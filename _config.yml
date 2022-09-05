@@ -103,5 +103,5 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/penspulse326/penspulse326.github.io.git # 你的儲存庫 clone
+  repo: https://github.com/penspulse326/penspulse326.github.io.git
   branch: gh-pages

@@ -27,9 +27,8 @@ categories: 生活分享
 最後我決定遵循[這位大大](https://ithelp.ithome.com.tw/articles/10269050)推薦的 Next 主題，開始我的第一篇文章。
 
 後記：
-六角的大大們真是無所不在，在新增 Disqus 留言板的時候，
-發現留言板居然還會出現分類頁與標籤頁，看起來是大部分的頁面共用到同一個 Layout 了，
-但是我不知道得去哪裡修改......結果 google 搜尋馬上就找到 [Ray 大的文章](https://israynotarray.com/hexo/20190516/2710757554/)，
-問題瞬間圓滿解決了！
+後續加了留言的功能，則是參照[這位大大](https://blog.kyomind.tw/hexo-blog-reply/)，
+測試的過程中也發現 Next 雖然乾淨，但是動畫的時間實在長到嚇人，
+所以也參考了[這篇文章](https://ammomercy.cn/2021/01/24/next%E5%85%B3%E9%97%AD%E5%8A%A8%E7%94%BB/)把部分動畫給修掉了。
 
 ---Shin

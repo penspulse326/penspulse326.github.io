@@ -5,8 +5,12 @@
 # Site
 title: Penspulse
 subtitle: ''
-description: 
-keywords:
+description: '我的學習紀錄，偶爾寫寫一些生活事'
+keywords: 
+- '前端'
+- '程式語言'
+- 'Front-end'
+- '程式新手'
 author: Shin
 language: zh-TW
 timezone: ''

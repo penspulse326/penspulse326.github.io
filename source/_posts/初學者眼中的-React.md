@@ -1,5 +1,5 @@
 ---
-title: 一個初學者眼中的 React
+title: 一個初學者眼中的 React（一）
 date: 2022-10-04 16:34:12
 tags:
 - React
@@ -27,10 +27,10 @@ React 讀書會之後，才終於對 React 有初步的認識。
 當需要管理的元素越來越多，邏輯層次的分量也開始變得複雜時，
 不僅產生了效能上的負擔，也增加了維護的難度。
 
-像是設計按鈕的 A 的事件後，可能會需要新增 B 區塊，
-而 B 區塊又有一些根據個別狀態所設計的不同事件，產生 C 或 D 元素等，
+像是設計按鈕的 A 的事件，可能會需要新增 B 區塊，
+而 B 區塊又有依個別狀態所設計的不同事件，產生 C 或 D 元素等，
 這樣一層又一層的衍生，在只用原生 JS 或 jQuery 的情況下，
-不僅同時操作了很多 DOM 元素，而且互相關聯的部分也造成追蹤的困難。
+不僅同時操作了很多 DOM 元素，而且互相關聯的部分也造成追蹤程式碼的困難。
 
 React 的目的便是希望我們可以減少直接操作 DOM，取而代之的是我們對資料的操作，
 也就是所謂的狀態(State)管理，形成一個單向的資料流：
@@ -39,8 +39,29 @@ React 的目的便是希望我們可以減少直接操作 DOM，取而代之的�
 使用了**Virtual DOM**的概念，透過比對狀態改變前後的虛擬 DOM，
 來決定如何顯示我們看到的畫面。
 
-在資料量比較大的時候，以往渲染出一個新的 DOM 的做法就容易導致網頁效能的耗損，
+在資料量比較大的時候，以往直接渲染出一個新的 DOM 的做法就容易導致網頁效能的耗損，
 Virtual DOM 則是在比對的過程中，找出不一樣的 Node( DOM 是樹狀結構)，
-並直接至換掉那個 Node 下面所有的 Leaf，以達到更好的時間複雜度。
+並從那個 Node 開始整塊拆掉，一起置換下面所有的 Leaf，以達到更好的時間複雜度。
 
 ![Tree of Virtual DOM](https://i1.wp.com/programmingwithmosh.com/wp-content/uploads/2018/11/lnrn_0201.png)
+
+比起框架，React 更應該說是個函式庫，而建構 UI（元件） 的過程中，
+也需要其他套件或函式庫來完善其功能，因此 React 也可以說是彈性很大，
+但也容易令人摸不著頭緒的一個工具。
+
+初學的過程要多多嘗試不一樣的作業或作者提供的小專案，
+來了解 React 除了它自己的基礎功能，還有什麼外部的套件是經常被使用的。
+（像是 React-Hook-Form、React-Router-Dom、Redux 等等）
+
+最後總結一下 React 是什麼樣的存在：
++ React 是一套函式庫，Virtual DOM 與創造可重複利用的元件是啟用它的重要原因
++ 獨特的 JSX 寫法在初學時期腦袋會很星爆
++ 單向的資料流容易追蹤狀態
++ React 像是一輛只有引擎的汽車，我們可以只貼皮也可以增加很多功能
+
+下一篇再來統整常用的 Hooks ！
+
+參考資料：
++ [[筆記] Why React?](https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-why-react-424f2abaf9a2)
++ [從Native到React：初學React.js角度的JavaScript「升級」整理](https://hackmd.io/@BOBYZH/H1JqsfYg9)
++ [你了解 React JS 嗎 15 個 React JS 的面試問題](https://linyencheng.github.io/2021/05/07/react-interview-questions/#React-%E6%9C%89%E4%BB%80%E9%BA%BC%E7%BC%BA%E9%BB%9E%E5%92%8C%E9%99%90%E5%88%B6)

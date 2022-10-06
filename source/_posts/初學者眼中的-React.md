@@ -13,7 +13,7 @@ categories: 程式學習
 React 讀書會之後，才終於對 React 有初步的認識。
 
 以下我會以自己初學 React 的角度，大略統整我在學習 React 上的心得。
-
+<!-- more -->
 ### 為什麼要學 React ？
 ~~因為課綱就教 React~~，雖然課綱最後在框架的選定上，
 在 Vue、Angular、React 這三劍客中選定了 React，
@@ -45,6 +45,8 @@ Virtual DOM 則是在比對的過程中，找出不一樣的 Node( DOM 是樹狀
 
 ![Tree of Virtual DOM](https://i1.wp.com/programmingwithmosh.com/wp-content/uploads/2018/11/lnrn_0201.png)
 
+### React 的彈性：給你輪子，你也能造出飛車
+
 比起框架，React 更應該說是個函式庫，而建構 UI（元件） 的過程中，
 也需要其他套件或函式庫來完善其功能，因此 React 也可以說是彈性很大，
 但也容易令人摸不著頭緒的一個工具。
@@ -61,7 +63,7 @@ Virtual DOM 則是在比對的過程中，找出不一樣的 Node( DOM 是樹狀
 
 下一篇再來統整常用的 Hooks ！
 
-參考資料：
+### 　參考資料：
 + [[筆記] Why React?](https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-why-react-424f2abaf9a2)
 + [從Native到React：初學React.js角度的JavaScript「升級」整理](https://hackmd.io/@BOBYZH/H1JqsfYg9)
 + [你了解 React JS 嗎 15 個 React JS 的面試問題](https://linyencheng.github.io/2021/05/07/react-interview-questions/#React-%E6%9C%89%E4%BB%80%E9%BA%BC%E7%BC%BA%E9%BB%9E%E5%92%8C%E9%99%90%E5%88%B6)

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"penspulse326.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.13.0","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"${hits} 找到 ${time} 個結果","hits":"找到 ${hits} 個結果"}}</script><script src="/js/config.js"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CW2LGTM5N5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CW2LGTM5N5');
+</script>
+    <meta name="description" content="極速上手篇也是秉持著我寫筆記的風格，不寫得密密麻麻，基本的規則也不會寫得太詳盡，能夠簡短說明的地方就盡量簡短！ 這篇會先在 Codepen 環境上使用 React，釐清基本的流程架構之後，就不難了解在本機上要製作 React 專案時的內容架構了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&amp;#91;筆記 &amp;#93; 初學者眼中的 React：極速上手篇 - 環境架構">
+<meta property="og:url" content="https://penspulse326.github.io/2022/11/03/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%20React%EF%BC%9A%E6%A5%B5%E9%80%9F%E4%B8%8A%E6%89%8B%E7%AF%87/index.html">
+<meta property="og:site_name" content="Penspulse">
+<meta property="og:description" content="極速上手篇也是秉持著我寫筆記的風格，不寫得密密麻麻，基本的規則也不會寫得太詳盡，能夠簡短說明的地方就盡量簡短！ 這篇會先在 Codepen 環境上使用 React，釐清基本的流程架構之後，就不難了解在本機上要製作 React 專案時的內容架構了。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-11-03T02:43:40.000Z">
+<meta property="article:modified_time" content="2022-11-04T04:40:52.307Z">
+<meta property="article:author" content="Shin">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="程式語言">
+<meta property="article:tag" content="學習心得">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://penspulse326.github.io/2022/11/03/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%20React%EF%BC%9A%E6%A5%B5%E9%80%9F%E4%B8%8A%E6%89%8B%E7%AF%87/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://penspulse326.github.io/2022/11/03/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%20React%EF%BC%9A%E6%A5%B5%E9%80%9F%E4%B8%8A%E6%89%8B%E7%AF%87/","path":"2022/11/03/初學者眼中的 React：極速上手篇/","title":"&#91;筆記 &#93; 初學者眼中的 React：極速上手篇 - 環境架構"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>&#91;筆記 &#93; 初學者眼中的 React：極速上手篇 - 環境架構 | Penspulse</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CW2LGTM5N5"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-CW2LGTM5N5","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Penspulse</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B-Codepen-%E7%92%B0%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">建立 Codepen 環境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%9F%B7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">基本執行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A3%9C%E5%85%85%E8%AA%AA%E6%98%8E%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">補充說明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Shin</p>
+  <div class="site-description" itemprop="description">我的學習紀錄，偶爾寫寫一些生活事</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/penspulse326" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;penspulse326" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:penspulse@gmail.com" title="E-Mail → mailto:penspulse@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="回到頂端">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://penspulse326.github.io/2022/11/03/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%20React%EF%BC%9A%E6%A5%B5%E9%80%9F%E4%B8%8A%E6%89%8B%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Shin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Penspulse">
+      <meta itemprop="description" content="我的學習紀錄，偶爾寫寫一些生活事">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="&#91;筆記 &#93; 初學者眼中的 React：極速上手篇 - 環境架構 | Penspulse">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          &#91;筆記 &#93; 初學者眼中的 React：極速上手篇 - 環境架構
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2022-11-03 10:43:40" itemprop="dateCreated datePublished" datetime="2022-11-03T10:43:40+08:00">2022-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2022-11-04 12:40:52" itemprop="dateModified" datetime="2022-11-04T12:40:52+08:00">2022-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%A8%8B%E5%BC%8F%E5%AD%B8%E7%BF%92/" itemprop="url" rel="index"><span itemprop="name">程式學習</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="閱讀次數" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">閱讀次數：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>極速上手篇也是秉持著我寫筆記的風格，不寫得密密麻麻，<br>基本的規則也不會寫得太詳盡，能夠簡短說明的地方就盡量簡短！</p>
+<p>這篇會先在 <a target="_blank" rel="noopener" href="https://codepen.io/">Codepen</a> 環境上使用 React，<br>釐清基本的流程架構之後，就不難了解在本機上要製作 React 專案時的內容架構了。</p>
+<span id="more"></span>
+<h3 id="建立-Codepen-環境"><a href="#建立-Codepen-環境" class="headerlink" title="建立 Codepen 環境"></a>建立 Codepen 環境</h3><p>開啟一個新的 Pen 之後，在 Setting 裡面點選 <strong>JS</strong>，將 JavaScript Preprocessor 改為 Bable，<br>並在 Add External Scripts&#x2F;Pens 搜尋到 <strong>react</strong> 與 <strong>react-dom</strong>，並<strong>依序</strong>加入，<br>（一定要先加入 react 才能加入 react-dom，否則 codepen 會編譯不過），<br>或是在最下面的 Add Packages 找到這兩個套件，以 import 的方式引入也沒問題。 </p>
+<h3 id="基本執行流程"><a href="#基本執行流程" class="headerlink" title="基本執行流程"></a>基本執行流程</h3><p>範例程式：</p>
+<iframe src="https://codepen.io/shin9626/embed/XWYKprY?default-tab=html,result&editable=true" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<hr>
+<ol>
+<li>在 JS 裡面抓到 DOM 裡面的元素，以該元素當作起點 (root) 來產生畫面</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> root = <span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;root&quot;</span>));</span><br><span class="line">root.<span class="title function_">render</span>(<span class="string">&quot;要產生的東西&quot;</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>render 雖然可以放進任何值，不過大多是放元件(Component)</li>
+<li>React 元件以 function 的方式宣告(開頭要大寫)，在 return 裡面放入設計好的 html 標籤結構，這些標籤都可以像一般的 html 程式碼一樣被產生在畫面上。</li>
+<li>return 的內容必須是一個區塊，而不能是多個並列的元素：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      要產生的內容</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">)<span class="comment">// 回傳一個 div</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>要產生的內容<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>要產生的內容<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">)<span class="comment">// 這樣是不行的 會直接報錯</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>要產生的內容<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>要產生的內容<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">)<span class="comment">// 用空的標籤包住元素也可以</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>JSX 允許使用標籤化的方式撰寫 JS，這時 render 的內容就可以用標籤的寫法，<br>將 Component 傳進去，最後在 root 裡面 render 出來。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Component</span> /&gt;</span></span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>當然 Component 也可以一般標籤一樣自定義屬性，並且能夠當作參數傳送。<br>這時用大括號包住屬性的內容，就可以把一些變數內容打包傳進去。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> element = <span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>這就是 JSX！<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line"><span class="keyword">const</span> text = <span class="string">&quot;這就是一段字串！&quot;</span>;</span><br><span class="line"><span class="comment">// 用大括號包住變數 就能夠在 Component 的 function 裡面抓到</span></span><br><span class="line">root.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">Component</span> <span class="attr">element</span>=<span class="string">&#123;element&#125;</span> <span class="attr">text</span>=<span class="string">&#123;text&#125;/</span>&gt;</span></span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>元件的 function 預設會有一個參數去抓取我們在標籤裡寫入的屬性，<br>像物件屬性一樣抓出來使用就可以了。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">props</span>) &#123;</span><br><span class="line">  <span class="comment">// props 後面接上對應的屬性名稱就能直接抓出來使用</span></span><br><span class="line">  <span class="keyword">const</span> text = props.<span class="property">text</span>; <span class="comment">// text 的內容是 &quot;這就是一段字串！&quot;</span></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="comment">&lt;!--加上大括號就可以在標籤內容裡面使用變數--&gt;</span> </span></span><br><span class="line"><span class="language-xml">      &#123;props.element&#125;</span></span><br><span class="line"><span class="language-xml">      &#123;text&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用解構的寫法把屬性取出來也是可以的</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Component</span>(<span class="params">&#123;element, text&#125;</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上就完成了一個使用了 React 的簡單網頁！</p>
+<h3 id="補充說明："><a href="#補充說明：" class="headerlink" title="補充說明："></a>補充說明：</h3><p>參數名稱、標籤屬性這些都是可以自由命名的，<br>只是有些命名慣例和語意化的命名最好要遵守，比如說元件的參數會命名成 props，<br>觸發了某個事件時要進行相對的處置，就會將函式命名為 handleSomething…諸如此類，<br>之前在讀書會裡面有看過其他初學者好像很容易因為這樣想破頭，無法往下了解整個流程，<br>如果試著去改改看的話會發現程式其實還是能動的！</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><p><a target="_blank" rel="noopener" href="https://zh-hant.reactjs.org/docs/hello-world.html">(必看)React 官方教學</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+              <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag"># 程式語言</a>
+              <a href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" rel="tag"># 學習心得</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/04/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84-React/" rel="prev" title="&#91;筆記 &#93; 初學者眼中的 React：概念篇">
+                  <i class="fa fa-chevron-left"></i> &#91;筆記 &#93; 初學者眼中的 React：概念篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shin</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="訪客總數">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="總瀏覽次數">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"penspulse326/penspulse326.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

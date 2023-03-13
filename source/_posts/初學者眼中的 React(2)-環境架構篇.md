@@ -1,108 +1,113 @@
 ---
-title: '[筆記] 初學者眼中的 React(2)-環境架構篇'
-date: 2022-11-03 10:43:40
+title: '[筆記] 初學者眼中的 React (3)：Hooks 三小強'
+date: 2022-10-18 21:33:41
 tags:
 - React
 - 程式語言
 - 學習心得
 categories: 程式學習
 ---
-接下來的教學也是秉持著我寫筆記的風格，不寫得密密麻麻，
-基本的規則也不會寫得太詳盡，能夠簡短說明的地方就盡量簡短
-畢竟絕大部分是寫給自己看的......
-
-這篇會先在 [Codepen](https://codepen.io/) 環境上使用 React，
-釐清基本的流程架構之後，就不難了解在本機上要製作 React 專案時的內容架構了。
+接下來要示範 React 最常用的三個 Hooks：
+- useState
+- useEffect
+- useRef
 <!-- more -->
-### 建立 Codepen 環境
+<br/>
 
-開啟一個新的 Pen 之後，在 Setting 裡面點選 **JS**，將 JavaScript Preprocessor 改為 Bable，
-並在 Add External Scripts/Pens 搜尋到 **react** 與 **react-dom**，並**依序**加入，
-（一定要先加入 react 才能加入 react-dom，否則 codepen 會編譯不過），
-或是在最下面的 Add Packages 找到這兩個套件，以 import 的方式引入也沒問題。 
+---
 
-### 基本執行流程
+## State 就是一切：useState
+
+從上一篇文章可以知道，React 會將我們寫好的 component 在指定的地方 render 出來
+那麼畫面上的資料如果更動了，是誰讓它重新顯示的？
+
+是 ***useState***！
 
 範例程式：
-{% iframe https://codepen.io/shin9626/embed/XWYKprY?default-tab=html%2Cresult&editable=true %}
+{% iframe https://codepen.io/shin9626/embed/MWqQBLb?default-tab=html%2Cresult %}
+
 ---
-1. 在 JS 裡面抓到 DOM 裡面的元素，以該元素當作起點 (root) 來產生畫面
+透過解構的語法宣告出我們要操作的變數
+傳入 useState 會作為 value 的初始值可以是任何值
+```JS
+// React 官方規定的寫法
+const [value, setValue] = useState(0);
+```
+
+使用 button 來控制計數器的行為（其他元素也可以）
+這邊的 onClick 是 React 內建的監聽事件，而***不是 JS 中的 addEventListener***！
+onClick 裡面要用 callback 的方式去執行 setValue
+setValue 可以直接寫新的值，但如果需要取出原本的值，則必須用 callback 的方式取出來
+監聽事件的細節比較多，可以慢慢品嘗（笑）
    
 ```JS
-const root = createRoot(document.getElementById("root"));
-root.render("要產生的東西");
+// onClick 的 callback 也和 addEventListener 一樣是可以取出 event 這個參數的
+// 取出來的參數也一樣是被冒泡捕捉到的元素
+<button onClick={() => setValue((state) => state + 1)}>加1</button>
+<button onClick={() => setValue((state) => state - 1)}>減1</button>
 ```
-2. render 雖然可以放進任何值，不過大多是放元件(Component)
-3. React 元件以 function 的方式宣告(開頭要大寫)，在 return 裡面放入設計好的 html 標籤結構，這些標籤都可以像一般的 html 程式碼一樣被產生在畫面上。
-4. return 的內容必須是一個區塊，而不能是多個並列的元素：
-   
+
+---
+<br/>
+
+## 默默做事不想被看到：useRef
+
+現在我們知道只要透過 setValue 去更改值，畫面就會更新
+那麼如果有些變數不需要顯示在畫面上，或是不想要因為它的改變而重新 render
+則需要 useRef 這個 hook
+
+和 useState 一樣可以給定任何值當作初始值
+但直接存取 ref 並不會得到值，必須用 ref.current
 ```JS
-return (
-    <div>
-      要產生的內容
-    </div>
-)// 回傳一個 div
-
-return (
-    <div>要產生的內容</div>
-    <div>要產生的內容</div>
-)// 這樣是不行的 會直接報錯
-
-return (
-    <>
-      <div>要產生的內容</div>
-      <div>要產生的內容</div>
-    </>
-)// 用空的標籤包住元素也可以
+const ref = useRef(0);
+ref.current++;
+console.log(ref.current); // 1
 ```
 
-5. JSX 允許使用標籤化的方式撰寫 JS，這時 render 的內容就可以用標籤的寫法，
-將 Component 傳進去，最後在 root 裡面 render 出來。
+---
+<br/>
 
-```JS
-root.render(<Component />);
-```
+## 我 OK 您先請：useEffect
 
-6. 當然 Component 也可以一般標籤一樣自定義屬性，並且能夠當作參數傳送。
-這時用大括號包住屬性的內容，就可以把一些變數內容打包傳進去。
-   
-```JS
-const element = <h1>這就是 JSX！</h1>;
-const text = "這就是一段字串！";
-// 用大括號包住變數 就能夠在 Component 的 function 裡面抓到
-root.render(<Component element={element} text={text}/>);
-```
+useEffect 會在第一次 render 完之後執行裡面的內容
+不加入任何參數的話，每次 render 完都會再執行一遍
+加入空陣列，則只會在第一次 render 時執行
+陣列裡加入任何變數，代表只在該變數有變動時才執行
+（亂加的話會無限執行，請細細品嘗）
 
-7. 元件的 function 預設會有一個參數去抓取我們在標籤裡寫入的屬性，
-像物件屬性一樣抓出來使用就可以了。
+常見的用法是利用它可以在特定條件執行的特性，用來 fetch 資料
 
 ```JS
-function Component(props) {
-  // props 後面接上對應的屬性名稱就能直接抓出來使用
-  const text = props.text; // text 的內容是 "這就是一段字串！"
-  return (
-    <div>
-      <!--加上大括號就可以在標籤內容裡面使用變數--> 
-      {props.element}
-      {text}
-    </div>
-  );
-}
+// 不加入任何參數就會在每次 render 都執行
+useEffect(()=>{
+  console.log('看到這行代表又 render 了一次')
+});
 
-// 用解構的寫法把屬性取出來也是可以的
-function Component({element, text}) {}
+// 只會執行一次
+useEffect(()=>{
+  console.log('你只會在畫面第一次完時看到這行字')
+},[]);
+
+// 在不加入參數的狀態，放進 setValue 的行為
+// 或是監聽錯誤的參數，就會進入無限迴圈然後爆掉
+useEffect(()=>{
+  setValue((state)=>state+1)
+  console.log('看到這行字代表你的記憶體很快就要爆了')
+},[value]);
 ```
 
-以上就完成了一個使用了 React 的簡單網頁！
+---
 
-### 補充說明：
-參數名稱、標籤屬性這些都是可以自由命名的，
-只是有些命名慣例和語意化的命名最好要遵守，比如說元件的參數會命名成 props，
-觸發了某個事件時要進行相對的處置，就會將函式命名為 handleSomething...諸如此類，
-之前在讀書會裡面有看過其他初學者好像很容易因為這樣想破頭，無法往下了解整個流程，
-如果試著去改改看的話會發現程式其實還是能動的！
+本文的範例是參考 ***走歪的工程師 James*** 所示範的：
+***一個範例讓你搞懂useState, useRef, useEffect***
 
+你可以在範例中了解到 React 基本的週期變化
+由 useState 控制的值在***重新 render 之前都不會真正改變***
+我們按按鈕只是控制它改變的時間點，真正的值會在 re-render 後顯示出來
+利用這個特點，我們可以用 useRef + useEffect 去取得改變之前的值
+因此在你每次按完按鈕後，可以看到加加減減之前的數值！
 
+---
 
 ### 　參考資料
-[(必看)React 官方教學](https://zh-hant.reactjs.org/docs/hello-world.html)
+[走歪的工程師 James：一個範例讓你搞懂useState, useRef, useEffect](https://www.youtube.com/watch?v=q0C5g4WIrKU)

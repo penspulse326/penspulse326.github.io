@@ -4,7 +4,7 @@ menu:
   About: /about
   Archives: /archives
 rss: /atom.xml
-banner: "images/banner.jpg"
+banner: "https://drive.google.com/uc?export=view&id=1_d8kzvUxSnTwvQyxshkOlNc0i4Z3R0R7"
 
 # Content
 excerpt_link: Read More
@@ -28,11 +28,11 @@ copyright:
 # Sidebar
 sidebar: right
 widgets:
+- recent_posts
 - category
 - tag
 - tagcloud
 - archive
-- recent_posts
 
 # display widgets at the bottom of index pages (pagination == 2)
 index_widgets:

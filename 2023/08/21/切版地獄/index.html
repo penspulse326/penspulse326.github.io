@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENMQERHZKM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ENMQERHZKM');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>[筆記] 切版小白的無盡地獄？重要的網格系統 | Penspulse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在 2022 年初我選定前端工程師作為轉職目標後，就開始了這段不歸路漫漫長路。而我選用的教材是 Huli 大大開設的 Lidemy 網站課程，以及參考他自辦 bootcamp 的課綱來學習和做作業。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[筆記] 切版小白的無盡地獄？重要的網格系統">
+<meta property="og:url" content="https://penspulse326.github.io/2023/08/21/%E5%88%87%E7%89%88%E5%9C%B0%E7%8D%84/index.html">
+<meta property="og:site_name" content="Penspulse">
+<meta property="og:description" content="在 2022 年初我選定前端工程師作為轉職目標後，就開始了這段不歸路漫漫長路。而我選用的教材是 Huli 大大開設的 Lidemy 網站課程，以及參考他自辦 bootcamp 的課綱來學習和做作業。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=18KIJ5iOfRKxx3OR0rS9hWDVlB7Y5v5hw">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1Sk70T4CjEl42mE7LRPo4QiDsZZ9sFLIb">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1ow30oZnTg__tV1RvtwPU1CJPNPjG0Wno">
+<meta property="article:published_time" content="2023-08-21T04:03:39.000Z">
+<meta property="article:modified_time" content="2023-08-21T12:23:54.589Z">
+<meta property="article:author" content="Shin">
+<meta property="article:tag" content="學習心得">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="程式語言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://drive.google.com/uc?export=view&id=18KIJ5iOfRKxx3OR0rS9hWDVlB7Y5v5hw">
+  
+    <link rel="alternate" href="/atom.xml" title="Penspulse" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Penspulse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://penspulse326.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-切版地獄" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/21/%E5%88%87%E7%89%88%E5%9C%B0%E7%8D%84/" class="article-date">
+  <time class="dt-published" datetime="2023-08-21T04:03:39.000Z" itemprop="datePublished">2023-08-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      [筆記] 切版小白的無盡地獄？重要的網格系統
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在 2022 年初我選定前端工程師作為轉職目標後，<br>就開始了這段<del>不歸路</del>漫漫長路。<br>而我選用的教材是 Huli 大大開設的 Lidemy 網站課程，<br>以及參考他自辦 bootcamp 的課綱來學習和做作業。</p>
+ <span id="more"></span>
+
+<h2 id="學習沿革"><a href="#學習沿革" class="headerlink" title="學習沿革"></a>學習沿革</h2><p>切版在這份課綱裡算是比較小的課程量，大部分還是著重在培養程式邏輯和 JavaScript 相關的應用。<br>也因為當時我是照本宣科地做作業，沒有老師批改，所以每次在切版時我自己只是草草帶過有個樣子而已，<br>學習後期的重心全部放在 React 上，造成我對建構網頁時前後期該做什麼，熟悉度相當不一致。</p>
+<p>開始認知到自己對切版完全沒概念，是歷經了六角學院在 2022 年末舉辦的精神時光屋活動。<br>當時的每週主題我都嘗試用 React 去製作，想藉此熟悉 React。<br>也因為我在學習 React 之後沒有使用過其他可以搭配的 CSS 框架，<br>僅使用在課綱內學過的 styled-component，從結果來看我也是以純手刻的方式做元件化開發。</p>
+<p>沒有切版時前期規劃的概念，導致我在第二週與第三週的挑戰都沒有時限內完成，<br>因為我經常需要一邊改樣式一邊整合 React 邏輯，<br>既沒有效率，最終作品的呈現也不盡人意，等於版面與功能我都沒有兼顧好。<br><del>可謂人財兩失。</del></p>
+<hr>
+<h2 id="在使用框架之前"><a href="#在使用框架之前" class="headerlink" title="在使用框架之前"></a>在使用框架之前</h2><p>雖然在參加火箭隊的面試之前我已經補完精神時光屋的題目，<br>但對於切版的困惑還是沒有停止，直到我看到卡斯伯老師於去年線上直播分享的主題，<br>才知道切版的前期規劃中，有一件非常重要的事被我忽略了：<strong>網格系統</strong></p>
+<p>直播連結：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=qRZLtIcPdls&t=5256s&ab_channel=%E5%85%AD%E8%A7%92%E5%AD%B8%E9%99%A2">從 Figma 到 VSCode，設計做到網頁切版</a></p>
+<p>大部分的設計稿會依循網格系統或是一套設計邏輯做出來，<br>也就是說網頁內許多元素的排列其實是有規律可以遵守的，<br>但我們這些小白沒有這些前備知識的話，<br>一開始拿到設計稿可能會毫無頭緒從何開始。</p>
+<p>比如各個區塊的高矮胖瘦、間距、排列順序等等，<br>常常開了 class 後寫了一卡車的屬性，但又有點難整理它，<br>或是想到什麼就寫什麼，有時會造成各個頁面的不一致性，<br>重複的區塊寫了好幾個差不多的屬性等等…</p>
+<p>這時候我們如果能以網格系統的方式去拆解設計稿，<br>實作上就具有規則性，後續修改也比較容易，<br>如果設計稿本身是沒有網格系統的，<br>我們也可以自己加入，方便開發上的管理跟微調。</p>
+<p>當然商業上在前後期的開發都是很講究效時效的，<br>所以會引入 Bootstrap 或 Tailwind 等等的 CSS 框架來加速開發，<br>但這裡我們可以先想想看，一般純手刻的話要怎麼做到網格系統的管理模式，<br>對之後再使用框架時也會比較有頭緒。<br>（雖然我自己使用的這套邏輯也是因為曾經使用過 Bootstrap 而參考它做出來的就是了…XD）</p>
+<hr>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p>以 PCHOME 首頁為例，我們可以發現從畫面最頂端導覽列的文字，<br>到下面的圖卡或標籤文字等等，它們都貼齊在某個看不見的線上而不是畫面的邊緣，<br>這是因為這些元素都放在<strong>容器</strong>裡面！</p>
+<p><img src="https://drive.google.com/uc?export=view&id=18KIJ5iOfRKxx3OR0rS9hWDVlB7Y5v5hw" alt="PCHOME首頁"></p>
+<p>在遇到解析度高使得畫面寬度也很寬的情況下，<br>設計上會希望內容不會因為螢幕的寬度較寬，導致圖片或區塊也被拉到變形，<br>就會放在某個容器內，而這個容器會設定最大寬度來保證元素不會超出去。</p>
+<p>容器通常依據設計稿的版型設定，如桌機畫面為 1920px、平板 768px、手機 375px，<br>最大寬度就會依序設定為：1296px、696px、348px 等等。<br>（稍後會說明這些數值怎麼來的）</p>
+<p>假如我從手機畫面開始切版，容器就會這樣寫：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 在 <span class="number">767px</span> 以前都顯示手機畫面</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">348px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="number">768px</span> ~ <span class="number">1199px</span> 為平板畫面</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>: <span class="number">768px</span>) &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">696px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="number">1200px</span> 開始為桌機畫面</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>: <span class="number">1400px</span>) &#123;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">1296px</span>;</span><br><span class="line">&#125;</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+
+<p>斷點的寫法就因人而異，如果能用最少的斷點作出所有版型是最好的，<br>但無論如何最後都要符合在指定的解析度上設計稿所畫的樣子就對了～</p>
+<hr>
+<h2 id="格子"><a href="#格子" class="headerlink" title="格子"></a>格子</h2><p>決定好容器的寬度後，容器內的切分會依版型分成 12 格～ 4 格等等，<br>手機通常是 4 格、桌機 12 格。</p>
+<p>採用網格系統做設計的稿件，裡面的元素的大小通常也會依循格子數量做設定或排列位置！<br>比如下面的設計稿可以看到，導覽列的 logo 設定為 1 格寬，<br>主畫面的大 logo 與按鈕則是佔了 4 格並且要在第 8 格出現。</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1Sk70T4CjEl42mE7LRPo4QiDsZZ9sFLIb" alt="2022F2E UI 組小菜的稿件"></p>
+<p>先前我舉例的 1296px、696px 等等這些寬度，則是依照設計稿訂定的寬度設定的，<br>如果設計稿並沒有給定，直接交給框架處理就可以，或是我們可以自行觀察設計稿來決定，<br>例如在 1920 的版面下，設計師對大部分的元素都安排在距離螢幕邊界 400px 的地方，<br>我們就可以設定最大寬度為 1920 - 400*2 &#x3D; 1120px。</p>
+<p>由於這些格子是平均分散而不是緊緊相連的，所以稿件通常也會設定好每一格的間距，稱為 gutter，<br>gutter 在不同的版面設計上有可能是不同寬度的，所以在撰寫 SCSS 時要注意一下規則。</p>
+<p>知道這些概念之後，我們就可以設定格子的 class，<br>以下是桌機和手機版型的大概示範：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 格子間距</span><br><span class="line"></span><br><span class="line">$gutter: <span class="number">20px</span>;</span><br><span class="line"></span><br><span class="line">// 設定手機版的格子寬度 總共 <span class="number">4</span> 格</span><br><span class="line"></span><br><span class="line"><span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">4</span> &#123;</span><br><span class="line">    <span class="selector-class">.col-sm-</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">        <span class="attribute">width</span>: <span class="built_in">calc</span>((<span class="number">100%</span><span class="built_in">-</span>($gutter * <span class="number">3</span>))/<span class="number">4</span> * $i + $gutter * ($i-<span class="number">1</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 設定桌機版的格子寬度 總共 <span class="number">12</span> 格</span><br><span class="line">// 寫在 media query 裡面保證它只會在某個寬度下作用</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">min-width</span>: <span class="number">1200px</span>) &#123;</span><br><span class="line">    <span class="keyword">@for</span> $i from <span class="number">1</span> through <span class="number">12</span> &#123;</span><br><span class="line">        <span class="selector-class">.col-lg-</span>#&#123;$<span class="selector-tag">i</span>&#125; &#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="built_in">calc</span>((<span class="number">100%</span><span class="built_in">-</span>($gutter * <span class="number">11</span>))/<span class="number">12</span> * $i + $gutter * ($i-<span class="number">1</span>))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>格子寬度的設定跟以前數學課的種樹問題是類似的，<br>大家不要緊張，我馬上解釋……</p>
+<p>首先用 for 迴圈來產生一連串的 class 名稱，<br>然後 width 這個屬性可以透過 calc()來執行一些計算式得到寬度數值，<br>百分比和 px 或 em 等等不同單位的數值也可以混合計算。</p>
+<p>由於全部格子是分散佔滿整個容器的，所以容器寬度我們視作 100%，<br>以桌機為例會有 12 個格子，因此有 11 個間距。<br>扣掉全部間距佔用的寬度 $gutter * 11，再除以 12，就是目前這個容器的寬度下，<br>每個格子真正的寬度，再依照目前迴圈執行的數字來算出 1 ~ 12 格個別有多寬。</p>
+<p>如現在迴圈跑到 $i &#x3D; 6，也就是正在生成 .col-lg-6 這個 class，<br>從剛剛我們算出的每格寬度 (100%-($gutter * 11))&#x2F;12，<br>乘上 6，再加上 5 個間距，就是 .col-lg-6 實際上在畫面佔用的格子數。</p>
+<p>透過 for 迴圈加上一些簡單的數學計算，我們就可以為每個元素加上格子的 class 設定寬度，<br>而且因為我們透過 @media 限制了每種版型下會作用的格子，<br>所以一個元素上可以加 <strong>.col-lg-4</strong>、 <strong>col-md-6</strong> 等等多種 class，<br>使它們可以符合設計稿上不同版型下的寬度變化！<br>但這邊要注意的是如果該元素已經有 col 的 class，<br>我們在 CSS 裡面就不要再為這個元素設 width 或有關的屬性，否則會因為複寫的關係，使 col 計算好的寬度失效。</p>
+<p>註：寬度計算是用 100% 而不是 max-width 設定的數字，<br>是因為我們只是以 max-width 來限制容器的寬度而已，<br>裡面的其他元素還是要依照當前的寬度，來符合設計稿的比例，如果寫死數值的話，<br>這些格子的寬度就會被固定住而不會照百分比拉伸。</p>
+<hr>
+<h2 id="行列變化"><a href="#行列變化" class="headerlink" title="行列變化"></a>行列變化</h2><p>有了容器與格子後，我們就可以使用 flex 來輕鬆處理 RWD 的變版，<br>熟悉 Bootstrap 的人應該知道，所有擁有格子 class 的元素都要放在 row 裡面！</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.row</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>row 就是一個有 flex 屬性的容器，必須搭配上 wrap 的屬性，<br>才能使我們設定好的元素佔有正確的格子數量並成功換行。<br>（沒有加入 wrap 會全部擠在同一行）</p>
+<p>例如我們設定四個一排的元素，它們在桌機、手機上各佔 4 格、4 格，<br>在畫面上看起來會像是，桌機是四個元素排在同一行，但在手機上每個元素都滿版呈現，<br>（手機的 4 格就是滿版了）</p>
+<p>因為我們設定了 wrap，以及每個元素的寬度，<br>所以在寬度低於桌機的斷點時，這些元素會變成滿版，像是單行排列的樣子。</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1ow30oZnTg__tV1RvtwPU1CJPNPjG0Wno" alt="兩個版型的 row 變化"></p>
+<p>這時 row 或是其他具有 flex 屬性的容器，搭配 gap 屬性就可以起到很好的分隔效果，<br>這些元素會依照 gap 的數值分開，並且頭尾的元素也不會產生額外的間距而要另外修改。<br>（gap 的左右間隔通常就是網格的 gutter，上下間隔就看稿件怎麼設定）</p>
+<hr>
+<h2 id="建立簡單的撰寫規則"><a href="#建立簡單的撰寫規則" class="headerlink" title="建立簡單的撰寫規則"></a>建立簡單的撰寫規則</h2><p>純手刻的模式下，當我們寫得區塊越來越多，<br>CSS 檔也會慢慢變得冗長，即使使用 mixin 的方式把重複的屬性功能打包起來，<br>也有可能還是整理不完，這時候如果有一套撰寫規則，<br>就能讓閱讀的難度稍微降低！如果是多人協作的話，訂製一個大家必須遵守的規則即可。<br>如像我一個人做作業的時候，通常屬性撰寫上我會這樣做區分：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    // 跟 <span class="attribute">position</span> 有關的寫在一起</span><br><span class="line">    <span class="attribute">position</span>:relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50px</span>;</span><br><span class="line"></span><br><span class="line">    // 跟 <span class="attribute">display</span> 有關的</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line"></span><br><span class="line">    // 跟 box model 有關的</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">12px</span> <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line"></span><br><span class="line">    // 跟 <span class="attribute">background</span> 有關的</span><br><span class="line">    <span class="attribute">background-color</span>: grey;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.8</span>;</span><br><span class="line"></span><br><span class="line">    // 跟 <span class="attribute">font</span> 有關的</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: right;</span><br><span class="line"></span><br><span class="line">    // 跟 <span class="attribute">transform</span> 有關的</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scaleX</span>(<span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">transition</span>: <span class="number">0.3s</span>;</span><br><span class="line"></span><br><span class="line">    // 其他有的沒的</span><br><span class="line">    <span class="attribute">object-fit</span>: cover;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>當然這是我個人的撰寫習慣，僅供參考～<br>只要有一套方便自己管理和修改的寫法即可，<br>要注意的是當我們運用 SCSS 巢狀選擇器的方式來寫屬性時，<br>盡量控制在 3 層以內，否則會造成網頁生成畫面時的效能問題，<br>元素性質比較特別或是作用範圍較大的，最好也要另外命名一個 class 來直接選取它，<br>以上兩點也會都會影響閱讀程式碼的困難度。</p>
+<hr>
+<p>在我擁有網格的概念後，最近做作業都會先依循這個方法設定一下 SCSS，<br>再開始做切版的準備，當然切版還有很多美美嘎嘎，和要琢磨的地方，<br>比如順序調換、偽元素、圖片變形、動態特效、檔案管理等等的問題，<br>但就不寫得太長了…單純分享一直以來我在練習切版中，<br>始終感到混沌但是終於豁然開朗的過程，然後上面提到卡斯伯老師的直播，<br>我覺得是必看的…不論最後有沒有採用 Bootstrap 來實作，裡面的示範的觀念都還蠻完整且很重要，<br>當然以上我的作法如果有概念錯誤、混淆的地方也歡迎大家指正，<br>畢竟我目前還是一位前端學習者，有誤的部分就還請大家見諒&lt;(_ _)&gt;</p>
+<p>參考資料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.figma.com/file/sPyo1NZ2zYyUQ0Z7VAj3et/%E5%B0%8F%E8%8F%9C_WEEK2?type=design&node-id=61-6099&mode=design&t=YGd0glcr7ZgfqXIy-0">小菜小姐的稿件</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/ivycodefive/5-bootstrap-%E7%B6%B2%E6%A0%BC%E7%B3%BB%E7%B5%B1-grid-be5779287231">Bootstrap 網格系統</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=qRZLtIcPdls&t=5256s&ab_channel=%E5%85%AD%E8%A7%92%E5%AD%B8%E9%99%A2">從 Figma 到 VSCode，設計做到網頁切版</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://penspulse326.github.io/2023/08/21/%E5%88%87%E7%89%88%E5%9C%B0%E7%8D%84/" data-id="cllkunboo00084cvq88bs00hg" data-title="[筆記] 切版小白的無盡地獄？重要的網格系統" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" rel="tag">學習心得</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag">程式語言</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/08/20/week3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[日常] 火箭日記-第三週</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+  <div>
+    <section id="comments" class="comments">
+      <style>
+        .utterances{max-width: 100%;}
+      </style>
+        <script src="https://utteranc.es/client.js"
+                repo="annkuoQ/blog-utterances"
+                issue-term="title"
+                theme="github-dark"
+                crossorigin="anonymous"
+                async>
+        </script>
+  </section>
+</div>
+  </section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%88%86%E4%BA%AB/">生活分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BC%8F%E5%AD%B8%E7%BF%92/">程式學習</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" rel="tag">個人生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" rel="tag">學習心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" rel="tag">火箭隊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag">程式語言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%A9%A6/" rel="tag">面試</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">個人生活</a> <a href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" style="font-size: 20px;">學習心得</a> <a href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" style="font-size: 12.5px;">火箭隊</a> <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" style="font-size: 17.5px;">程式語言</a> <a href="/tags/%E9%9D%A2%E8%A9%A6/" style="font-size: 10px;">面試</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/21/%E5%88%87%E7%89%88%E5%9C%B0%E7%8D%84/">[筆記] 切版小白的無盡地獄？重要的網格系統</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/20/week3/">[日常] 火箭日記-第三週</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/14/week2/">[日常] 火箭日記-第二週</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%9C%A8-Github-%E4%B8%8A%E5%82%B3%E5%B0%B1%E5%A4%B1%E6%95%97/">[筆記] 第一次在 Github 上傳就失敗？！Password 又輸入錯誤了！</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/09/week1/">[日常] 火箭日記-第一週</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Shin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -68,8 +68,8 @@ add(); // 印出的 a 是 9
 
 ## 不能不說：const
 
-const 在宣告之後就必須賦值，否則會報錯，
-但 var 與 let 是可以不賦值的，此時讀到的內容是 undefined。
+const 在宣告之後就必須賦值，否則會報錯，而且宣告後不能重新賦值（更改內容），一樣也會報錯。
+但 var 與 let 是可以宣告但不賦值，此時讀到的內容是 undefined。
 
 ---
 
@@ -82,16 +82,16 @@ string 的 + 是拼接的意思，因此 number、null、undefined、NaN 都會�
 如果 string 內容是中英文等等而不是數字，就無法被轉換成 number 型別，會顯示 NaN，運算結果也是 NaN。
 
 特別注意 null 常被當成變數宣告時可以賦予的空值，但在數字運算上會被當作 0，
-但是 undefined 是不行進行運算的，就會被當成 NaN。
+但是 undefined 是無法做任何運算的，會被當成 NaN。
 
 （可以用 Number() 看看任何值被轉成 number 時會變成什麼）
 
 所以規則大略可以整理成：
 
 - string 加 任何東西 = string
-- string 減乘除 任何東西 = 減乘除會把兩邊運算元強制轉為 number，不能轉成數字
-- null 運算當作 0
-- undefined 運算是 NaN
+- string 減乘除 任何東西 = 減乘除會把兩邊運算元強制轉為 number，不能轉成數字的東西會變成 NaN
+- null 運算時當作 0
+- undefined 運算時當作 NaN
 
 ---
 

@@ -112,7 +112,7 @@ console.log(NaN === NaN); // false
 console.log(isNaN(NaN));  // true
 ```
 
-關於 2. 真是見鬼了對吧...我也驚呆了，**Not a Number 的型別居然是一個 number**！
+關於 2. ...我也驚呆了，**Not a Number 的型別居然是一個 number**！
 NaN 是在運算過程中，無法被轉換成有效數字而誕生的一個**「值」**，
 雖然不能對它做任何運算，但注意，前面說它是一個值，並不是一種型別，
 計算機科學的世界裡面，NaN 可以視作一個特別的浮點數，所以型別會顯示 number...

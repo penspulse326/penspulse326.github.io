@@ -20,17 +20,17 @@
   <meta name="description" content="隨著 Lidemy 的課綱，我自學的進度來到最後的框架了。起初我完全不懂 React 到底在寫什麼，JSX 是什麼概念，而後硬著頭皮做完了整個課程的作業，加上同時我也參加了六角學院舉辦的，React 讀書會之後，才終於對 React 有初步的認識。 以下我會以自己初學 React 的角度，大略統整我在學習 React 上的心得。不過筆記類的文章我不會書寫得太詳細，因為主要是寫給自己看的，有點像考前">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[筆記] 初學者眼中的 React(1)：入門概念">
-<meta property="og:url" content="https://penspulse326.github.io/2022/09/16/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%20React(1)%EF%BC%9A%E5%85%A5%E9%96%80%E6%A6%82%E5%BF%B5/index.html">
+<meta property="og:url" content="https://penspulse326.github.io/2022/09/16/react-tutorial-1/index.html">
 <meta property="og:site_name" content="Penspulse">
 <meta property="og:description" content="隨著 Lidemy 的課綱，我自學的進度來到最後的框架了。起初我完全不懂 React 到底在寫什麼，JSX 是什麼概念，而後硬著頭皮做完了整個課程的作業，加上同時我也參加了六角學院舉辦的，React 讀書會之後，才終於對 React 有初步的認識。 以下我會以自己初學 React 的角度，大略統整我在學習 React 上的心得。不過筆記類的文章我不會書寫得太詳細，因為主要是寫給自己看的，有點像考前">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i1.wp.com/programmingwithmosh.com/wp-content/uploads/2018/11/lnrn_0201.png">
 <meta property="article:published_time" content="2022-09-16T08:34:12.000Z">
-<meta property="article:modified_time" content="2023-08-11T10:38:19.859Z">
+<meta property="article:modified_time" content="2023-09-05T10:59:00.716Z">
 <meta property="article:author" content="Shin">
+<meta property="article:tag" content="程式語言">
 <meta property="article:tag" content="學習心得">
 <meta property="article:tag" content="React">
-<meta property="article:tag" content="程式語言">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i1.wp.com/programmingwithmosh.com/wp-content/uploads/2018/11/lnrn_0201.png">
   
@@ -91,9 +91,9 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-初學者眼中的 React(1)：入門概念" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-react-tutorial-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/09/16/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%20React(1)%EF%BC%9A%E5%85%A5%E9%96%80%E6%A6%82%E5%BF%B5/" class="article-date">
+    <a href="/2022/09/16/react-tutorial-1/" class="article-date">
   <time class="dt-published" datetime="2022-09-16T08:34:12.000Z" itemprop="datePublished">2022-09-16</time>
 </a>
     
@@ -120,6 +120,7 @@
         <p>隨著 Lidemy 的課綱，我自學的進度來到最後的框架了。<br>起初我完全不懂 React 到底在寫什麼，JSX 是什麼概念，<br>而後硬著頭皮做完了整個課程的作業，加上同時我也參加了六角學院舉辦的，<br>React 讀書會之後，才終於對 React 有初步的認識。</p>
 <p>以下我會以自己初學 React 的角度，大略統整我在學習 React 上的心得。<br>不過筆記類的文章我不會書寫得太詳細，因為主要是寫給自己看的，<br>有點像考前重點複習那樣，還請見諒。</p>
 <span id="more"></span>
+
 <h3 id="為什麼要學-React-？"><a href="#為什麼要學-React-？" class="headerlink" title="為什麼要學 React ？"></a>為什麼要學 React ？</h3><p><del>因為課綱就教 React</del>。</p>
 <p>畫面互動經常需要操作到 DOM 元素，<br>需要管理的元素越來越多，邏輯就會開始變得複雜，<br>所以也會帶來效能上的負擔和維護的難度。</p>
 <p>如撰寫按鈕 A 的事件，可能會需要新增 B 區塊，<br>而 B 區塊又有一些個別狀態所觸發的不同事件，產生 C 或 D 元素等，<br>這樣一層又一層的衍生，在只用原生 JS 或 jQuery 的情況下，<br>不僅同時操作了很多 DOM 元素，而且互相關聯的部分也經常造成追蹤程式碼的困難。</p>
@@ -138,16 +139,17 @@
 <li>需要其他第三方套件輔助</li>
 </ul>
 <p>下一篇會示範 React 基本架構 ！</p>
+<hr>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
 <li><a target="_blank" rel="noopener" href="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-why-react-424f2abaf9a2">[筆記] Why React?</a></li>
-<li><a target="_blank" rel="noopener" href="https://hackmd.io/@BOBYZH/H1JqsfYg9">從Native到React：初學React.js角度的JavaScript「升級」整理</a></li>
+<li><a target="_blank" rel="noopener" href="https://hackmd.io/@BOBYZH/H1JqsfYg9">從 Native 到 React：初學 React.js 角度的 JavaScript「升級」整理</a></li>
 <li><a target="_blank" rel="noopener" href="https://linyencheng.github.io/2021/05/07/react-interview-questions/#React-%E6%9C%89%E4%BB%80%E9%BA%BC%E7%BC%BA%E9%BB%9E%E5%92%8C%E9%99%90%E5%88%B6">你了解 React JS 嗎 15 個 React JS 的面試問題</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://penspulse326.github.io/2022/09/16/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%20React(1)%EF%BC%9A%E5%85%A5%E9%96%80%E6%A6%82%E5%BF%B5/" data-id="clll4vqxj000cbovq3daxghsl" data-title="[筆記] 初學者眼中的 React(1)：入門概念" class="article-share-link">Share</a>
+      <a data-url="https://penspulse326.github.io/2022/09/16/react-tutorial-1/" data-id="clm67djj1000840vq89mch8if" data-title="[筆記] 初學者眼中的 React(1)：入門概念" class="article-share-link">Share</a>
       
       
       
@@ -159,7 +161,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/10/01/%E5%88%9D%E5%AD%B8%E8%80%85%E7%9C%BC%E4%B8%AD%E7%9A%84%20React(2)%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%A7%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/10/01/react-tutorial-2/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -169,7 +171,7 @@
     </a>
   
   
-    <a href="/2022/09/06/%E5%85%AD%E8%A7%92%E5%AD%B8%E9%99%A2-React-%E8%AE%80%E6%9B%B8%E6%9C%83%E7%B5%90%E6%A5%AD%E5%BF%83%E5%BE%97/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/09/06/hexschool-react/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">[心得] 六角學院 React 讀書會結業心得 </div>
     </a>
@@ -215,7 +217,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" rel="tag">個人生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" rel="tag">學習心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" rel="tag">火箭隊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag">程式語言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%A9%A6/" rel="tag">面試</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" rel="tag">個人生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" rel="tag">學習心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" rel="tag">火箭隊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag">程式語言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%A9%A6/" rel="tag">面試</a></li></ul>
     </div>
   </div>
 
@@ -225,7 +227,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">個人生活</a> <a href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" style="font-size: 20px;">學習心得</a> <a href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" style="font-size: 12.5px;">火箭隊</a> <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" style="font-size: 17.5px;">程式語言</a> <a href="/tags/%E9%9D%A2%E8%A9%A6/" style="font-size: 10px;">面試</a>
+      <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 11.67px;">JavaScript</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">個人生活</a> <a href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" style="font-size: 20px;">學習心得</a> <a href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" style="font-size: 16.67px;">火箭隊</a> <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" style="font-size: 18.33px;">程式語言</a> <a href="/tags/%E9%9D%A2%E8%A9%A6/" style="font-size: 10px;">面試</a>
     </div>
   </div>
 
@@ -234,7 +236,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">彙整</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
     </div>
   </div>
 
@@ -247,23 +249,23 @@
       <ul>
         
           <li>
-            <a href="/2023/08/21/%E5%88%87%E7%89%88%E5%9C%B0%E7%8D%84/">[筆記] 切版小白的無盡地獄？重要的網格系統</a>
+            <a href="/2023/09/05/rocket-week5/">[日常] 火箭日記-第五週</a>
           </li>
         
           <li>
-            <a href="/2023/08/20/week3/">[日常] 火箭日記-第三週</a>
+            <a href="/2023/09/01/js-week2/">[筆記] JavaScript 的條件判斷</a>
           </li>
         
           <li>
-            <a href="/2023/08/14/week2/">[日常] 火箭日記-第二週</a>
+            <a href="/2023/08/30/js-week1/">[筆記] JavaScript 的宣告與型別問題</a>
           </li>
         
           <li>
-            <a href="/2023/08/11/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%9C%A8-Github-%E4%B8%8A%E5%82%B3%E5%B0%B1%E5%A4%B1%E6%95%97/">[筆記] 第一次在 Github 上傳就失敗？！Password 又輸入錯誤了！</a>
+            <a href="/2023/08/28/rocket-week4/">[日常] 火箭日記-第四週</a>
           </li>
         
           <li>
-            <a href="/2023/08/09/week1/">[日常] 火箭日記-第一週</a>
+            <a href="/2023/08/21/layout-hell/">[筆記] 切版小白的無盡地獄？重要的網格系統</a>
           </li>
         
       </ul>

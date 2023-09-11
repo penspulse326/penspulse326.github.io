@@ -88,7 +88,7 @@ list.forEach(function(item, index) {
 })
 ```
 
-這個 forEach 迭代的結構看起來跟上一個範例很像對吧...
+這個 forEach 迭代的結構看起來跟上一個範例似曾相似...
 沒錯，箭頭函式也是一種匿名函式，所以這邊的 callback 也是能改寫成箭頭函式的。
 
 ---
@@ -110,7 +110,7 @@ list.forEach(function(item, index) {
 // 這裡我不需要任何 return 的值所以箭頭後面直接接上 console.log()
 ```
 
-那麼在一些會調動 callback 的方法裡面，在 callback 後面接小括號變成 IIFE 可以嗎？
+那麼某些會調動 callback 的方法，在 callback 後面接小括號變成 IIFE 可以嗎？
 其實語法上是合法的，只是 callback 本來就會在迭代過程中執行，所以就沒有必要寫了！
 
 ---
@@ -122,8 +122,6 @@ list.forEach(function(item, index) {
 然後才在下面的內容找到函式的宣告。
 
 但是被賦予匿名函式的變數就不能這樣做，因為變數宣告與函式宣告的級別不同！
-
-（之後再補充一下提升，這邊先記住函式會有提升這個特性）
 
 ```JS
 console.log(add(1,2)); // 函式可以在宣告前就取用
@@ -138,6 +136,8 @@ const twoSum = (a, b) => {
   return a+b;
 }
 ```
+
+（之後再補充一下提升，這邊先記住函式會有提升這個特性）
 
 ### 參考資料
 

@@ -16,11 +16,11 @@ JS 的陣列與物件也有專屬的類似迴圈的方式，
 
 ## for 家族
 
-### 原始的 for
+### 1. 原始的 for
 
-for 是許多語言都有的迴圈語法，所以不限於陣列或哪種形式的做使用，
+for 是許多語言都有的迴圈語法，所以不限於陣列做使用，
 只要是單一重複的工作都可以利用 for 完成，
-只要注意迴圈的終止條件就不要寫錯造成無限迴圈。
+注意迴圈的終止條件，不要寫錯造成無限迴圈。
 
 ```JS
 
@@ -33,10 +33,10 @@ for(let i = 1; i < 10 ; i++) {
 console.log(numStr); // "0123456789"
 ```
 
-### for in / for of
+### 2. for in / for of
 
 這兩個方法是 for 的親戚，差別就在於不需要寫條件式，
-in 可以抓出索引值，而 of 可以抓出 value。
+for in 可以抓出索引值，而 for of 可以抓出 value。
 
 ```JS
 const arr = ["a", "b", "c", "d"];
@@ -52,7 +52,7 @@ for(const value of arr) {
 
 ---
 
-### forEach
+### 3. forEach
 
 forEach 則必須接在陣列後面才能做使用，
 而 forEach 本身是沒有條件式的，它會在訪問所有的元素後終止。
@@ -78,7 +78,7 @@ numArray.forEach((item, index, arr)=>{
 ## 進階陣列方法：map / filter / sort
 
 陣列有很多內建方法，不常用的話蠻容易混淆的，
-但是只要記住兩個重點後，之後在查閱想要用到方法時就會快很多：
+但是只要記住兩個重點後，之後想查閱時就會快很多：
 
 - 這個方法有沒有回傳值？回傳值是什麼？
 - 這個方法會不會更改到原本的陣列？
@@ -87,7 +87,7 @@ numArray.forEach((item, index, arr)=>{
 
 ---
 
-### map
+### map（有回傳值/不會改變陣列）
 
 （這邊的 map 不是資料結構中的 map 而是陣列方法 map）
 
@@ -102,11 +102,11 @@ const arr2 = arr1.map((item) => ++item);
 console.log(arr2); // [2, 3, 4]
 ```
 
-callback 裡面也可以寫入一些程式碼做事而不是像範例這樣直接回傳值，
+callback 裡面也可以寫入一些程式碼而不是像範例這樣直接回傳值，
 只要確定好最後 return 的東西是要放到新陣列的就可以了。
 
 要注意的是之前提到過的拷貝問題，諸如上面提到的 forEach，
-或是這次要介紹的 map、filter 等等，一樣只能做到第一層的獨立，
+或是這次要介紹的 map、filter 等等，一樣**只能做到第一層的獨立**，
 如果是包含陣列或物件之類的內容，在 map 的 callback 裡面抓出來後，
 仍然是指向原本陣列的，所以修改新陣列也會同時改到原本的陣列。（淺拷貝）
 
@@ -121,9 +121,9 @@ console.log(arr1); // [{value: 2}, {value: 3}, {value: 4}]
 
 ---
 
-### filter
+### filter（有回傳值/不會改變陣列）
 
-filter 的 callback 是回**傳值上寫入條件判斷式**，
+filter 類似 map，但 callback 是在**回傳值上寫入條件判斷式**，
 符合條件的元素會被留下來，最後整合出篩選過的新陣列。
 
 ```JS
@@ -136,11 +136,11 @@ console.log(arr2); // [ 3, 4 ]
 ```
 
 當然要在 callback 裡面順便做事，語法上也是可以的，
-只是要記得最後 return 條件判斷式，才能進行篩選。
+只是要記得最後 return 一個條件判斷式，才能進行篩選。
 
 ---
 
-### sort
+### sort（無回傳值/會改變陣列）
 
 sort 是一個很精妙的方法...我也不是很熟悉它的條件式 XD
 要特別注意的是，它會**更動原來的陣列**。
@@ -151,7 +151,7 @@ sort 的 callback 會有兩個參數，通常寫成 a, b 或 x, y，
 而回傳值則代表之後的排序行為，
 回傳值是負數時 a 與 b 不會交換，
 回傳值是正數時 a 與 b 交換位置。
-經過多次的當兩兩比較後都不會交換位置時，sort 就完成排序。
+經過多次的當兩兩比較後都不會交換位置時，sort 就結束並完成排序。
 
 依照這個特性，可以利用**純值的比較**寫出簡潔的語法，
 所以有時候 sort 的 callback 看起來還蠻抽象的...
@@ -207,10 +207,8 @@ console.log(objArray); // 順序變成 Ann, Bob, Cindy,
 
 ## 物件的遍歷
 
-物件沒有陣列的特性，所以上面提到的 for 與 forEach，
-沒辦法直接套用在物件身上。
-
-不過物件還是有很多遍歷的方式，可以抓出所有的 key 與 value。
+物件在規範上沒辦法使用上面提到的 for 與 forEach，
+不過還是有很多遍歷的方式，可以抓出所有的 key 與 value。
 
 ### 沒有回傳值的 for in
 
@@ -231,7 +229,7 @@ for(const value if obj) {
 
 ### 有回傳值的內建方法 Object
 
-物件可以透過內建方法來遍歷內容，
+物件可以透過 Object 原型的內建方法來遍歷內容，
 同時它們也會回傳一個陣列，所以可以宣告變數去儲存結果。
 
 Object.keys、Object.values 就不用多說了吧！
@@ -250,7 +248,7 @@ console.log(Object.values(obj));  // [1, 2, 3]
 ```
 
 Object.entries 也會產生陣列，
-陣列的內容則是一個小的陣列，包含一組 key 與 value。
+陣列的內容則是一個小的陣列，看起來會很像一個數對，代表的是一組 key 與 value。
 
 ```JS
 const obj = {
@@ -263,7 +261,7 @@ console.log(Object.entries(obj)); // [['a', 1], ['b', 2], ['c', 3]]
 ```
 
 因為透過 Object 內建方法會產生陣列，
-這時 forEach 之類的陣列方法就可以使用在它們身上了。
+這時 forEach 之類的陣列方法就可以接續在這些方法後面使用。
 
 ```JS
 const obj = {
@@ -275,8 +273,8 @@ const obj = {
 console.log(Object.entries(obj).filter(item => item[1] > 1));
 ```
 
-注意 entries 產生的陣列內容是小陣列，因此 filter 這類的方法，
-callback 的參數 item 就是小陣列，要加上索引才能拿到值，
+注意 entries 產生的陣列內容是小陣列，因此 map、filter 這類的方法，
+callback 的參數拿到的 item 就是小陣列，要再上索引才能拿到值，
 或是可以直接用陣列解構成可讀的寫法：
 
 ```JS
@@ -288,3 +286,17 @@ const obj = {
 
 console.log(Object.entries(obj).filter(([key, value]) => value > 1));
 ```
+
+這些方法在操縱大量的 DOM 事件也經常會用到～
+所以可以說是必學的！
+
+---
+
+### 參考資料
+
+- [JavaScript Array 陣列操作方法大全 ( 含 ES6 )](https://www.oxxostudio.tw/articles/201908/js-array.html?fbclid=IwAR12g-n-YcR7KG-dgXWme9xcKCdXlBNthFFeptHjfLjK_UBEBR7WysgX9Oo#array_map)
+- [JavaScript 陣列處理方法](https://www.casper.tw/javascript/2017/06/29/es6-native-array/?fbclid=IwAR09E7Sn52hQArZoUYxIdWC5Y9GW_qL8BnHdsq7uYRhsIxySqjrq00MlqKE)
+- [DOM 是什麼 ? 先了解 Node & HTMLElement 就知道了](https://ithelp.ithome.com.tw/articles/10283568?fbclid=IwAR2hVCz5EpBgC6r4XG9kSOgJN_Cx-I0VAerqXPYCii7zHeOHxD1KYX5-1-I)
+
+- [JavaScript 容易混淆的遍歷方法](https://awdr74100.github.io/2019-11-28-javascript-traverse/?fbclid=IwAR3VGGfIhJgNuf-RWvokMQeoedHFGt5rOI0j9l-9D3B9oQSFn8A66MWvH-4)
+- [JS 將陣列 Array 重新排列的 sort()](https://ithelp.ithome.com.tw/articles/10225733?fbclid=IwAR0sMRAy_sHRlwo-7pDA9xzhzSSaLPIOwzu2Luo8LQJ1xx5vB3eRExR82AU)

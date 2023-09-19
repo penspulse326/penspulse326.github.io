@@ -4,7 +4,7 @@ date: 2023-09-14 16:16:24
 tags:
   - JavaScript
   - 程式語言
-  - 函式
+  - 迴圈
 categories: 程式學習
 ---
 

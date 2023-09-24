@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENMQERHZKM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ENMQERHZKM');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>[筆記] JavaScript 的遍歷 | Penspulse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="迴圈和遍歷是相關的概念，除了常見的 for、while 之外，JS 的陣列與物件也有專屬的類似迴圈的方式，一樣都能將重複的程式碼封裝起來。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[筆記] JavaScript 的遍歷">
+<meta property="og:url" content="https://penspulse326.github.io/2023/09/14/js-week5/index.html">
+<meta property="og:site_name" content="Penspulse">
+<meta property="og:description" content="迴圈和遍歷是相關的概念，除了常見的 for、while 之外，JS 的陣列與物件也有專屬的類似迴圈的方式，一樣都能將重複的程式碼封裝起來。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-09-14T08:16:24.000Z">
+<meta property="article:modified_time" content="2023-09-24T05:23:54.740Z">
+<meta property="article:author" content="Shin">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="程式語言">
+<meta property="article:tag" content="迴圈">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Penspulse" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Penspulse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://penspulse326.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-js-week5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/14/js-week5/" class="article-date">
+  <time class="dt-published" datetime="2023-09-14T08:16:24.000Z" itemprop="datePublished">2023-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BC%8F%E5%AD%B8%E7%BF%92/">程式學習</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      [筆記] JavaScript 的遍歷
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>迴圈和遍歷是相關的概念，除了常見的 for、while 之外，<br>JS 的陣列與物件也有專屬的類似迴圈的方式，<br>一樣都能將重複的程式碼封裝起來。</p>
+<span id="more"></span>
+
+<h2 id="for-家族"><a href="#for-家族" class="headerlink" title="for 家族"></a>for 家族</h2><h3 id="1-原始的-for"><a href="#1-原始的-for" class="headerlink" title="1. 原始的 for"></a>1. 原始的 for</h3><p>for 是許多語言都有的迴圈語法，所以不限於陣列做使用，<br>只要是單一重複的工作都可以利用 for 完成，<br>注意迴圈的終止條件，不要寫錯造成無限迴圈。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> numStr = <span class="string">&quot;0&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; <span class="number">10</span> ; i++) &#123;</span><br><span class="line">    numStr += i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(numStr); <span class="comment">// &quot;0123456789&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-for-in-x2F-for-of"><a href="#2-for-in-x2F-for-of" class="headerlink" title="2. for in &#x2F; for of"></a>2. for in &#x2F; for of</h3><p>這兩個方法是 for 的親戚，差別就在於不需要寫條件式，<br>for in 可以抓出索引值，而 for of 可以抓出 value。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> index <span class="keyword">in</span> arr) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`索引 <span class="subst">$&#123;index&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> value <span class="keyword">of</span> arr) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`值 <span class="subst">$&#123;value&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3-forEach"><a href="#3-forEach" class="headerlink" title="3. forEach"></a>3. forEach</h3><p>forEach 則必須接在陣列後面才能做使用，<br>而 forEach 本身是沒有條件式的，它會在訪問所有的元素後終止。</p>
+<p>forEach 的 callback 可以帶入三個參數：元素本身（必填）、元素的索引（選填）、元素的整個陣列（選填）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> numArray = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"></span><br><span class="line">numArray.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item, index, arr</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;目前元素索引:&quot;</span>,index);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;目前元素內容:&quot;</span>,item);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;目前陣列:&quot;</span>,arr);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>要特別注意 JS 中有類似陣列的資料結構，<strong>稱作 array-like objects</strong>，<br>它們雖然不是陣列，但通常也可以透過 forEach 進行遍歷，<br>像是操作 DOM 元素時可能會得到的 NodeList、HTMLElement 等等。</p>
+<hr>
+<h2 id="進階陣列方法：map-x2F-filter-x2F-sort"><a href="#進階陣列方法：map-x2F-filter-x2F-sort" class="headerlink" title="進階陣列方法：map &#x2F; filter &#x2F; sort"></a>進階陣列方法：map &#x2F; filter &#x2F; sort</h2><p>陣列有很多內建方法，不常用的話蠻容易混淆的，<br>但是只要記住兩個重點後，之後想查閱時就會快很多：</p>
+<ul>
+<li>這個方法有沒有回傳值？回傳值是什麼？</li>
+<li>這個方法會不會更改到原本的陣列？</li>
+</ul>
+<p>這篇要介紹的三個常用方法也包含這兩個特性！</p>
+<hr>
+<h3 id="map（有回傳值-x2F-不會改變陣列）"><a href="#map（有回傳值-x2F-不會改變陣列）" class="headerlink" title="map（有回傳值&#x2F;不會改變陣列）"></a>map（有回傳值&#x2F;不會改變陣列）</h3><p>（這邊的 map 不是資料結構中的 map 而是陣列方法 map）</p>
+<p>map 的 callback 和 forEach 一樣，可以帶入三個參數，<br>但是 map 會回傳一個新的陣列，所以要保留結果的話要另外宣告變數來儲存。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> ];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr2 = arr1.<span class="title function_">map</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> ++item);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// [2, 3, 4]</span></span><br></pre></td></tr></table></figure>
+
+<p>callback 裡面也可以寫入一些程式碼而不是像範例這樣直接回傳值，<br>只要確定好最後 return 的東西是要放到新陣列的就可以了。</p>
+<p>要注意的是之前提到過的拷貝問題，諸如上面提到的 forEach，<br>或是這次要介紹的 map、filter 等等，一樣<strong>只能做到第一層的獨立</strong>，<br>如果是包含陣列或物件之類的內容，在 map 的 callback 裡面抓出來後，<br>仍然是指向原本陣列的，所以修改新陣列也會同時改到原本的陣列。（淺拷貝）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [&#123;<span class="attr">value</span>: <span class="number">1</span>&#125;, &#123;<span class="attr">value</span>: <span class="number">2</span>&#125;, &#123;<span class="attr">value</span>: <span class="number">3</span>&#125;];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr2 = arr1.<span class="title function_">map</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> ++item.<span class="property">value</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// [&#123;value: 2&#125;, &#123;value: 3&#125;, &#123;value: 4&#125;]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr1); <span class="comment">// [&#123;value: 2&#125;, &#123;value: 3&#125;, &#123;value: 4&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="filter（有回傳值-x2F-不會改變陣列）"><a href="#filter（有回傳值-x2F-不會改變陣列）" class="headerlink" title="filter（有回傳值&#x2F;不會改變陣列）"></a>filter（有回傳值&#x2F;不會改變陣列）</h3><p>filter 類似 map，但 callback 是在<strong>回傳值上寫入條件判斷式</strong>，<br>符合條件的元素會被留下來，最後整合出篩選過的新陣列。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr2 = arr1.<span class="title function_">filter</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> item &gt; <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr2); <span class="comment">// [ 3, 4 ]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>當然要在 callback 裡面順便做事，語法上也是可以的，<br>只是要記得最後 return 一個條件判斷式，才能進行篩選。</p>
+<hr>
+<h3 id="sort（無回傳值-x2F-會改變陣列）"><a href="#sort（無回傳值-x2F-會改變陣列）" class="headerlink" title="sort（無回傳值&#x2F;會改變陣列）"></a>sort（無回傳值&#x2F;會改變陣列）</h3><p>sort 是一個很精妙的方法…我也不是很熟悉它的條件式 XD<br>要特別注意的是，它會<strong>更動原來的陣列</strong>。</p>
+<p>sort 的 callback 會有兩個參數，通常寫成 a, b 或 x, y，<br>代表陣列中相鄰的兩個元素（n 與 n +1）。</p>
+<p>而回傳值則代表之後的排序行為，<br>回傳值是負數時 a 與 b 不會交換，<br>回傳值是正數時 a 與 b 交換位置。<br>經過多次的當兩兩比較後都不會交換位置時，sort 就結束並完成排序。</p>
+<p>依照這個特性，可以利用<strong>純值的比較</strong>寫出簡潔的語法，<br>所以有時候 sort 的 callback 看起來還蠻抽象的…<br>但其實就是和回傳值有關係！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span> , -<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">arr1.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br><span class="line"><span class="comment">// 表示 a（前項） 如果比較大就往後移</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr1); <span class="comment">// [ -5, 1, 2, 3, 4 ]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>秉持<strong>正數交換</strong>的原則來看上面的範例，<br>callback 的回傳值為 a - b，<br>表示 a 比 b 還要大時會交換位置，<br>因此經過多次的兩兩比較後，數值較大的元素會被往後排形成升冪排序。</p>
+<p>稍微改變回傳值的寫法就能變成降冪排序了！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span> , -<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">arr1.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> b - a);</span><br><span class="line"><span class="comment">// 表示 b（後項）如果比較大就往前移（因為正數交換原則）</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr1); <span class="comment">// [ 4, 3, 2, 1, -5 ]</span></span><br></pre></td></tr></table></figure>
+
+<p>只要掌握交換的原則就可以設計出一些純值計算的條件達成想要的排序效果了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> objArray = [</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Cindy&quot;</span>, <span class="attr">money</span>: <span class="number">300</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Bob&quot;</span>, <span class="attr">money</span>: <span class="number">100</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Ann&quot;</span>, <span class="attr">money</span>: <span class="number">600</span>&#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">objArray.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.<span class="property">money</span> - b.<span class="property">money</span>)</span><br><span class="line"><span class="comment">// money 越多就往後排</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objArray); <span class="comment">// 順序變成 Bob, Cindy, Ann</span></span><br><span class="line"></span><br><span class="line">objArray.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.<span class="property">name</span>.<span class="title function_">charCodeAt</span>(<span class="number">0</span>) - b.<span class="property">name</span>.<span class="title function_">charCodeAt</span>(<span class="number">0</span>))</span><br><span class="line"><span class="comment">// 利用 charCode 來照字首排序</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(objArray); <span class="comment">// 順序變成 Ann, Bob, Cindy,</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="物件的遍歷"><a href="#物件的遍歷" class="headerlink" title="物件的遍歷"></a>物件的遍歷</h2><p>物件在規範上沒辦法使用上面提到的 for 與 forEach，<br>不過還是有很多遍歷的方式，可以抓出所有的 key 與 value。</p>
+<h3 id="沒有回傳值的-for-in"><a href="#沒有回傳值的-for-in" class="headerlink" title="沒有回傳值的 for in"></a>沒有回傳值的 for in</h3><p>上面提到 for 的親戚，可以利用 for in 語法來抓出物件的 key 值，<br>但也只能抓出 key 值，for of 就不能抓出物件的 value 了（會報錯）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">b</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">c</span>: <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> value <span class="keyword">if</span> obj) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="有回傳值的內建方法-Object"><a href="#有回傳值的內建方法-Object" class="headerlink" title="有回傳值的內建方法 Object"></a>有回傳值的內建方法 Object</h3><p>物件可以透過 Object 原型的內建方法來遍歷內容，<br>同時它們也會回傳一個陣列，所以可以宣告變數去儲存結果。</p>
+<p>Object.keys、Object.values 就不用多說了吧！<br>名符其實，看得出來這是會產生所有 key 與 value 的方法，<br>參數是要遍歷的物件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">b</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">c</span>: <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">keys</span>(obj)); <span class="comment">// [a, b, c]</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">values</span>(obj));  <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<p>Object.entries 也會產生陣列，<br>陣列的內容則是一個小的陣列，看起來會很像一個數對，代表的是一組 key 與 value。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">b</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">c</span>: <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">entries</span>(obj)); <span class="comment">// [[&#x27;a&#x27;, 1], [&#x27;b&#x27;, 2], [&#x27;c&#x27;, 3]]</span></span><br></pre></td></tr></table></figure>
+
+<p>因為透過 Object 內建方法會產生陣列，<br>這時 forEach 之類的陣列方法就可以接續在這些方法後面使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">b</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">c</span>: <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">entries</span>(obj).<span class="title function_">filter</span>(<span class="function"><span class="params">item</span> =&gt;</span> item[<span class="number">1</span>] &gt; <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>注意 entries 產生的陣列內容是小陣列，因此 map、filter 這類的方法，<br>callback 的參數拿到的 item 就是小陣列，要再上索引才能拿到值，<br>或是可以直接用陣列解構成可讀的寫法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">b</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">c</span>: <span class="number">3</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">entries</span>(obj).<span class="title function_">filter</span>(<span class="function">(<span class="params">[key, value]</span>) =&gt;</span> value &gt; <span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>這些方法在操縱大量的 DOM 事件也經常會用到～<br>所以可以說是必學的！</p>
+<hr>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.oxxostudio.tw/articles/201908/js-array.html?fbclid=IwAR12g-n-YcR7KG-dgXWme9xcKCdXlBNthFFeptHjfLjK_UBEBR7WysgX9Oo#array_map">JavaScript Array 陣列操作方法大全 ( 含 ES6 )</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.casper.tw/javascript/2017/06/29/es6-native-array/?fbclid=IwAR09E7Sn52hQArZoUYxIdWC5Y9GW_qL8BnHdsq7uYRhsIxySqjrq00MlqKE">JavaScript 陣列處理方法</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10283568?fbclid=IwAR2hVCz5EpBgC6r4XG9kSOgJN_Cx-I0VAerqXPYCii7zHeOHxD1KYX5-1-I">DOM 是什麼 ? 先了解 Node &amp; HTMLElement 就知道了</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://awdr74100.github.io/2019-11-28-javascript-traverse/?fbclid=IwAR3VGGfIhJgNuf-RWvokMQeoedHFGt5rOI0j9l-9D3B9oQSFn8A66MWvH-4">JavaScript 容易混淆的遍歷方法</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10225733?fbclid=IwAR0sMRAy_sHRlwo-7pDA9xzhzSSaLPIOwzu2Luo8LQJ1xx5vB3eRExR82AU">JS 將陣列 Array 重新排列的 sort()</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://penspulse326.github.io/2023/09/14/js-week5/" data-id="clmx2jf7q000h1wvq44lc03z6" data-title="[筆記] JavaScript 的遍歷" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag">程式語言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%B4%E5%9C%88/" rel="tag">迴圈</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/09/17/rocket-week7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [日常] 火箭日記-第七週
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/10/rocket-week6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[日常] 火箭日記-第六週</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+  <div>
+    <section id="comments" class="comments">
+      <style>
+        .utterances{max-width: 100%;}
+      </style>
+        <script src="https://utteranc.es/client.js"
+                repo="annkuoQ/blog-utterances"
+                issue-term="title"
+                theme="github-dark"
+                crossorigin="anonymous"
+                async>
+        </script>
+  </section>
+</div>
+  </section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%88%86%E4%BA%AB/">生活分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BC%8F%E5%AD%B8%E7%BF%92/">程式學習</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" rel="tag">個人生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E5%BC%8F/" rel="tag">函式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" rel="tag">學習心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" rel="tag">火箭隊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E4%BB%B6/" rel="tag">物件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag">程式語言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%8A%E6%95%B8%E5%9E%8B%E5%88%A5/" rel="tag">變數型別</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%B4%E5%9C%88/" rel="tag">迴圈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%82%8F%E8%BC%AF%E5%88%A4%E6%96%B7/" rel="tag">邏輯判斷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%A3%E5%88%97/" rel="tag">陣列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%A9%A6/" rel="tag">面試</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/React/" style="font-size: 13.33px;">React</a> <a href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">個人生活</a> <a href="/tags/%E5%87%BD%E5%BC%8F/" style="font-size: 10px;">函式</a> <a href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" style="font-size: 20px;">學習心得</a> <a href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" style="font-size: 16.67px;">火箭隊</a> <a href="/tags/%E7%89%A9%E4%BB%B6/" style="font-size: 10px;">物件</a> <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" style="font-size: 18.33px;">程式語言</a> <a href="/tags/%E8%AE%8A%E6%95%B8%E5%9E%8B%E5%88%A5/" style="font-size: 10px;">變數型別</a> <a href="/tags/%E8%BF%B4%E5%9C%88/" style="font-size: 10px;">迴圈</a> <a href="/tags/%E9%82%8F%E8%BC%AF%E5%88%A4%E6%96%B7/" style="font-size: 10px;">邏輯判斷</a> <a href="/tags/%E9%99%A3%E5%88%97/" style="font-size: 10px;">陣列</a> <a href="/tags/%E9%9D%A2%E8%A9%A6/" style="font-size: 10px;">面試</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/24/rocket-week8/">[日常] 火箭日記-第八週</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/19/js-week6/">[筆記] 初入 JavaScript 的網路請求</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/17/rocket-week7/">[日常] 火箭日記-第七週</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/14/js-week5/">[筆記] JavaScript 的遍歷</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/10/rocket-week6/">[日常] 火箭日記-第六週</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Shin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

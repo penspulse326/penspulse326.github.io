@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENMQERHZKM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ENMQERHZKM');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>[筆記] 初入 JavaScript 的網路請求 | Penspulse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="從串接 API 開始就會有很多五欸ㄇ欸問題發生，因為在 JS 裡面要處理網路請求就要認識更多相關的函式和系統機制，這篇來記錄必定會碰到的知識點。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[筆記] 初入 JavaScript 的網路請求">
+<meta property="og:url" content="https://penspulse326.github.io/2023/09/19/js-week6/index.html">
+<meta property="og:site_name" content="Penspulse">
+<meta property="og:description" content="從串接 API 開始就會有很多五欸ㄇ欸問題發生，因為在 JS 裡面要處理網路請求就要認識更多相關的函式和系統機制，這篇來記錄必定會碰到的知識點。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-09-19T06:43:08.000Z">
+<meta property="article:modified_time" content="2023-09-24T05:26:35.834Z">
+<meta property="article:author" content="Shin">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="程式語言">
+<meta property="article:tag" content="API">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Penspulse" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Penspulse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜尋"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://penspulse326.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-js-week6" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/09/19/js-week6/" class="article-date">
+  <time class="dt-published" datetime="2023-09-19T06:43:08.000Z" itemprop="datePublished">2023-09-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BC%8F%E5%AD%B8%E7%BF%92/">程式學習</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      [筆記] 初入 JavaScript 的網路請求
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>從串接 API 開始就會有很多五欸ㄇ欸問題發生，<br>因為在 JS 裡面要處理網路請求就要認識更多相關的函式和系統機制，<br>這篇來記錄必定會碰到的知識點。</p>
+<span id="more"></span>
+
+<h2 id="RESTful-不是很放鬆"><a href="#RESTful-不是很放鬆" class="headerlink" title="RESTful 不是很放鬆"></a>RESTful 不是很放鬆</h2><p>其實要說放鬆也可以，只要知道這個架構在做什麼，<br>就會讓規劃變得很輕鬆（並沒有）</p>
+<p>REST 其實是指一種網路系統的設計風格，<br>主要有六種重要的指標：</p>
+<ol>
+<li><strong>客戶端-伺服器端</strong>：意指將前後端的程式系統完全分開，方便兩端的功能開發管理與擴充、維護。</li>
+<li><strong>無狀態</strong>：客戶端的請求每次都是獨立的，跟上次的請求無關，每次新請求都會得到包含必要資訊的回應。（比如說按電鈴，按幾次就會響幾次，每次的行為都是獨立的）</li>
+<li><strong>快取</strong>：可以保留某些請求行為和資源，在有效期限內客戶端如果再發起一樣的請求，可以直接在中間伺服器給出快取的資料，不用每次都與真正的伺服器請求，節省伺服器負載。</li>
+<li><strong>統一介面</strong>：這是等等要說的。</li>
+<li><strong>分層系統</strong>：前後端中間通常會再安排代理伺服器，用來處理快取、身份驗證、資安等等的一些業務邏輯，減少直接訪問訪問後端伺服器造成的流量消耗和危險性。</li>
+<li><strong>按需代碼（可選）</strong>：根據特定的請求從後端生成程式碼，再發送到前端執行。</li>
+</ol>
+<p>所以我們經常聽到的 RESTful API 就是建立在以上的概念所設計出來的網路請求方法～</p>
+<p>API 最常見的就是使用者透過網址（URL）發送過來的請求，<br>來對應伺服器要做的事，所以這時候<strong>路由</strong>的設計就很重要，<br>也就是上面說的統一介面的問題。</p>
+<p>前後端的開發人員會規劃出一套完整的路由系統，<br>讓雙方可以看懂請求的行為是什麼～</p>
+<p>比如我們部署了留言板網站的網域 <a target="_blank" rel="noopener" href="http://www.our-comments.com/">www.our-comments.com</a> 指向我們的伺服器時，<br>前端會根據畫面的按鈕、表單、超連結等等的互動行為，<br><strong>把使用者想做的事透過子網域的 URL 發送過來讓後端接收</strong>，<br>因此路由可能會這樣設計：</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>HTTP method</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;user&#x2F;:id</td>
+<td>GET</td>
+<td>查看某個使用者的資料</td>
+</tr>
+<tr>
+<td>&#x2F;user&#x2F;:id&#x2F;comments</td>
+<td>GET</td>
+<td>查看某個使用者的留言</td>
+</tr>
+<tr>
+<td>&#x2F;user&#x2F;:id&#x2F;add</td>
+<td>POST</td>
+<td>在某個使用者的頁面留言</td>
+</tr>
+<tr>
+<td>&#x2F;user&#x2F;:id&#x2F;comments&#x2F;:id&#x2F;update</td>
+<td>PUT</td>
+<td>更新某一則留言</td>
+</tr>
+<tr>
+<td>&#x2F;user&#x2F;:id&#x2F;comments&#x2F;:id&#x2F;delete</td>
+<td>DELETE</td>
+<td>刪除某一則留言</td>
+</tr>
+</tbody></table>
+<p>一般我們常使用的網站大多也會設計對應的路由，<br>所以網址列經常會看到類似的結構！</p>
+<hr>
+<h2 id="等你回來再出發：非同步"><a href="#等你回來再出發：非同步" class="headerlink" title="等你回來再出發：非同步"></a>等你回來再出發：非同步</h2><p>同步是指一次能進行幾個任務的概念，<br>一般高階語言如 Java、Python、C# 等等的，<br>它們是<strong>多執行緒</strong>的程式語言，因此主程式啟動之後，<br>它們可以一次執行多個函式甚至是多個獨立的程式碼檔案～</p>
+<p>可以想像成在玩 RPG 的時候，身為主角的你正在跑主線劇情，<br>但同時你能夠僱傭很多工人去跑相關的支線，<br>因此你在很短的時間內就打完這個遊戲了。</p>
+<p>而 JS 是<strong>單執行緒</strong>的程式語言，<br>這表示 JS 一次只能執行一段程式碼，<br>也就是在 RPG 的世界裡，你一次只能開一個任務，<br>慢慢地把主線或支線農完然後結束遊戲……</p>
+<p>但這不表示 JS 是廢物，因為上面舉例的多執行緒語言，<br>其實都和它們出現的年代、被設計用來做什麼 APP 的原因有關。<br>JS 起初是用來豐富網頁的動態性，所以只能在瀏覽器內跑的程式。<br>（因此沒辦法做出多執行緒，因為容量太大了）</p>
+<p>JS 也透過一些機制，讓它可以把程式執行的過程變成非同步！</p>
+<hr>
+<h2 id="Call-Me-In-Your-Stack：callback-function"><a href="#Call-Me-In-Your-Stack：callback-function" class="headerlink" title="Call Me In Your Stack：callback function"></a>Call Me In Your Stack：callback function</h2><p>callback 就是 JS 一種非同步的機制，<br>比如 forEach、陣列的 map 方法等等，<br>可以發現它們在函式內帶入的參數也是一個函式，<br>這些參數函式就是 callback，它們會被丟到引擎內的容器，<br>依照後進先出的原則再放進任務排程，（後進先出是資料結構 Stack 的特性，先不探討太多 QQ）<br>引擎的執行緒已經沒有任務後就會從排程裡面再取出剛剛被扔進去的 callback ～</p>
+<p>這也會探討到一開始在介紹變數宣告的時候為什麼最好少用 var，<br>因為這些 callback 在後續回到執行緒（全域環境）跑的時候，<br>var 很容易造成污染，callback 可能也會沒辦法做到想要的事。</p>
+<hr>
+<h2 id="壞男人從不承諾：Promise"><a href="#壞男人從不承諾：Promise" class="headerlink" title="壞男人從不承諾：Promise"></a>壞男人從不承諾：Promise</h2><p>JS 變相來說也是個壞男人…<br>因為這些非同步的機制，它可以把需要等待時間、延後執行的 callback 先打入冷宮，<br>繼續往下找別的女…阿不，是繼續往下執行別的程式，<br>因此你可以發現進到購物網站時，有時商品的列表是一片空白還在讀取，<br>但是點擊網頁其他的地方還是會動作的，因為 JS 可以利用非同步把它們的任務切割。</p>
+<p>Promise 在戳 API 這類網路請求的功能時是經常會用到的方式，<br><strong>Promise 簡單地說是一種特別的物件</strong>，內容為非同步請求的結果，<br>請求成功或失敗都會有對應的資料，但是沒辦法直接用 console.log 看到內容，<br>因此也無法直接取出使用，<strong>需要用後綴 then() 的方式取出資料</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params">apiUrl</span>) &#123;</span><br><span class="line">  fetch.(apiUrl).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(res)).<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>)=&gt;</span><span class="variable language_">console</span>.<span class="title function_">log</span>(error))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 fetch 方法裡帶入網址後會回傳一個 Promise 物件，<br>如上面所說，如果我們要取出資料就必須在後面接一個 .then，<br>.then 裡面的 callback 預設參數就是伺服器回應的資料，<br>這時才能用 console.log 查看內容，或是用外層的變數儲存起來。</p>
+<p>所以一般購物網站的商品列因為圖片和資料屬性比較多，<br>戳 API 之後把這些資料接收過來到顯示在網頁上是需要一段時間的，<br>這段過程是在等待伺服器傳回來的資料，並且打包成 Promise 物件再解析出來。</p>
+<p>因為非同步的網路請求並不是每次都會成功，有時會遇到伺服器的問題，或是網頁程式碼的問題，<br>因此除了 .then() 之外也需要 .catch() 來捕捉錯誤通知，<br>.catch() 只會在錯誤發生的時候捕捉到，<br>但要注意的是 .then 裡面也有可能拿到錯誤通知，<br>所以 .then 與 .catch 都要下才能知道是前後端或資料庫的錯誤訊息！</p>
+<hr>
+<h2 id="一個武器大師：AJAX"><a href="#一個武器大師：AJAX" class="headerlink" title="一個武器大師：AJAX"></a>一個武器大師：AJAX</h2><p>(爛梗)</p>
+<p>AJAX 簡單地說就是非同步網路請求的技術，<br>比如 JS 原生的 fetch、或是 axios、jQuery 這類好用的套件都是一種 AJAX 技術。</p>
+<p>原生的 fetch 雖然可以直接使用，<br>不過要寫的東西還有機制就相對複雜一點，<br>以剛剛的範例來說：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params">apiUrl</span>) &#123;</span><br><span class="line">  fetch.(apiUrl)</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> res.<span class="title function_">json</span>())</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(result))</span><br><span class="line">    .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>)=&gt;</span><span class="variable language_">console</span>.<span class="title function_">log</span>(error))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一個 then 拿到的參數通常不會是結構化的資料，所以要透過內建的 .json() 方法，<br>再丟出一個 Promise 物件，然後加上第二個 then 取出來…就是這麼麻煩 XD</p>
+<p>axios 則簡化了這些流程，從 axios 回傳的 Promise 物件，<br>只要用一次 then 就可以取出，HTTP method 也可以透過點記法直接叫出對應的方法。</p>
+<p>另外 axios 可以在發送請求前就取消，或是對請求做一些格式驗證，<br>但是 fetch 就沒有內建的方法了，需要自己再額外撰寫。</p>
+<p>因為 axios 是外掛上去的模組，<br>所以不論是前端或 Node.js 之類的 JS 環境都是可以執行的。</p>
+<hr>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10191925">RESTful API 與 MVC 名詞介紹</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E8%A1%A8%E7%8E%B0%E5%B1%82%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2">表現層狀態轉換</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/itsems-frontend/javascript-sync-async-22e75e1ca1dc">一次搞懂同步與非同步的一切</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.casper.tw/development/2020/09/30/about-ajax/">AJAX 完整解說系列：基礎觀念</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://penspulse326.github.io/2023/09/19/js-week6/" data-id="clmx2jf7p000d1wvqaajh2ehg" data-title="[筆記] 初入 JavaScript 的網路請求" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag">程式語言</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/09/24/rocket-week8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [日常] 火箭日記-第八週
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/17/rocket-week7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[日常] 火箭日記-第七週</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+  <div>
+    <section id="comments" class="comments">
+      <style>
+        .utterances{max-width: 100%;}
+      </style>
+        <script src="https://utteranc.es/client.js"
+                repo="annkuoQ/blog-utterances"
+                issue-term="title"
+                theme="github-dark"
+                crossorigin="anonymous"
+                async>
+        </script>
+  </section>
+</div>
+  </section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%88%86%E4%BA%AB/">生活分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BC%8F%E5%AD%B8%E7%BF%92/">程式學習</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/" rel="tag">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" rel="tag">個人生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%87%BD%E5%BC%8F/" rel="tag">函式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" rel="tag">學習心得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" rel="tag">火箭隊</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E4%BB%B6/" rel="tag">物件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" rel="tag">程式語言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%8A%E6%95%B8%E5%9E%8B%E5%88%A5/" rel="tag">變數型別</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%B4%E5%9C%88/" rel="tag">迴圈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%82%8F%E8%BC%AF%E5%88%A4%E6%96%B7/" rel="tag">邏輯判斷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%99%A3%E5%88%97/" rel="tag">陣列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%A9%A6/" rel="tag">面試</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標籤雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/React/" style="font-size: 13.33px;">React</a> <a href="/tags/%E5%80%8B%E4%BA%BA%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">個人生活</a> <a href="/tags/%E5%87%BD%E5%BC%8F/" style="font-size: 10px;">函式</a> <a href="/tags/%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" style="font-size: 20px;">學習心得</a> <a href="/tags/%E7%81%AB%E7%AE%AD%E9%9A%8A/" style="font-size: 16.67px;">火箭隊</a> <a href="/tags/%E7%89%A9%E4%BB%B6/" style="font-size: 10px;">物件</a> <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/" style="font-size: 18.33px;">程式語言</a> <a href="/tags/%E8%AE%8A%E6%95%B8%E5%9E%8B%E5%88%A5/" style="font-size: 10px;">變數型別</a> <a href="/tags/%E8%BF%B4%E5%9C%88/" style="font-size: 10px;">迴圈</a> <a href="/tags/%E9%82%8F%E8%BC%AF%E5%88%A4%E6%96%B7/" style="font-size: 10px;">邏輯判斷</a> <a href="/tags/%E9%99%A3%E5%88%97/" style="font-size: 10px;">陣列</a> <a href="/tags/%E9%9D%A2%E8%A9%A6/" style="font-size: 10px;">面試</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/24/rocket-week8/">[日常] 火箭日記-第八週</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/19/js-week6/">[筆記] 初入 JavaScript 的網路請求</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/17/rocket-week7/">[日常] 火箭日記-第七週</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/14/js-week5/">[筆記] JavaScript 的遍歷</a>
+          </li>
+        
+          <li>
+            <a href="/2023/09/10/rocket-week6/">[日常] 火箭日記-第六週</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 Shin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

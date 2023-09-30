@@ -87,8 +87,10 @@ callback 就是 JS 一種非同步的機制，
 比如 forEach、陣列的 map 方法等等，
 可以發現它們在函式內帶入的參數也是一個函式，
 這些參數函式就是 callback，它們會被丟到引擎內的容器，
-依照後進先出的原則再放進任務排程，（後進先出是資料結構 Stack 的特性，先不探討太多 QQ）
-引擎的執行緒已經沒有任務後就會從排程裡面再取出剛剛被扔進去的 callback ～
+如果是 JS 自己的程式就會在容器內先執行，
+如果是 Web API 程式就會丟到，Web API 的空間等待，
+再透過 Event loop 這個事件檢查機制，
+丟到 JS 引擎內的容器執行。（也因此跟網路請求有關的函式通常會比較慢執行）
 
 這也會探討到一開始在介紹變數宣告的時候為什麼最好少用 var，
 因為這些 callback 在後續回到執行緒（全域環境）跑的時候，
@@ -172,3 +174,4 @@ axios 則簡化了這些流程，從 axios 回傳的 Promise 物件，
 - [表現層狀態轉換](https://zh.wikipedia.org/zh-tw/%E8%A1%A8%E7%8E%B0%E5%B1%82%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2)
 - [一次搞懂同步與非同步的一切](https://medium.com/itsems-frontend/javascript-sync-async-22e75e1ca1dc)
 - [AJAX 完整解說系列：基礎觀念](https://www.casper.tw/development/2020/09/30/about-ajax/)
+- [Event loop 詳解](https://youtu.be/8aGhZQkoFbQ?si=DzQ752C64Pn_y8mo)

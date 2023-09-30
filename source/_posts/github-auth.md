@@ -41,7 +41,7 @@ Github 會直接給你 push 過一次的乾淨專案的頁面，
 ![複製 code](https://drive.google.com/uc?export=view&id=1vsbDJY6VvZXFSJ8W1atInB5rxbHIV1JL)
 
 然後在終端機切換到桌面或是任何你方便 cd 過去的地方，
-Windows 可以直接在桌面或資料夾空白處右鍵開啟終端機省去 cd 切換目錄的步驟，
+或是可以直接在桌面或資料夾空白處右鍵開啟終端機省去 cd 切換目錄的步驟，
 輸入 git clone 在後面加上剛剛複製的網址，
 這時 Github 新增一個資料夾，名稱是 repo 的名字，
 這個資料夾就與剛剛新建的 repo 連動了，

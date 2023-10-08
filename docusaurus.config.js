@@ -11,7 +11,7 @@ const config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://your-docusaurus-test-site.com",
+  url: "https://penspulse326.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -20,6 +20,7 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "penspulse326", // Usually your GitHub org/user name.
   projectName: "penspulse326.github.io", // Usually your repo name.
+  deploymentBranch: "gh-pages",
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -38,6 +39,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -76,9 +78,10 @@ const config = {
             position: "left",
             label: "筆記",
           },
-          { to: "/blog", label: "Blog", position: "left" },
+          { to: "/blog", label: "學習日記", position: "left" },
+          { to: "/blog/tags", label: "日記標籤", position: "left" },
           {
-            href: "https://github.com/facebook/docusaurus",
+            href: "https://github.com/penspulse326",
             label: "GitHub",
             position: "right",
           },
@@ -134,8 +137,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Penspulse, Inc. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: darkCodeTheme,
       },
     }),
 };

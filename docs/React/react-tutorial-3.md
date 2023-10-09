@@ -26,7 +26,11 @@ categories: 程式學習
 是 **_useState_**！
 
 範例程式：
-{% iframe https://codepen.io/shin9626/embed/MWqQBLb?default-tab=html%2Cresult %}
+<iframe height="300" width="100%" scrolling="no" title="React 教學 - 基礎 Hook" src="https://codepen.io/shin9626/embed/MWqQBLb?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/shin9626/pen/MWqQBLb">
+  React 教學 - 基礎 Hook</a> by SHIN (<a href="https://codepen.io/shin9626">@shin9626</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
 
 ---
 

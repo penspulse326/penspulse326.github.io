@@ -14,8 +14,6 @@ C3.js 是基於 D3.js 的圖表繪製套件，
 也因為圖表生成的方式被簡化了，樣式上能修改的東西就沒有那麼多，
 但如果只是要呈現簡易的示意資料也已經足夠了！
 
-<!-- more -->
-
 ## 加入套件
 
 最懶人的方式是直接引入 CDN 即可：
@@ -23,7 +21,7 @@ C3.js 是基於 D3.js 的圖表繪製套件，
 ```HTML
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.18/c3.js"></script>
 ```
 
 官方提供的方式是將函式庫直接下載到電腦裡，
@@ -91,7 +89,7 @@ C3 的文件可能一時之間會有看沒有懂，為什麼 colors 有時候跟
 **如果是針對個別資料的設定通常是寫在 data 裡面，用 key-value 的方式指定資料呈現的方式**
 下面可以跟著範例來看：
 
-<iframe height="300" style="width: 100%;" scrolling="no" title="C3 Practice" src="https://codepen.io/shin9626/embed/mdaLxyB?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="300" width="100%" scrolling="no" title="C3 Practice" src="https://codepen.io/shin9626/embed/mdaLxyB?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/shin9626/pen/mdaLxyB">
   C3 Practice</a> by SHIN (<a href="https://codepen.io/shin9626">@shin9626</a>)
   on <a href="https://codepen.io">CodePen</a>.

@@ -79,7 +79,7 @@ const config = {
             label: "筆記",
           },
           { to: "/blog", label: "學習日記", position: "left" },
-          { to: "/blog/tags", label: "日記標籤", position: "left" },
+          { to: "/blog/tags", label: "文章標籤", position: "left" },
           {
             href: "https://github.com/penspulse326",
             label: "GitHub",

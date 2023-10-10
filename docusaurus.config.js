@@ -87,6 +87,12 @@ const config = {
           },
         ],
       },
+      metadata: [
+        {
+          name: "keywords",
+          content: "前端, 部落格, 火箭隊, 火箭隊培訓營, JavaScript",
+        },
+      ],
       colorMode: {
         defaultMode: "dark",
         disableSwitch: true,

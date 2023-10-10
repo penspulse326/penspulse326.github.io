@@ -288,7 +288,7 @@ div {
 
 ---
 
-### 參考資料：
+## 參考資料：
 
 - [小菜小姐的稿件](https://www.figma.com/file/sPyo1NZ2zYyUQ0Z7VAj3et/%E5%B0%8F%E8%8F%9C_WEEK2?type=design&node-id=61-6099&mode=design&t=YGd0glcr7ZgfqXIy-0)
 - [Bootstrap 網格系統](https://medium.com/ivycodefive/5-bootstrap-%E7%B6%B2%E6%A0%BC%E7%B3%BB%E7%B5%B1-grid-be5779287231)

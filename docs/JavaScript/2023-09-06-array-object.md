@@ -143,7 +143,7 @@ console.log(arr2); // [{ a : 1 },{ b : 2}]
 
 ---
 
-### 參考資料
+## 參考資料
 
 - [所有東西都是物件(或純值)](https://israynotarray.com/jsweirdworld/20190521/1329212743/)
 - [JS 原力覺醒 Day9 - 原始型別與物件型別](https://ithelp.ithome.com.tw/articles/10220005)

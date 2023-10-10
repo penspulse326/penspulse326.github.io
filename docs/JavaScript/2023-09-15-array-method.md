@@ -129,7 +129,7 @@ console.log(objArray); // 順序變成 Ann, Bob, Cindy,
 
 ---
 
-### 參考資料
+## 參考資料
 
 - [JavaScript Array 陣列操作方法大全 ( 含 ES6 )](https://www.oxxostudio.tw/articles/201908/js-array.html?fbclid=IwAR12g-n-YcR7KG-dgXWme9xcKCdXlBNthFFeptHjfLjK_UBEBR7WysgX9Oo#array_map)
 

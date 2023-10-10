@@ -145,7 +145,7 @@ const twoSum = (a, b) => {
 
 ---
 
-### 參考資料
+## 參考資料
 
 - [JavaScript 面試考什麼！卡斯伯新書發表會～](https://www.youtube.com/live/XIJQNzUyeX8?app=desktop&feature=share)
 - [重新認識 JavaScript: Day 10 函式 Functions 的基本概念](https://ithelp.ithome.com.tw/articles/10191549)

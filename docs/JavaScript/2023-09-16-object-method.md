@@ -90,6 +90,6 @@ console.log(Object.entries(obj).filter(([key, value]) => value > 1));
 
 ---
 
-### 參考資料
+## 參考資料
 
 - [JavaScript 容易混淆的遍歷方法](https://awdr74100.github.io/2019-11-28-javascript-traverse/?fbclid=IwAR3VGGfIhJgNuf-RWvokMQeoedHFGt5rOI0j9l-9D3B9oQSFn8A66MWvH-4)

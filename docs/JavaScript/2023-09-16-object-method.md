@@ -25,6 +25,8 @@ for(const value if obj) {
 }
 ```
 
+---
+
 ### 有回傳值的內建方法 Object
 
 物件可以透過 Object 原型的內建方法來遍歷內容，  

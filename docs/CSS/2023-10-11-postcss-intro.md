@@ -3,6 +3,7 @@ title: "[PostCSS] 導入 PostCSS"
 description: "Tailwind 的安裝方法"
 date: 2023-10-11 15:54:38
 keywords: [CSS, PostCSS]
+slug: install-postcss
 ---
 
 PostCSS 是一個 CSS 工具，有許多加工 CSS 內容的功能插件，  

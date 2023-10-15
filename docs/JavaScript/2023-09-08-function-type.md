@@ -3,6 +3,7 @@ title: "函式類型"
 description: "JavaScript 的函式類型"
 date: 2023-09-08 13:51:24
 keywords: [JavaScript, 程式語言, 函式]
+slug: function-types
 ---
 
 JavaScript 的函式也有各種花式玩法...諸如 HOC、閉包、IIFE 等等，  

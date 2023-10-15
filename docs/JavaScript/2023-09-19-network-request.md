@@ -3,6 +3,7 @@ title: "網路請求與非同步"
 description: "JavaScript 中的網路請求"
 date: 2023-09-19 14:43:08
 keywords: [JavaScript, 程式語言, API, 網路請求, AJAX]
+slug: network-request-ajax-api
 ---
 
 從練習串接 API 開始就會有很多五欸ㄇ欸問題發生，  

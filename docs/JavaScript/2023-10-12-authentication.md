@@ -3,6 +3,7 @@ title: "驗證機制"
 description: "網路請求中的驗證機制"
 date: 2023-10-11 10:43:08
 keywords: [JavaScript, 程式語言, 驗證機制, session, cookie, JWT, 驗證機制]
+slug: authentication-of-ajax
 ---
 
 大部分的網路請求其實是不公開的，也就是說需要通過一些驗證機制，  

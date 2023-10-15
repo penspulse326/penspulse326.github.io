@@ -3,6 +3,7 @@ title: "[Tailwind] 導入 Tailwind"
 description: "Tailwind 的安裝方法"
 date: 2023-10-12 23:54:38
 keywords: [Tailwind, CSS, PostCSS]
+slug: install-tailwind
 ---
 
 當前流行的 Tailwind 與行之有年的 Bootstrap 類似，可以在 html class 寫上各種封裝好的樣式，減少手刻 CSS 的負擔，  

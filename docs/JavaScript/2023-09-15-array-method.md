@@ -3,6 +3,7 @@ title: "陣列方法"
 description: "JavaScript 中的陣列方法"
 date: 2023-09-14 16:16:24
 keywords: [JavaScript, 程式語言, 陣列, 陣列方法]
+slug: array-method
 ---
 
 陣列有很多內建方法，不常用的話蠻容易混淆的，  

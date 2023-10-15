@@ -3,6 +3,7 @@ title: "陣列與物件"
 description: "JavaScript 的物件與陣列"
 date: 2023-09-06 10:19:47
 keywords: [JavaScript, 程式語言, 陣列, 物件]
+slug: array-and-object
 ---
 
 前面筆記了一些變數與邏輯判斷的特性後，這篇就要來記錄一下陣列跟物件了。

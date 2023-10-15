@@ -3,6 +3,7 @@ title: "[CSS] 網格系統概念"
 description: "利用網格系統的基本概念幫助切版"
 date: 2023-08-21 12:03:39
 keywords: [CSS, Grid System, 網格系統, 切版]
+slug: css-grid-system
 ---
 
 在 2022 年初我選定前端工程師作為轉職目標後，

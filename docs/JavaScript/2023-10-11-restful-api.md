@@ -3,6 +3,7 @@ title: "API 與 RESTful"
 description: "API 與 RESTful 的概念"
 date: 2023-10-11 10:43:08
 keywords: [JavaScript, 程式語言, API, 網路請求, RESTful]
+slug: restful-api
 ---
 
 API 的概念其實並不複雜，就是資料交換的方式。

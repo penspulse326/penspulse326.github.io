@@ -3,6 +3,7 @@ title: "物件方法"
 description: "JavaScript 中的物件方法"
 date: 2023-09-14 16:30:24
 keywords: [JavaScript, 程式語言, 物件, 物件方法]
+slug: object-method
 ---
 
 物件在規範上沒辦法使用之前提到的 for 與 forEach，  

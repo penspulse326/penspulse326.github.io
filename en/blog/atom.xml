@@ -2,11 +2,28 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://penspulse326.github.io/en/blog</id>
     <title>Penspulse Blog</title>
-    <updated>2023-10-22T20:11:00.000Z</updated>
+    <updated>2023-10-29T18:38:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://penspulse326.github.io/en/blog"/>
     <subtitle>Penspulse Blog</subtitle>
     <icon>https://penspulse326.github.io/en/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[[日常] 火箭日記-第十三週]]></title>
+        <id>https://penspulse326.github.io/en/blog/rocket-week13</id>
+        <link href="https://penspulse326.github.io/en/blog/rocket-week13"/>
+        <updated>2023-10-29T18:38:00.000Z</updated>
+        <content type="html"><![CDATA[<p>這週在進入可怕的切版地獄（？）前的週末，正在瘋狂地修 JS 第八週的 todo list 作業，<br>
+<!-- -->因為發了 PR 後給阿劍學長和 Ray 看過之後，得到蠻多建議的，<br>
+<!-- -->所以整個週末可以說是一修再修，希望能把最簡單的 todo list 的架構刁到最好。</p><p>上週分完 F2E 的組別後，雖然這組只有我一個前端，不過好處是我與 UI 同學協調很快，<br>
+<!-- -->因為我在她還沒精稿的時候就動工了，所以一些色票的名稱、資源設定等等，<br>
+<!-- -->我後來又在 tailwind.config.js 做了修改，如果這是協作的話，<br>
+<!-- -->另外一個前端應該已經被我整死了 XD 歷經了波折後算是暫時切完電腦版的部分。</p><p>因為版型不會太複雜的關係，所以我有在 navbar 或一些小地方補上 hover + scale 的效果，<br>
+<!-- -->盡量在補足動態的同時不要造成動態太多的煩躁感。這次也套用了其他同學在週四主題分享時的套件，<br>
+<!-- -->AOS 真的蠻好用的，馬上就能搞定效果！</p><p>但 Swiper 受限於稿件結構的問題，我沒辦法直接套用上去，<br>
+<!-- -->最後請出小專案殺手的 jQuery 救駕...因此也順便補完了一些快速定位的功能，<br>
+<del>只能說 jQuery 再戰十年不是歐北共。</del>現在最害怕的是變版直接讓我死去呢......</p>]]></content>
+        <category label="火箭隊" term="火箭隊"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[[日常] 火箭日記-第十二週]]></title>
         <id>https://penspulse326.github.io/en/blog/rocket-week12</id>

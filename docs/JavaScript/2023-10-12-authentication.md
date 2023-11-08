@@ -45,17 +45,17 @@ session 改善了部分 cookie 的安全問題，
 
 ## JWT(JSON Web Token)
 
-JWT 與上述兩者比較不一樣的是，這組隨機生成的識別碼通常會丟進 localStorage，
-所以它不會像上述兩者需要指定網域，也可以避免跨域請求的問題（CORS）。
-（因為有時候在打 API，伺服器設定會影響到跨域請求會不會成功）
+JWT 是一組在伺服器端隨機生成的識別碼，可以透過變數、cookie、session、localStorage 儲存，  
+因為 JWT 的亂碼包含了 UID、有效時間、伺服器端的簽名，所以經常成為一種身分驗證的方式。  
 
-JWT 一般會請前端邏輯存到 headers 上帶過來，這樣只要解析 headers 裡面的識別碼是否合法就好，
-識別碼的內容大多也會寫在 headers 的 Authoriation 這個屬性裡面：
+JWT 一般會請前端邏輯存到 headers 上帶過來，這樣只要解析 headers 裡面的識別碼是否合法就好，  
+識別碼的內容大多也會寫在 headers 的 Authoriation 這個屬性裡面：  
 
 ![headers 裡面可以看到 token](https://drive.google.com/uc?export=view&id=1jneF4VFOqBxMl8n7RRe3fHtOXFm9t5Ho)
 
-JWT 會把到期時間和部分資料內容一起寫進去加密生成，所以伺服器只需要驗證合不合法即可，
-算是非常方便也很流行的驗證機制！
+因為對前端來說只要想辦法寫進 headers 就好了，  
+只要不涉及太多資安設定的話是很簡單的驗證工具，  
+算是非常方便也很流行的驗證機制！  
 
 ---
 
@@ -63,3 +63,4 @@ JWT 會把到期時間和部分資料內容一起寫進去加密生成，所以�
 
 - [傻傻分不清之 Cookie、Session、Token、JWT](https://juejin.cn/post/6844904034181070861)
 - [Session 與 Cookie 差別](https://medium.com/tsungs-blog/day14-session%E8%88%87cookie%E5%B7%AE%E5%88%A5-eb7b4035a382)
+- [JWT 是什麼？跟 Cookie 差別在哪裡？兩個常用使用者驗證機制的比較](https://devindeving.blogspot.com/2022/01/jwt-concept-vs-cookie.html)

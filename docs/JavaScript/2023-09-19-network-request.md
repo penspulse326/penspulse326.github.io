@@ -63,7 +63,9 @@ Promise 在戳 API 這類網路請求的功能時是經常會用到的方式，
 
 ```js
 function getData(apiUrl) {
-  fetch.(apiUrl).then((res) => console.log(res)).catch((error)=>console.log(error))
+  fetch.(apiUrl)
+    .then((res) => console.log(res))
+    .catch((error)=>console.log(error))
 }
 ```
 

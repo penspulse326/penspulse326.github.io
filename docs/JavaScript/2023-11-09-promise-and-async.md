@@ -191,3 +191,4 @@ async function deleteItem() {
 
 - [你今天 Promise 了嗎？](https://5xruby.tw/posts/promise)
 - [Promise 物件的建立](https://eyesofkids.gitbooks.io/javascript-start-es6-promise/content/contents/ch4_basic_usage.html)
+- [JavaScript 核心觀念(80)](https://israynotarray.com/javascript/20220513/3060050230/)

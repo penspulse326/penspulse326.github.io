@@ -1,32 +1,28 @@
 ---
-title: "[筆記] 初學者眼中的 React(2)：基本架構"
+title: "[筆記] React 初心者(2)：架構"
+description: "React 的基本架構"
 date: 2022-10-1 10:43:40
-tags:
-  - React
-  - 程式語言
-  - 學習心得
-categories: 程式學習
+keywords: [JavaScript, 程式語言, 變數型別]
+slug: react-tutorial-2
 ---
 
-接下來的教學也是秉持著我寫筆記的風格，不寫得密密麻麻，
-能夠簡短說明的地方就盡量簡短，但 React 中經常要使用 ES6 的語法，
-不熟悉的話會很星爆哦！
+這篇會先在 CodePen 環境上使用 React，後續再說明一般如何建構 React 程式。
 
-這篇會先在 [Codepen](https://codepen.io/) 環境上使用 React
+## 建立 Codepen 環境
 
-<!-- more -->
+開啟一個新的 Pen 之後：
 
-### 建立 Codepen 環境
+1. 點擊右上角 Setting
+2. 左側點選 **JS**
+3. JavaScript Preprocessor 改為 Bable
+4. Add External Scripts/Pens 搜尋到 **react** 與 **react-dom**
+5. 一定要先加入 react 才能加入 react-dom
+6. 是在最下面的 Add Packages 找到這兩個套件，以 import 的方式引入也沒問題。
 
-開啟一個新的 Pen 之後，在 Setting 裡面點選 **JS**，將 JavaScript Preprocessor 改為 Bable，
-並在 Add External Scripts/Pens 搜尋到 **react** 與 **react-dom**，並**依序**加入，
-（一定要先加入 react 才能加入 react-dom，否則 codepen 會編譯不過），
-或是在最下面的 Add Packages 找到這兩個套件，以 import 的方式引入也沒問題。
-
-### 基本執行流程
+## 基本執行流程
 
 範例程式：
-{% iframe https://codepen.io/shin9626/embed/XWYKprY?default-tab=html%2Cresult&editable=true %}
+https://codepen.io/shin9626/embed/XWYKprY?default-tab=html%2Cresult&editable=true
 
 ---
 

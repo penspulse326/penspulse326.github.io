@@ -9,7 +9,7 @@ slug: object-method
 物件在規範上沒辦法使用之前提到的 for 與 forEach，  
 不過還是有很多遍歷的方式，可以抓出所有的 key 與 value。
 
-### 沒有回傳值的 for in
+## 沒有回傳值的 for in
 
 之前提到 for 的親戚，可以利用 for in 語法來抓出物件的 key 值，  
 但也只能抓出 key 值，for of 就不能抓出物件的 value 了（會報錯）。
@@ -28,7 +28,7 @@ for (const value in obj) {
 
 ---
 
-### 有回傳值的內建方法 Object
+## 有回傳值的內建方法 Object
 
 物件可以透過 Object 原型的內建方法來遍歷內容，  
 同時它們也會回傳一個陣列，所以可以宣告變數去儲存結果。

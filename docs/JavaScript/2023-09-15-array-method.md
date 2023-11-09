@@ -1,11 +1,75 @@
 ---
-title: "陣列方法"
+title: "迴圈與陣列方法（我常用的）"
 description: "JavaScript 中的陣列方法"
 date: 2023-09-14 16:16:24
-keywords: [JavaScript, 程式語言, 陣列, 陣列方法]
+keywords: [JavaScript, 程式語言, 迴圈, 陣列, 陣列方法]
 slug: array-method
 ---
 
+遍歷指的是從頭走訪到尾的意思，在陣列或物件中也表示從第一項依序跑到最後一項的行為。  
+迴圈和遍歷是相關的概念，除了常見的 for、while 之外，JS 的陣列與物件也有專屬的類似迴圈的方式，  
+一樣都能將重複的程式碼封裝起來。
+
+## for 家族
+
+### 原始的 for
+
+for 是許多語言都有的迴圈語法，所以不限於陣列做使用，只要是單一重複的工作都可以利用 for 完成，  
+注意迴圈的終止條件，不要寫錯造成無限迴圈。
+
+```js
+let numStr = "0";
+
+for (let i = 1; i < 10; i++) {
+  numStr += i;
+}
+
+console.log(numStr); // "0123456789"
+```
+
+---
+
+### for in / for of
+
+這兩個方法是 for 的親戚，差別就在於不需要寫條件式，  
+for in 可以抓出索引值，而 for of 可以抓出 value。
+
+```js
+const arr = ["a", "b", "c", "d"];
+
+for (const index in arr) {
+  console.log(`索引 ${index}`);
+}
+
+for (const value of arr) {
+  console.log(`值 ${value}`);
+}
+```
+
+---
+
+### forEach
+
+forEach 則必須接在陣列後面才能做使用，  
+而 forEach 本身是沒有條件式的，它會在訪問所有的元素後終止。
+
+forEach 的 callback 可以帶入三個參數：元素本身（必填）、元素的索引（選填）、元素的整個陣列（選填）。
+
+```js
+let numArray = [1, 2, 3, 4];
+
+numArray.forEach((item, index, arr) => {
+  console.log("目前元素索引:", index);
+  console.log("目前元素內容:", item);
+  console.log("目前陣列:", arr);
+});
+```
+
+---
+
+要特別注意 JS 中有類似陣列的資料結構，**稱作 array-like objects**，  
+它們雖然不是陣列，但通常也可以透過 forEach 進行遍歷，  
+像是操作 DOM 元素時可能會得到的 NodeList、HTMLElement 等等。
 陣列有很多內建方法，不常用的話蠻容易混淆的，  
 但是只要記住兩個重點後，之後想查閱時就會快很多：
 
@@ -16,7 +80,7 @@ slug: array-method
 
 ## 進階陣列方法
 
-### 1. map（有回傳值/不會改變陣列）
+### map（有回傳值/不會改變陣列）
 
 map 的 callback 和 forEach 一樣，可以帶入三個參數，  
 但是 map 會回傳一個新的陣列，所以要保留結果的話要另外宣告變數來儲存。
@@ -48,7 +112,7 @@ console.log(arr1); // [{value: 2}, {value: 3}, {value: 4}]
 
 ---
 
-### 2. filter（有回傳值/不會改變陣列）
+### filter（有回傳值/不會改變陣列）
 
 filter 類似 map，但 callback 是在**回傳值上寫入條件判斷式**，
 符合條件的元素會被留下來，最後整合出篩選過的新陣列。
@@ -66,7 +130,7 @@ console.log(arr2); // [ 3, 4 ]
 
 ---
 
-### 3. sort（無回傳值/會改變陣列）
+### sort（無回傳值/會改變陣列）
 
 sort 是一個很精妙的方法...我也不是很熟悉它的條件式 XD
 要特別注意的是，它會**更動原來的陣列**。
@@ -133,5 +197,4 @@ console.log(objArray); // 順序變成 Ann, Bob, Cindy,
 ## 參考資料
 
 - [JavaScript Array 陣列操作方法大全 ( 含 ES6 )](https://www.oxxostudio.tw/articles/201908/js-array.html?fbclid=IwAR12g-n-YcR7KG-dgXWme9xcKCdXlBNthFFeptHjfLjK_UBEBR7WysgX9Oo#array_map)
-
 - [JS 將陣列 Array 重新排列的 sort()](https://ithelp.ithome.com.tw/articles/10225733?fbclid=IwAR0sMRAy_sHRlwo-7pDA9xzhzSSaLPIOwzu2Luo8LQJ1xx5vB3eRExR82AU)

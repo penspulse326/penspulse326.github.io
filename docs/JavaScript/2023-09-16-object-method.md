@@ -19,9 +19,9 @@ const obj = {
   a: 1,
   b: 2,
   c: 3,
-}
+};
 
-for(const value if obj) {
+for (const value in obj) {
   console.log(key);
 }
 ```
@@ -34,7 +34,7 @@ for(const value if obj) {
 同時它們也會回傳一個陣列，所以可以宣告變數去儲存結果。
 
 Object.keys、Object.values 就不用多說了吧！  
-名符其實，看得出來這是會產生所有 key 與 value 的方法，參數是要遍歷的物件。
+看得出來這是會產生所有 key 與 value 的方法，參數是要遍歷的物件。
 
 ```js
 const obj = {

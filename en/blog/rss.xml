@@ -4,10 +4,45 @@
         <title>Penspulse Blog</title>
         <link>https://penspulse326.github.io/en/blog</link>
         <description>Penspulse Blog</description>
-        <lastBuildDate>Sun, 29 Oct 2023 18:38:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 11 Nov 2023 14:46:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[[日常] 火箭日記-第十五週]]></title>
+            <link>https://penspulse326.github.io/en/blog/rocket-week15</link>
+            <guid>https://penspulse326.github.io/en/blog/rocket-week15</guid>
+            <pubDate>Sat, 11 Nov 2023 14:46:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>這週二雖然沒有上課，不過還是要展示一下 JS 最終作業的成果，<br>
+<!-- -->當天一早就發現學姊沒借會議室，所以我就發揮工具人的專長幫忙借一下（？</p><p>一路陪我們奮戰的 UI 紅豆有幫我們點出一些細微的設計問題，<br>
+<!-- -->像是加減號的位置、刪除提示的按鈕、表格欄位被壓縮等等，<br>
+<!-- -->不過這有一部分是我的問題，畢竟我是統籌作業規範的人，<br>
+<!-- -->除了程式撰寫的規範，我應該還要統一一下細部個規格。</p><p>demo 結束後我們最終選了 React 框架作為接下來的學習目標，<br>
+<!-- -->反正套一句洧杰老師說的話：</p><p>「你們就憑直覺選啊，反正你們的學長姊很多剛上工的時候，<br>
+<!-- -->要用的框架跟這邊學的都不一樣。」</p><p>我自己是覺得 React 蠻前面就要大量使用 ES6 的語法，<br>
+<!-- -->而且它的渲染機制也都會牽扯到 pass by reference 等等的核心觀念，<br>
+<!-- -->如果能過這關，以後學其他框架也不會太難。</p><p>這禮拜四中午，F2E 一開放前端組的投稿，我就去搶頭香了 XD<br>
+<!-- -->和我配合的 UI 江江真的很可怕...我們都還沒研究好第二關的技術需求，<br>
+<!-- -->她已經快產好圖了...這下不想辦法做出來真的不好意思 🫠</p>]]></content:encoded>
+            <category>火箭隊</category>
+        </item>
+        <item>
+            <title><![CDATA[[日常] 火箭日記-第十四週]]></title>
+            <link>https://penspulse326.github.io/en/blog/rocket-week14</link>
+            <guid>https://penspulse326.github.io/en/blog/rocket-week14</guid>
+            <pubDate>Sat, 04 Nov 2023 12:28:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>這週二是最後一次上 JS 課，當天同時也是六角內部的萬聖節活動，<br>
+<!-- -->所以免費蹭到披薩當午餐，因為披薩多到吃不完所以又多蹭幾片當晚餐，<br>
+<del>只能說人也會怕肥呢</del></p><p>最後一堂課大概講解完最終作業的一些規範後就差不多結束了，<br>
+<!-- -->可以說是徒增傷感的一天，因為我們最後要選的框架八九不離十會是 React，<br>
+<!-- -->所以暫時要跟穎旻學姊說聲再見了（？</p><p>這週還是花比較多在處理 F2E 的稿件，上週因為我自己的問題，<br>
+<!-- -->然後星期三回家後突然想不開，想說乾脆用 React 重構好了...<br>
+<!-- -->但其實自己沒有寫得那麼糟啦，但一行一行慢慢調整之後，<br>
+<!-- -->目前變版算是成功了，剩下一些細微的功能要做調整，所以其實沒有想像中的可怕，<br>
+<!-- -->以下附上連結，歡迎參考（？<br>
+<a href="https://github.com/penspulse326/F2E2023-1" target="_blank" rel="noopener noreferrer">Mission 1 - 立委競選官網</a></p>]]></content:encoded>
+            <category>火箭隊</category>
+        </item>
         <item>
             <title><![CDATA[[日常] 火箭日記-第十三週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week13</link>

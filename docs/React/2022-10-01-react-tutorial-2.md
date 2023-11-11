@@ -26,26 +26,12 @@ slug: react-tutorial-2
 
 ## 基本架構與 JSX
 
-export const CodePen = () => (
-  <>
-    <iframe
-      style={{ width: "100%", height: "500px" }}
-      src="https://codepen.io/shin9626/embed/XWYKprY?default-tab=js%2Cresult&theme-id=dark"
-    >
-      See the Pen{" "}
-      <a href="https://codepen.io/shin9626/pen/XWYKprY">
-        React 教學 - 基礎板模
-      </a>{" "}
-      by SHIN (<a href="https://codepen.io/shin9626">@shin9626</a>) on{" "}
-      <a href="https://codepen.io">CodePen</a>.
-    </iframe>
-  </>
-);
-
-<CodePen />
-<br />
-<br />
-
+<iframe height="300" width="100%" scrolling="no" title="React 教學 - 基本架構" src="https://codepen.io/shin9626/embed/XWYKprY?default-tab=js%2Cresult&theme-id=dark" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/shin9626/pen/XWYKprY">
+  React 教學 - 基本架構</a> by SHIN (<a href="https://codepen.io/shin9626">@shin9626</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+<br/>
 接下來都會以上面範例來解說～
 
 ### 產生畫面

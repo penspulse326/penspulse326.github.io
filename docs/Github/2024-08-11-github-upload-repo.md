@@ -94,7 +94,7 @@ Github 會給你一串 git 指令要你在終端機複製貼上執行：
 Github 已經不能再透過自己的帳號密碼去認證了，  
 此時電腦裡的認證已經到期或是第一次使用 Github，  
 就會遇到要再輸入一次 username 和 password 的情況，  
-這時 password 要輸入的就不再是你原本登入 Github 的密碼了！
+這時 password 要輸入的就不再是你原本登入 Github 的密碼了！  
 如果您使用的是 vs code 開發工具，現在會跳出一個不太明顯的小視窗，  
 提示要輸入 github token。
 

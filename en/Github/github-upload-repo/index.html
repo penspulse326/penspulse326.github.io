@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v2.4.3">
 <title data-rh="true">[筆記] Github 初次上傳就失敗 | Penspulse</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://penspulse326.github.io/en/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://penspulse326.github.io/en/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://penspulse326.github.io/en/Github/github-upload-repo"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="google-site-verification" content="BT40gvqlnLc8hWqvB_OG0IS3cUgqoKo4pwt7qGy-5_E"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="[筆記] Github 初次上傳就失敗 | Penspulse"><meta data-rh="true" name="description" content="初次上傳 Github 專案時會碰到的問題"><meta data-rh="true" property="og:description" content="初次上傳 Github 專案時會碰到的問題"><meta data-rh="true" name="keywords" content="git,github,token"><link data-rh="true" rel="icon" href="/en/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://penspulse326.github.io/en/Github/github-upload-repo"><link data-rh="true" rel="alternate" href="https://penspulse326.github.io/Github/github-upload-repo" hreflang="zh-Hant"><link data-rh="true" rel="alternate" href="https://penspulse326.github.io/en/Github/github-upload-repo" hreflang="en"><link data-rh="true" rel="alternate" href="https://penspulse326.github.io/Github/github-upload-repo" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/en/blog/rss.xml" title="Penspulse RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/en/blog/atom.xml" title="Penspulse Atom Feed"><link rel="stylesheet" href="/en/assets/css/styles.b26e4843.css">
-<link rel="preload" href="/en/assets/js/runtime~main.6839688c.js" as="script">
+<link rel="preload" href="/en/assets/js/runtime~main.cff00a0b.js" as="script">
 <link rel="preload" href="/en/assets/js/main.f5bd530d.js" as="script">
 </head>
 <body class="navigation-with-keyboard">
@@ -39,8 +39,8 @@
 <!-- -->那麼這就是我寫此文的原因 XD</p><p>Github 已經不能再透過自己的帳號密碼去認證了，<br>
 <!-- -->此時電腦裡的認證已經到期或是第一次使用 Github，<br>
 <!-- -->就會遇到要再輸入一次 username 和 password 的情況，<br>
-<!-- -->這時 password 要輸入的就不再是你原本登入 Github 的密碼了！
-如果您使用的是 vs code 開發工具，現在會跳出一個不太明顯的小視窗，<br>
+<!-- -->這時 password 要輸入的就不再是你原本登入 Github 的密碼了！<br>
+<!-- -->如果您使用的是 vs code 開發工具，現在會跳出一個不太明顯的小視窗，<br>
 <!-- -->提示要輸入 github token。</p><p>這時要登入 Github 網站 &gt; 右上角頭像 &gt; Setting &gt; 左邊選項的最下面選 <strong>Developer Settings</strong></p><p>左邊的 Personal access tokens 選擇 Tokens(classic) 後，<br>
 <!-- -->右邊選 Generate new token(classic) 進到建立 token 的頁面。</p><p>下面的表單可以選擇此 token 能用於什麼驗證，<br>
 <!-- -->把 repo 打勾後到最下面就可以產生 token。</p><p><img loading="lazy" src="https://drive.google.com/uc?export=view&amp;id=1iBrodhA0pq-eKxgv2NZx-33HVSH52YVs" alt="repo 要打勾" class="img_ev3q"></p><p>產生好後頁面上有一串像亂碼的東西就是剛剛建立的 token，<br>
@@ -49,7 +49,7 @@
 <!-- -->所以建立 token 的畫面沒有勾選 repo，之後當然也 push 失敗，<br>
 <!-- -->頓時對世界感到一片灰暗...只好回去默默地更新自己的 SSH 憑證，<br>
 <!-- -->不過大概閱讀每個頁面的資訊就會發現問題了，不用自己嚇自己 XD</p><hr><h2 class="anchor anchorWithStickyNavbar_LWe7" id="參考資料">參考資料<a href="#參考資料" class="hash-link" aria-label="Direct link to 參考資料" title="Direct link to 參考資料">​</a></h2><p><a href="https://shengyu7697.github.io/github-personal-access-token/" target="_blank" rel="noopener noreferrer">Github Token 取得</a></p></div></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/en/category/github"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Github</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-建立-repo" class="table-of-contents__link toc-highlight">1. 建立 repo：</a></li><li><a href="#2-在操作終端機之前" class="table-of-contents__link toc-highlight">2. 在操作終端機之前：</a><ul><li><a href="#有勾選-add-a-readme-file-的狀況" class="table-of-contents__link toc-highlight">有勾選 <strong>Add a README file</strong> 的狀況：</a></li><li><a href="#沒勾選-add-a-readme-file-的狀況" class="table-of-contents__link toc-highlight">沒勾選 <strong>Add a README file</strong> 的狀況：</a></li></ul></li><li><a href="#3-上傳三部曲" class="table-of-contents__link toc-highlight">3. 上傳三部曲：</a></li><li><a href="#所以-password-到底是什麼-" class="table-of-contents__link toc-highlight">所以 password 到底是什麼 ？</a></li><li><a href="#參考資料" class="table-of-contents__link toc-highlight">參考資料</a></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2023 Penspulse, Inc. Built with Docusaurus.</div></div></div></footer></div>
-<script src="/en/assets/js/runtime~main.6839688c.js"></script>
+<script src="/en/assets/js/runtime~main.cff00a0b.js"></script>
 <script src="/en/assets/js/main.f5bd530d.js"></script>
 </body>
 </html>

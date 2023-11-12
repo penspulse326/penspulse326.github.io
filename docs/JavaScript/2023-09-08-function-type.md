@@ -88,7 +88,7 @@ list.forEach(function (item, index) {
 
 ---
 
-## 要，現在就要：IIFE
+## 現在就要：IIFE
 
 不管是傳統函式、匿名函式、箭頭函式，它們都可以在被宣告時立即執行，  
 稱作 **IIFE (Immediately Invoked Function Expression)**。

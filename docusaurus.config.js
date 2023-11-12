@@ -98,6 +98,10 @@ const config = {
           name: "keywords",
           content: "前端, 部落格, 火箭隊, 火箭隊培訓營, JavaScript",
         },
+        {
+          name: "google-site-verification",
+          content: "BT40gvqlnLc8hWqvB_OG0IS3cUgqoKo4pwt7qGy-5_E",
+        },
       ],
       colorMode: {
         defaultMode: "dark",

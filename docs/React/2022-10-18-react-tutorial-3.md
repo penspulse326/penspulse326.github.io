@@ -1,5 +1,6 @@
 ---
-title: "[筆記] 初學者眼中的 React (3)：Hooks 三小強"
+title: "[筆記] React 初學筆記(3)：Hooks"
+description: "React 的 Hooks"
 date: 2022-10-18 21:33:41
 tags:
   - React
@@ -13,19 +14,15 @@ categories: 程式學習
 - useState
 - useEffect
 - useRef
-  <!-- more -->
-  <br/>
 
 ---
 
 ## State 就是一切：useState
 
-從上一篇文章可以知道，React 會將我們寫好的 component 在指定的地方 render 出來
-那麼畫面上的資料如果更動了，是誰讓它重新顯示的？
-
-是 **_useState_**！
+從上一篇筆記可以知道，React 會將我們寫好的 component 在指定的地方 render 出來
 
 範例程式：
+
 <iframe height="300" width="100%" scrolling="no" title="React 教學 - 基礎 Hook" src="https://codepen.io/shin9626/embed/MWqQBLb?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/shin9626/pen/MWqQBLb">
   React 教學 - 基礎 Hook</a> by SHIN (<a href="https://codepen.io/shin9626">@shin9626</a>)

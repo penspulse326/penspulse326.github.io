@@ -4,10 +4,26 @@
         <title>Penspulse Blog</title>
         <link>https://penspulse326.github.io/en/blog</link>
         <description>Penspulse Blog</description>
-        <lastBuildDate>Sat, 11 Nov 2023 14:46:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 18 Nov 2023 20:32:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[[日常] 火箭日記-第十六週]]></title>
+            <link>https://penspulse326.github.io/en/blog/rocket-week16</link>
+            <guid>https://penspulse326.github.io/en/blog/rocket-week16</guid>
+            <pubDate>Sat, 18 Nov 2023 20:32:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>這週應該是最後一次的穎旻分享會了（？）<br>
+<!-- -->正好也是為框架的學習做一個鋪墊，這次大家要分享的主題是 ES6 語法。<br>
+<!-- -->我分配到的主題也是比較抽象的 <a href="https://penspulse326.github.io/JavaScript/promise-and-async/" target="_blank" rel="noopener noreferrer">Promise</a>，不過我已經盡量用好理解的方式去說明了 QQ</p><p>F2E 的第二關這週也差不多完成大致的切版，<br>
+<!-- -->其實操縱 SVG 沒有想像中難，不過搭配 React 實作就要思考怎麼做組合，<br>
+<!-- -->其中也因為下拉式選單的問題，我採用了 react-select 這個套件，<br>
+<!-- -->不然本來想要手刻內耗自己（？</p><p>組合的方式就是先將台灣各縣市的 JSON 餵給 react-select，<br>
+<!-- -->再用 useState 去捕捉 select 元件的選取值，然後 render 對應的 svg 路徑！<br>
+<!-- -->不知道有沒有比較好的做法，不過目前的方式倒是還蠻愉快的，畢竟是自己想出來的 XD<br>
+<!-- -->最後的拼圖就是圖表渲染，還有第二層鄉鎮市區的 Excel 檔了...</p>]]></content:encoded>
+            <category>火箭隊</category>
+        </item>
         <item>
             <title><![CDATA[[日常] 火箭日記-第十五週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week15</link>
@@ -18,7 +34,7 @@
 <!-- -->像是加減號的位置、刪除提示的按鈕、表格欄位被壓縮等等，<br>
 <!-- -->不過這有一部分是我的問題，畢竟我是統籌作業規範的人，<br>
 <!-- -->除了程式撰寫的規範，我應該還要統一一下細部個規格。</p><p>demo 結束後我們最終選了 React 框架作為接下來的學習目標，<br>
-<!-- -->反正套一句洧杰老師說的話：</p><p>「你們就憑直覺選啊，反正你們的學長姊很多剛上工的時候，<br>
+<!-- -->反正套一句洧杰老師說的話：</p><p>「你們就憑直覺選啊，反正你們的學長姊很多第一份工作，<br>
 <!-- -->要用的框架跟這邊學的都不一樣。」</p><p>我自己是覺得 React 蠻前面就要大量使用 ES6 的語法，<br>
 <!-- -->而且它的渲染機制也都會牽扯到 pass by reference 等等的核心觀念，<br>
 <!-- -->如果能過這關，以後學其他框架也不會太難。</p><p>這禮拜四中午，F2E 一開放前端組的投稿，我就去搶頭香了 XD<br>

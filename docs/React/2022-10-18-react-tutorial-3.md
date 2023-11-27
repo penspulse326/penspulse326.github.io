@@ -1,12 +1,9 @@
 ---
-title: "[筆記] React 初學筆記(3)：Hooks"
+title: "[筆記] React 基礎 Hooks"
 description: "React 的 Hooks"
 date: 2022-10-18 21:33:41
-tags:
-  - React
-  - 程式語言
-  - 學習心得
-categories: 程式學習
+keywords: [程式語言, JavaScript, React, JSX, Hooks]
+slug: react-tutorial-3
 ---
 
 接下來要示範 React 最常用的三個 Hooks，後續會再補充一些詳細觀念：

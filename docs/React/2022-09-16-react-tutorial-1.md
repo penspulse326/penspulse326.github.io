@@ -1,5 +1,5 @@
 ---
-title: "[筆記] React 初學筆記(1)：前言"
+title: "[筆記] React 概念"
 description: "React 是什麼東西？"
 date: 2022-9-16 16:34:12
 keywords: [程式語言, JavaScript, React]

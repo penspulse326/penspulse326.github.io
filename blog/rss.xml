@@ -4,10 +4,23 @@
         <title>Penspulse Blog</title>
         <link>https://penspulse326.github.io/blog</link>
         <description>Penspulse Blog</description>
-        <lastBuildDate>Sat, 18 Nov 2023 20:32:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 26 Nov 2023 21:32:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hant</language>
+        <item>
+            <title><![CDATA[[日常] 火箭日記-第十七週]]></title>
+            <link>https://penspulse326.github.io/blog/rocket-week17</link>
+            <guid>https://penspulse326.github.io/blog/rocket-week17</guid>
+            <pubDate>Sun, 26 Nov 2023 21:32:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>這週趕在星期五下午把 F2E 的第二關做出來了，<br>
+<!-- -->終於不用再被折磨真是可喜可賀（？</p><p>特別感謝組員 UI 江江在這次活動挑戰上常常配合我修改稿件，<br>
+<!-- -->活動中也學習到蠻多東西的，尤其是套件的整合，<br>
+<!-- -->這次採用了 <strong>React-Select</strong>、<strong>Recharts</strong> 兩個完全沒用過的套件，<br>
+<!-- -->完全違反 82 法則了 XD 之後也會補充一下套件的使用心得。</p><p>不過隨著活動的告終，我們也快來到專題發想的階段了，<br>
+<!-- -->下週三同時也是 13 梯專題發表的日子，真的是瑟瑟發抖啊 QQ</p>]]></content:encoded>
+            <category>火箭隊</category>
+        </item>
         <item>
             <title><![CDATA[[日常] 火箭日記-第十六週]]></title>
             <link>https://penspulse326.github.io/blog/rocket-week16</link>

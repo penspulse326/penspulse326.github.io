@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://penspulse326.github.io/blog</id>
     <title>Penspulse Blog</title>
-    <updated>2023-11-26T21:32:00.000Z</updated>
+    <updated>2023-12-03T16:21:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://penspulse326.github.io/blog"/>
     <subtitle>Penspulse Blog</subtitle>
     <icon>https://penspulse326.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[[日常] 火箭日記-第十八週]]></title>
+        <id>https://penspulse326.github.io/blog/rocket-week18</id>
+        <link href="https://penspulse326.github.io/blog/rocket-week18"/>
+        <updated>2023-12-03T16:21:00.000Z</updated>
+        <content type="html"><![CDATA[<p>這週見證了 13 梯被公開處刑的時刻，<br>
+<!-- -->這次協助發表的廠商非常天使，跟 12 梯比起來溫和很多 XD<br>
+<!-- -->13 梯這次也帶入了比較生動的情境劇，讓人比較好進入 user story 的概念，<br>
+<!-- -->整場發表算是安全下莊了，可喜可賀！不過也快輪到我們被處刑了...</p><p>React 的進度大概來到第三週，隨著時間推進，<br>
+<!-- -->要學的東西真的永無止盡，除了基本的 Hooks 要複習，<br>
+<!-- -->還有進階的 Hooks 要學，以及 RTK、Query 等等的，<br>
+<!-- -->React 的世界真的很寬闊（？<br>
+<!-- -->下週也有新一梯的學弟妹要進來，希望我能扛住 QQ</p>]]></content>
+        <category label="火箭隊" term="火箭隊"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[[日常] 火箭日記-第十七週]]></title>
         <id>https://penspulse326.github.io/blog/rocket-week17</id>
@@ -19,20 +34,6 @@
 <!-- -->這次採用了 <strong>React-Select</strong>、<strong>Recharts</strong> 兩個完全沒用過的套件，<br>
 <!-- -->完全違反 82 法則了 XD 之後也會補充一下套件的使用心得。</p><p>不過隨著活動的告終，我們也快來到專題發想的階段了，<br>
 <!-- -->下週三同時也是 13 梯專題發表的日子，真的是瑟瑟發抖啊 QQ</p>]]></content>
-        <category label="火箭隊" term="火箭隊"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[[日常] 火箭日記-第十八週]]></title>
-        <id>https://penspulse326.github.io/blog/rocket-week18</id>
-        <link href="https://penspulse326.github.io/blog/rocket-week18"/>
-        <updated>2023-11-26T21:32:00.000Z</updated>
-        <content type="html"><![CDATA[<p>這週見證了 13 梯被公開處刑的時刻，<br>
-<!-- -->這次協助發表的廠商非常天使，跟 12 梯比起來溫和很多 XD<br>
-<!-- -->13 梯這次也帶入了比較生動的情境劇，讓人比較好進入 user story 的概念，<br>
-<!-- -->整場發表算是安全下莊了，可喜可賀！不過也快輪到我們被處刑了...</p><p>React 的進度大概來到第三週，隨著時間推進，<br>
-<!-- -->要學的東西真的永無止盡，除了基本的 Hooks，<br>
-<!-- -->還有進階的 Hooks 要學，以及 RTK、Query 等等的，<br>
-<!-- -->希望我能扛住 QQ</p>]]></content>
         <category label="火箭隊" term="火箭隊"/>
     </entry>
     <entry>

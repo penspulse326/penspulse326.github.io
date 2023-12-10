@@ -96,7 +96,7 @@ const Map = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-			{/* 這邊開始做重複渲染*/}
+	  {/* 這邊開始做重複渲染*/}
       {paths.map(({ id, d }) => (
         <path
           id={id}

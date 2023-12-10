@@ -218,7 +218,7 @@ const handleMouseLeave = (e) => {
 return (
     <svg {...svgProps}>
       {paths.map(({ id, d }) => {
-	      // hoverCity 只有在 hover 事件觸發才會做狀態變更，所以直接就可以了
+	    // hoverCity 只有在 hover 事件觸發才會做狀態變更，所以直接判斷就可以了
         const fill = id === hoverCity ? "tomato": "grey";
         
         return (

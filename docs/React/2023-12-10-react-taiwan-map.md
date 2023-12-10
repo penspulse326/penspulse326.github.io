@@ -1,6 +1,6 @@
 ---
-title: "[筆記] React 製作簡易台灣互動地圖"
-description: "React 製作簡易台灣互動地圖"
+title: "[筆記] React 簡易互動地圖"
+description: "製作簡易台灣互動地圖"
 date: 2022-10-18 21:33:41
 keywords: [程式語言, JavaScript, React, JSX, Hooks, SVG]
 slug: react-taiwan-map

@@ -2,11 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://penspulse326.github.io/blog</id>
     <title>Penspulse Blog</title>
-    <updated>2023-12-10T13:40:00.000Z</updated>
+    <updated>2023-12-25T09:20:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://penspulse326.github.io/blog"/>
     <subtitle>Penspulse Blog</subtitle>
     <icon>https://penspulse326.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[[日常] 火箭日記-第二一週]]></title>
+        <id>https://penspulse326.github.io/blog/rocket-week21</id>
+        <link href="https://penspulse326.github.io/blog/rocket-week21"/>
+        <updated>2023-12-25T09:20:00.000Z</updated>
+        <content type="html"><![CDATA[<p>上週的第二次提案，洧杰老師說我們收斂的方向精準很多，<br>
+<!-- -->不過呢...他覺得 OK 的主題最後我們都沒有選，<br>
+<!-- -->反而是選了一些風險比較高的主題，就看看啟動會議當天會不會被唸一頓吧 XD</p><p>這陣子因為提案的關係，加上 react 的 loading 也越來越重，<br>
+<!-- -->所以壓力指數頻頻上升，通常這時候應該會偏頭痛的，但是居然沒有（？<br>
+<!-- -->希望我的精神狀況可以慢慢安定下來。</p>]]></content>
+        <category label="火箭隊" term="火箭隊"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[[日常] 火箭日記-第二十週]]></title>
+        <id>https://penspulse326.github.io/blog/rocket-week20</id>
+        <link href="https://penspulse326.github.io/blog/rocket-week20"/>
+        <updated>2023-12-21T09:46:00.000Z</updated>
+        <content type="html"><![CDATA[<p>撰文的時間已經是第 21 週了（？<br>
+<!-- -->因為除了帶學弟妹之外，專題的提案也要開始，<br>
+<!-- -->不知為何我的焦慮症又開始發作了，上一次已經是很久以前的事，<br>
+<!-- -->所以上週除了坐立難安，開會前也都沒辦法好好吃飯。</p><p>洧杰老師給我們的第一次提案很多一針見血（？）<br>
+<!-- -->不過提案這種事本來就不能瞎講或憑空想像，<br>
+<!-- -->所以上週提案後大家各自都針對一些模糊、發散的東西去思考怎麼收斂。</p><p>近期問題比較多的還是 TypeScript 的學習，<br>
+<!-- -->原本套件用得很開心，配上型別就不開心了啊 XDD</p>]]></content>
+        <category label="火箭隊" term="火箭隊"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[[日常] 火箭日記-第十九週]]></title>
         <id>https://penspulse326.github.io/blog/rocket-week19</id>

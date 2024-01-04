@@ -153,7 +153,7 @@ layer 的功能也能使用了，可以輕鬆 @apply 組合 class：
 
 ---
 
-## Tailwind 的客製化
+## 客製化
 
 tailwind 的設定檔裡面，extend 裡面所寫的自定義屬性，也就是如其名的功能「**延伸**」，  
 是基於 Tailwind 原本就有的屬性去增加新的值，所以需要有前綴詞：
@@ -194,7 +194,7 @@ backgroundImage 裡面指定 url，
 
 ---
 
-### 全域樣式
+## 全域樣式
 
 如果不寫在 extend 裡面，代表的是全域的自定義樣式，意義上和 extend 不太一樣，  
 所以如果寫到 Tailwind 原本就有封裝的屬性，就會覆蓋過去，要特別注意這點。
@@ -220,7 +220,7 @@ Tailwind 也很聰明，此時 blue-100 這樣後綴的數字都是基於覆蓋�
 
 ---
 
-## Tailwind 核心
+## 核心設定
 
 在安裝階段有設置一個 input.css 檔，該檔案所載入的正是 Tailwind 的核心功能：
 
@@ -232,7 +232,7 @@ Tailwind 也很聰明，此時 blue-100 這樣後綴的數字都是基於覆蓋�
 
 要編輯這些功能會用到 **@layer** 語法，以下示範。
 
-### base
+## base
 
 還記得 SASS 7-1 patterns 裡面會分出一個資料夾叫做「base」嗎？  
 它們的意義是相似的，在 Tailwind 裡面 base 也掌管部分的全局樣式。
@@ -264,7 +264,7 @@ modern-normalize 正如其名是從 normalize 延伸出來，移除一些過時�
 
 ---
 
-### components
+## components
 
 網頁上有重複的元件時（個人覺得用到三次以上就算有重複性），
 可以在 components 封裝起來，語法如下：

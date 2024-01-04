@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第二一週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 21 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week21</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week21</guid>
             <pubDate>Mon, 25 Dec 2023 09:20:00 GMT</pubDate>
@@ -21,7 +21,16 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第二十週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 22 週]]></title>
+            <link>https://penspulse326.github.io/en/blog/rocket-week22</link>
+            <guid>https://penspulse326.github.io/en/blog/rocket-week22</guid>
+            <pubDate>Mon, 25 Dec 2023 09:20:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>上週是非常混沌的一週，我什麼也不想寫。<br>
+<!-- -->大家專題加油。</p>]]></content:encoded>
+            <category>火箭隊</category>
+        </item>
+        <item>
+            <title><![CDATA[[日常] 火箭日記-第 20 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week20</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week20</guid>
             <pubDate>Thu, 21 Dec 2023 09:46:00 GMT</pubDate>
@@ -35,16 +44,16 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十九週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 19 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week19</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week19</guid>
             <pubDate>Sun, 10 Dec 2023 13:40:00 GMT</pubDate>
             <content:encoded><![CDATA[<p>這週是 15 梯新人報到，這梯的學弟妹感覺都是社交達人（？）<br>
 <!-- -->還問我公共區的零食吃完，是不是要自己花錢補，真的是很可愛 XDDDDD<br>
 <!-- -->比較有趣的是有人是學過前端覺得該去後端組，有人是學了後端發現自己比較喜歡前端，<br>
-<!-- -->我也有提醒他們<del>不要問我轉職成功率，我現在還在火箭隊坐牢，等我有 offer 再說</del> 。 </p><p>這週在練習 useReducer 時遇到一些型別不會解的問題，<br>
+<!-- -->我也有提醒他們<del>不要問我轉職成功率，我現在還在火箭隊坐牢，等我有 offer 再說</del> 。</p><p>這週在練習 useReducer 時遇到一些型別不會解的問題，<br>
 <!-- -->就鼓起勇氣問了學長姊們，感謝 Vivian、Alex、阿劍三位學長姊的傾囊相授，<br>
-<!-- -->沒想到意外促成「火箭聯絡簿」的誕生 XD  </p><p>話又說回來，其實在網路社群上有時候大家的互動真的太嗜血了，導致很多人不敢問問題，<br>
+<!-- -->沒想到意外促成「火箭聯絡簿」的誕生 XD</p><p>話又說回來，其實在網路社群上有時候大家的互動真的太嗜血了，導致很多人不敢問問題，<br>
 <!-- -->但畢竟誰都菜過嘛，所以我覺得不會問問題，或是不知道程式的問題該怎麼問是難免的，<br>
 <!-- -->雖然這真的是月經文，不過這種時候我自己會丟些連結或格式給發問的人參考看看，<br>
 <!-- -->這樣他們下次就可以提問得比較具體或精準，惡言相向真的沒必要(= A = )a<br>
@@ -52,7 +61,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十八週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 18 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week18</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week18</guid>
             <pubDate>Sun, 03 Dec 2023 16:21:00 GMT</pubDate>
@@ -67,13 +76,13 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十七週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 17 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week17</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week17</guid>
             <pubDate>Sun, 26 Nov 2023 21:32:00 GMT</pubDate>
             <content:encoded><![CDATA[<p>這週趕在星期五下午把 F2E 的第二關做出來了，<br>
 <!-- -->終於不用再被折磨真是可喜可賀（？
-放一下<a href="https://penspulse326.github.io/F2E2023-2/" target="_blank" rel="noopener noreferrer">連結</a>給大家見笑QQ</p><p>特別感謝組員 UI 江江在這次活動挑戰上常常配合我修改稿件，<br>
+放一下<a href="https://penspulse326.github.io/F2E2023-2/" target="_blank" rel="noopener noreferrer">連結</a>給大家見笑 QQ</p><p>特別感謝組員 UI 江江在這次活動挑戰上常常配合我修改稿件，<br>
 <!-- -->活動中也學習到蠻多東西的，尤其是套件的整合，<br>
 <!-- -->這次採用了 <strong>React-Select</strong>、<strong>Recharts</strong> 兩個完全沒用過的套件，<br>
 <!-- -->完全違反 82 法則了 XD 之後也會補充一下套件的使用心得。</p><p>不過隨著活動的告終，我們也快來到專題發想的階段了，<br>
@@ -81,7 +90,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十六週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 16 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week16</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week16</guid>
             <pubDate>Sat, 18 Nov 2023 20:32:00 GMT</pubDate>
@@ -97,7 +106,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十五週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 15 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week15</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week15</guid>
             <pubDate>Sat, 11 Nov 2023 14:46:00 GMT</pubDate>
@@ -115,15 +124,15 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十四週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 14 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week14</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week14</guid>
             <pubDate>Sun, 05 Nov 2023 11:21:00 GMT</pubDate>
             <content:encoded><![CDATA[<p>這週二是最後一次上 JS 課，當天同時也是六角內部的萬聖節活動，<br>
 <!-- -->所以免費蹭到披薩當午餐，因為披薩多到吃不完所以又多蹭幾片當晚餐，<br>
-<del>只能說人也會怕肥呢</del>  </p><p>最後一堂課大概講解完最終作業的一些規範後就差不多結束了，<br>
+<del>只能說人也會怕肥呢</del></p><p>最後一堂課大概講解完最終作業的一些規範後就差不多結束了，<br>
 <!-- -->可以說是徒增傷感的一天，因為我們最後要選的框架八九不離十會是 React，<br>
-<!-- -->所以暫時要跟穎旻學姊說聲再見了（？）　</p><p>這週還是花比較多在處理 F2E 的稿件，上週因為我自己的問題，<br>
+<!-- -->所以暫時要跟穎旻學姊說聲再見了（？）</p><p>這週還是花比較多在處理 F2E 的稿件，上週因為我自己的問題，<br>
 <!-- -->然後星期三回家後突然想不開，想說乾脆用 React 重構好了...<br>
 <!-- -->但其實自己沒有寫得那麼糟啦，但一行一行慢慢調整之後，<br>
 <!-- -->目前變版算是成功了，剩下一些細微的功能要做調整，所以其實沒有想像中的可怕，<br>
@@ -131,7 +140,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十三週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 13 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week13</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week13</guid>
             <pubDate>Sun, 29 Oct 2023 18:38:00 GMT</pubDate>
@@ -148,7 +157,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十二週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 12 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week12</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week12</guid>
             <pubDate>Sun, 22 Oct 2023 20:11:00 GMT</pubDate>
@@ -156,16 +165,16 @@
 <!-- -->不過還是有被抓到一些可以噹的地方，像我自己就是為了求快，所以中午就交卷了，<br>
 <!-- -->結果部分細節沒注意到，或是偷吃步不符合一般設計規格，<br>
 <!-- -->都有被抓出來說...說來真是慚愧 XD 但畢竟寫程式就是有一定的規範，<br>
-<!-- -->不管是為了求快偷懶，還是任何原因，就是不能隨便寫，不分 HTML、CSS 還是 JS。  </p><p>這週也決定了今年的 F2E 團體分組，<br>
+<!-- -->不管是為了求快偷懶，還是任何原因，就是不能隨便寫，不分 HTML、CSS 還是 JS。</p><p>這週也決定了今年的 F2E 團體分組，<br>
 <!-- -->身為六角學院附屬火箭隊培訓營當然要<del>被強迫</del>勇敢報名！<br>
 <!-- -->因為我們有兩位 UI，所以最後是依照 UI 出的圖，來決定前端的同學怎麼分工，<br>
 <!-- -->但尷尬的是前端只有三位同學，所以勢必有一位前端要一個人做...<br>
-<!-- -->那個人就是我了，這是老師考量到第二關我可以用框架去做，所以建議的分組模式。  </p><p>可是我怎麼覺得我的版面也沒有比較好做啊啊啊啊啊
+<!-- -->那個人就是我了，這是老師考量到第二關我可以用框架去做，所以建議的分組模式。</p><p>可是我怎麼覺得我的版面也沒有比較好做啊啊啊啊啊
 切版真是讓人又愛又恨 XD</p>]]></content:encoded>
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十一週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 11 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week11</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week11</guid>
             <pubDate>Sun, 15 Oct 2023 16:51:00 GMT</pubDate>
@@ -173,7 +182,7 @@
 <!-- -->但也因為連假的關係，週四預計要上課的穎旻學姊說今年 F2E 的官網要上線，<br>
 <!-- -->內部還在忙著跑測試，所以又停課了 XD<br>
 <!-- -->週五是傳說中的 JS 期中，其實題目不會很困難，<br>
-<!-- -->都是考基本邏輯，只要想清楚函式流程再搭配內建函式就 OK 了。  </p><p>連假到這週期中考的中間都在做第八週的 to-do list，<br>
+<!-- -->都是考基本邏輯，只要想清楚函式流程再搭配內建函式就 OK 了。</p><p>連假到這週期中考的中間都在做第八週的 to-do list，<br>
 <!-- -->雖然去年的 React 讀書會做的也是一模一樣版型，<br>
 <!-- -->不過既然是寫原生的 JS，程式碼整體就會變得冗長一點，<br>
 <!-- -->因為有一點元件化的基礎了，所以作業整體我有試著做檔案管理，<br>
@@ -181,7 +190,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第十週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 10 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week10</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week10</guid>
             <pubDate>Sun, 08 Oct 2023 16:51:00 GMT</pubDate>
@@ -199,7 +208,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第九週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 9 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week9</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week9</guid>
             <pubDate>Sat, 30 Sep 2023 15:38:00 GMT</pubDate>
@@ -218,7 +227,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第八週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 8 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week8</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week8</guid>
             <pubDate>Sun, 24 Sep 2023 13:28:23 GMT</pubDate>
@@ -239,7 +248,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第七週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 7 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week7</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week7</guid>
             <pubDate>Sun, 17 Sep 2023 13:54:42 GMT</pubDate>
@@ -258,7 +267,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第六週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 6 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week6</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week6</guid>
             <pubDate>Sun, 10 Sep 2023 11:19:21 GMT</pubDate>
@@ -275,7 +284,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第五週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 5 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week5</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week5</guid>
             <pubDate>Sun, 03 Sep 2023 14:02:36 GMT</pubDate>
@@ -296,7 +305,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第四週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 4 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week4</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week4</guid>
             <pubDate>Sat, 26 Aug 2023 16:08:40 GMT</pubDate>
@@ -318,7 +327,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第三週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 3 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week3</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week3</guid>
             <pubDate>Sun, 20 Aug 2023 22:55:12 GMT</pubDate>
@@ -338,7 +347,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第二週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 2 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week2</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week2</guid>
             <pubDate>Mon, 14 Aug 2023 21:50:48 GMT</pubDate>
@@ -360,7 +369,7 @@
             <category>火箭隊</category>
         </item>
         <item>
-            <title><![CDATA[[日常] 火箭日記-第一週]]></title>
+            <title><![CDATA[[日常] 火箭日記-第 1 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week1</link>
             <guid>https://penspulse326.github.io/en/blog/rocket-week1</guid>
             <pubDate>Wed, 09 Aug 2023 01:50:48 GMT</pubDate>

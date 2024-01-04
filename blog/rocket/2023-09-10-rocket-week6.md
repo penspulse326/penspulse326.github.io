@@ -1,5 +1,5 @@
 ---
-title: "[日常] 火箭日記-第六週"
+title: "[日常] 火箭日記-第 6 週"
 date: 2023-09-10 11:19:21
 description: ""
 slug: rocket-week6

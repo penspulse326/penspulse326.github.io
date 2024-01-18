@@ -4,10 +4,41 @@
         <title>Penspulse Blog</title>
         <link>https://penspulse326.github.io/en/blog</link>
         <description>Penspulse Blog</description>
-        <lastBuildDate>Mon, 25 Dec 2023 09:20:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 18 Jan 2024 12:13:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[[日常] 火箭日記-第 24 週]]></title>
+            <link>https://penspulse326.github.io/en/blog/rocket-week24</link>
+            <guid>https://penspulse326.github.io/en/blog/rocket-week24</guid>
+            <pubDate>Thu, 18 Jan 2024 12:13:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>我的日記變得越來越像超級流水帳了，但是沒關係，我還是要寫，<br>
+<!-- -->因為持續紀錄才能讓我走得更遠，我想走到很遠的地方，走到我不曾去過的地方...</p><p>上週嘗試了 Cloudinary 的串接，目前都還算順利，<br>
+<!-- -->不過也因為牽涉到第三方的 API KEY，所以原本寫好的 API 需要重新封裝，<br>
+<!-- -->再透過 Next API Route 打出去。<br>
+<!-- -->檔案讀寫也是一個大坑，目前用基地網路測 API，上傳影片的速度是真的慢，<br>
+<!-- -->不太確定是網速問題還是檔案讀寫的優化問題...</p>]]></content:encoded>
+            <category>火箭隊</category>
+        </item>
+        <item>
+            <title><![CDATA[[日常] 火箭日記-第 23 週]]></title>
+            <link>https://penspulse326.github.io/en/blog/rocket-week23</link>
+            <guid>https://penspulse326.github.io/en/blog/rocket-week23</guid>
+            <pubDate>Thu, 11 Jan 2024 10:09:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>上週是非常忙碌的一週，我什麼也不想寫。<br>
+<!-- -->時間不等人...QQ</p>]]></content:encoded>
+            <category>火箭隊</category>
+        </item>
+        <item>
+            <title><![CDATA[[日常] 火箭日記-第 22 週]]></title>
+            <link>https://penspulse326.github.io/en/blog/rocket-week22</link>
+            <guid>https://penspulse326.github.io/en/blog/rocket-week22</guid>
+            <pubDate>Wed, 03 Jan 2024 09:20:00 GMT</pubDate>
+            <content:encoded><![CDATA[<p>上週是非常混沌的一週，我什麼也不想寫。<br>
+<!-- -->大家專題加油。</p>]]></content:encoded>
+            <category>火箭隊</category>
+        </item>
         <item>
             <title><![CDATA[[日常] 火箭日記-第 21 週]]></title>
             <link>https://penspulse326.github.io/en/blog/rocket-week21</link>
@@ -421,37 +452,6 @@
 <!-- -->每次面試如果能夠回想一下這些過程，<br>
 <!-- -->一定能找到改進的地方，因為我也當過那個惹毛面試官的白目，哈哈。  </p><p>祝大家面試成功！</p>]]></content:encoded>
             <category>生活分享</category>
-        </item>
-        <item>
-            <title><![CDATA[[日常] 火箭日記-第 24 週]]></title>
-            <link>https://penspulse326.github.io/en/blog/rocket-week24</link>
-            <guid>https://penspulse326.github.io/en/blog/rocket-week24</guid>
-            <pubDate>Wed, 18 Jan 2023 12:13:00 GMT</pubDate>
-            <content:encoded><![CDATA[<p>我的日記變得越來越像超級流水帳了，但是沒關係，我還是要寫，<br>
-<!-- -->因為持續紀錄才能讓我走得更遠，我想走到很遠的地方，走到我不曾去過的地方...</p><p>上週嘗試了 Cloudinary 的串接，目前都還算順利，<br>
-<!-- -->不過也因為牽涉到第三方的 API KEY，所以原本寫好的 API 需要重新封裝，<br>
-<!-- -->再透過 Next API Route 打出去。<br>
-<!-- -->檔案讀寫也是一個大坑，目前用基地網路測 API，上傳影片的速度是真的慢，<br>
-<!-- -->不太確定是網速問題還是檔案讀寫的優化問題...</p>]]></content:encoded>
-            <category>火箭隊</category>
-        </item>
-        <item>
-            <title><![CDATA[[日常] 火箭日記-第 23 週]]></title>
-            <link>https://penspulse326.github.io/en/blog/rocket-week23</link>
-            <guid>https://penspulse326.github.io/en/blog/rocket-week23</guid>
-            <pubDate>Wed, 11 Jan 2023 10:09:00 GMT</pubDate>
-            <content:encoded><![CDATA[<p>上週是非常忙碌的一週，我什麼也不想寫。<br>
-<!-- -->時間不等人...QQ</p>]]></content:encoded>
-            <category>火箭隊</category>
-        </item>
-        <item>
-            <title><![CDATA[[日常] 火箭日記-第 22 週]]></title>
-            <link>https://penspulse326.github.io/en/blog/rocket-week22</link>
-            <guid>https://penspulse326.github.io/en/blog/rocket-week22</guid>
-            <pubDate>Tue, 03 Jan 2023 09:20:00 GMT</pubDate>
-            <content:encoded><![CDATA[<p>上週是非常混沌的一週，我什麼也不想寫。<br>
-<!-- -->大家專題加油。</p>]]></content:encoded>
-            <category>火箭隊</category>
         </item>
         <item>
             <title><![CDATA[[心得] 六角學院 React 讀書會結業心得 ]]></title>

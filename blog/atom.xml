@@ -2,46 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://penspulse326.github.io/blog</id>
     <title>Penspulse Blog</title>
-    <updated>2024-01-31T22:13:00.000Z</updated>
+    <updated>2024-03-13T10:28:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://penspulse326.github.io/blog"/>
     <subtitle>Penspulse Blog</subtitle>
     <icon>https://penspulse326.github.io/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[[日常] 火箭日記-第 25-26 週]]></title>
-        <id>https://penspulse326.github.io/blog/rocket-week25-26</id>
-        <link href="https://penspulse326.github.io/blog/rocket-week25-26"/>
-        <updated>2024-01-31T22:13:00.000Z</updated>
-        <content type="html"><![CDATA[<p>這兩週疲於奔命在切版和元件拆分...<br>
-<!-- -->上一週的進度其實有點慢，我和另一位前端夥伴分頭研究專題的難點技術，<br>
-<!-- -->雖然大概有雛型了，但不太確定到時候真的串接時會發生什麼事。  </p><p>不過好消息是後端教完虛擬機部署與 API 開發的流程後，<br>
-<!-- -->我們目前對接測試是有成功的，所以接下來好好完善元件封裝和請求格式的問題，<br>
-<!-- -->前端的功能應該就會慢慢完整了。</p>]]></content>
-        <category label="火箭隊" term="火箭隊"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[[日常] 火箭日記-第 23-24 週]]></title>
-        <id>https://penspulse326.github.io/blog/rocket-week23-24</id>
-        <link href="https://penspulse326.github.io/blog/rocket-week23-24"/>
-        <updated>2024-01-18T12:13:00.000Z</updated>
-        <content type="html"><![CDATA[<p>我的日記變得越來越像超級流水帳了，但是沒關係，我還是要寫，<br>
-<!-- -->因為持續紀錄才能讓我走得更遠，我想走到很遠的地方，走到我不曾去過的地方...</p><p>上週嘗試了 Cloudinary 的串接，目前都還算順利，<br>
-<!-- -->不過也因為牽涉到第三方的 API KEY，所以原本寫好的 API 需要重新封裝，<br>
-<!-- -->再透過 Next API Route 打出去。<br>
-<!-- -->檔案讀寫也是一個大坑，目前用基地網路測 API，上傳影片的速度是真的慢，<br>
-<!-- -->不太確定是網速問題還是檔案讀寫的優化問題...</p>]]></content>
-        <category label="火箭隊" term="火箭隊"/>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[[日常] 火箭日記-第 21-22 週]]></title>
-        <id>https://penspulse326.github.io/blog/rocket-week21-22</id>
-        <link href="https://penspulse326.github.io/blog/rocket-week21-22"/>
-        <updated>2024-01-03T09:20:00.000Z</updated>
-        <content type="html"><![CDATA[<p>上週的第二次提案，洧杰老師說我們收斂的方向精準很多，<br>
-<!-- -->不過呢...他覺得 OK 的主題最後我們都沒有選，<br>
-<!-- -->反而是選了一些風險比較高的主題，就看看啟動會議當天會不會被唸一頓吧 XD</p><p>這陣子因為提案的關係，加上 react 的 loading 也越來越重，<br>
-<!-- -->所以壓力指數頻頻上升，通常這時候應該會偏頭痛的，但是居然沒有（？<br>
-<!-- -->希望我的精神狀況可以慢慢安定下來。</p>]]></content>
+        <title type="html"><![CDATA[[日常] 火箭日記-結訓]]></title>
+        <id>https://penspulse326.github.io/blog/rocket-end</id>
+        <link href="https://penspulse326.github.io/blog/rocket-end"/>
+        <updated>2024-03-13T10:28:00.000Z</updated>
+        <content type="html"><![CDATA[<p>撰文時間已經是發表結束後一週了...時間過得很快呢<br>
+<!-- -->離上次撰文大概有三個月，也就是我們這一梯花了 32 週才結訓 XD<br>
+<!-- -->一路走來過了好多連假，但怎麼感覺專題實際開發的時間還是很短啊...</p><p>我們這組的主題比我想像中得難多了，其中也不乏三端的溝通，<br>
+<!-- -->前端有時候真的蠻難做人的，所以我相信做完專題還想要繼續做前端的人，<br>
+<!-- -->才是真的有決心要走這條路的人（？</p><p>不過接下來漫長的求職旅程才是真正的開始。</p>]]></content>
         <category label="火箭隊" term="火箭隊"/>
     </entry>
     <entry>

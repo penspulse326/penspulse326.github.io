@@ -1,5 +1,5 @@
 ---
-title: "[筆記] React 架構"
+title: "環境架構"
 description: "React 的基本架構"
 date: 2022-10-01 10:43:40
 keywords: [程式語言, JavaScript, React, JSX]

@@ -1,5 +1,5 @@
 ---
-title: "[筆記] React 基礎 Hooks"
+title: "3. 基礎 Hooks"
 description: "React 的 Hooks"
 date: 2022-10-18 21:33:41
 keywords: [程式語言, JavaScript, React, JSX, Hooks]

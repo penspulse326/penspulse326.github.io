@@ -1,6 +1,6 @@
 ---
-title: "基礎 Hooks"
-description: "React 的 Hooks"
+title: "useState"
+description: "useState 的用法"
 date: 2022-10-18 21:33:41
 keywords: [程式語言, JavaScript, React, JSX, Hooks]
 slug: react-tutorial-3

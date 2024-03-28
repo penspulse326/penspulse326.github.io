@@ -1,5 +1,5 @@
 ---
-title: "4. useReducer"
+title: "useReducer"
 description: "React 的 useReducer"
 date: 2023-12-02 15:21:00
 keywords: [程式語言, JavaScript, React, JSX, Hooks, useReducer]

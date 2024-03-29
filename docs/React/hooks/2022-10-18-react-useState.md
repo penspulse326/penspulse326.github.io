@@ -38,7 +38,7 @@ React 的運作大致上是圍繞這個概念，
 ## The First Hook：useState
 
 上一篇筆記有示範到元件可以在指定的地方用 root.render 呈現出來，  
- root.render 是剛載入網頁時做的事，會把許多元件做成一包叫做 `<App />`的元件，  
+root.render 是剛載入網頁時做的事，會把許多元件做成一包叫做 `<App />`的元件，  
 再用 root.render 渲染出來，這個函式通常也只會執行一次。
 
 之後重新渲染畫面的工作都會交給 React 的內建函式來決定，也就是 useState，  

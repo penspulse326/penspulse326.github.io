@@ -3,7 +3,7 @@ title: "框架概念"
 description: "React 與框架的概念"
 date: 2022-09-16 17:55:00
 keywords: [程式語言, JavaScript, React, JSX]
-slug: react-tutorial-1
+slug: react-intro
 ---
 
 起初接觸框架時完全不懂 React 在寫什麼，JSX 是什麼概念，  

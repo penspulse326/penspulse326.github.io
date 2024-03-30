@@ -3,7 +3,7 @@ title: "useEffect"
 description: "React 的 useEffect"
 date: 2023-12-02 15:21:00
 keywords: [程式語言, JavaScript, React, JSX, Hooks, useEffect]
-slug: react-tutorial-4
+slug: react-useeffect
 ---
 
 假設我們設計的 todo list，內容是透過 API 取得的，那麼我要如何設計元件呢？

@@ -3,7 +3,7 @@ title: "useState"
 description: "useState 的用法"
 date: 2022-10-18 21:33:41
 keywords: [程式語言, JavaScript, React, JSX, Hooks]
-slug: react-tutorial-3
+slug: react-usestate
 ---
 
 在開始之前，可以試著回想看看，用原生 JavaScript 寫 todo list，  

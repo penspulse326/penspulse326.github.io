@@ -32,9 +32,6 @@ export default function Home(): JSX.Element {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="前端開發, 前端筆記"
-    >
-      123
-      <main></main>
-    </Layout>
+    ></Layout>
   );
 }

@@ -1,4 +1,4 @@
----
+<!-- ---
 title: "[CSS] 網格系統概念"
 description: "利用網格系統的基本概念幫助切版"
 date: 2023-08-21 12:03:39
@@ -302,4 +302,4 @@ div {
 
 - [小菜小姐的稿件](https://www.figma.com/file/sPyo1NZ2zYyUQ0Z7VAj3et/%E5%B0%8F%E8%8F%9C_WEEK2?type=design&node-id=61-6099&mode=design&t=YGd0glcr7ZgfqXIy-0)
 - [Bootstrap 網格系統](https://medium.com/ivycodefive/5-bootstrap-%E7%B6%B2%E6%A0%BC%E7%B3%BB%E7%B5%B1-grid-be5779287231)
-- [從 Figma 到 VSCode，設計做到網頁切版](https://www.youtube.com/watch?v=qRZLtIcPdls&t=5256s&ab_channel=%E5%85%AD%E8%A7%92%E5%AD%B8%E9%99%A2)
+- [從 Figma 到 VSCode，設計做到網頁切版](https://www.youtube.com/watch?v=qRZLtIcPdls&t=5256s&ab_channel=%E5%85%AD%E8%A7%92%E5%AD%B8%E9%99%A2) -->

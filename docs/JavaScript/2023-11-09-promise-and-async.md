@@ -82,11 +82,11 @@ numPromise("你好")
 
 如果我們直接使用 console.log 去查看 Promise 物件的值，  
 有可能會出現三種狀態：
-
+```
 - Promise { pending }
 - Promise { fulfilled }
 - Promise { rejected }
-
+```
 pending 在直接 console.log 查看網路請求的結果時，  
 通常最容易得到這個結果，它代表 Promise 物件的內部還沒有進行任何 resolve 或 reject 的行為。
 

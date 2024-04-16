@@ -22,7 +22,7 @@ const config = {
 
   i18n: {
     defaultLocale: "zh-Hant",
-    locales: ["zh-Hant"],
+    locales: ["en", "zh-Hant"],
   },
 
   presets: [

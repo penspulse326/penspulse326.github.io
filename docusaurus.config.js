@@ -87,7 +87,7 @@ const config = {
         },
         {
           name: "google-site-verification",
-          content: "BT40gvqlnLc8hWqvB_OG0IS3cUgqoKo4pwt7qGy-5_E",
+          content: "wMykY7w8T7MwUmxyM5U0CVPgo868g5gBJHYQiOgNBXk",
         },
       ],
       colorMode: {

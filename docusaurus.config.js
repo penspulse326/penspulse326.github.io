@@ -11,10 +11,10 @@ const config = {
   title: "Penspulse",
   tagline: "前端筆記",
   favicon: "img/favicon.ico",
-  url: "https://penspulse326.github.io",
+  url: "https://penspulse.vercel.app/",
   baseUrl: "/",
   organizationName: "penspulse326",
-  projectName: "penspulse326.github.io",
+  projectName: "blog",
   deploymentBranch: "gh-pages",
 
   onBrokenLinks: "throw",
@@ -87,7 +87,7 @@ const config = {
         },
         {
           name: "google-site-verification",
-          content: "wMykY7w8T7MwUmxyM5U0CVPgo868g5gBJHYQiOgNBXk",
+          content: "TKGWYzc2xE7oWOmv_990Dt4v3x64gP01YJDW",
         },
       ],
       colorMode: {

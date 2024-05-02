@@ -22,12 +22,12 @@ const config = {
 
   i18n: {
     defaultLocale: "zh-Hant",
-    locales: ["zh-Hant"],
+    locales: ["zh-Hant", "en"],
   },
 
   presets: [
     [
-      "classic",
+      "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
@@ -39,6 +39,10 @@ const config = {
         },
         theme: {
           customCss: "./src/css/custom.css",
+        },
+        gtag: {
+          trackingID: "G-CW2LGTM5N5",
+          anonymizeIP: true,
         },
         sitemap: {
           changefreq: "weekly",

@@ -11,10 +11,10 @@ const config = {
   title: "Penspulse",
   tagline: "前端筆記",
   favicon: "img/favicon.ico",
-  url: "https://penspulse.vercel.app/",
+  url: "https://penspulse326.github.io/",
   baseUrl: "/",
   organizationName: "penspulse326",
-  projectName: "blog",
+  projectName: "penspulse326.github.io",
   deploymentBranch: "gh-pages",
 
   onBrokenLinks: "throw",
@@ -87,11 +87,16 @@ const config = {
       metadata: [
         {
           name: "keywords",
-          content: "前端, 部落格, 火箭隊, 火箭隊培訓營, JavaScript",
+          content:
+            "前端, 網頁前端, 前端開發, JavaScript, React.js, front end, web design, penspulse",
         },
         {
           name: "google-site-verification",
           content: "TKGWYzc2xE7oWOmv_990Dt4v3x64gP01YJDW",
+        },
+        {
+          name: "robots",
+          content: "max-image-preview:standard",
         },
       ],
       colorMode: {

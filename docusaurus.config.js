@@ -92,7 +92,7 @@ const config = {
         },
         {
           name: "google-site-verification",
-          content: "TKGWYzc2xE7oWOmv_990Dt4v3x64gP01YJDW",
+          content: "y1fosEIPhMHBWjB5UUareJqGdW8985Ce21yBQrSRPvs",
         },
         {
           name: "robots",

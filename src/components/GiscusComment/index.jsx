@@ -1,10 +1,19 @@
 import React from "react";
 import Giscus from "@giscus/react";
 import { useColorMode } from "@docusaurus/theme-common";
+import { useLocation } from "@docusaurus/router";
+
 import styles from "./styles.module.css";
 
 function GiscusComment() {
   const { colorMode } = useColorMode();
+
+  const location = useLocation();
+
+  if (location.pathname === "/") {
+    return null;
+  }
+
   return (
     <div className={styles.comment}>
       <Giscus

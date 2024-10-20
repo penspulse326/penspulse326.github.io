@@ -27,15 +27,26 @@ const config = {
 
   presets: [
     [
-      "@docusaurus/preset-classic",
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          routeBasePath: "/",
           sidebarPath: "./sidebars.js",
+          // editUrl:
+          //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         blog: {
           showReadingTime: true,
+          feedOptions: {
+            type: ["rss", "atom"],
+            xslt: true,
+          },
+          // editUrl:
+          //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          // Useful options to enforce blogging best practices
+          onInlineTags: "warn",
+          onInlineAuthors: "warn",
+          onUntruncatedBlogPosts: "warn",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -57,9 +68,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
       navbar: {
-        title: "Penspulse",
+        title: "Pen's Pulse",
         logo: {
           alt: "My Site Logo",
           src: "img/logo.png",
@@ -71,8 +83,8 @@ const config = {
             position: "left",
             label: "筆記",
           },
-          { to: "/blog", label: "學習日記", position: "left" },
-          { to: "/blog/tags", label: "文章標籤", position: "left" },
+          { to: "/blog", label: "日記", position: "left" },
+          { to: "/blog/tags", label: "日記標籤", position: "left" },
           {
             href: "https://github.com/penspulse326",
             label: "Github",
@@ -99,10 +111,6 @@ const config = {
           content: "max-image-preview:standard",
         },
       ],
-      colorMode: {
-        defaultMode: "dark",
-        disableSwitch: true,
-      },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,

@@ -10,7 +10,7 @@ function GiscusComment() {
 
   const location = useLocation();
 
-  if (location.pathname === "/") {
+  if (location.pathname === "/docs/") {
     return null;
   }
 

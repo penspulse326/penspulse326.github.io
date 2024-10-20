@@ -3,21 +3,113 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
+.block {
+  padding: 20px;
+  border: 1px solid var(--ifm-color-border);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
+  @media (min-width: 768px) {
+    padding: 24px;
   }
 }
 
-.buttons {
+[data-theme='dark'] .block {
+  border: 1px solid var(--ifm-color-border-dark);
+}
+
+p {
+  font-size: 14px;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+
+img {
+  display: block;
+  object-fit: cover;
+}
+
+.wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 24px 0;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+  }
+}
+
+.contentGrid {
+  flex-grow: 1;
+}
+
+.basicInfo {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    height: 280px;
+  }
+}
+
+.avatar {
+  position: absolute;
+  right: -12px;
+  bottom: -12px;
+  z-index: -1;
+  align-self: flex-end;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  opacity: 0.2;
+
+  @media (min-width: 768px) {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.tech {
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin-bottom: 8px;
+    color: var(--ifm-color-subtitle);
+    font-size: 12px;
+  }
+}
+
+.date {
+  color: var(--ifm-color-subtitle);
+  font-size: 12px;
+}
+
+
+.expItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.expJob {
+  color: var(--ifm-color-primary);
+  font-weight: bold;
+}
+
+.expDesc {
+  font-size: 12px;
 }

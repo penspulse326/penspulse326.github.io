@@ -22,10 +22,6 @@
 
 p {
   font-size: 14px;
-
-  @media (min-width: 768px) {
-    font-size: 16px;
-  }
 }
 
 @media (min-width: 768px) {
@@ -95,16 +91,14 @@ img {
   }
 }
 
-.tech {
-  h2 {
-    margin: 0;
-  }
+.tech h2 {
+  margin: 0;
+}
 
-  p {
-    margin-bottom: 8px;
-    color: var(--ifm-color-subtitle);
-    font-size: 12px;
-  }
+.tech p {
+  margin-bottom: 8px;
+  color: var(--ifm-color-subtitle);
+  font-size: 12px;
 }
 
 .date {

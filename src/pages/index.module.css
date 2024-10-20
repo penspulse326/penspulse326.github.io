@@ -8,8 +8,10 @@
   border: 1px solid var(--ifm-color-border);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .block {
     padding: 24px;
   }
 }
@@ -26,6 +28,12 @@ p {
   }
 }
 
+@media (min-width: 768px) {
+  p {
+    font-size: 16px;
+  }
+}
+
 img {
   display: block;
   object-fit: cover;
@@ -37,8 +45,10 @@ img {
   flex-wrap: wrap;
   gap: 16px;
   margin: 24px 0;
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .wrapper {
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
@@ -55,8 +65,10 @@ img {
   justify-content: space-between;
   overflow: hidden;
   margin-bottom: 16px;
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .basicInfo {
     height: 280px;
   }
 }
@@ -72,8 +84,10 @@ img {
   border-radius: 50%;
   overflow: hidden;
   opacity: 0.2;
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .avatar {
     position: relative;
     right: 0;
     bottom: 0;
@@ -97,7 +111,6 @@ img {
   color: var(--ifm-color-subtitle);
   font-size: 12px;
 }
-
 
 .expItem {
   display: flex;

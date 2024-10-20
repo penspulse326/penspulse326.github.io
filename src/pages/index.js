@@ -7,7 +7,6 @@ import ImgAvatar from "@site/static/img/avatar.png";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout description="Description will go into a meta tag in <head />">
       <main className="container">

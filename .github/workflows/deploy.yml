@@ -16,7 +16,7 @@ jobs:
 
       - uses: pnpm/action-setup@v3
         with:
-          version: 8 # 使用你项目中使用的 pnpm 版本
+          version: 8
 
       - uses: actions/setup-node@v4
         with:
@@ -24,7 +24,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: Build website
         run: pnpm run build

@@ -27,7 +27,7 @@ function GiscusComment() {
         emitMetadata="0"
         inputPosition="bottom"
         theme={colorMode}
-        lang="zh-TW"
+        lang="zh-Hant"
         crossorigin="anonymous"
         async
       />

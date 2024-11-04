@@ -1,0 +1,8 @@
+{
+  "label": "SQL",
+  "position": 99,
+  "link": {
+    "type": "generated-index",
+    "description": "這裡放一些 SQL 的知識筆記"
+  }
+}

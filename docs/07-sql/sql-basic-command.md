@@ -6,13 +6,13 @@ keywords: [程式語言, SQL, 資料庫, database, 指令, sql command]
 slug: sql-basic-command
 ---
 
-SQL 的指令非常口語，學過就很難忘記了！
+這裡筆記的指令以 PostgreSQL 為主！
 
 ## table, column, row
 
-- table 是一張資料表，類似 excel 的 sheet。
-- column 是資料欄位，可以限定內容格式，比如必須是數字、不能超過 100 字等。
-- row 是一列包含所有欄位的完整資料。
+- table 是一張資料表，類似 excel 的 sheet
+- column 是資料欄位，可以限定內容格式，比如必須是數字、不能超過 100 字等
+- row 是一筆包含所有欄位的完整資料
 
 | 商品     | 庫存 | 售價  |
 | -------- | ---- | ----- |
@@ -47,10 +47,8 @@ const table = [
 
 ## CREATE
 
-```SQL
-/*
-  建立資料表
-*/
+```postgresql
+-- 建立資料表
 CREATE TABLE products (
   name VARCHAR(100),
   price INTEGER,
@@ -58,27 +56,26 @@ CREATE TABLE products (
 );
 ```
 
+---
+
 ## INSERT
 
-```SQL
-/*
-  插入資料
-*/
-INSERT INTO
+```postgresql
+-- INSERT INTO
   products (name, price, stock)
 VALUES
   ('手機殼', 1200, 50),
   ('耳機', 599, 82);
 ```
 
+---
+
 ## SELECT
 
-```SQL
-/*
-  查詢資料
-  * 代表全部資料和全部欄位
-  可以使 row 只呈現部分欄位
-*/
+```postgresql
+-- 查詢資料
+-- * 代表全部資料和全部欄位
+-- 可以使 row 只呈現部分欄位
 SELECT
   name,
   stock
@@ -86,25 +83,25 @@ FROM
   products;
 ```
 
+---
+
 ## AS
 
-```SQL
-/*
-  AS 可以改變查詢結果的 column 名稱
-*/
+```postgresql
+-- AS 可以改變查詢結果的 column 名稱
 SELECT
-  name AS 商 品 名 稱,
-  stock AS 庫 存
+  name AS "商品名稱",
+  stock AS "庫存"
 FROM
   products;
 ```
 
+---
+
 ## WHERE
 
-```SQL
-/*
-  條件篩選資料
-*/
+```postgresql
+-- 條件篩選資料
 SELECT
   *
 FROM
@@ -113,12 +110,12 @@ WHERE
   price < 1000;
 ```
 
+---
+
 ## AND, OR
 
-```SQL
-/*
-  多重條件篩選
-*/
+```postgresql
+-- AND 篩選
 SELECT
   *
 FROM
@@ -126,12 +123,8 @@ FROM
 WHERE
   price < 1000
   AND stock > 10;
-```
 
-```SQL
-/*
-  多重條件篩選
-*/
+-- OR 篩選
 SELECT
   *
 FROM
@@ -141,36 +134,28 @@ WHERE
   OR stock > 10;
 ```
 
+---
+
 ## IN, NOT IN, BETWEEN
 
-```SQL
-/*
-  多重條件篩選
-*/
+```postgresql
+-- IN 篩選
 SELECT
   *
 FROM
   products
 WHERE
   name IN ('手機殼', '耳機');
-```
 
-```SQL
-/*
-  多重條件篩選
-*/
+-- NOT IN 篩選
 SELECT
   *
 FROM
   products
 WHERE
   name NOT IN ('手機');
-```
 
-```SQL
-/*
-  多重條件篩選
-*/
+-- BETWEEN 篩選
 SELECT
   *
 FROM
@@ -180,24 +165,24 @@ WHERE
   AND 1000;
 ```
 
+---
+
 ## UPDATE
 
-```SQL
-/*
-  更新資料內容
-*/
+```postgresql
+-- 更新指定欄位
 UPDATE
   products
 SET
   price = price + 100;
 ```
 
+---
+
 ## DELETE
 
-```SQL
-/*
-  刪除資料
-*/
+```postgresql
+-- 刪除資料
 DELETE FROM
   products
 WHERE

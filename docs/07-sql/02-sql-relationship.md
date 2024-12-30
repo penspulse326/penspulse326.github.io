@@ -14,7 +14,7 @@ slug: sql-relationship
 每筆資料的區分方式，因此它必須是不重複的唯一值，  
 通常會選擇 id 或是 uuid 作為主鍵。
 
-```postgresql
+```sql
 CREATE TABLE users (
   id INT PRIMARY KEY,
   name VARCHAR(100)
@@ -24,7 +24,7 @@ CREATE TABLE users (
 如果沒有特別指定格式，可以設定自動遞增，  
 新增資料時就不需再自己填寫 id，會從數字 1 開始建立：
 
-```postgresql
+```sql
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100)
@@ -55,7 +55,7 @@ FROM
 指定某個欄位為外鍵時，表示該欄位的值必須是來自某一個 table 的內容，  
 一個 table 可以有多個外鍵：
 
-```postgresql
+```sql
 -- 建立性別 table genders
 CREATE TABLE genders (
   id INT PRIMARY KEY,
@@ -97,7 +97,7 @@ VALUES
 可以查詢多個 table 組合後的結果，因為有超過 1 張以上的表，  
 所以在 SELECT 時要前綴 table 的名稱才能索引到指定的欄位：
 
-```postgresql
+```sql
 SELECT
   users.name AS "名字",
   genders.name AS "性別"
@@ -127,7 +127,7 @@ FULL JOIN 則取聯集，所以撈出時會看到組合結果的兩邊可能都�
 
 插入新的欄位：
 
-```postgresql
+```sql
 ALTER TABLE
   users
 ADD
@@ -142,7 +142,7 @@ ADD
 
 刪除欄位：
 
-```postgresql
+```sql
 ALTER TABLE
   users
 DROP

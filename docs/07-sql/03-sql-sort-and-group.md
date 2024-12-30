@@ -11,7 +11,7 @@ slug: sql-sort-and-group
 - ACS 升冪
 - DESC 降冪
 
-```PostgreSQL
+```sql
 SELECT
   name AS 姓名,
   salary AS 薪資,
@@ -27,7 +27,7 @@ ORDER BY team_id ASC, salary DESC;
 - LIMIT 單次查詢的最多筆數上限
 - OFFSET 跳過 N 筆資料，需連在 LIMIT 後面
 
-```postgresql
+```sql
 SELECT
   name AS 姓名,
   team_id AS 部門
@@ -43,7 +43,7 @@ LIMIT 5 OFFSET 2; -- 跳過兩筆，所以從第三筆開始顯示
 - 顯示第 2 頁，語法為 `LIMIT 5 OFFSET 5`，
 - 顯示第 3 頁，語法為 `LIMIT 5 OFFSET 10`
 
-```postgresql
+```sql
 SELECT
   name AS 姓名,
   team_id AS 部門
@@ -62,7 +62,7 @@ LIMIT 5 OFFSET ((SELECT COUNT(*) FROM employees) / N);
 針對指定條件做分組，搭配聚合函數可以計算不同組之間的資料，  
 搭配 JOIN 組合出完整的資料：
 
-```postgresql
+```sql
 SELECT
     teams.name AS 部門名稱,
     COUNT(*) AS 人數 -- 用 COUNT 算出各部門人數
@@ -78,7 +78,7 @@ GROUP BY teams.name;
 用小括號獨立出一個 SELECT 的查詢集合，例如可以在小括號完成平均薪資的計算，  
 然後在最外層的 SELECT（主查詢）撈出大於平均薪資的員工：
 
-```postgresql
+```sql
 SELECT name, salary
 FROM users
 WHERE salary > (SELECT AVG(salary) FROM users);
@@ -87,7 +87,7 @@ WHERE salary > (SELECT AVG(salary) FROM users);
 或是在新增資料時，透過子查詢的方式取得特定的鍵值，  
 如在新增員工時，用 SELECT + WHERE 可以利用部門名稱去索引部門 id：
 
-```postgresql
+```sql
 INSERT INTO users (name, email, salary, team_id) VALUES
 (
     '新同事',

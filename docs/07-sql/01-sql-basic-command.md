@@ -47,7 +47,7 @@ const table = [
 
 ## CREATE
 
-```postgresql
+```sql
 -- 建立資料表
 CREATE TABLE products (
   name VARCHAR(100),
@@ -60,8 +60,9 @@ CREATE TABLE products (
 
 ## INSERT
 
-```postgresql
--- INSERT INTO
+```sql
+-- 新增資料
+INSERT INTO
   products (name, price, stock)
 VALUES
   ('手機殼', 1200, 50),
@@ -72,7 +73,7 @@ VALUES
 
 ## SELECT
 
-```postgresql
+```sql
 -- 查詢資料
 -- * 代表全部資料和全部欄位
 -- 可以使 row 只呈現部分欄位
@@ -87,7 +88,7 @@ FROM
 
 ## AS
 
-```postgresql
+```sql
 -- AS 可以改變查詢結果的 column 名稱
 SELECT
   name AS "商品名稱",
@@ -100,7 +101,7 @@ FROM
 
 ## WHERE
 
-```postgresql
+```sql
 -- 條件篩選資料
 SELECT
   *
@@ -114,7 +115,7 @@ WHERE
 
 ## AND, OR
 
-```postgresql
+```sql
 -- AND 篩選
 SELECT
   *
@@ -138,7 +139,7 @@ WHERE
 
 ## IN, NOT IN, BETWEEN
 
-```postgresql
+```sql
 -- IN 篩選
 SELECT
   *
@@ -169,7 +170,7 @@ WHERE
 
 ## UPDATE
 
-```postgresql
+```sql
 -- 更新指定欄位
 UPDATE
   products
@@ -181,7 +182,7 @@ SET
 
 ## DELETE
 
-```postgresql
+```sql
 -- 刪除資料
 DELETE FROM
   products

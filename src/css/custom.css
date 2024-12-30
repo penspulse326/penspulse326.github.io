@@ -33,8 +33,9 @@
   --ifm-color-subtitle-dark: #AAA;
 }
 
-.container {
+.box {
   max-width: 960px;
+  margin: 0 auto;
 }
 
 .f-grid {

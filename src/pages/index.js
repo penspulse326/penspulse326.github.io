@@ -9,7 +9,7 @@ import styles from "./index.module.css";
 export default function Home() {
   return (
     <Layout description="Description will go into a meta tag in <head />">
-      <main className="container">
+      <main className="box">
         <div className={styles.wrapper}>
           <div className={styles.contentGrid}>
             <section className={clsx(styles.block, styles.basicInfo)}>

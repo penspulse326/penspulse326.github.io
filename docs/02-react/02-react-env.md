@@ -1,14 +1,14 @@
 ---
-title: "環境架構"
+title: "02-環境架構"
 description: "React 的基本架構"
 date: 2022-10-01 10:43:40
 keywords: [程式語言, JavaScript, React, JSX]
 slug: react-env
 ---
 
-目前純 React 的環境可以直接使用 Vite 建立，  
-`create-React-app` 雖然停止維護了，  
-但還是有機率碰到，差別在於建構工具是 Webpack，
+目前純 react 的環境可以直接使用 Vite 建立。
+`create-react-app` 雖然停止維護了，但還是有機率碰到，  
+差別在於建構工具是 Webpack。
 不建議官方推薦的 `create-next-app`，  
 這會建出一個 Next 專案......~~可能是 Meta 跟 Vercel 狼狽為奸的成果。~~
 
@@ -192,7 +192,7 @@ Component 標籤寫上 `text`、`obj`、`element` 屬性後，
 
 ---
 
-## style
+## coding style
 
 雖然範例都很簡短，不過有蠻多撰寫慣例要遵守，  
 像是 `onClick` 的內容最好可以拉出來宣告，才不致於讓 JSX 的內容變得很冗長，  

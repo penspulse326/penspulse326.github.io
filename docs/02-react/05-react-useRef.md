@@ -1,9 +1,9 @@
 ---
-title: "useReducer"
-description: "React 的 useReducer"
-date: 2023-12-02 15:21:00
-keywords: [程式語言, JavaScript, React, JSX, Hooks, useReducer]
-slug: react-tutorial-4
+title: "05-useRef"
+description: "useRef 的用法"
+date: 2023-11-13 14:11:00
+keywords: [程式語言, JavaScript, React, JSX, Hooks, useRef]
+slug: react-useref
 ---
 
 在要管理的 state 慢慢變多之後管理上就會變得繁瑣，  

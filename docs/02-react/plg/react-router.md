@@ -1,5 +1,5 @@
 ---
-title: "[筆記] React-Router"
+title: "React-Router"
 description: "React-Router 的簡易上手"
 date: 2023-12-18 16:38:00
 keywords: [程式語言, JavaScript, React, React-Router]

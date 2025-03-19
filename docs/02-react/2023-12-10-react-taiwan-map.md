@@ -96,7 +96,7 @@ function TaiwanMap() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* 這邊開始做重複渲染*/}     {" "}
+      {/* 這邊開始做重複渲染*/}
       {paths.map(({ id, d }) => (
         <path
           id={id}
@@ -108,7 +108,6 @@ function TaiwanMap() {
           strokeLinejoin="round"
         />
       ))}
-         {" "}
     </svg>
   );
 }
@@ -176,7 +175,6 @@ function TaiwanMap() {
 
   return (
     <svg {...svgProps}>
-           {" "}
       {paths.map(({ id, d }) => {
         let fill = isHover ? "tomato" : "grey";
         return (
@@ -191,7 +189,6 @@ function TaiwanMap() {
           />
         );
       })}
-         {" "}
     </svg>
   );
 }

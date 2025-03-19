@@ -1,5 +1,5 @@
 ---
-title: "[PostCSS] 導入 PostCSS"
+title: "導入 PostCSS"
 description: "Tailwind 的安裝方法"
 date: 2023-10-11 15:54:38
 keywords: [CSS, PostCSS]

@@ -1,5 +1,5 @@
 ---
-title: "[筆記] Github 初次上傳就失敗"
+title: "Github 初次上傳就失敗"
 description: "初次上傳 Github 專案時會碰到的問題"
 date: 2023-08-11 16:47:47
 keywords: [git, github, token]

@@ -13,7 +13,7 @@ keywords: [火箭隊培訓營, 前端工程師, 前端工程師培訓]
 在六月底離職後，我放空了腦袋一個多月，沒有讀書或學習，  
 就是窩在家裡做鋼彈，完成了 Zeta MG ver.ka，讓它和鳳村雨作伙團圓。
 
-<!-- more -->
+<!-- truncate -->
 
 ![有情人終生眷屬的概念](https://drive.google.com/uc?export=view&id=1KpBzZ3cOEYzooBb6p1YyDfmy7IAGTCAD)
 

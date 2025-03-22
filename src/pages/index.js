@@ -18,7 +18,8 @@ export default function Home() {
                 <p>
                   💻 前端工程師 | 聯和趨動
                   <br />
-                  ✡️ 專題教練 | 六角學院 2024 切版專題班
+                  ✡️ 專題教練 | 六角學院 2025 Node專題班 ✡️ 專題教練 | 六角學院
+                  2024 切版專題班
                   <br />
                 </p>
                 <p>
@@ -42,9 +43,7 @@ export default function Home() {
                   <span>聯和趨動股份有限公司</span>
                   <span className={styles.date}>2024 年 8 月 - 現在</span>
 
-                  <p className={styles.expDesc}>
-                    以 Vue 開發 HRMS 系統，以 Nuxt 開發產品介紹網站
-                  </p>
+                  <p className={styles.expDesc}>以 Vue 開發 HRM 系統</p>
                 </div>
                 <div className={styles.expItem}>
                   <span className={styles.expJob}>前端組學員</span>
@@ -59,20 +58,18 @@ export default function Home() {
                 <h2>主要技術</h2>
                 <p>緩慢增加中</p>
                 <ul>
-                  <li>JavaScript</li>
                   <li>TypeScript</li>
                   <li>React.js</li>
                   <li>Next.js</li>
                   <li>Vue.js</li>
                   <li>Node.js</li>
-                  <li>MongoDB</li>
                 </ul>
               </section>
               <section className={clsx(styles.block, styles.tech)}>
                 <h2>專案類型</h2>
                 <p>緩慢增加中</p>
                 <ul>
-                  <li>HRMS 系統</li>
+                  <li>HRM 系統</li>
                   <li>GIS 系統</li>
                   <li>影音社群平台</li>
                   <li>形象網站</li>

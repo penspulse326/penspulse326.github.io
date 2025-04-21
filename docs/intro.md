@@ -1,7 +1,6 @@
 ---
 slug: /
 sidebar_position: 0
-giscus: false
 ---
 
 # 關於本站

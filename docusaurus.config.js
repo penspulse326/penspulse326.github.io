@@ -84,8 +84,8 @@ const config = {
             position: "left",
             label: "筆記",
           },
-          { to: "/blog", label: "日記", position: "left" },
-          { to: "/blog/tags", label: "日記標籤", position: "left" },
+          { to: "/blog", label: "雜談", position: "left" },
+          { to: "/blog/tags", label: "雜談標籤", position: "left" },
           {
             href: "https://github.com/penspulse326",
             label: "Github",

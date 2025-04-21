@@ -32,3 +32,29 @@
   --ifm-color-border-dark: #444;
   --ifm-color-subtitle-dark: #AAA;
 }
+
+/* GitHub icon */
+.header-github-link::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  display: flex;
+  -webkit-mask: url('/img/github.svg') no-repeat;
+  mask: url('/img/github.svg') no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: #000;
+  transition: background-color 0.2s ease;
+}
+
+.header-github-link:hover::before {
+  background-color: var(--ifm-color-primary);
+}
+
+[data-theme='dark'] .header-github-link::before {
+  background-color: #fff;
+}
+
+[data-theme='dark'] .header-github-link:hover::before {
+  background-color: var(--ifm-color-primary);
+}

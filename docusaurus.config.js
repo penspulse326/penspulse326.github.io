@@ -89,8 +89,9 @@ const config = {
           { to: "/blog/tags", label: "雜談標籤", position: "left" },
           {
             href: "https://github.com/penspulse326",
-            label: "Github",
+            className: "header-github-link",
             position: "right",
+            "aria-label": "GitHub",
           },
         ],
       },

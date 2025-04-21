@@ -1,47 +1,45 @@
 import React from "react";
 import Giscus from "@giscus/react";
-import { useColorMode } from "@docusaurus/theme-common";
 import { useLocation } from "@docusaurus/router";
 
 import styles from "./styles.module.css";
 
 function GiscusComment() {
-  // 检查是否在客户端
-  if (typeof window === "undefined") {
+  const location = useLocation();
+
+  // Exclude homepage and any other pages where comments are not needed
+  // Currently only excluding the homepage, add other paths here if needed
+  if (typeof window === "undefined" || location.pathname === "/") {
     return null;
   }
 
-  try {
-    const { colorMode } = useColorMode();
-    const location = useLocation();
+  // Get the color mode from document rather than the hook
+  const prefersDarkTheme =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme =
+    document.documentElement.dataset.theme ||
+    (prefersDarkTheme ? "dark" : "light");
 
-    if (location.pathname === "/docs/") {
-      return null;
-    }
-
-    return (
-      <div className={styles.comment}>
-        <Giscus
-          repo="penspulse326/penspulse326.github.io"
-          repoId="R_kgDOH7IBDw"
-          category="Announcements"
-          categoryId="DIC_kwDOH7IBD84CesRY"
-          mapping="title"
-          strict="0"
-          reactionsEnabled="1"
-          emitMetadata="0"
-          inputPosition="bottom"
-          theme={colorMode}
-          lang="zh-Hant"
-          crossOrigin="anonymous"
-          async
-        />
-      </div>
-    );
-  } catch (error) {
-    console.warn("GiscusComment rendering error:", error);
-    return null;
-  }
+  return (
+    <div className={styles.comment}>
+      <Giscus
+        repo="penspulse326/penspulse326.github.io"
+        repoId="R_kgDOH7IBDw"
+        category="Announcements"
+        categoryId="DIC_kwDOH7IBD84CesRY"
+        mapping="title"
+        strict="0"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="bottom"
+        theme={theme}
+        lang="zh-Hant"
+        crossOrigin="anonymous"
+        async
+      />
+    </div>
+  );
 }
 
 export default function GiscusWrapper() {

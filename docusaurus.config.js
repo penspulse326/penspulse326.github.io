@@ -84,6 +84,7 @@ const config = {
             position: "left",
             label: "筆記",
           },
+          { to: "/tags", label: "筆記標籤", position: "left" },
           { to: "/blog", label: "雜談", position: "left" },
           { to: "/blog/tags", label: "雜談標籤", position: "left" },
           {

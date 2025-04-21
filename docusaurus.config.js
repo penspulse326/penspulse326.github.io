@@ -34,6 +34,7 @@ const config = {
           sidebarPath: "./sidebars.js",
           // editUrl:
           //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          routeBasePath: "/",
         },
         blog: {
           showReadingTime: true,

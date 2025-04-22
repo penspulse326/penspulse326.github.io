@@ -48,6 +48,8 @@ const config = {
           onInlineTags: "warn",
           onInlineAuthors: "warn",
           onUntruncatedBlogPosts: "warn",
+          blogSidebarCount: 5,
+          blogSidebarTitle: "近期文章",
         },
         theme: {
           customCss: "./src/css/custom.css",

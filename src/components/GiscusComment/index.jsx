@@ -7,16 +7,14 @@ import styles from "./styles.module.css";
 function GiscusComment() {
   const location = useLocation();
 
-  // Exclude homepage and any other pages where comments are not needed
-  // Currently only excluding the homepage, add other paths here if needed
   if (typeof window === "undefined" || location.pathname === "/") {
     return null;
   }
 
-  // Get the color mode from document rather than the hook
   const prefersDarkTheme =
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
+
   const theme =
     document.documentElement.dataset.theme ||
     (prefersDarkTheme ? "dark" : "light");

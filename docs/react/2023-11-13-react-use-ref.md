@@ -7,148 +7,118 @@ tags: ["筆記", "React"]
 slug: react-use-ref
 ---
 
-在要管理的 state 慢慢變多之後管理上就會變得繁瑣，  
-在 React 通常可以使用 useReducer 做管理，有規模一點的專案就會投入 Redux，  
-但兩者的語法跟概念算是類似的！
-
-## 設定
-
-假設原本有 data、isLoading 這兩個 state：
-
-```jsx
-const [data, setData] = useState([]);
-const [isLoading, setIsLoading] = useState(true);
-```
-
-改為用 reducer 的方式管理後，這些 state 可以拉出來做成一個大的 state，  
-通常也會在此賦予初始值，所以變數名稱習慣上命名成 initialState：
-
-```jsx
-const initialState = {
-  data: [],
-  isLoading: true,
-};
-```
-
-原本用來改變那些狀態的 setAction 方法，一樣要拉出來存到 reducer 這個變數，  
-並且改成用 switch 來判斷有哪些動作可以被觸發， 可以說 reducer 是定義動作的地方：
-
-```jsx
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "SET_LOADING":
-      return { ...state, isLoading: action.payload };
-    case "SET_DATA":
-      return { ...state, data: action.payload };
-    default:
-      return state;
-  }
-};
-```
-
-每個 case 做的事跟原本的 setAction 差不多，  
-差別在於傳入的值要透過 `action.payload` 取得，  
-return 之前也可以做其他運算。
-
----
+useRef 可以保留資料狀態，並且資料內容的變更不會觸發重新渲染。  
+有些資料我們不希望它像 useState 會觸發重新渲染，或是重新渲染之後資料被初始化。
 
 ## 用法
 
-狀態跟方法都被分離出來了，這時就可以開始使用 useReducer，  
-把剛剛定義好的 state 與 reducer 傳入：
+和 useEffect 一樣，宣告時可以指定初始值，  
+但後續存取要用 current 屬性取出：
 
 ```jsx
-const MyComponent = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+function App() {
+  const [value, setValue] = setValue(0);
+  const valueRef = useRef(0);
 
-  console.log(state); // 會印出 initailState 裡面的東西
+  useEffect(() => {
+    valueRef.current = value;
+  }, [value]);
 
   return (
     <div>
-      {state.data.map((item) => (
-        <div>{item.name}</div>
-      ))}
-    </div>
-  );
-};
+      <div>
+        last value:
+        { valueRef.current }
+      </div>
+
+      <div>
+        current value:
+        { value }
+      </div>
+    </div>);
+}
 ```
 
-原本要使用 setAction 觸發的狀態變更，這時要改用 dispatch 傳入對應格式，  
-type 就是我們剛剛在 reducer 裡面定好的 case，payload 就是要傳入的資料：
-
-```jsx
-dispatch({ type: "SET_LOADING", payload: false });
-```
+ref 的變更並不會讓元件重新渲染，所以如範例用 useEffect 改變 valueRef 後，  
+雖然內容的確被更新了，但在畫面上顯示的 valueRef 還是上一個週期的內容。
 
 ---
+## 存取 DOM
 
-## 優化
-
-此篇示範的情境是元件初次渲染時要去打 API，接到回來的資料後，  
-改變 isLoading 和 data 的內容，所以程式碼大致的結構會是這樣：
+用來存取 DOM 時初始值會指定為 null，並在目標的 DOM 上加入屬性 `ref={boxRef}`來綁定。  
 
 ```jsx
-const MyComponent = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { isLoading, data } = state;
-
-  const fetchData = async () => {
-    try {
-      const response = await getData();
-      dispatch({ type: "SET_LOADING", payload: false });
-      dispatch({ type: "SET_DATA", payload: response.data });
-    } catch (err) {
-      console.error("Error:", err);
-    }
-  };
+function App() {
+  const boxRef = useRef(null);
 
   useEffect(() => {
-    fetchData();
+    // 在第一次渲染後會成功綁定到 DOM
+    console.log(boxRef.current);
   }, []);
 
   return (
     <div>
-      {isLoading && <LoadingAnimation />}
-      {data.map((item) => (
-        <div>{item.name}</div>
-      ))}
-    </div>
-  );
-};
+      <div
+       ref={boxRef}
+       class="box"
+      >
+        box
+      </div>
+    </div>);
+}
 ```
 
-可以把 state 裡面的狀態變數都解構出來。  
-改變狀態的方式從 setAction 改為 dispatch 後，  
-這樣的格式`{ type: "SET_LOADING", payload: false }` 讓語法看起來變長了，  
-如果遇到有要把方法傳遞下去的狀況，最好再封裝成一個函式，  
-所以原本直接寫 setXXX 直接傳下去的 props 也建議改為更語意化的 on 事件，  
-否則掛在 component 上的 callback 會很長也不好閱讀：
+常見的案例是要捕捉元素的屬性或方法，例如長寬大小、scorll bar 的高度，  
+或是操作 `<video>` 的暫停、播放等。  
 
-```jsx
-const handleChange = () => {
-  dispatch({ type: "SET_LOADING", payload: false });
-};
-
-return <ChildComponent onChange={handleChange} />;
-```
-
-最後就是，action type 目前全部都是用字串傳下去的，  
-如果字串有打錯的話第一時間沒報錯就很難抓到 bug，  
-所以這些字串通常會拉出來變成變數名稱：
-
-```jsx
-const ACTION = {
-  SET_LOADING: "SET_LOADING",
-  SET_DATA: "SET_DATA",
-};
-
-// 改成變數後能降低出包率
-dispatch({ type: ACTION.SET_LOADING, payload: false });
-```
+像 scorll bar 有可能在重新渲染後，因為 DOM 被重新創造，  
+原本停留在某個高度，就會被刷新回到 `top: 0` 的位置，  
+導致使用者必須再滾動一次，這時就需要透過 useRef 搭配 useEffect，  
+讓它在重新渲染後仍然能回到正確的位置。
 
 ---
+## 第三方套件
 
+許多套件的功能是用 class 來實現的，如果不使用 useRef 存起來的話，  
+會造成每次渲染時都 new 出新的 instance，在上一個週期的物件內容也都被重置了：
+
+```jsx
+class Foo {
+  time = null;
+
+  constructor(time) {
+    this.time = time;
+  }
+
+  sayHelloCreatedTime() {
+    console.log(`Hello, this object is created at ${this.time}`);
+  }
+}
+
+function App() {
+  const [value, setValue] = useState(0);
+  const fooObj = new Foo(new Date());
+  const fooObjRef = useRef(new Foo(new Date()));
+  
+  useEffect(() => {
+    fooObj.sayHelloCreatedTime();
+    fooObjRef.current.sayHelloCreatedTime();
+  }, [value]);
+  
+  return (/* 元件內容 */);
+}
+```
+
+如上面範例，只要狀態改變，元件內部除了 hook，  
+在重新渲染時其他程式碼都會重新執行一次，  
+所以 `fooObj` 每次在 useEffect 中印出來的 time 都不一樣。  
+當 class 有被 useRef 保留下來後，再操作 class 裡面的屬性或方法時，  
+就不會發生狀態被重置的問題。
+
+---
 ## 參考資料
 
-- [既生 useState 何生 useReducer ?](https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/react-hooks-usestate-vs-usereducer-b14966ad37dd)
-- [Day6-React Hook 篇-useReducer](https://ithelp.ithome.com.tw/articles/10268258)
+- [走歪的工程師 James：一個範例讓你搞懂 useState, useRef, useEffect](https://www.youtube.com/watch?v=q0C5g4WIrKU)
+
+---
+關聯主題：[[3. useState - 已發布]]

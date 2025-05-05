@@ -8,7 +8,7 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Penspulse",
+  title: "Pen's Pulse",
   tagline: "前端筆記",
   favicon: "img/favicon.ico",
   url: "https://penspulse326.github.io/",
@@ -87,8 +87,8 @@ const config = {
             label: "筆記",
           },
           { to: "/tags", label: "筆記標籤", position: "left" },
-          { to: "/blog", label: "雜談", position: "left" },
-          { to: "/blog/tags", label: "雜談標籤", position: "left" },
+          { to: "/blog", label: "文章", position: "left" },
+          { to: "/blog/tags", label: "文章標籤", position: "left" },
           {
             href: "https://github.com/penspulse326",
             className: "header-github-link",

@@ -34,7 +34,7 @@ const config = {
           sidebarPath: "./sidebars.js",
           // editUrl:
           //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-          routeBasePath: "/",
+          routeBasePath: "docs",
         },
         blog: {
           showReadingTime: true,
@@ -85,8 +85,9 @@ const config = {
             sidebarId: "tutorialSidebar",
             position: "left",
             label: "筆記",
+            to: "/docs",
           },
-          { to: "/tags", label: "筆記標籤", position: "left" },
+          { to: "/docs/tags", label: "筆記標籤", position: "left" },
           { to: "/blog", label: "文章", position: "left" },
           { to: "/blog/tags", label: "文章標籤", position: "left" },
           {

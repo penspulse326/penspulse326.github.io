@@ -62,7 +62,7 @@ const config = {
           onInlineTags: "warn",
           onInlineAuthors: "warn",
           onUntruncatedBlogPosts: "warn",
-          blogSidebarCount: 5,
+          blogSidebarCount: 10,
           blogSidebarTitle: "近期文章",
         },
         theme: {
@@ -85,6 +85,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
+      },
       // Replace with your project's social card
       image: "img/docusaurus-social-card.jpg",
       navbar: {

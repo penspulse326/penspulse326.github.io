@@ -7,7 +7,17 @@ import styles from "./styles.module.css";
 function GiscusComment() {
   const location = useLocation();
 
-  if (typeof window === "undefined" || location.pathname === "/") {
+  // Don't show comments on main pages or index pages
+  if (
+    typeof window === "undefined" ||
+    location.pathname === "/" ||
+    location.pathname === "/docs" ||
+    location.pathname === "/docs/" ||
+    location.pathname === "/projects" ||
+    location.pathname === "/projects/" ||
+    location.pathname === "/blog" ||
+    location.pathname === "/blog/"
+  ) {
     return null;
   }
 

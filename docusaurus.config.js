@@ -25,6 +25,20 @@ const config = {
     locales: ["zh-Hant", "en"],
   },
 
+  plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "projects",
+        path: "projects",
+        routeBasePath: "projects",
+        sidebarPath: require.resolve("./sidebarProjects.js"),
+        // editUrl:
+        //   "https://github.com/penspulse326/penspulse326.github.io/edit/main/",
+      },
+    ],
+  ],
+
   presets: [
     [
       "classic",
@@ -82,12 +96,18 @@ const config = {
         items: [
           {
             type: "docSidebar",
-            sidebarId: "tutorialSidebar",
+            sidebarId: "docsSidebar",
             position: "left",
             label: "筆記",
             to: "/docs",
           },
-          { to: "/docs/tags", label: "筆記標籤", position: "left" },
+          {
+            type: "doc",
+            docId: "index",
+            position: "left",
+            label: "實作",
+            docsPluginId: "projects",
+          },
           { to: "/blog", label: "文章", position: "left" },
           { to: "/blog/tags", label: "文章標籤", position: "left" },
           {

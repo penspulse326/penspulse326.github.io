@@ -35,9 +35,11 @@ export default function DocItemContent({ children }) {
           <Heading as="h1">{syntheticTitle}</Heading>
         </header>
       )}
-      <span className={styles.docItemDate}>
-        {frontMatter.date.toLocaleDateString()} 發布
-      </span>
+      {frontMatter.date && (
+        <span className={styles.docItemDate}>
+          {new Date(frontMatter.date).toLocaleDateString()} 發布
+        </span>
+      )}
       <MDXContent>{children}</MDXContent>
     </div>
   );

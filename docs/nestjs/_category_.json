@@ -1,5 +1,6 @@
 {
-  "label": "圖表",
+  "label": "NestJS",
+  "position": 4,
   "link": {
     "type": "generated-index"
   }

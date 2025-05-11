@@ -1,5 +1,5 @@
 ---
-title: "[React 元件挑戰] 01-Button"
+title: "1-Button"
 description: "設計 Button 元件"
 date: 2024-07-26 00:00:00
 keywords:
@@ -12,7 +12,7 @@ keywords:
     storybook,
     button,
   ]
-tags: ["筆記", "React", "元件設計", "React 元件挑戰"]
+tags: ["實作", "React", "元件設計", "React 元件設計大挑戰"]
 slug: react-custom-ui-button
 ---
 

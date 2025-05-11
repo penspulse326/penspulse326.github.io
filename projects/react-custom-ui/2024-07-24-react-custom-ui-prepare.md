@@ -1,10 +1,10 @@
 ---
-title: "[React 元件挑戰] 00-事前準備"
+title: "事前準備"
 description: "設計 UI 庫的事前準備"
 date: 2024-07-24 00:00:00
 keywords:
   [程式語言, JavaScript, React, custom-component, component-design, storybook]
-tags: ["筆記", "React", "元件設計", "React 元件挑戰"]
+tags: ["實作", "React", "元件設計", "React 元件設計大挑戰"]
 slug: react-custom-ui-prepare
 ---
 

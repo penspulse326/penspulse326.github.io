@@ -76,10 +76,10 @@ export class TodoModule {}
 export class AppController {
   constructor(
     // 在裝飾器傳入 token 名稱
-    @Inject("TEST_USE_VALUE") private readonly testUseValue: string
+    @Inject('TEST_USE_VALUE') private readonly testUseValue: string
   ) {}
 
-  @Get("test-use-value")
+  @Get('test-use-value')
   getTestUseValue() {
     return this.testUseValue;
   }
@@ -111,10 +111,10 @@ export class AppController {
 @Controller()
 export class AppController {
   constructor(
-    @Inject("TEST_USE_FACTORY") private readonly testUseFactory: string
+    @Inject('TEST_USE_FACTORY') private readonly testUseFactory: string
   ) {}
 
-  @Get("test-use-factory")
+  @Get('test-use-factory')
   getTestUseFactory() {
     return this.testUseFactory;
   }
@@ -158,10 +158,10 @@ export class AppController {
 export class AppController {
   constructor(
     // 實際上這個 provider 就是 AppService
-    @Inject("TEST_USE_EXISTING") private readonly testUseExisting: AppService
+    @Inject('TEST_USE_EXISTING') private readonly testUseExisting: AppService
   ) {}
 
-  @Get("test-use-existing")
+  @Get('test-use-existing')
   getTestUseExisting() {
     return this.testUseExisting.getHello();
   }
@@ -177,8 +177,8 @@ export class AppController {
 
 ```ts
 const testUseValueProvider: Provider = {
-  provide: "TEST_USE_VALUE",
-  useValue: "這是用 useValue 註冊的 provider",
+  provide: 'TEST_USE_VALUE',
+  useValue: '這是用 useValue 註冊的 provider',
 };
 
 @Module({
@@ -202,14 +202,14 @@ export class CustomModule {}
 export class AppController {
   constructor(
     @Optional()
-    @Inject("TEST_USE_EXISTING")
+    @Inject('TEST_USE_EXISTING')
     private readonly testUseExisting: AppService
   ) {}
 
-  @Get("test-use-existing")
+  @Get('test-use-existing')
   getTestUseExisting() {
     if (!testUseExisting) {
-      return "實例不存在";
+      return '實例不存在';
     }
 
     return this.testUseExisting.getHello();

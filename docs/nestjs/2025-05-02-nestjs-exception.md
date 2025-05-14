@@ -122,7 +122,7 @@ nest g filter filter/http
 初始架構是一個帶有 `@Catch` 裝飾器的類別，泛型 T 可以改寫成我們要實作的類型：
 
 ```ts
-import { ArgumentsHost, Catch, ExceptionFilter } from "@nestjs/common";
+import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 
 @Catch()
 export class HttpFilter<T> implements ExceptionFilter {
@@ -273,7 +273,7 @@ msg 被塞入的是內建的 exception 資料，所以需要調整 `getResponse`
 ```ts
 const message = (() => {
   const res = exception.getResponse();
-  if (typeof res === "string") {
+  if (typeof res === 'string') {
     return res;
   }
 
@@ -328,8 +328,8 @@ getHttpFilterException() {
 ```ts
 @Get('test-http-filter')
 getHttpFilterException() {
-	// 傳一個空物件
-	throw new UnprocessableEntityException({});
+  // 傳一個空物件
+  throw new UnprocessableEntityException({});
 }
 ```
 

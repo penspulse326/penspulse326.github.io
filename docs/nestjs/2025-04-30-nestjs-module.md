@@ -57,15 +57,15 @@ module 會規範好作用域，`controllers` 和 `providers` 只能填入該模�
 
 ```ts
 // 這個 import 只是匯入類別的定義
-import { CopyService } from "src/copy/copy.service";
+import { CopyService } from 'src/copy/copy.service';
 
 // NestJS 用 CopyService 這個標記去尋找依賴注入容器中的實例時會報錯
 // 因為沒有在各自的 @Module 中定義 imports 或 exports
-@Controller("todos")
+@Controller('todos')
 export class TodoController {
   constructor(private readonly copyService: CopyService) {}
 
-  @Get("copy")
+  @Get('copy')
   getCopy() {
     return this.copyService.getCopy();
   }
@@ -133,8 +133,8 @@ export class AppModule {}
 在任意模組中使用時就不用在 `@Module` 裡面匯入：
 
 ```ts
-import { Module } from "@nestjs/common";
-import { TestController } from "./test.controller";
+import { Module } from '@nestjs/common';
+import { TestController } from './test.controller';
 
 @Module({
   controllers: [TestController],
@@ -146,10 +146,10 @@ export class TestModule {}
 依賴注入後就可以成功呼叫：
 
 ```ts
-import { Controller, Get } from "@nestjs/common";
-import { TodoService } from "src/todo/todo.service";
+import { Controller, Get } from '@nestjs/common';
+import { TodoService } from 'src/todo/todo.service';
 
-@Controller("test")
+@Controller('test')
 export class TestController {
   constructor(private readonly todoService: TodoService) {}
 

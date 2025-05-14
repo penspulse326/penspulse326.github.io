@@ -31,11 +31,11 @@ nest g controller <name>
 在應用程式啟動時建立一個路由表並將這個元數據註冊進去，如：
 
 ```ts
-@Controller("todos")
+@Controller('todos')
 export class TodoController {}
 ```
 
-`'todos'` 就會被註冊成可以存取的端點路徑（endpoint） `/todos` 。
+`'todos'` 就會被註冊成可以存取的端點（endpoint）。
 
 :::info
 `@Controller` 也會被註冊到 DI Container 裡面。
@@ -48,7 +48,7 @@ export class TodoController {}
 controller 裡面必須使用網路請求相關的裝飾器才能正確存取路由，如：
 
 ```ts
-@Controller("todos")
+@Controller('todos')
 export class TodoController {
   @Get()
   getTodos() {
@@ -64,19 +64,21 @@ export class TodoController {
 
 ## 子路由
 
-子路由的概念也很直觀，直接在 `@Get` 裡面帶入字串，就可以生成一個端點：
+子路由的概念也很直觀，直接在 `@Get` 裡面帶入字串，就可以生成一個端點，  
+如在這個 controller 下面標記 `@Get('sub')`則表示，`/todos/sub` 會被捕捉，  
+並執行 `getTodo`：
 
 ```ts
-@Controller("todos")
+@Controller('todos')
 export class TodoController {
   @Get()
   getTodos() {
     return [];
   }
 
-  @Get("sub")
+  @Get('sub')
   getTodo() {
-    return "這是子路由";
+    return '這是子路由';
   }
 }
 ```
@@ -111,12 +113,12 @@ getTodo(@Param('id') id: string) {
 ```ts
 @Post()
 createTodo(@Body() data: { content: string }) {
-	const newTodo = {
+  const newTodo = {
     id: this.todos.length + 1,
     content: data.content,
   };
 
-	this.todos.push(newTodo);
+  this.todos.push(newTodo);
 
   return newTodo;
 }
@@ -128,18 +130,18 @@ createTodo(@Body() data: { content: string }) {
 // 解析 /todos?limit=3&offset=3
 @Get()
 getTodos(@Query('limit') limit?: string, @Query('offset') offset?: string) {
-	if (!limit) {
-		return this.todos;
-	}
+  if (!limit) {
+    return this.todos;
+  }
 
-	if (!offset) {
-		offset = '0';
-	}
+  if (!offset) {
+    offset = '0';
+  }
 
-	const limitNum = parseInt(limit);
-	const offsetNum = parseInt(offset);
+  const limitNum = parseInt(limit);
+  const offsetNum = parseInt(offset);
 
-	return this.todos.slice(offsetNum, offsetNum + limitNum);
+  return this.todos.slice(offsetNum, offsetNum + limitNum);
 }
 ```
 
@@ -155,7 +157,7 @@ getTodos(@Query('limit') limit?: string, @Query('offset') offset?: string) {
 // 這樣可以匹配 todos/bulk/goooooooood
 @Get('bulk/goo*d')
 getGood() {
-	return '這是 /bulk 下面的通用路由 goo*d';
+  return '這是 /bulk 下面的通用路由 goo*d';
 }
 ```
 
@@ -170,7 +172,7 @@ getGood() {
 @Get()
 @HttpCode(HttpStatus.NO_CONTENT)
 getTodos() {
-	return [];
+  return [];
 }
 ```
 
@@ -194,15 +196,15 @@ getTodos() {
 ```ts
 @Get()
 getData() {
-	return [];
+  return [];
 }
 
 // 被 setTimeout 延遲，會晚一點收到回應
 @Get()
 async getAsyncData() {
-	return new Promise((resolve) => {
-		setTimeout(() => resolve([]), 1000);
-	})
+  return new Promise((resolve) => {
+    setTimeout(() => resolve([]), 1000);
+  })
 }
 ```
 
@@ -216,19 +218,19 @@ RxJS 可以回傳一個響應物件 `of`，如果沒有串上其他 RxJS 的串�
 ```ts
 @Get('data/rxjs')
 getRxjsData() {
-	return of([]);
+  return of([]);
 }
 
 // 使串流方法重新組織資料
 @Get('data/rxjs')
 getRxjsData() {
-	return of(this.todos).pipe(
-		map((todos) => todos.map((todo) => ({ ...todo, status: 'active' }))),
-		catchError((err) => {
-			console.error('Error occurred:', err);
-			return of({ error: '獲取待辦事項失敗' });
-		}),
-	);
+  return of(this.todos).pipe(
+    map((todos) => todos.map((todo) => ({ ...todo, status: 'active' }))),
+    catchError((err) => {
+      console.error('Error occurred:', err);
+      return of({ error: '獲取待辦事項失敗' });
+    }),
+  );
 }
 ```
 
@@ -240,7 +242,7 @@ getRxjsData() {
 ```ts
 @Get('data/lib')
 getLibraryData(@Res() res: Response) {
-	res.status(200).send('這是從 library 來的資料');
+  res.status(200).send('這是從 library 來的資料');
 }
 ```
 

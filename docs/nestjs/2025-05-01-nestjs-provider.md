@@ -64,8 +64,8 @@ export class TodoModule {}
 
 ```ts
 {
-	provide: 'TEST_USE_VALUE',
-	useValue: '這是用 useValue 註冊的 provider',
+  provide: 'TEST_USE_VALUE',
+  useValue: '這是用 useValue 註冊的 provider',
 }
 ```
 
@@ -95,13 +95,13 @@ export class AppController {
 
 ```ts
 {
-	provide: 'TEST_USE_FACTORY',
-	inject: [AppService],
-	useFactory: (appService: AppService) => {
-		const result = appService.getHello();
+  provide: 'TEST_USE_FACTORY',
+  inject: [AppService],
+  useFactory: (appService: AppService) => {
+    const result = appService.getHello();
 
-		return `這是用 useFactory 註冊的 provider，這是從 AppService 拿到的資料 ${result}`;
-	},
+    return `這是用 useFactory 註冊的 provider，這是從 AppService 拿到的資料 ${result}`;
+  },
 },
 ```
 
@@ -125,18 +125,18 @@ export class AppController {
 
 ```ts
 {
-	provide: 'TEST_ASYNC_USE_FACTORY',
-	inject: [AppService],
-	useFactory: async (appService: AppService) => {
-		const timeLimit = 1000;
-		const result: string = await new Promise((resolve) => {
-			setTimeout(() => {
-				resolve(appService.getHello());
-			}, timeLimit);
-		});
+  provide: 'TEST_ASYNC_USE_FACTORY',
+  inject: [AppService],
+  useFactory: async (appService: AppService) => {
+    const timeLimit = 1000;
+    const result: string = await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(appService.getHello());
+      }, timeLimit);
+    });
 
-		return `這是用 async useFactory 註冊的 provider，這是從 AppService 拿到的資料 ${result}，耗時 ${timeLimit} 毫秒`;
-	},
+    return `這是用 async useFactory 註冊的 provider，這是從 AppService 拿到的資料 ${result}，耗時 ${timeLimit} 毫秒`;
+  },
 },
 ```
 
@@ -148,8 +148,8 @@ export class AppController {
 
 ```ts
 {
-	provide: 'TEST_USE_EXISTING',
-	useExisting: AppService,
+  provide: 'TEST_USE_EXISTING',
+  useExisting: AppService,
 },
 ```
 

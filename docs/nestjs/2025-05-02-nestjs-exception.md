@@ -19,9 +19,11 @@ tags: ["筆記", "NestJS"]
 slug: nestjs-exception
 ---
 
-錯誤處理也是一種元件，可以透過 `HttpException` 這個類別建立一個拋回 response 物件。  
+錯誤處理器（Exception Filter）也是一種元件，可以透過 `HttpException` 這個類別，  
+建立一個拋回 response 物件。
+
 只要是用 `HttpException` 建立或繼承出來的實例，  
-都會被內建的錯誤處理器（exception filter）捕捉。
+都會被內建的錯誤處理器捕捉。
 
 ## 標準 exception
 
@@ -111,7 +113,7 @@ getBuiltInException() {
 
 ---
 
-## exception filter
+## 自訂 exception
 
 錯誤處理器也可以自己生成：
 
@@ -122,7 +124,7 @@ nest g filter filter/http
 初始架構是一個帶有 `@Catch` 裝飾器的類別，泛型 T 可以改寫成我們要實作的類型：
 
 ```ts
-import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter } from "@nestjs/common";
 
 @Catch()
 export class HttpFilter<T> implements ExceptionFilter {
@@ -161,7 +163,7 @@ catch(exception: T, host: ArgumentsHost) {
 
   const responseBody = {
     code: statusCode,
-    msg: message,
+    message: message,
     timestamp: new Date().toISOString(),
   };
 
@@ -193,7 +195,7 @@ ArgumentsHost 的 getResponse 是 HTTP 物件，exception 的 getResponse 是繼
 
 ---
 
-## 部分套用
+### 部分套用
 
 使用 `@UseFilter` 標注在 controller 的方法上就可以套用指定的 filter：
 
@@ -217,7 +219,7 @@ export class AppController {
 
 ---
 
-## 全域套用
+### 全域套用
 
 可以在根模組進行注入（推薦）：
 
@@ -258,7 +260,7 @@ async function bootstrap() {
 ```json
 {
   "code": 422,
-  "msg": {
+  "message": {
     "message": "這是自訂格式的 422 錯誤",
     "error": "Unprocessable Entity",
     "statusCode": 422
@@ -267,13 +269,14 @@ async function bootstrap() {
 }
 ```
 
-msg 被塞入的是內建的 exception 資料，所以需要調整 `getResponse` 的判斷，  
+外層的 message 被塞入的是內建的 exception 資料，所以需要調整 `getResponse` 的判斷，  
 `exception.getResponse()` 的型別是 `string | object`：
 
 ```ts
 const message = (() => {
   const res = exception.getResponse();
-  if (typeof res === 'string') {
+
+  if (typeof res === "string") {
     return res;
   }
 
@@ -293,12 +296,13 @@ getHttpFilterException() {
 }
 ```
 
-不傳任何東西，預設會 throw 出內建的 exception 格式，此時就會處出物件內的 `message`：
+不傳任何東西，預設會 throw 出內建的 exception 格式，  
+此時就會帶出 422 exception 的 `message`：
 
 ```json
 {
   "code": 422,
-  "msg": "Unprocessable Entity",
+  "message": "Unprocessable Entity",
   "timestamp": "2025-05-05T07:00:13.501Z"
 }
 ```
@@ -318,12 +322,12 @@ getHttpFilterException() {
 ```json
 {
   "code": 422,
-  "msg": "這是自訂格式的 422 錯誤",
+  "message": "這是自訂格式的 422 錯誤",
   "timestamp": "2025-05-05T07:05:36.365Z"
 }
 ```
 
-因為剛剛的格式沒有做型別檢查，所以 message 取不出來：
+因為剛剛修正 `getResponse` 時沒有做額外的型別檢查，所以回應會取不出來 message：
 
 ```ts
 @Get('test-http-filter')
@@ -347,8 +351,8 @@ getHttpFilterException() {
 ## 總結
 
 一般來說內建的 exception 只要能訂出回應的物件型別，已經能應付大多情境，  
-不過有接入外部的服務或是 `ValidationPipe` 產生的報錯，如果也需要被固定在統一格式的話，  
-就會需要自訂的 exception filter 來實現邏輯判斷。
+接入外部的服務或是 `ValidationPipe` 產生的報錯，如果也需要被固定在統一格式的話，  
+就會需要自訂的 exception filter 來實現邏輯判斷，這樣也會讓前後端比較容易對照。
 
 ---
 

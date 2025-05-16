@@ -46,9 +46,9 @@ function List() {
 
 此時就需要 useEffect 來解決這個問題！  
 effect 指的是 **side effect**，表示執行函式時的衍生效果，  
-這個效果通常不會影響到主要邏輯，也不應該寫入太多跟主要邏輯無關的變動。
+這個效果通常不會影響到主要的元件邏輯，也不應該寫入太多跟元件邏輯無關的變動。
 
-把 fetch 改為 useEffect 來操作：
+把 fetch 放在 useEffect 來操作：
 
 ```jsx
 useEffect(() => {

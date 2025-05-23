@@ -52,12 +52,12 @@ pnpm --filter @apps/week-1 dev
 並且運行這個工作區 package.json 腳本中的 `dev`，  
 跟「切換到這個目錄底下後執行 `npm run dev`」是一樣的意思。
 
-如果能正常運行的話，那麼初步的專案搬遷就成功了！
+如果能正常運行的話，初步的搬遷已經成功了！
 
 ---
 ## 腳本
 
-可以將剛剛的指令加到根目錄的腳本，這樣之後就不用打一長串的指令，  
+可以將剛剛的指令加到根目錄的腳本，之後就不用打一長串的指令，  
 或是手動切換到子專案的資料夾：
 
 ```json
@@ -70,7 +70,7 @@ pnpm --filter @apps/week-1 dev
 }
 ```
 
-在根目錄操作運行子專案：
+在根目錄執行腳本來啟動子專案：
 
 ```bash
 pnpm week1:dev
@@ -171,10 +171,10 @@ const testRef = ref();
 2. `tsconfig.node.json`
 3. `tsconfig.json`，將上面兩個設定檔加入參照（reference）
 
-這些設定檔預設會從官方提供的 `@vue/tsconfig` 繼承，  
-剛剛也有提過，微前端架構中可能會包含其他不同框架的專案，  
-需要的編譯模式也不同，會牽涉到建構工具、編譯流程的問題，  
-所以要共用 TypeScript 的話，我認為只放入撰寫規則（lint）相關的設定就好。  
+這些設定檔預設會從官方提供的現成來源 `@vue/tsconfig` 和 `@tsconfig/node20` 繼承，  
+剛剛有提過微前端架構中可能包含其他不同框架的專案，  
+需要的 TypeScript 設定也不同，會牽涉到建構工具、編碼輸出的問題，  
+所以要共用 TypeScript 設定的話，我認為只放入撰寫規則（lint）相關的設定就好。  
 
 在根目錄新增 `tsconfig.base.json`：
 
@@ -201,7 +201,7 @@ const testRef = ref();
 }
 ```
 
-在子專案加入一個沒有指定參數型別的函式，測試是否有成功繼承到根目錄的設定：
+在子專案寫一個沒有指定參數型別的函式，測試是否有成功繼承到根目錄的設定：
 
 ```ts
 function greet(name) {
@@ -211,10 +211,10 @@ function greet(name) {
 
 這個規則會違反 `noImplicitAny`（不允許隱式的 any），所以會收到提示：
 
-`Parameter 'name' implicitly has an 'any' type.ts(7006)
+`Parameter 'name' implicitly has an 'any' type.ts(7006)`
 
 不過目前無法知道這個提示會生效的原因，  
-是基於 `@vue/tsconfig` 還是根目錄的 `tsconfig.base.json`，  
+是基於 `@vue/tsconfig` 或 `@tsconfig/node20` 還是根目錄的 `tsconfig.base.json`，  
 因此可以把 `noImplicitAny` 設為 `false` 來測試，  
 因為 `extends` 是照陣列順序來解析，所以在陣列的後面的 `"../../tsconfig.base.json"`，  
 如果有同名屬性的規則，應該要覆蓋過去。  
@@ -226,8 +226,8 @@ function greet(name) {
 ## 共用元件庫
 
 同時經營多個產品線的話，通常會有一套共用的設計系統延伸到各個專案，  
-不論開發上是純手刻，或是基於其他現成的元件庫做再封裝，都可以做成一個共用庫，  
-達成更好的開發一致性，以後也更好配合 design token 的改動。
+不論開發上是純手刻，或是基於其他現成的元件庫做再封裝，  
+都可以做成一個共用庫，達成更好的開發一致性，以後也更好配合 design token 的改動。
 
 先在根目錄建立資料夾 packages，並在裡面建立一個 Vue 3 專案，  
 `package.json` 中 Vue 相關的依賴項目都可以移除，  
@@ -251,7 +251,7 @@ packages:
   - "packages/*"
 ```
 
-也別忘記在根目錄執行一次 `pnpm install`，讓目前的環境重新識別到 `packages`。
+修改完後要在根目錄執行 `pnpm install`，讓目前的環境重新識別到 `packages`。
 
 隨意新增兩個元件，並在 `main.ts` 導出：
 
@@ -261,6 +261,13 @@ import SharedBadge from './components/SharedBadge.vue';
 import type { App } from 'vue';
 
 export { SharedButton, SharedBadge };
+
+export default {
+  install(app: App) {
+    app.component('SharedButton', SharedButton);
+    app.component('SharedBadge', SharedBadge);
+  }
+};
 ```
 
 切換到子專案安裝這個共用元件庫，安裝時要加入參數 `--workspace`，  
@@ -291,7 +298,7 @@ IDE 沒有任何提示，子專案也能順利啟動，就......還沒結束，
 ### 打包
 
 雖然這樣就可以直接部署了，不過為了支援 Tree-Shaking，  
-一般的共用庫還是會進行打包，導出一個整理乾淨的 `/dist/index.js`，  
+共用庫通常還是會進行打包，導出一個整理乾淨的 js 檔，  
 就像我們平常在使用 npm 抓下來的套件一樣。
 
 首先要在共用庫裡面安裝插件 `vite-plugin-dts`，  
@@ -340,7 +347,7 @@ export default defineConfig({
 
 ```
 
-要留意 `package.json` 必須移除剛剛指定的進入點 `main`！  
+`package.json` 的進入點 `main` 要改為打包後的 js 檔 `"main": "./dist/shared-ui.js"`，  
 並加入 `exports`，來讓其他子專案引用時，  
 可以識別這個共用庫打包後導出的 ESM 和型別定義檔放在哪裡：
 
@@ -350,7 +357,7 @@ export default defineConfig({
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  // 移除 "main": "src/main.ts"
+  "main": "./dist/shared-ui.js",
   // 加入以下設定
   "exports": {
     ".": {
@@ -364,23 +371,22 @@ export default defineConfig({
   ],
   // 以下略
 }
-
 ```
 
 :::info
 `main` 是 CommonJS 模組的進入點，`module` 則是對應 ESM，  
-在這個範例中用到的 `exports` 屬性，可以用 `import` 指定 ESM 的進入點，  
-想要指定 CommonJS 的進入點，就可以寫 `"require": "./dist/shared-ui.js"`，  
+在這個範例中用的 `exports` 屬性，可以用 `import` 指定 ESM 的進入點，  
+想要指定 CommonJS 的進入點，就可以寫 `"require": "./dist/shared-ui.cjs"`，  
 但是 Vite 的設定檔就必須修改，讓打包時可以輸出 CommonJS 格式。
 :::
 
 設定好之後執行 `pnpm build` 會生成 `dist` 資料夾，  
 並且包含 `vite.config.ts` 中指定生成的檔名。
 
-**但是再啟動子專案之後會發現元件的樣式不見了！**   
+**重新啟動子專案之後會發現元件的樣式不見了！**   
 
 因為還沒打包前是透過共用庫的 `main.ts` 直接取出 Vue SFC，  
-現在元件打包後會變 js 檔，不會自動內聯 CSS 樣式，所以要修改 vite 打包設定：
+打包後會變 js 檔，不會自動內聯樣式，所以要修改 vite 打包設定，導出 css 檔：
 
 ```ts
 import { defineConfig } from 'vite';
@@ -414,7 +420,7 @@ export default defineConfig({
 });
 ```
 
-並在子專案的進入點導入 css ：
+並在子專案的進入點導入 ：
 
 ```ts
 import { createApp } from 'vue';
@@ -452,13 +458,13 @@ export default defineConfig({
 :::info
 元件打包後生成的 js 檔可以透過 Node.js 自動解析，  
 而 css 檔則是普通的靜態資源，所以從外部導入時必須寫出完整路徑，  
-或是像上面的示範，在建構工具中寫入解析規則。
+或是像上面的示範，在建構工具中寫入解析路徑的規則。
 :::
 
 :::warning
 導入打包後的元件就不支援熱重載了，  
 必須重新打包後，子專案才能看到最新版的元件，  
-這邊就暫時不深入探討怎麼從設定面去解決。
+這邊暫不深入探討怎麼從設定面去解決。
 :::
 
 ---
@@ -466,8 +472,11 @@ export default defineConfig({
 
 前端框架的專案無論如何都會經過打包的階段，  
 而 Vite 建起來的 Vue 專案已經很好心地安裝好這個套件 `npm-run-all2`，  
-可以同時運行多個腳本，所以可以在根目錄加入腳本，  
-但要留意共用元件庫因為要給其他子專案導入，所以必須先打包它：
+可以同時運行多個腳本。  
+
+在根目錄加入 `npm-run-all2` 的腳本，  
+但要留意共用元件庫因為會被其他子專案導入，所以必須先打包它，  
+才能執行子專案的打包：
 
 ```json
 {
@@ -479,15 +488,13 @@ export default defineConfig({
 }
 ```
 
-執行 `pnpm build` 後就會先打包完共用元件庫，  
-再進行各個子專案就會同時執行工作區內 `package.json` 的打包腳本：    
-`"build": "run-p type-check \"build-only {@}\" --"`
+執行 `pnpm build` 後就會依序進行各工作區的打包。  
 
 確認沒有報錯後，就可以進行 GitHub Pages 的部署了！  
-也建議養成好習慣，自己運行打包腳本或是透過 Husky 設定 Git Hook 觸發打包腳本，  
-確保本地的 commit 在被 push 到 GitHub 之前，是可以正常完成打包的。  
+也建議養成好習慣，先在本機打包或是透過 Husky 設定 Git Hook 觸發打包腳本，  
+確保程式碼推送到 GitHub 之前，是可以正常完成打包的。  
 
-部屬前要記得調整 `vite.config.ts` 生成的 url，  
+部署前要記得調整 `vite.config.ts` 的 base url，  
 加上根目錄 repo 名稱 `/2024-vue-camp/`做前綴：
 
 ```ts
@@ -498,11 +505,12 @@ export default defineConfig({
 });
 
 ```
+---
 
-### CI/CD 腳本
+### CI/CD
 
 Vite 官網有提供 `workflows` 的[腳本](https://vite.dev/guide/static-deploy#github-pages)，只要專案 push 到指定的分支後，  
-就會觸發 GitHub Actions 自動進行編譯，並生成 GitHug Pages。
+就會觸發 GitHub Actions 進行腳本任務，並生成 GitHug Pages。
 
 改寫一下官方的腳本：
 
@@ -679,13 +687,13 @@ jobs:
 5. 利用 `actions/download-artifact@v4` 和  `actions/upload-artifact@v4` 來傳遞各個任務打包好的靜態檔案
 
 雖然設定檔看起來眼花撩亂，不過大致讀過後就發現，  
-這些腳本還算是一般人能讀的英文，語意化的程度是 OK 的，  
+這些腳本還算是一般人能讀懂的英文，語意化的程度是 OK 的，  
 但在這個時代當然不會自己一行一行寫腳本，你懂的 XD
 
 ---
 ## 導航頁面
 
-雖然部署完之後可以在這個 repo 的 GitHub Pages 的網址加上 `/week-1` 來導向到子專案，  
+部署完之後可以在這個 repo 的 GitHub Pages 的網址加上 `/week-1` 來導向到子專案，  
 但根目錄本身沒有 `index.html`，所以輸入這個 repo 的首頁 `/` 會導向 404，  
 可以加上 html 檔方便進行導覽：
 

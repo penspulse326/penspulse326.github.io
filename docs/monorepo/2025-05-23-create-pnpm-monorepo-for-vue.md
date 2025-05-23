@@ -1,3 +1,11 @@
+---
+title: 使用 pnpm 建立 Vue 的 Monorepo
+date: 2025-05-23 01:02:54
+description: 使用 pnpm 建立 Vue 的 Monorepo
+tags: ["筆記", "pnpm", "monorepo", "vue"]
+keywords: ["pnpm", "monorepo", "vue"]
+slug: create-pnpm-monorepo-for-vue
+---
 
 最近想整理 GitHub 上面一些 repo，像是活動或課程作業的相關產出，  
 應該都可以集合成一包大專案？  
@@ -734,3 +742,5 @@ https://github.com/penspulse326/2024-vue-camp
 - [Monorepo？來聊聊另一種專案管理架構吧！使用 Vite+ pnpm 建立 Vue3 Monorepo](https://israynotarray.com/other/20240413/3177435894/)
 - [pnpm 管理專案 - monorepo
 ](https://tzulinchang.medium.com/pnpm-%E7%AE%A1%E7%90%86%E5%B0%88%E6%A1%88-monorepo-96babcd1f1a6)
+
+https://uu9924079.medium.com/%E4%BD%BF%E7%94%A8-nx-%E5%BF%AB%E9%80%9F%E5%BB%BA%E6%A7%8B%E5%8C%85%E5%90%AB-react-vue-%E5%92%8C-svelte-%E7%9A%84-monorepo-de1e7da2d347

@@ -71,7 +71,7 @@ const [value, setValue] = useState(0);
 </button>
 ```
 
-這邊的 `onClick` 是 react 封裝好的監聽方式，  
+這邊的 `onClick` 是 React 封裝好的監聽方式，  
 而不是 HTML 的 `onclick`。
 
 `onClick` 或是其他事件，裡面預設是一個 callback，  

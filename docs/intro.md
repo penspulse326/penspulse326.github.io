@@ -1,5 +1,6 @@
 ---
 slug: /
+title: 關於筆記
 sidebar_position: 0
 ---
 

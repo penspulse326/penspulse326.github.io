@@ -54,7 +54,7 @@ export default function Home() {
               </p>
               <p>
                 寫作雖然不難，但也是呈現人類內在的一種媒介，因此我想告訴你，AI
-                僅供我寫作上的潤飾、內容增減、邏輯或資料來源的校驗，我還有點人性，所以我不會讓你看一篇從頭到尾都是
+                僅供我寫作上的潤飾、內容增減的方向，或是邏輯或資料來源的勘誤，我還有點人性，所以我不會讓你看一篇從頭到尾都是
                 AI 寫的東西。
               </p>
               <p>
@@ -73,8 +73,8 @@ export default function Home() {
             <div className={styles.contentSection}>
               <h2>經歷</h2>
               <ul className={styles.experienceList}>
-                <li>💻 HRM 系統介面開發與維護</li>
-                <li>🔯 六角學院 - 專題教練</li>
+                <li>💻 HRM 系統介面開發與維護（2024/8 - 至今）</li>
+                <li>🔯 六角學院 - 約聘專題教練（2024/6 - 至今）</li>
               </ul>
             </div>
           </div>

@@ -374,10 +374,10 @@ export default defineConfig({
 ```
 
 :::info
-`main` 是 CommonJS 模組的進入點，`module` 則是對應 ESM，  
-在這個範例中用的 `exports` 屬性，可以用 `import` 指定 ESM 的進入點，  
+`main` 和 `exports` 都是用來指定 Node.js 解析時的進入點，  
+而 `exports` 的優先級更高，可以用 `import` 指定 ESM 的進入點，  
 想要指定 CommonJS 的進入點，就可以寫 `"require": "./dist/shared-ui.cjs"`，  
-但是 Vite 的設定檔就必須修改，讓打包時可以輸出 CommonJS 格式。
+但是 Vite 的設定檔就必須修改，讓打包時可以輸出 `.cjs` 格式。
 :::
 
 設定好之後執行 `pnpm build` 會生成 `dist` 資料夾，  

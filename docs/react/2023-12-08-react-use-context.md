@@ -7,7 +7,7 @@ tags: ["筆記", "React"]
 slug: react-use-context
 ---
 
-實作元件必定會遇到有些變數要往下傳的狀況，如：
+實作元件時經常會遇到資料需要向下傳遞的狀況，如：
 
 ```jsx
 function ChildComponent({ count, onIncrease, onDecrease }) {
@@ -52,10 +52,10 @@ function App() {
 }
 ```
 
-目前只往下傳遞兩次，看起來還可以接受，  
-但再往下傳或是遇到更多封裝 setter 的地方，  
+目前只傳遞兩次，看起來還可以接受，  
+但再往下傳更多層，或是有更多封裝 setter 的地方，  
 就會造成過度傳遞的問題（props drilling），  
-寫的時候麻煩，後續維護也很痛苦，  
+寫的時候麻煩，後續維護和追蹤也很痛苦，  
 這時就可以考慮使用 `useContext` 來進行跨元件的資料管理。
 
 ## 用法
@@ -117,7 +117,8 @@ function ParentComponent() {
 :::warning
 比較早期的網路教學通常也會提到用 `<Context.Consumer>` 去取出 context 的內容，  
 不過此方式已經被官方標註為不推薦。  
-[參考](https://react.dev/reference/react/createContext#consumer)
+  
+[參考來源](https://react.dev/reference/react/createContext#consumer)
 :::
 
 ---
@@ -359,6 +360,9 @@ setter 和資料計算可以進一步透過 `useCallback` 和  `useMemo` 進行 
 4. UI 狀態切換，如 modal、側邊欄等
 5. 表單各步驟的資料暫存
 
+---
 
-- [# Container/Presentational Pattern](https://www.patterns.dev/react/presentational-container-pattern/)
-https://pjchender.dev/react/react-context-provider-api/#usecontext--usereducer
+## 參考資料
+
+- [Container/Presentational Pattern](https://www.patterns.dev/react/presentational-container-pattern/)
+- [React Context, Provider and useContext](https://pjchender.dev/react/react-context-provider-api/#usecontext--usereducer)

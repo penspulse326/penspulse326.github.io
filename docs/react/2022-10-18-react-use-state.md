@@ -85,7 +85,7 @@ const [value, setValue] = useState(0);
 才能正確執行 `setValue`。
 
 :::info
-React 的事件會掛載在根節點，透過冒泡來判斷觸發事件的來源。
+React 的事件會綁定在根節點，透過冒泡來判斷觸發事件的來源。
 :::
 
 ---
@@ -113,7 +113,7 @@ JSX 中任何跟變數有關的東西都要用大括號包住，內容會是一�
 2. `setValue` 改變了 `value` 所以重新渲染
 3. 重新渲染時又執行了 `setValue`
 
-這時畫面應該沒多久就會開始卡住，console 也會收到 **too many re-renders** 的警告，  
+這時畫面應該沒多久就會開始卡住，console 會收到 **too many re-renders** 的警告，  
 代表不小心寫出無限迴圈了。  
 
 所以要注意**函式宣告**與**函式執行**雖然都可以算是表達式，  

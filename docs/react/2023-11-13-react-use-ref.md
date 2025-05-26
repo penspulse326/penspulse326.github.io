@@ -9,7 +9,7 @@ slug: react-use-ref
 
 `useRef` 可以保留資料狀態，並且資料內容的變更不會觸發重新渲染。  
 有些資料我們不希望它像 `useState` 會觸發重新渲染，  
-或是重新渲染之後導致一些變數被初始化。
+或是重新渲染之後導致一些變數內容又被初始化。
 
 ## 用法
 
@@ -120,4 +120,5 @@ function App() {
 ## 參考資料
 
 - [走歪的工程師 James：一個範例讓你搞懂 useState, useRef, useEffect](https://www.youtube.com/watch?v=q0C5g4WIrKU)
+
 

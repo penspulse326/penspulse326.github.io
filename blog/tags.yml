@@ -17,3 +17,18 @@ hola:
   label: Hola
   permalink: /hola
   description: Hola tag description
+
+生活點滴:
+  label: 生活點滴
+  permalink: /生活點滴
+  description: 記錄日常生活的點點滴滴
+
+學習心得:
+  label: 學習心得
+  permalink: /學習心得
+  description: 學習過程中的心得與感想
+
+職涯心得:
+  label: 職涯心得
+  permalink: /職涯心得
+  description: 職業生涯相關的心得與經驗分享

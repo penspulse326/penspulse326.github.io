@@ -160,7 +160,7 @@ export class TestController {
 }
 ```
 
-:::warn
+:::warning
 大量使用的話也會有隱性耦合的問題。
 :::
 

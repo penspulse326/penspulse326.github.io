@@ -1,8 +1,4 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
+/* ========== 主要橫幅區域 ========== */
 .heroBanner {
   padding: 8rem 0;
   text-align: center;
@@ -10,6 +6,7 @@
   overflow: hidden;
 }
 
+/* 主要漸層背景 */
 .heroBanner::before {
   content: "";
   position: absolute;
@@ -17,36 +14,73 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("/img/banner.jpg");
-  background-size: cover;
-  background-position: center;
-  opacity: 0.33;
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-primary) 0%,
+    #ff6b35 50%,
+    #ff4757 100%
+  );
+  opacity: 0.9;
   z-index: 0;
 }
 
+/* 噪點紋理效果 */
+.heroBanner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 136, 0, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 107, 53, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(255, 71, 87, 0.2) 0%,
+      transparent 50%
+    );
+  opacity: 0.6;
+  z-index: 0;
+}
+
+/* 橫幅內容容器 */
 .heroBanner > div {
   position: relative;
   z-index: 1;
 }
 
-/* Text outline styles for hero title and subtitle */
-:global(.hero__title),
-:global(.hero__subtitle) {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
-/* Dark mode text outline */
-:global([data-theme="dark"]) :global(.hero__title),
-:global([data-theme="dark"]) :global(.hero__subtitle) {
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+/* ========== 橫幅標題樣式 ========== */
+.heroBanner :global(.hero__title) {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.5),
+    0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.1);
+  position: relative;
+  letter-spacing: -0.02em;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
-
+/* ========== 按鈕區域 ========== */
 .buttonsContainer {
   display: flex;
   align-items: center;
@@ -55,24 +89,76 @@
   flex-wrap: wrap;
 }
 
-/* Button styling for light/dark mode compatibility */
+/* 橫幅按鈕樣式（支援明暗模式） */
 .heroButton {
-  background-color: rgba(255, 255, 255, 1) !important;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.9) !important;
   color: var(--ifm-color-primary) !important;
-  transition: all 0.3s ease !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  text-decoration: none !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
+/* 按鈕光澤效果 */
+.heroButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+/* 按鈕懸停效果 */
 .heroButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
 }
 
-/* Dark mode button styling */
+.heroButton:hover::before {
+  left: 100%;
+}
+
+/* 按鈕點擊效果 */
+.heroButton:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 深色模式按鈕樣式 */
 :global([data-theme="dark"]) .heroButton {
-  background-color: rgba(36, 37, 38, 1) !important;
+  background: rgba(36, 37, 38, 0.9) !important;
   color: var(--ifm-color-primary) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
 
+:global([data-theme="dark"]) .heroButton:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ========== 主要內容區域 ========== */
 .homeContent {
   padding: 3rem 0;
 }
@@ -80,15 +166,10 @@
 .customContainer {
   max-width: 600px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0;
 }
 
-@media screen and (max-width: 768px) {
-  .homeContent {
-    padding: 2rem 1rem;
-  }
-}
-
+/* ========== 內容區塊樣式 ========== */
 .contentSection {
   padding: 1.5rem;
   border-radius: 8px;
@@ -101,6 +182,7 @@
   border-color: var(--ifm-color-primary);
 }
 
+/* 內容區塊標題 */
 .contentSection h2 {
   margin-bottom: 1.5rem;
   position: relative;
@@ -117,6 +199,7 @@
   left: 0;
 }
 
+/* ========== 連結和列表樣式 ========== */
 .inlineLink {
   margin: 0 0.3rem;
   font-weight: 500;
@@ -137,13 +220,29 @@
   position: relative;
 }
 
-@media screen and (max-width: 576px) {
-  .buttonsContainer {
-    flex-direction: column;
+/* ========== 響應式設計 ========== */
+/* 平板尺寸 */
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
   }
 }
 
-.link {
-  text-decoration: none;
-  font-weight: bold;
+@media screen and (max-width: 768px) {
+  .heroBanner :global(.hero__title) {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .homeContent {
+    padding: 2rem 1rem;
+  }
+}
+
+/* 手機尺寸 */
+@media screen and (max-width: 480px) {
+  .heroBanner :global(.hero__title) {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
 }

@@ -661,9 +661,7 @@ jobs:
       - name: Prepare deployment structure
         run: |
           mkdir -p final_dist
-          # 複製根目錄的 index.html 到部署目錄
           cp index.html final_dist/
-          # 複製各應用程式的構建結果到對應子目錄
           for app_dir in week-1 week-2 week-3 final; do
             mkdir -p final_dist/$app_dir
             cp -r artifacts/$app_dir-dist/* final_dist/$app_dir/
@@ -740,7 +738,4 @@ https://github.com/penspulse326/2024-vue-camp
 ## 參考資料
 
 - [Monorepo？來聊聊另一種專案管理架構吧！使用 Vite+ pnpm 建立 Vue3 Monorepo](https://israynotarray.com/other/20240413/3177435894/)
-- [pnpm 管理專案 - monorepo
-](https://tzulinchang.medium.com/pnpm-%E7%AE%A1%E7%90%86%E5%B0%88%E6%A1%88-monorepo-96babcd1f1a6)
-
-https://uu9924079.medium.com/%E4%BD%BF%E7%94%A8-nx-%E5%BF%AB%E9%80%9F%E5%BB%BA%E6%A7%8B%E5%8C%85%E5%90%AB-react-vue-%E5%92%8C-svelte-%E7%9A%84-monorepo-de1e7da2d347
+- [pnpm 管理專案 - monorepo](https://tzulinchang.medium.com/pnpm-%E7%AE%A1%E7%90%86%E5%B0%88%E6%A1%88-monorepo-96babcd1f1a6)

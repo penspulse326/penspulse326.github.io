@@ -69,6 +69,19 @@ const sanitizeId = (value: string) => value.replace(/[^a-zA-Z0-9_-]/g, '-');
 </div>
 
 <script>
+  // 擴展 Window 介面以包含 Bootstrap
+  declare global {
+    interface Window {
+      bootstrap?: {
+        Offcanvas: {
+          getInstance: (element: HTMLElement) => {
+            hide: () => void;
+          } | null;
+        };
+      };
+    }
+  }
+
   // 處理 offcanvas 內的導航連結點擊
   function initContentNavigation() {
     const navLinks = document.querySelectorAll('.content-nav__link[data-bs-dismiss="offcanvas"]');

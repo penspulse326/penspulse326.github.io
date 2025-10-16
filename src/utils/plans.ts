@@ -1,4 +1,5 @@
 import type { CategoryContentItem, ContentEntry } from './content';
+
 import { createContentManager } from './content';
 
 const manager = createContentManager('plans', '/plans');

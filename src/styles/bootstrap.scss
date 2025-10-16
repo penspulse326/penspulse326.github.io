@@ -56,8 +56,5 @@ $enable-negative-margins: true;
 // Optional utilities
 @import 'bootstrap/scss/utilities/api';
 
-// Import Bootstrap Icons
+// Import Bootstrap Icons (font-display 會由 PostCSS 自動轉換為 swap)
 @import 'bootstrap-icons/font/bootstrap-icons.css';
-
-// 覆寫 font-display 以優化效能
-@import './font-display-override.css';

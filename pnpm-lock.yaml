@@ -51,6 +51,9 @@ importers:
       lint-staged:
         specifier: ^16.2.3
         version: 16.2.3
+      postcss-font-display:
+        specifier: ^0.3.0
+        version: 0.3.0(postcss@8.5.6)
       postcss-html:
         specifier: ^1.8.0
         version: 1.8.0
@@ -2103,6 +2106,12 @@ packages:
     resolution: {integrity: sha512-eG2dWTVw5bzqGRztnHExczNxt5VGsE6OwTeCG3fdUf9KBsZzO3R5OIIIzWR+iZA0NtZ+RDVdaoE2dK1cn6jH4g==}
     engines: {node: '>=0.10'}
     hasBin: true
+
+  postcss-font-display@0.3.0:
+    resolution: {integrity: sha512-vtvuIIkiwr8aliF+dQ+NyiagJ3pXs9Bnfr+ur1GvMxO59nqbyjUgYk7MjCWLIDQt1Si09I15l+Qu/vlozLgQbA==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      postcss: ^8.3.0
 
   postcss-html@1.8.0:
     resolution: {integrity: sha512-5mMeb1TgLWoRKxZ0Xh9RZDfwUUIqRrcxO2uXO+Ezl1N5lqpCiSU5Gk6+1kZediBfBHFtPCdopr2UZ2SgUsKcgQ==}
@@ -4954,6 +4963,10 @@ snapshots:
   picomatch@4.0.3: {}
 
   pidtree@0.6.0: {}
+
+  postcss-font-display@0.3.0(postcss@8.5.6):
+    dependencies:
+      postcss: 8.5.6
 
   postcss-html@1.8.0:
     dependencies:

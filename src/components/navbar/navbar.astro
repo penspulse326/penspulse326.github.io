@@ -1,10 +1,14 @@
 ---
+import { Image } from 'astro:assets';
+
 import type { CategoryWithContent } from '../../utils/content';
 import type { CategoryPostItem } from '../../utils/posts';
 
 import ContentMenu from './content-menu.astro';
 import PostsMenu from './posts-menu.astro';
 import ThemeToggler from './theme-toggler.astro';
+
+import logoImage from '/public/logo.png';
 
 const pathname = Astro.url.pathname;
 const isNotesRoute = pathname.startsWith('/notes');
@@ -80,7 +84,15 @@ if (isNotesRoute) {
   <div class="container">
     <!-- Logo -->
     <a class="navbar-brand me-4 d-lg-none" href="/">
-      <img alt="Pen's Pulse Logo" class="d-inline-block align-text-top" height="30" src="/logo.png" />
+      <Image
+        alt="Pen's Pulse Logo"
+        class="d-inline-block align-text-top"
+        format="webp"
+        height={30}
+        quality={90}
+        src={logoImage}
+        width={30}
+      />
     </a>
 
     <!-- 桌面版導覽列 - 僅在 lg 以上顯示 -->
@@ -90,7 +102,15 @@ if (isNotesRoute) {
         <div class="d-flex align-items-center">
           <!-- Logo -->
           <a class="navbar-brand me-4" href="/">
-            <img alt="Pen's Pulse 首頁" class="d-inline-block align-text-top" height="30" src="/logo.png" />
+            <Image
+              alt="Pen's Pulse 首頁"
+              class="d-inline-block align-text-top"
+              format="webp"
+              height={30}
+              quality={90}
+              src={logoImage}
+              width={30}
+            />
           </a>
 
           <!-- 站內連結 -->

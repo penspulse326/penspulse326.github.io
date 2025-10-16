@@ -1,6 +1,10 @@
 ---
+import { Image } from 'astro:assets';
+
 import StarfieldCanvas from '../components/StarfieldCanvas.astro';
 import Layout from '../layouts/default-layout.astro';
+
+import avatarImage from '/public/avatar.png';
 ---
 
 <Layout>
@@ -23,7 +27,7 @@ import Layout from '../layouts/default-layout.astro';
           <div class="col-md-4">
             <article class="card h-100">
               <div class="card-body">
-                <h3 class="card-title card-title-underline fs-5">研究筆記</h3>
+                <h2 class="card-title card-title-underline fs-5">研究筆記</h2>
                 <p class="card-text mt-2">簡短的摘要，通常不會寫太長，主要寫給自己快速回顧。</p>
                 <a class="card-link" href="/notes">閱讀更多</a>
               </div>
@@ -32,7 +36,7 @@ import Layout from '../layouts/default-layout.astro';
           <div class="col-md-4">
             <article class="card h-100">
               <div class="card-body">
-                <h3 class="card-title card-title-underline fs-5">挑戰計畫</h3>
+                <h2 class="card-title card-title-underline fs-5">挑戰計畫</h2>
                 <p class="card-text mt-2">以紀錄個人小型專案開發為主的系列文章。</p>
                 <a class="card-link" href="/plans">閱讀更多</a>
               </div>
@@ -41,7 +45,7 @@ import Layout from '../layouts/default-layout.astro';
           <div class="col-md-4">
             <article class="card h-100">
               <div class="card-body">
-                <h3 class="card-title card-title-underline fs-5">心得文章</h3>
+                <h2 class="card-title card-title-underline fs-5">心得文章</h2>
                 <p class="card-text mt-2">與職涯、工作、活動等相關的心得文章。</p>
                 <a class="card-link" href="/posts">閱讀更多</a>
               </div>
@@ -55,7 +59,7 @@ import Layout from '../layouts/default-layout.astro';
           <div class="col-md-8">
             <article class="card h-100 overflow-hidden">
               <div class="card-body">
-                <h3 class="card-title card-title-underline fs-5">個人介紹</h3>
+                <h2 class="card-title card-title-underline fs-5">個人介紹</h2>
                 <p class="card-text mt-2">
                   我是 Shin，在 2024 年 6 月轉職成為前端工程師，至今仍在工作崗位上努力不被 AI 淘汰 XD
                 </p>
@@ -68,14 +72,22 @@ import Layout from '../layouts/default-layout.astro';
                   >、<span class="fw-bold">產品展示</span>等管理層面來協助學生完成網站專題。
                 </p>
               </div>
-              <img alt="Shin" class="avatar rounded-circle" src="/avatar.png" />
+              <Image
+                alt="Shin"
+                class="avatar rounded-circle"
+                format="webp"
+                height={300}
+                quality={80}
+                src={avatarImage}
+                width={300}
+              />
             </article>
           </div>
 
           <div class="col-md-4 d-flex flex-column gap-3">
             <article class="card">
               <div class="card-body">
-                <h3 class="card-title card-title-underline fs-5">經歷</h3>
+                <h2 class="card-title card-title-underline fs-5">經歷</h2>
                 <ul class="card-text mt-2 mt-1 list-unstyled d-flex flex-column gap-2">
                   <li class="d-flex align-items-end">
                     <span>💻 前端工程師</span>
@@ -89,7 +101,7 @@ import Layout from '../layouts/default-layout.astro';
 
             <article class="card">
               <div class="card-body">
-                <h3 class="card-title card-title-underline fs-5">使用技術</h3>
+                <h2 class="card-title card-title-underline fs-5">使用技術</h2>
                 <ul class="card-text mt-2 mt-1 list-unstyled d-flex flex-column gap-2">
                   <li class="d-flex align-items-center">
                     <span class="me-2">•</span>

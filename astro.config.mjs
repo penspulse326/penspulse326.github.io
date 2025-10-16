@@ -10,4 +10,10 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkDirective, remarkAdmonitions],
   },
+
+  vite: {
+    build: {
+      cssMinify: 'lightningcss',
+    },
+  },
 });

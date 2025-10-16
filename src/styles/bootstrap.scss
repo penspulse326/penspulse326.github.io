@@ -1,11 +1,8 @@
 // Required functions import
 @import 'bootstrap/scss/functions';
 
-// Import Bootstrap Icons
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-
 // Optional variable overrides
-$primary: #00a8a5;
+$primary: #006f6c;
 $secondary: #0861c5;
 $enable-negative-margins: true;
 
@@ -30,23 +27,27 @@ $enable-negative-margins: true;
 @import 'bootstrap/scss/button-group';
 @import 'bootstrap/scss/buttons';
 @import 'bootstrap/scss/card';
-@import 'bootstrap/scss/carousel';
+
+// @import 'bootstrap/scss/carousel'; // 未使用
 @import 'bootstrap/scss/close';
 @import 'bootstrap/scss/dropdown';
 @import 'bootstrap/scss/forms';
 @import 'bootstrap/scss/grid';
 @import 'bootstrap/scss/list-group';
-@import 'bootstrap/scss/modal';
+
+// @import 'bootstrap/scss/modal'; // 未使用
 @import 'bootstrap/scss/navbar';
 @import 'bootstrap/scss/offcanvas';
 @import 'bootstrap/scss/pagination';
-@import 'bootstrap/scss/placeholders';
-@import 'bootstrap/scss/popover';
-@import 'bootstrap/scss/progress';
-@import 'bootstrap/scss/spinners';
+
+// @import 'bootstrap/scss/placeholders'; // 未使用
+// @import 'bootstrap/scss/popover'; // 未使用
+// @import 'bootstrap/scss/progress'; // 未使用
+// @import 'bootstrap/scss/spinners'; // 未使用
 @import 'bootstrap/scss/tables';
-@import 'bootstrap/scss/toasts';
-@import 'bootstrap/scss/tooltip';
+
+// @import 'bootstrap/scss/toasts'; // 未使用
+// @import 'bootstrap/scss/tooltip'; // 未使用
 @import 'bootstrap/scss/transitions';
 
 // Optional helpers
@@ -54,3 +55,6 @@ $enable-negative-margins: true;
 
 // Optional utilities
 @import 'bootstrap/scss/utilities/api';
+
+// Import Bootstrap Icons
+@import 'bootstrap-icons/font/bootstrap-icons.css';

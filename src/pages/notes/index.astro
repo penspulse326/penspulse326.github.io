@@ -1,0 +1,41 @@
+---
+import ArticleLayout from '../../layouts/article-layout.astro';
+import { getNavigation } from '../../utils/notes';
+
+const notesNav = getNavigation();
+const navigation = notesNav.map((cat) => ({
+  id: cat.id,
+  items: cat.notes,
+  label: cat.label,
+  position: cat.position,
+}));
+---
+
+<ArticleLayout navigation={navigation} showToc={false} title="研究筆記">
+  <section class="notes-intro px-2 px-lg-4 w-full">
+    <header class="mb-4">
+      <h1 class="display-6 fw-bold mb-3">研究筆記</h1>
+    </header>
+
+    <div class="card-body">
+      <p>
+        這裡的筆記大多是寫給自己快速回顧，所以通常不會有完整的教學。
+        <br />
+        <br />
+        舊的筆記可能會寫得比叫冗長，請斟酌閱讀。新的筆記至少會有兩個小節：
+      </p>
+
+      <ul>
+        <li>使用情境</li>
+        <li>坑點</li>
+      </ul>
+    </div>
+  </section>
+</ArticleLayout>
+
+<style>
+  /* 列表項目間距 */
+  li {
+    margin-bottom: 0.5rem;
+  }
+</style>

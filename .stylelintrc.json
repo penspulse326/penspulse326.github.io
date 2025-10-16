@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-scss"
+  ],
+  "rules": {
+    "no-empty-source": null,
+    "no-descending-specificity": null,
+    "selector-class-pattern": null,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignore": ["custom-elements"],
+        "ignoreTypes": ["comment"]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.astro"],
+      "customSyntax": "postcss-html"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+---
+interface Props {
+  Content: any;
+}
+
+const { Content } = Astro.props;
+---
+
+<div class="post-excerpt-wrapper">
+  <Content />
+</div>
+
+<script>
+  // 在客戶端處理截斷並轉換為純文字
+  document.addEventListener('DOMContentLoaded', () => {
+    const excerpts = document.querySelectorAll('.post-excerpt-wrapper');
+
+    excerpts.forEach((excerpt) => {
+      const walker = document.createTreeWalker(excerpt, NodeFilter.SHOW_COMMENT, null);
+      let comment;
+      let truncateFound = false;
+
+      // 尋找 truncate 註解
+      while ((comment = walker.nextNode())) {
+        if (comment.textContent?.trim() === 'truncate') {
+          truncateFound = true;
+          // 隱藏此註解之後的所有兄弟元素
+          let sibling = comment.nextSibling;
+
+          while (sibling) {
+            const next = sibling.nextSibling;
+
+            if (sibling.nodeType === Node.ELEMENT_NODE) {
+              (sibling as HTMLElement).style.display = 'none';
+            }
+            sibling = next;
+          }
+          break;
+        }
+      }
+
+      // 將內容轉換為純文字
+      const textContent = (excerpt as HTMLElement).innerText || (excerpt as HTMLElement).textContent || '';
+
+      // 清空原有內容並插入純文字
+      (excerpt as HTMLElement).innerHTML = '';
+      const textNode = document.createTextNode(textContent);
+      (excerpt as HTMLElement).appendChild(textNode);
+    });
+  });
+</script>
+
+<style>
+  .post-excerpt-wrapper {
+    color: var(--bs-secondary-color);
+    line-height: 1.6;
+  }
+</style>

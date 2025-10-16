@@ -1,0 +1,73 @@
+---
+import type { NoteEntry } from '../../utils/notes';
+
+import TableOfContents from '../../components/table-of-contents.astro';
+import ArticleLayout from '../../layouts/article-layout.astro';
+import { getAllNotes, getNavigation } from '../../utils/notes';
+
+export function getStaticPaths() {
+  const allNotes = getAllNotes();
+  return allNotes.map((note) => ({
+    params: { slug: note.id },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props as { note: NoteEntry };
+
+if (!note) {
+  // 靜態生成時不應該發生此情況
+  return Astro.redirect('/404');
+}
+
+const notesNav = getNavigation();
+const navigation = notesNav.map((cat) => ({
+  id: cat.id,
+  items: cat.notes,
+  label: cat.label,
+  position: cat.position,
+}));
+const activeId = note.id;
+const pageTitle = `${note.frontmatter.title} | 研究筆記`;
+const headings = await note.getHeadings();
+---
+
+<ArticleLayout
+  activeId={activeId}
+  description={note.frontmatter.description}
+  headings={headings}
+  navigation={navigation}
+  title={pageTitle}
+>
+  <article class="notes-article px-2 px-lg-4">
+    <header class="mb-4">
+      <h1 class="display-6 fw-bold mb-3">{note.frontmatter.title}</h1>
+      <div class="d-flex flex-wrap align-items-center gap-3">
+        {
+          note.frontmatter.date && (
+            <time class="notes-article__meta text-muted" datetime={note.frontmatter.date.toISOString()}>
+              {note.frontmatter.date.toLocaleDateString('zh-TW')} 發布
+            </time>
+          )
+        }
+      </div>
+    </header>
+    <TableOfContents headings={headings} variant="mobile" />
+    <div class="markdown-body">
+      <note.Content />
+    </div>
+  </article>
+</ArticleLayout>
+
+<style>
+  /* 筆記文章樣式 */
+  .notes-article {
+    background-color: var(--bs-body-bg);
+  }
+
+  /* 筆記文章 meta 資訊樣式 */
+  .notes-article__meta {
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+import type { CategoryWithContent } from '../utils/content';
+
+import ContentNavigation from './content-navigation.astro';
+
+interface Props {
+  activeId?: string;
+  ariaLabel?: string;
+  navigation: CategoryWithContent[];
+}
+
+const { activeId, ariaLabel = '側邊導覽', navigation } = Astro.props;
+---
+
+<aside class="d-none d-lg-block pt-1 px-2" style={{ width: '200px' }}>
+  <nav aria-label={ariaLabel}>
+    <ContentNavigation activeId={activeId} id="content-sidebar-accordion" navigation={navigation} />
+  </nav>
+</aside>

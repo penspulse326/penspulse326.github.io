@@ -1,0 +1,90 @@
+---
+import type { GetStaticPaths } from 'astro';
+
+import PostsSidebar from '../../components/posts-sidebar.astro';
+import TableOfContents from '../../components/table-of-contents.astro';
+import ArticleLayout from '../../layouts/article-layout.astro';
+import { getAllPosts, getRecentPosts, getTagCloud } from '../../utils/posts';
+
+export const getStaticPaths = (async () => {
+  const posts = getAllPosts();
+
+  return posts.map((post) => {
+    return {
+      params: {
+        slug: post.slug,
+      },
+      props: {
+        post,
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { Content, getHeadings } = post;
+const headings = await getHeadings();
+
+// 側邊欄資料
+const recentPosts = getRecentPosts(5);
+const tagCloud = getTagCloud();
+
+// 格式化日期
+function formatDate(date?: Date): string {
+  if (!date) return '';
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}/${month}/${day}`;
+}
+---
+
+<ArticleLayout
+  description={post.frontmatter.description || post.frontmatter.title}
+  headings={headings}
+  title={post.frontmatter.title}
+>
+  <PostsSidebar activeId={post.id} recentPosts={recentPosts} slot="sidebar" tagCloud={tagCloud} />
+
+  <article class="px-2 px-lg-4">
+    <header class="mb-4">
+      <h1 class="display-6 fw-bold mb-3">{post.frontmatter.title}</h1>
+
+      <div class="post-meta text-muted mb-3 d-flex gap-3">
+        {post.frontmatter.date && <div class="mb-2">{formatDate(post.frontmatter.date)} 發布</div>}
+        {
+          post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
+            <div>
+              <i class="bi bi-tags" />{' '}
+              {post.frontmatter.tags.map((tag, index) => (
+                <>
+                  <a class="text-muted text-decoration-none tag-link" href={`/posts?tag=${encodeURIComponent(tag)}`}>
+                    {tag}
+                  </a>
+                  {index < (post.frontmatter.tags?.length ?? 0) - 1 && ', '}
+                </>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </header>
+
+    <TableOfContents headings={headings} variant="mobile" />
+
+    <div class="markdown-body">
+      <Content />
+    </div>
+
+    <footer class="mt-5 pt-4 border-top">
+      <a class="btn btn-outline-dark" href="/posts"> ← 返回文章列表 </a>
+    </footer>
+  </article>
+</ArticleLayout>
+
+<style>
+  /* 標籤連結 */
+  .tag-link:hover {
+    text-decoration: underline !important;
+  }
+</style>

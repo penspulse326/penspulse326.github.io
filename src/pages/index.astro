@@ -1,0 +1,162 @@
+---
+import StarfieldCanvas from '../components/StarfieldCanvas.astro';
+import Layout from '../layouts/default-layout.astro';
+---
+
+<Layout>
+  <!-- 主標題區域 -->
+  <section
+    aria-labelledby="site-title-heading"
+    class="hero-section d-flex align-items-center justify-content-center text-white"
+  >
+    <StarfieldCanvas />
+    <h1 class="text-center" id="site-title-heading">
+      Pen's Pulse <br />
+      各種筆記與開發心得
+    </h1>
+  </section>
+
+  <div class="container py-5">
+    <div class="mx-auto" style="max-width: 992px;">
+      <section aria-labelledby="about-site-heading" class="mb-3">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <article class="card h-100">
+              <div class="card-body">
+                <h3 class="card-title card-title-underline fs-5">研究筆記</h3>
+                <p class="card-text mt-2">簡短的摘要，通常不會寫太長，主要寫給自己快速回顧。</p>
+                <a class="card-link" href="#">閱讀更多</a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="card h-100">
+              <div class="card-body">
+                <h3 class="card-title card-title-underline fs-5">挑戰計畫</h3>
+                <p class="card-text mt-2">以紀錄個人小型專案開發為主的系列文章。</p>
+                <a class="card-link" href="#">閱讀更多</a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="card h-100">
+              <div class="card-body">
+                <h3 class="card-title card-title-underline fs-5">心得文章</h3>
+                <p class="card-text mt-2">與職涯、工作、活動等相關的心得文章。</p>
+                <a class="card-link" href="/posts">閱讀更多</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="about-me-heading">
+        <div class="row g-3">
+          <div class="col-md-8">
+            <article class="card h-100 overflow-hidden">
+              <div class="card-body">
+                <h3 class="card-title card-title-underline fs-5">個人介紹</h3>
+                <p class="card-text mt-2">
+                  我是 Shin，在 2024 年 6 月轉職成為前端工程師，至今仍在工作崗位上努力不被 AI 淘汰 XD
+                </p>
+
+                <p class="card-text mt-2 mb-5">
+                  也於 2024 年 7 月開始於六角學院擔任約聘專題教練， 輔導過<span class="fw-bold">切版專題班</span>、
+                  <span class="fw-bold">React 專題班</span>、
+                  <span class="fw-bold">Node.js 全端專題班</span>，主要以<span class="fw-bold">專案規劃</span>、<span
+                    class="fw-bold">可行性評估</span
+                  >、<span class="fw-bold">產品展示</span>等管理層面來協助學生完成網站專題。
+                </p>
+              </div>
+              <img alt="Shin" class="avatar rounded-circle" src="/avatar.png" />
+            </article>
+          </div>
+
+          <div class="col-md-4 d-flex flex-column gap-3">
+            <article class="card">
+              <div class="card-body">
+                <h3 class="card-title card-title-underline fs-5">經歷</h3>
+                <ul class="card-text mt-2 mt-1 list-unstyled d-flex flex-column gap-2">
+                  <li class="d-flex align-items-end">
+                    <span>💻 前端工程師</span>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <span>✡️ 六角學院 - 專題教練</span>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-body">
+                <h3 class="card-title card-title-underline fs-5">使用技術</h3>
+                <ul class="card-text mt-2 mt-1 list-unstyled d-flex flex-column gap-2">
+                  <li class="d-flex align-items-center">
+                    <span class="me-2">•</span>
+                    <span>JavaScript / TypeScript</span>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <span class="me-2">•</span>
+                    <span>React / Next.js</span>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <span class="me-2">•</span>
+                    <span>Node.js / Express</span>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <span class="me-2">•</span>
+                    <span>Vue</span>
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <style>
+    /* 主視覺區樣式 */
+    .hero-section {
+      position: relative;
+      height: 300px;
+      background: linear-gradient(to bottom, var(--bs-primary) 0%, #0861c5 100%);
+    }
+
+    /* 卡片標題底線 */
+    .card-title-underline {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .card-title-underline::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 80%;
+      height: 3px;
+      background-color: var(--bs-primary);
+    }
+
+    /* 頭像樣式 */
+    .avatar {
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 250px;
+      height: 250px;
+      opacity: 0.2;
+
+      @media (width >= 768px) {
+        bottom: -40px;
+        right: -20px;
+        width: 300px;
+        height: 300px;
+      }
+    }
+  </style>
+</Layout>

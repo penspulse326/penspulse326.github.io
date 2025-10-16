@@ -1,0 +1,491 @@
+---
+import type { CategoryWithContent } from '../../utils/content';
+import type { CategoryPostItem } from '../../utils/posts';
+
+import ContentMenu from './content-menu.astro';
+import PostsMenu from './posts-menu.astro';
+import ThemeToggler from './theme-toggler.astro';
+
+const pathname = Astro.url.pathname;
+const isNotesRoute = pathname.startsWith('/notes');
+const isPlansRoute = pathname.startsWith('/plans');
+const isPostsRoute = pathname.startsWith('/posts');
+const isContentRoute = isNotesRoute || isPlansRoute;
+const hasCustomMenu = isContentRoute || isPostsRoute;
+
+const normalizePath = (path: string) => (path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path);
+
+let contentNavigation: CategoryWithContent[] = [];
+let activeContentId: string | undefined;
+let postsRecentPosts: CategoryPostItem[] = [];
+let postsTagCloud: Array<{ count: number; tag: string }> = [];
+let activePostId: string | undefined;
+
+if (isNotesRoute) {
+  const { getNavigation } = await import('../../utils/notes');
+  const notesNav = getNavigation();
+  contentNavigation = notesNav.map((cat) => ({ ...cat, items: cat.notes }));
+
+  const currentPath = normalizePath(pathname);
+
+  for (const category of contentNavigation) {
+    for (const item of category.items) {
+      const itemPath = normalizePath(item.url);
+
+      if (itemPath === currentPath) {
+        activeContentId = item.id;
+        break;
+      }
+    }
+
+    if (activeContentId) {
+      break;
+    }
+  }
+} else if (isPlansRoute) {
+  const { getNavigation } = await import('../../utils/plans');
+  const plansNav = getNavigation();
+  contentNavigation = plansNav.map((cat) => ({ ...cat, items: cat.plans }));
+
+  const currentPath = normalizePath(pathname);
+
+  for (const category of contentNavigation) {
+    for (const item of category.items) {
+      const itemPath = normalizePath(item.url);
+
+      if (itemPath === currentPath) {
+        activeContentId = item.id;
+        break;
+      }
+    }
+
+    if (activeContentId) {
+      break;
+    }
+  }
+} else if (isPostsRoute) {
+  const { getRecentPosts, getTagCloud } = await import('../../utils/posts');
+  postsRecentPosts = getRecentPosts(5);
+  postsTagCloud = getTagCloud();
+
+  // 從 URL 取得當前文章的 slug
+  const pathParts = pathname.split('/').filter(Boolean);
+  if (pathParts.length > 1) {
+    activePostId = pathParts[pathParts.length - 1];
+  }
+}
+---
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand me-4 d-lg-none" href="/">
+      <img alt="Pen's Pulse Logo" class="d-inline-block align-text-top" height="30" src="/logo.png" />
+    </a>
+
+    <!-- 桌面版導覽列 - 僅在 lg 以上顯示 -->
+    <div class="collapse navbar-collapse">
+      <div class="d-flex justify-content-between w-100">
+        <!-- 左欄 -->
+        <div class="d-flex align-items-center">
+          <!-- Logo -->
+          <a class="navbar-brand me-4" href="/">
+            <img alt="Pen's Pulse 首頁" class="d-inline-block align-text-top" height="30" src="/logo.png" />
+          </a>
+
+          <!-- 站內連結 -->
+          <ul class="navbar-nav mb-0 d-flex flex-row gap-1">
+            <li class="nav-item">
+              <a class={`nav-link ${isNotesRoute ? 'active' : ''}`} href="/notes">
+                <span>研究筆記</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class={`nav-link ${isPlansRoute ? 'active' : ''}`} href="/plans">
+                <span>挑戰計畫</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class={`nav-link ${isPostsRoute ? 'active' : ''}`} href="/posts">
+                <span>心得文章</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 右欄 -->
+        <div class="d-flex align-items-center justify-content-end">
+          <!-- 搜尋框 -->
+          <div class="bd-search me-2">
+            <button aria-label="搜尋 (Ctrl+K)" class="search-button" type="button">
+              <div class="search-button-container">
+                <i class="bi bi-search search-icon"></i>
+                <span class="search-placeholder">搜尋</span>
+              </div>
+              <div class="search-keys">
+                <kbd class="search-key">
+                  <i class="bi bi-command" style="font-size: 0.8em;"></i>
+                </kbd>
+                <kbd class="search-key">K</kbd>
+              </div>
+            </button>
+          </div>
+
+          <!-- 外部連結 -->
+          <a
+            aria-label="前往 GitHub 查看專案"
+            class="text-body-emphasis text-opacity-75-hover px-2"
+            href="https://github.com/penspulse326"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span aria-hidden="true" class="bi bi-github" style="font-size: 1.25rem;"></span>
+          </a>
+
+          <!-- 主題切換 -->
+          <ThemeToggler />
+        </div>
+      </div>
+    </div>
+
+    <!-- 手機版選單按鈕 - 僅在小於 lg 螢幕顯示 -->
+    <button
+      aria-controls="offcanvasNavbar"
+      aria-label="Toggle navigation"
+      class="navbar-toggler px-1 border-0"
+      data-bs-target="#offcanvasNavbar"
+      data-bs-toggle="offcanvas"
+      type="button"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- 側邊選單 - 僅在手機版顯示 -->
+    <div
+      aria-labelledby="offcanvasNavbarLabel"
+      class="offcanvas offcanvas-end d-lg-none"
+      id="offcanvasNavbar"
+      tabindex="-1"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">Pen's Pulse</h5>
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button"></button>
+      </div>
+
+      <hr class="mx-3 mt-0" />
+
+      <div class="offcanvas-body">
+        <div id="main-menu-container">
+          <!-- 內部連結 - 兩欄排列 -->
+          <div class="row g-3">
+            <div class="col-6 m-0">
+              <a class="d-block py-2 text-decoration-none text-body" href="/notes">
+                <div class="d-flex align-items-center">
+                  <span aria-hidden="true" class="bi bi-journal-text me-2"></span>
+                  <span>研究筆記</span>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 m-0">
+              <a class="d-block py-2 text-decoration-none text-body" href="/plans">
+                <div class="d-flex align-items-center">
+                  <span aria-hidden="true" class="bi bi-trophy me-2"></span>
+                  <span>挑戰計畫</span>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 m-0">
+              <a class="d-block py-2 text-decoration-none text-body" href="/posts">
+                <div class="d-flex align-items-center">
+                  <span aria-hidden="true" class="bi bi-file-earmark-text me-2"></span>
+                  <span>心得文章</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <hr class="my-3" />
+
+          <!-- 外部連結 -->
+          <div class="row g-2">
+            <div class="col-6">
+              <a
+                aria-label="前往 GitHub 查看專案"
+                class="d-block py-2 text-decoration-none text-body"
+                href="https://github.com/yourusername/yourrepo"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div class="d-flex align-items-center">
+                  <span aria-hidden="true" class="bi bi-github me-2"></span>
+                  <span>GitHub</span>
+                </div>
+              </a>
+            </div>
+            <div class="col-6">
+              <a
+                aria-label="前往外部連結"
+                class="d-block py-2 text-decoration-none text-body"
+                href="https://example.com"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div class="d-flex alignments-center">
+                  <span aria-hidden="true" class="bi bi-box-arrow-up-right me-2"></span>
+                  <span>外部連結</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <hr class="my-3" />
+
+          <!-- 主題切換 -->
+          <div
+            class="d-flex align-items-center"
+            onclick="document.getElementById('bd-theme').click()"
+            style="cursor: pointer;"
+          >
+            <ThemeToggler />
+            <span class="me-3">主題切換</span>
+          </div>
+
+          <hr class="my-3" />
+
+          <!-- 搜尋 -->
+          <div class="mt-3">
+            <form role="search">
+              <label class="visually-hidden" for="mobile-search">搜尋網站內容</label>
+              <div class="input-group">
+                <input
+                  aria-label="搜尋網站內容"
+                  class="form-control"
+                  id="mobile-search"
+                  placeholder="搜尋..."
+                  type="search"
+                />
+                <button aria-label="執行搜尋" class="btn btn-outline-primary" type="submit">
+                  <span aria-hidden="true" class="bi bi-search"></span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {
+          isContentRoute && (
+            <div id="content-menu-container">
+              <ContentMenu activeId={activeContentId} navigation={contentNavigation} />
+            </div>
+          )
+        }
+
+        {
+          isPostsRoute && (
+            <div id="posts-menu-container">
+              <PostsMenu activeId={activePostId} recentPosts={postsRecentPosts} tagCloud={postsTagCloud} />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    height: 60px;
+  }
+
+  /* 搜尋按鈕樣式 */
+  .bd-search {
+    position: relative;
+    margin: 0;
+  }
+
+  .search-button {
+    align-items: center;
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 6px;
+    color: var(--bs-body-color);
+    display: flex;
+    font-size: 0.875rem;
+    font-weight: 400;
+    height: 2rem;
+    justify-content: space-between;
+    min-width: 200px;
+    padding: 0 0.5rem;
+    text-align: left;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .search-button:hover {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-body-color);
+  }
+
+  .search-button:focus {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.25);
+    color: var(--bs-body-color);
+    outline: 0;
+  }
+
+  .search-button-container {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    pointer-events: none;
+  }
+
+  .search-icon {
+    color: var(--bs-secondary-color);
+    flex-shrink: 0;
+  }
+
+  .search-placeholder {
+    color: var(--bs-secondary-color);
+    opacity: 0.75;
+  }
+
+  .search-keys {
+    align-items: center;
+    display: flex;
+    gap: 0.25rem;
+    pointer-events: none;
+  }
+
+  .search-key {
+    align-items: center;
+    background-color: var(--bs-tertiary-bg);
+    border: 1px solid var(--bs-border-color);
+    border-bottom: 2px solid var(--bs-gray-500);
+    border-radius: 0.25rem;
+    color: var(--bs-secondary-color);
+    display: inline-flex;
+    font-family: var(--bs-font-monospace);
+    font-size: 1em;
+    height: 1.5em;
+    justify-content: center;
+    line-height: 1.2;
+    min-width: 1.2em;
+    padding: 0 0.5em;
+    white-space: nowrap;
+  }
+
+  .search-key-icon {
+    color: var(--bs-secondary-color);
+  }
+
+  /* 導覽列網格佈局 - 三欄式，中間欄位固定寬度 */
+  .navbar-grid-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* 導覽連結 hover 效果 */
+  .nav-link span {
+    position: relative;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    color: var(--bs-body-color);
+  }
+
+  .nav-link span::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--bs-primary);
+    transition: width 0.15s ease;
+  }
+
+  .nav-link:hover span::after {
+    width: 100%;
+  }
+
+  /* 導覽連結 active 狀態 */
+  .nav-link.active span {
+    color: var(--bs-primary);
+    font-weight: 600;
+  }
+
+  .nav-link.active span::after {
+    width: 100%;
+  }
+
+  /* GitHub 圖示的主題顏色 */
+  [data-bs-theme='light'] .text-opacity-75-hover:hover {
+    color: var(--bs-body-color) !important;
+    opacity: 1 !important;
+  }
+
+  /* 側邊選單平滑過渡效果 */
+  .offcanvas {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  /* 手機版選單項目間距 */
+  .offcanvas-body .nav-item {
+    margin: 0.5rem 0;
+  }
+
+  /* 側邊選單關閉按鈕樣式 */
+  .offcanvas-header .btn-close {
+    margin: -0.5rem -0.5rem -0.5rem auto;
+    padding: 0.5rem;
+  }
+
+  /* 側邊選單連結樣式 */
+  .offcanvas-body a {
+    border-radius: 0.375rem;
+    transition: background-color 0.2s;
+  }
+
+  .offcanvas-body a:hover {
+    background-color: rgb(0 0 0 / 5%);
+  }
+
+  [data-bs-theme='dark'] .offcanvas-body a:hover {
+    background-color: rgb(255 255 255 / 10%);
+  }
+
+  [data-bs-theme='dark'] .text-opacity-75-hover {
+    color: var(--bs-body-color) !important;
+    opacity: 0.75;
+  }
+
+  [data-bs-theme='dark'] .text-opacity-75-hover:hover {
+    opacity: 1;
+  }
+
+  .notes-drawer .accordion-button {
+    padding: 0.5rem 0;
+  }
+
+  .notes-drawer-item + .notes-drawer-item {
+    border-top: 1px solid var(--bs-border-color-translucent);
+  }
+
+  .notes-drawer-link {
+    display: block;
+    padding: 0.625rem 0;
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.95rem;
+  }
+
+  .notes-drawer-link.active {
+    font-weight: 600;
+    color: var(--bs-primary);
+  }
+</style>

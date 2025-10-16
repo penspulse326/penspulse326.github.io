@@ -78,7 +78,9 @@ function formatDate(date?: Date): string {
     </div>
 
     <footer class="mt-5 pt-4 border-top">
-      <a class="btn btn-outline-dark" href="/posts"> ← 返回文章列表 </a>
+      <a class="back-to-list-link" href="/posts">
+        <i class="bi bi-arrow-left"></i> 返回文章列表
+      </a>
     </footer>
 
     <GiscusComment />
@@ -89,5 +91,18 @@ function formatDate(date?: Date): string {
   /* 標籤連結 */
   .tag-link:hover {
     text-decoration: underline !important;
+  }
+
+  /* 返回列表連結 */
+  .back-to-list-link {
+    color: var(--bs-link-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .back-to-list-link:hover {
+    color: var(--bs-link-hover-color);
+    text-decoration: underline;
   }
 </style>

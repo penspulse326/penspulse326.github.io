@@ -19,6 +19,16 @@ const hasCustomMenu = isContentRoute || isPostsRoute;
 
 const normalizePath = (path: string) => (path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path);
 
+// 輔助函式：查找當前頁面的 active ID
+const findActiveId = (navigation: CategoryWithContent[], currentPath: string) => {
+  for (const category of navigation) {
+    for (const item of category.items) {
+      if (normalizePath(item.url) === currentPath) return item.id;
+    }
+  }
+  return undefined;
+};
+
 let contentNavigation: CategoryWithContent[] = [];
 let activeContentId: string | undefined;
 let postsRecentPosts: CategoryPostItem[] = [];
@@ -27,56 +37,18 @@ let activePostId: string | undefined;
 
 if (isNotesRoute) {
   const { getNavigation } = await import('../../utils/notes');
-  const notesNav = getNavigation();
-  contentNavigation = notesNav.map((cat) => ({ ...cat, items: cat.notes }));
-
-  const currentPath = normalizePath(pathname);
-
-  for (const category of contentNavigation) {
-    for (const item of category.items) {
-      const itemPath = normalizePath(item.url);
-
-      if (itemPath === currentPath) {
-        activeContentId = item.id;
-        break;
-      }
-    }
-
-    if (activeContentId) {
-      break;
-    }
-  }
+  contentNavigation = getNavigation().map((cat) => ({ ...cat, items: cat.notes }));
+  activeContentId = findActiveId(contentNavigation, normalizePath(pathname));
 } else if (isPlansRoute) {
   const { getNavigation } = await import('../../utils/plans');
-  const plansNav = getNavigation();
-  contentNavigation = plansNav.map((cat) => ({ ...cat, items: cat.plans }));
-
-  const currentPath = normalizePath(pathname);
-
-  for (const category of contentNavigation) {
-    for (const item of category.items) {
-      const itemPath = normalizePath(item.url);
-
-      if (itemPath === currentPath) {
-        activeContentId = item.id;
-        break;
-      }
-    }
-
-    if (activeContentId) {
-      break;
-    }
-  }
+  contentNavigation = getNavigation().map((cat) => ({ ...cat, items: cat.plans }));
+  activeContentId = findActiveId(contentNavigation, normalizePath(pathname));
 } else if (isPostsRoute) {
   const { getRecentPosts, getTagCloud } = await import('../../utils/posts');
   postsRecentPosts = getRecentPosts(5);
   postsTagCloud = getTagCloud();
-
-  // 從 URL 取得當前文章的 slug
   const pathParts = pathname.split('/').filter(Boolean);
-  if (pathParts.length > 1) {
-    activePostId = pathParts[pathParts.length - 1];
-  }
+  activePostId = pathParts.length > 1 ? pathParts[pathParts.length - 1] : undefined;
 }
 ---
 
@@ -342,18 +314,19 @@ if (isNotesRoute) {
     transition: all 0.2s ease-in-out;
   }
 
-  .search-button:hover {
-    background-color: var(--bs-body-bg);
-    border-color: var(--bs-primary);
-    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.1);
-    color: var(--bs-body-color);
-  }
-
+  .search-button:hover,
   .search-button:focus {
     background-color: var(--bs-body-bg);
     border-color: var(--bs-primary);
-    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.25);
     color: var(--bs-body-color);
+  }
+
+  .search-button:hover {
+    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.1);
+  }
+
+  .search-button:focus {
+    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.25);
     outline: 0;
   }
 
@@ -445,10 +418,13 @@ if (isNotesRoute) {
     width: 100%;
   }
 
-  /* GitHub 圖示的主題顏色 */
+  /* 外部連結 hover 效果 */
+  .text-opacity-75-hover:hover {
+    opacity: 1 !important;
+  }
+
   [data-bs-theme='light'] .text-opacity-75-hover:hover {
     color: var(--bs-body-color) !important;
-    opacity: 1 !important;
   }
 
   /* 側邊選單平滑過渡效果 */
@@ -484,10 +460,6 @@ if (isNotesRoute) {
   [data-bs-theme='dark'] .text-opacity-75-hover {
     color: var(--bs-body-color) !important;
     opacity: 0.75;
-  }
-
-  [data-bs-theme='dark'] .text-opacity-75-hover:hover {
-    opacity: 1;
   }
 
   .notes-drawer .accordion-button {

@@ -14,63 +14,61 @@ const showDesktop = variant === 'desktop' || variant === 'both';
 const showMobile = variant === 'mobile' || variant === 'both';
 ---
 
+{/* 桌面版目錄 - 固定在右側 */}
 {
-  (
-    <>
-      {/* 桌面版目錄 - 固定在右側 */}
-      {showDesktop && (
-        <aside class="toc-desktop d-none d-lg-block">
-          <nav aria-label="目錄">
-            <h2 class="toc-title">目錄</h2>
-            <ul class="toc-list">
-              {tocHeadings.map((heading) => (
-                <li class:list={['toc-item', `toc-item--depth-${heading.depth}`]}>
-                  <a class="toc-link" href={`#${heading.slug}`}>
-                    {heading.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </aside>
-      )}
+  showDesktop && (
+    <aside class="toc-desktop d-none d-lg-block">
+      <nav aria-label="目錄">
+        <h2 class="toc-title">目錄</h2>
+        <ul class="toc-list">
+          {tocHeadings.map((heading) => (
+            <li class:list={['toc-item', `toc-item--depth-${heading.depth}`]}>
+              <a class="toc-link" href={`#${heading.slug}`}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  )
+}
 
-      {/* 手機版目錄 - 手風琴（預設展開）*/}
-      {showMobile && (
-        <div class="toc-mobile d-lg-none mb-4">
-          <div class="accordion" id="toc-accordion">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="toc-heading">
-                <button
-                  aria-controls="toc-collapse"
-                  aria-expanded="true"
-                  class="accordion-button p-2"
-                  data-bs-target="#toc-collapse"
-                  data-bs-toggle="collapse"
-                  type="button"
-                >
-                  <i class="bi bi-list-ul me-2" />
-                  目錄
-                </button>
-              </h2>
-              <div aria-labelledby="toc-heading" class="accordion-collapse collapse show" id="toc-collapse">
-                <div class="accordion-body px-2">
-                  <ul class="toc-list">
-                    {tocHeadings.map((heading) => (
-                      <li class:list={['toc-item', `toc-item--depth-${heading.depth}`]}>
-                        <a class="toc-link" href={`#${heading.slug}`}>
-                          {heading.text}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+{/* 手機版目錄（預設展開）*/}
+{
+  showMobile && (
+    <div class="toc-mobile d-lg-none mb-4">
+      <div class="accordion" id="toc-accordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="toc-heading">
+            <button
+              aria-controls="toc-collapse"
+              aria-expanded="true"
+              class="accordion-button p-2"
+              data-bs-target="#toc-collapse"
+              data-bs-toggle="collapse"
+              type="button"
+            >
+              <i class="bi bi-list-ul me-2" />
+              目錄
+            </button>
+          </h2>
+          <div aria-labelledby="toc-heading" class="accordion-collapse collapse show" id="toc-collapse">
+            <div class="accordion-body px-2">
+              <ul class="toc-list">
+                {tocHeadings.map((heading) => (
+                  <li class:list={['toc-item', `toc-item--depth-${heading.depth}`]}>
+                    <a class="toc-link" href={`#${heading.slug}`}>
+                      {heading.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   )
 }
 
@@ -81,7 +79,10 @@ const showMobile = variant === 'mobile' || variant === 'both';
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.getAttribute('id');
-          if (!id) return;
+
+          if (!id) {
+            return;
+          }
 
           const tocLinks = document.querySelectorAll(`a[href="#${id}"]`);
 
@@ -113,11 +114,18 @@ const showMobile = variant === 'mobile' || variant === 'both';
     document.querySelectorAll('.toc-link').forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
+
         const targetId = link.getAttribute('href')?.slice(1);
-        if (!targetId) return;
+
+        if (!targetId) {
+          return;
+        }
 
         const targetElement = document.getElementById(targetId);
-        if (!targetElement) return;
+
+        if (!targetElement) {
+          return;
+        }
 
         const offset = 80; // 固定導覽列高度
         const elementPosition = targetElement.getBoundingClientRect().top;

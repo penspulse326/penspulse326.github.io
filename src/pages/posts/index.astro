@@ -86,7 +86,7 @@ function formatDate(date?: Date): string {
                   <PostExcerpt Content={Content} />
                 </div>
 
-                <a class="btn btn-outline-dark btn-sm" href={post.url}>
+                <a class="read-more-link" href={post.url}>
                   閱讀更多 <i class="bi bi-arrow-right" />
                 </a>
               </article>
@@ -166,6 +166,19 @@ function formatDate(date?: Date): string {
   .post-content :global(ol) {
     margin-bottom: 0.75rem;
     padding-left: 1.5rem;
+  }
+
+  /* 閱讀更多連結 */
+  .read-more-link {
+    color: var(--bs-link-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .read-more-link:hover {
+    color: var(--bs-link-hover-color);
+    text-decoration: underline;
   }
 
   /* 分頁樣式 */

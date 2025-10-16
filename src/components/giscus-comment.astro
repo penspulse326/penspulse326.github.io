@@ -8,12 +8,14 @@
   // 動態載入 Giscus
   function loadGiscus() {
     const giscusWrapper = document.querySelector('.giscus-wrapper');
-    if (!giscusWrapper) return;
+
+    if (!giscusWrapper) {
+      return;
+    }
 
     // 檢測主題
-    const prefersDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    const theme = document.documentElement.dataset.theme || (prefersDarkTheme ? 'dark' : 'light');
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+    const theme = currentTheme === 'dark' ? 'dark' : 'light';
 
     // 建立 Giscus script
     const script = document.createElement('script');
@@ -38,9 +40,24 @@
   // 頁面載入時執行
   loadGiscus();
 
-  // 監聽主題變化 (如果你的網站有主題切換功能)
+  // 監聽主題變化
   document.addEventListener('astro:page-load', () => {
     loadGiscus();
+  });
+
+  // 監聽主題切換並更新 Giscus
+  const observer = new MutationObserver(() => {
+    const iframe = document.querySelector<HTMLIFrameElement>('.giscus-wrapper iframe');
+    if (iframe?.contentWindow) {
+      const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+      const theme = currentTheme === 'dark' ? 'dark' : 'light';
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app');
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-bs-theme'],
   });
 </script>
 

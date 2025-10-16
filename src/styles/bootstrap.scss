@@ -58,3 +58,6 @@ $enable-negative-margins: true;
 
 // Import Bootstrap Icons
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// 覆寫 font-display 以優化效能
+@import './font-display-override.css';

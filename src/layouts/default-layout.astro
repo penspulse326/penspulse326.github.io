@@ -32,6 +32,15 @@ const fullOgImageUrl = new URL(ogImage, baseUrl).href;
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content={Astro.generator} name="generator" />
 
+    <!-- 預載入關鍵資源以優化效能 -->
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href="/_astro/bootstrap-icons.mSm7cUeB.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+
     <!-- 主要 Meta 標籤 -->
     <title>{siteTitle}</title>
     <meta content={siteTitle} name="title" />

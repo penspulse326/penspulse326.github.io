@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
+import GiscusComment from '../../components/giscus-comment.astro';
 import PostsSidebar from '../../components/posts-sidebar.astro';
 import TableOfContents from '../../components/table-of-contents.astro';
 import ArticleLayout from '../../layouts/article-layout.astro';
@@ -79,6 +80,8 @@ function formatDate(date?: Date): string {
     <footer class="mt-5 pt-4 border-top">
       <a class="btn btn-outline-dark" href="/posts"> ← 返回文章列表 </a>
     </footer>
+
+    <GiscusComment />
   </article>
 </ArticleLayout>
 

@@ -1,6 +1,7 @@
 ---
 import type { NoteEntry } from '../../utils/notes';
 
+import GiscusComment from '../../components/giscus-comment.astro';
 import TableOfContents from '../../components/table-of-contents.astro';
 import ArticleLayout from '../../layouts/article-layout.astro';
 import { getAllNotes, getNavigation } from '../../utils/notes';
@@ -56,6 +57,8 @@ const headings = await note.getHeadings();
     <div class="markdown-body">
       <note.Content />
     </div>
+
+    <GiscusComment />
   </article>
 </ArticleLayout>
 

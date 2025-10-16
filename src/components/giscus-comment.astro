@@ -1,0 +1,53 @@
+---
+// Giscus 留言元件
+---
+
+<div class="giscus-wrapper"></div>
+
+<script>
+  // 動態載入 Giscus
+  function loadGiscus() {
+    const giscusWrapper = document.querySelector('.giscus-wrapper');
+    if (!giscusWrapper) return;
+
+    // 檢測主題
+    const prefersDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    const theme = document.documentElement.dataset.theme || (prefersDarkTheme ? 'dark' : 'light');
+
+    // 建立 Giscus script
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'penspulse326/penspulse326.github.io');
+    script.setAttribute('data-repo-id', 'R_kgDOH7IBDw');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDOH7IBD84CesRY');
+    script.setAttribute('data-mapping', 'title');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'bottom');
+    script.setAttribute('data-theme', theme);
+    script.setAttribute('data-lang', 'zh-Hant');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    giscusWrapper.appendChild(script);
+  }
+
+  // 頁面載入時執行
+  loadGiscus();
+
+  // 監聽主題變化 (如果你的網站有主題切換功能)
+  document.addEventListener('astro:page-load', () => {
+    loadGiscus();
+  });
+</script>
+
+<style>
+  .giscus-wrapper {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--bs-border-color, #dee2e6);
+  }
+</style>

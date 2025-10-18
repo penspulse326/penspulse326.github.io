@@ -96,11 +96,4 @@
   // 初始化
   initCanvas();
   animate();
-
-  // 視窗大小改變時重新初始化
-  window.addEventListener('resize', () => {
-    cancelAnimationFrame(animationId);
-    initCanvas();
-    animate();
-  });
 </script>

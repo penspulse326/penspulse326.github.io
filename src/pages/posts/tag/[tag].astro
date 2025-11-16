@@ -1,30 +1,58 @@
 ---
 import type { GetStaticPaths, Page } from 'astro';
 
-import PostExcerpt from '../../components/post-excerpt.astro';
-import PostsSidebar from '../../components/posts-sidebar.astro';
-import ArticleLayout from '../../layouts/article-layout.astro';
-import { getPostsSortedByDate, getRecentPosts, getTagCloud, type PostEntry } from '../../utils/posts';
+import PostExcerpt from '../../../components/post-excerpt.astro';
+import PostsSidebar from '../../../components/posts-sidebar.astro';
+import ArticleLayout from '../../../layouts/article-layout.astro';
+import { getPostsSortedByDate, getRecentPosts, getTagCloud, getAllTags, type PostEntry } from '../../../utils/posts';
+
+export const getStaticPaths = (async () => {
+  const allPosts = getPostsSortedByDate();
+  const tags = Array.from(getAllTags().keys());
+  const paths: Array<{ params: { tag: string }; props: { tag: string } }> = [];
+
+  // 為每個標籤生成路徑
+  for (const tag of tags) {
+    const filteredPosts = allPosts.filter((post) => post.frontmatter.tags?.some((t) => t === tag));
+
+    if (filteredPosts.length > 0) {
+      paths.push({
+        params: { tag },
+        props: { tag },
+      });
+    }
+  }
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+interface Props {
+  tag: string;
+}
+
+const { tag } = Astro.props;
 
 const allPosts = getPostsSortedByDate();
+const filteredPosts = allPosts.filter((post) => post.frontmatter.tags?.some((t) => t === tag));
+
 const pageSize = 5;
-const totalPages = Math.ceil(allPosts.length / pageSize);
+const totalPages = Math.ceil(filteredPosts.length / pageSize);
 
 // 模擬第一頁的 page 物件
 const page: Page<PostEntry> = {
-  data: allPosts.slice(0, pageSize),
+  data: filteredPosts.slice(0, pageSize),
   start: 0,
-  end: Math.min(pageSize - 1, allPosts.length - 1),
+  end: Math.min(pageSize - 1, filteredPosts.length - 1),
   size: pageSize,
-  total: allPosts.length,
+  total: filteredPosts.length,
   currentPage: 1,
   lastPage: totalPages,
   url: {
-    current: '/posts',
+    current: `/posts/tag/${encodeURIComponent(tag)}`,
     prev: undefined,
-    next: totalPages > 1 ? '/posts/2' : undefined,
+    next: totalPages > 1 ? `/posts/tag/${encodeURIComponent(tag)}/2` : undefined,
     first: undefined,
-    last: totalPages > 1 ? `/posts/${totalPages}` : undefined,
+    last: totalPages > 1 ? `/posts/tag/${encodeURIComponent(tag)}/${totalPages}` : undefined,
   },
 };
 
@@ -42,11 +70,17 @@ function formatDate(date?: Date): string {
 }
 ---
 
-<ArticleLayout description="與職涯、工作、活動等相關的心得文章" showToc={false} title="心得文章">
+<ArticleLayout description={`標籤「${tag}」相關的心得文章`} showToc={false} title={`標籤：${tag}`}>
   <PostsSidebar recentPosts={recentPosts} slot="sidebar" tagCloud={tagCloud} />
 
   <div class="mx-n3">
     <div class="px-2 px-lg-4">
+      <!-- 標籤標題 -->
+      <div class="mb-4">
+        <h2 class="h5 mb-2">標籤：{tag}</h2>
+        <p class="text-muted">共 {filteredPosts.length} 篇文章</p>
+      </div>
+
       <!-- 文章列表 -->
       <div class="posts-list">
         {
@@ -68,10 +102,13 @@ function formatDate(date?: Date): string {
                       {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
                         <span class="ms-3">
                           <i class="bi bi-tags" />{' '}
-                          {post.frontmatter.tags.map((tag: string, idx: number) => (
+                          {post.frontmatter.tags.map((postTag: string, idx: number) => (
                             <>
-                              <a class="text-muted text-decoration-none" href={`/posts/tag/${encodeURIComponent(tag)}`}>
-                                {tag}
+                              <a
+                                class="text-muted text-decoration-none"
+                                href={`/posts/tag/${encodeURIComponent(postTag)}`}
+                              >
+                                {postTag}
                               </a>
                               {idx < (post.frontmatter.tags?.length ?? 0) - 1 && ', '}
                             </>
@@ -108,7 +145,14 @@ function formatDate(date?: Date): string {
 
               {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
                 <li class:list={['page-item', { active: pageNum === page.currentPage }]}>
-                  <a class="page-link" href={pageNum === 1 ? '/posts' : `/posts/${pageNum}`}>
+                  <a
+                    class="page-link"
+                    href={
+                      pageNum === 1
+                        ? `/posts/tag/${encodeURIComponent(tag)}`
+                        : `/posts/tag/${encodeURIComponent(tag)}/${pageNum}`
+                    }
+                  >
                     {pageNum}
                   </a>
                 </li>

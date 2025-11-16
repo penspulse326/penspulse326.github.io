@@ -2,41 +2,65 @@
 title: '變數宣告'
 description: 'JavaScript 的變數宣告問題'
 date: 2023-08-30 13:54:38
-keywords: [JavaScript, 變數, 作用域, variable, scope]
-tags: ['筆記', 'JavaScript']
-slug: js-variable-declare
+keywords:
+  [
+    JavaScript,
+    變數,
+    作用域,
+    variable,
+    scope,
+    let,
+    const,
+    var,
+    block scope,
+    function scope,
+    大括號作用域,
+    函式作用域,
+    重複宣告,
+    redeclaration,
+    setTimeout,
+    非同步,
+    asynchronous,
+    Event Loop,
+    全域變數,
+    global variable,
+    window,
+    property,
+    屬性,
+    delete,
+    ES6,
+  ]
+slug: variable-declare
 ---
 
-宣告是為了告訴電腦需要**一塊記憶體空間**來存放資料，類似**置物櫃**的概念，  
-申請左上角的 1 號櫃之後，我們可以決定櫃子裡面要裝什麼，但 1 號櫃的位置仍然在左上角。
+宣告是為了告訴電腦需要**一個記憶體空間**來存放資料，類似**置物櫃**的概念。
 
 ## let / const
 
-let 的內容可以隨時賦值改變，  
-const 則指不會變動的內容（constant）。
+`let` 的內容可以隨時賦值 (assign) 改變，宣告時可以不賦值，內容為 `undefined`。
 
-let 宣告時可以不賦值，內容為 undefined，  
-const 在宣告後必須賦值且不能改變內容，否則會報錯：
+`const` 指不會變動的內容 (constant)，宣告後**必須賦值且不能改變內容**，否則會報錯。
 
 ```js
 let a; // a 為 undefined
 
-const b; // >>>> 報錯 const 在宣告時必須賦予值
+const b; // 報錯 const 在宣告時必須賦予值
 
 const c = 1;
-c = 2; // >>>> 報錯 不能改變 const 的內容
+c = 2; // 報錯 不能改變 const 的內容
 ```
 
 ---
 
 ## var
 
-ES6 前只有 var 這個宣告方式，功能類似 let，  
-但語法規定寬鬆，某些機制容易造成撰寫上的意外失誤。
+ES6 前只有 `var` 這個宣告方式，但語法規定寬鬆，容易造成撰寫上的意外。
 
-### 可以重複宣告
+主要有以下機制：
 
-有寫過其他程式語言的話一定會覺得重複宣告是非常奇怪的事：
+1. 可以重複宣告：
+
+有碰過其他語言的話一定會覺得重複宣告是非常奇怪的事：
 
 ```js
 var a = 1;
@@ -45,15 +69,12 @@ console.log(a); // 1
 
 var a = '我被重新宣告竟然沒有報錯太扯了吧';
 
-console.log(a); // "我被重新宣告竟然沒有報錯太扯了吧"
+console.log(a); // '我被重新宣告竟然沒有報錯太扯了吧'
 ```
 
-### 作用域
+2. 作用域
 
-var 最顯著的差異就是作用域。
-
-let / const 的作用區間以**大括號**為限，離開大括號後就無法存取，  
-包含迴圈、函式，或隨手寫一組大括號等都符合這個規則：
+`let` 或 `const` 的作用區間以**大括號**為限，離開大括號後就無法存取，包含迴圈、函式，或隨手寫一組大括號等都符合這個規則：
 
 ```js
 {
@@ -61,10 +82,10 @@ let / const 的作用區間以**大括號**為限，離開大括號後就無法�
   const b = 'hello';
 }
 
-console.log(a, b); // 報錯 a 與 b 未宣告
+console.log(a, b); // 報錯，a 與 b 未宣告
 ```
 
-大部分的語言也是遵循這種生命週期的概念設計的，但是 var 的行為不同：
+大部分的語言也是遵循這種以大括號為存取限制的概念設計的，但是 var 的行為不同：
 
 ```js
 var a = 1;
@@ -77,28 +98,51 @@ console.log(a); // 11
 console.log(i); // 5
 ```
 
-迴圈跑完後可以查看 a 的值是 11，但是連 i 的值都可以存取...  
-這是因為 var 的作用域是以**函式內**為限，  
-而 for 的迭代只是一組大括號而已，並不是函式。
+迴圈跑完後可以查看 a 的值是 11，這是正確的，但是連 i 的值都可以存取，這是因為 `var` 的作用域是在**函式內部**，而 `for` 的迭代只是一組大括號而已，並不是函式。
 
-以上特性都有機率產生全域性的污染，  
-進而取到錯誤的值，或是無意間修改了同名的資料，  
-一般撰寫時幾乎不推薦使用 var 宣告。
+以上特性都有機率產生全域污染，例如取出預期之外的值或是無意間修改了同名的資料，所以現今撰寫 JS 時幾乎不推薦使用 `var` 宣告。
 
-### 比較
+### 必考題
 
-|          | var    | let    | const  |
-| -------- | ------ | ------ | ------ |
-| 作用域   | 函式   | 大括號 | 大括號 |
-| 初始值   | 非必須 | 非必須 | 必須   |
-| 重複宣告 | 可以   | 不行   | 不行   |
+```js
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log(i);
+  }, 0);
+}
+```
+
+最終會印出 3 次 `3`。
+
+`setTimeout` 是一個非同步的 Web API，在 JS 的執行環境 (runtime) 中呼叫這類的 API 時會先被放到另外一個待處理的空間，和 `setTimeout` 後面給予的時間參數 `0` 無關，原生的運算行為會優先執行完畢，所以迴圈會繼續迭代完才進行 `setTimeout` 的內容：
+
+```js
+var i = 0;
+
+{
+  i++; // i 為 1
+}
+{
+  i++; // i 為 2
+}
+{
+  i++; // i 為 3，迴圈終止
+}
+
+console.log(i);
+console.log(i);
+console.log(i);
+```
+
+:::info
+Web API 執行順序與事件循環(Event Loop)有關。
+:::
 
 ---
 
-## 變數可以不宣告嗎
+## 變數一定要經過宣告嗎
 
-沒有任何宣告的關鍵字，直接寫出變數名稱，  
-會變成**全域環境**下可以存取的值：
+沒有任何宣告的關鍵字，直接寫出變數名稱，會變成**全域**可以存取的值：
 
 ```js
 function foo() {
@@ -106,15 +150,14 @@ function foo() {
 }
 
 foo();
+
 console.log(a); // 1
 console.log(window.a); // 1
 ```
 
-函式 foo 執行完後仍然可以找到 a，  
-此時 a 是全域物件 **window** 的一個**屬性**（property），用 `window.a` 可以取出來，  
-所以嚴格來說 a 目前不是一個獨立的變數。
+`foo` 執行完後仍然可以找到 `a`，此時 a 是全域物件 **window** 的一個**屬性** (property)，用 `window.a` 可以取出來，所以嚴格來說 `a` 目前不是一個獨立的變數。
 
-屬性與變數最重要的差異在於，**屬性**可以使用 delete 運算子刪除：
+屬性與變數最重要的差異在於，**屬性**可以使用 `delete` 運算子刪除：
 
 ```js
 function foo() {
@@ -122,6 +165,7 @@ function foo() {
 }
 
 foo();
+
 delete a;
 console.log(a); // Uncaught ReferenceError: a is not defined
 
@@ -130,13 +174,27 @@ delete b;
 console.log(b); // 2
 ```
 
-`delete a` 之後印出 a 會報錯，因為 a 已經確實被刪除，  
-而對使用 let 宣告的 b 使用 delete 後還是可以印出來，  
-因為 delete 運算子對變數不生效但也不會報錯。
+`delete a` 之後印出 `a` 會報錯，因為 `a` 是屬性，已經確實被刪除。
+
+而使用 `let` 宣告的 `b` 還是可以印出來，因為 `delete` 運算子對變數不生效（但是不會報錯）。
+
+---
+
+## 小結
+
+|          | var    | let    | const  |
+| -------- | ------ | ------ | ------ |
+| 作用域   | 函式   | 大括號 | 大括號 |
+| 初始值   | 非必須 | 非必須 | 必須   |
+| 重複宣告 | 可以   | 不行   | 不行   |
+
+- `var` 的作用域和 `for` 迴圈的相關問題
+- 未使用關鍵字宣告的變數會變成全域物件的屬性
+- `delete` 只對屬性生效
 
 ---
 
 ## 參考資料
 
 - [JS 宣告變數， var 與 let / const 差異](https://www.programfarmer.com/articles/2020/javascript-var-let-const-for-loop)
-- [一文了解無宣告、var、let、const 變數細節](https://www.lagagain.com/post/%E4%BD%A0%E5%8F%AF%E8%83%BD%E9%83%BD%E4%B8%8D%E7%9E%AD%E8%A7%A3%E7%9A%84js%E8%AE%8A%E6%95%B8%E7%A5%95%E5%AF%86/)
+- [一文了解無宣告、var、let、const變數細節](https://www.lagagain.com/post/%E4%BD%A0%E5%8F%AF%E8%83%BD%E9%83%BD%E4%B8%8D%E7%9E%AD%E8%A7%A3%E7%9A%84js%E8%AE%8A%E6%95%B8%E7%A5%95%E5%AF%86/)

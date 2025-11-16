@@ -35,21 +35,14 @@ slug: cozy-chat-day1
 2. 實作前端
 3. 實作後端
 4. 單元測試
-5. 整合測試
-6. 部署專案
-
-進階：
-
-- 建立 Docker 容器
-- 導入監控系統查看在線人數與整體流量
+5. 部署專案
 
 這次的 side project 我也盡量捏在 80/20 法則的範圍內，完全未知的部分是：
 
 1. WebSocket
 2. 測試
-3. 監控
 
-這些需要多爬文研究與 AI 輔助來完成基本的知識建立與功能實現。其他則是我已經略知一二的技術，因此這次挑戰算是有把握完成～剩下的就在開發過程中慢慢摸索吧！
+這些需要爬文研究與 AI 輔助來完建立基礎知識。其他則是我已經略知一二的技術，因此這次挑戰還算是有把握完成，剩下的就在開發過程中慢慢摸索吧！
 
 整體的先備知識大概有：
 
@@ -62,6 +55,6 @@ slug: cozy-chat-day1
 
 ![gh](https://raw.githubusercontent.com/penspulse326/penspulse326.github.io/images/1756743290000t6o8lj.png)
 
-剛剛不是說：「在開發過程中慢慢摸索」嗎？這才是隕石開發的醍醐味^O^
+「在開發過程中慢慢摸索」才是隕石開發的醍醐味^O^
 
-專案成果可以參考我的 [GitHub](https://github.com/penspulse326/cozy-chat)，隨鐵人賽進度持續更新！
+專案成果可以參考我的 [GitHub](https://github.com/penspulse326/cozy-chat)，隨鐵人賽進度持續更新。

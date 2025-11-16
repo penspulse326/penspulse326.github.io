@@ -59,7 +59,7 @@ function formatDate(date?: Date): string {
               <i class="bi bi-tags" />{' '}
               {post.frontmatter.tags.map((tag, index) => (
                 <>
-                  <a class="text-muted text-decoration-none tag-link" href={`/posts?tag=${encodeURIComponent(tag)}`}>
+                  <a class="text-muted text-decoration-none tag-link" href={`/posts/tag/${encodeURIComponent(tag)}`}>
                     {tag}
                   </a>
                   {index < (post.frontmatter.tags?.length ?? 0) - 1 && ', '}

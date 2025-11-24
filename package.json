@@ -17,7 +17,8 @@
     "remark-directive": "^4.0.0",
     "sass": "^1.94.0",
     "sharp": "^0.34.5",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "unist-util-visit-parents": "^6.0.2"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.46.4",

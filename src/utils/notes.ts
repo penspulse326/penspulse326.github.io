@@ -14,7 +14,6 @@ export type CategoryNoteItem = CategoryContentItem;
 export interface CategoryWithNotes {
   id: string;
   label: string;
-  position: number;
   notes: CategoryContentItem[];
 }
 

@@ -13,7 +13,6 @@ export type CategoryPlanItem = CategoryContentItem;
 export interface CategoryWithPlans {
   id: string;
   label: string;
-  position: number;
   plans: CategoryContentItem[];
 }
 

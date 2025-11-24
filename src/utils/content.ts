@@ -11,7 +11,6 @@ interface ContentFrontmatter {
 
 interface CategoryMeta {
   label: string;
-  position?: number;
 }
 
 interface ContentEntry {
@@ -43,7 +42,6 @@ interface CategoryContentItem {
 interface CategoryWithContent {
   id: string;
   label: string;
-  position: number;
   items: CategoryContentItem[];
 }
 
@@ -155,7 +153,6 @@ export function createContentManager(contentPath: string, urlPrefix: string) {
     const categoryData: CategoryWithContent = existing ?? {
       id: content.category,
       label: meta?.label ?? content.category,
-      position: meta?.position ?? Number.MAX_SAFE_INTEGER,
       items: [],
     };
 
@@ -191,11 +188,31 @@ export function createContentManager(contentPath: string, urlPrefix: string) {
   }
 
   const orderedCategories = Array.from(groupedCategories.values()).sort((a, b) => {
-    if (a.position === b.position) {
-      return a.label.localeCompare(b.label, 'zh-TW');
+    // 判斷是否為中文字符（CJK 統一表意文字範圍）
+    const isChinese = (char: string): boolean => {
+      const code = char.charCodeAt(0);
+      return (
+        (code >= 0x4e00 && code <= 0x9fff) || // CJK 統一表意文字
+        (code >= 0x3400 && code <= 0x4dbf) || // CJK 擴展 A
+        (code >= 0xf900 && code <= 0xfaff)
+      ); // CJK 兼容表意文字
+    };
+
+    const aFirstChar = a.label.charAt(0);
+    const bFirstChar = b.label.charAt(0);
+    const aIsChinese = isChinese(aFirstChar);
+    const bIsChinese = isChinese(bFirstChar);
+
+    // 英文項目排在前面，中文項目排在後面
+    if (aIsChinese && !bIsChinese) {
+      return 1; // a 是中文，b 是英文，a 排在後面
+    }
+    if (!aIsChinese && bIsChinese) {
+      return -1; // a 是英文，b 是中文，a 排在前面
     }
 
-    return a.position - b.position;
+    // 同類別內按字母順序排序（都是英文或都是中文）
+    return a.label.localeCompare(b.label, aIsChinese ? 'zh-TW' : 'en');
   });
 
   return {

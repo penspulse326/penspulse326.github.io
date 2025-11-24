@@ -31,8 +31,8 @@ const template = readFileSync(templatePath, 'utf-8');
 // 填充 frontmatter
 const content = template
   .replace("title: ''", `title: '${articleName}'`)
-  .replace('date: ', `date: ${dateTimeStr}`)
-  .replace('slug: ', `slug: ${articleName}`);
+  .replace(/date:\s*\r?\n/g, `date: ${dateTimeStr}\n`)
+  .replace(/slug:\s*\r?\n/g, `slug: ${articleName}\n`);
 
 // 生成檔名
 const fileName = `${dateStr}_${articleName}.md`;

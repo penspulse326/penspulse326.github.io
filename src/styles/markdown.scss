@@ -129,10 +129,10 @@
 
   // Blockquotes
   blockquote {
-    margin: 1rem 0;
+    margin: 1.5rem 0;
     padding: 0.75rem 1rem;
     border-left: 4px solid var(--bs-primary);
-    background-color: color-mix(in srgb, var(--bs-primary-bg-subtle) 50%, transparent);
+    background-color: color-mix(in srgb, var(--bs-primary-bg-subtle) 40%, transparent);
     color: var(--bs-body);
 
     > :first-child {
@@ -150,7 +150,7 @@
 
   // Horizontal rules
   hr {
-    margin: 2rem 0;
+    margin: 0.5rem 0;
     border: 0;
     border-top: 2px solid var(--bs-border-color);
   }

@@ -4,6 +4,7 @@
 .markdown-body {
   line-height: 1.5;
   color: var(--bs-body-color);
+  letter-spacing: 0.01em;
 
   h1,
   h2,
@@ -69,7 +70,7 @@
 
   // Inline code
   code:not(pre code) {
-    background-color: #d5f3ff;
+    background-color: var(--bs-primary-bg-subtle);
     color: var(--bs-primary);
     padding: 0.125rem 0.25rem;
     font-size: 0.875em;
@@ -218,7 +219,7 @@
       user-select: none;
 
       &:hover {
-        color: var(--bs-primary);
+        color: var(--bs-primary-hover-color);
       }
     }
 

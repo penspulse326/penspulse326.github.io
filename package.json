@@ -1,5 +1,5 @@
 {
-  "name": "hello-astro",
+  "name": "penspulse326.github.io",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -17,10 +17,12 @@
     "remark-directive": "^4.0.0",
     "sass": "^1.94.0",
     "sharp": "^0.34.5",
+    "three": "^0.181.2",
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-parents": "^6.0.2"
   },
   "devDependencies": {
+    "@types/three": "^0.181.0",
     "@typescript-eslint/parser": "^8.46.4",
     "eslint": "^9.39.1",
     "eslint-plugin-astro": "^1.5.0",

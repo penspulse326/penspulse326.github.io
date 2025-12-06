@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 
-import StarfieldCanvas from '../components/starfield-canvas.astro';
+import StarfieldThree from '../components/starfield-three.astro';
 import Layout from '../layouts/default-layout.astro';
 
 import avatarImage from '/public/avatar.png';
@@ -13,11 +13,8 @@ import avatarImage from '/public/avatar.png';
     aria-labelledby="site-title-heading"
     class="hero-section d-flex align-items-center justify-content-center text-white"
   >
-    <StarfieldCanvas />
-    <h1 class="text-center" id="site-title-heading">
-      Pen's Pulse <br />
-      各種筆記與開發心得
-    </h1>
+    <h1 class="relative title text-center" id="site-title-heading">Pen's Pulse</h1>
+    <StarfieldThree />
   </section>
 
   <div class="container my-lg-2 py-4">
@@ -130,6 +127,11 @@ import avatarImage from '/public/avatar.png';
 
   <style>
     /* 主視覺區樣式 */
+    .title {
+      text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
+      z-index: 10;
+    }
+
     .hero-section {
       position: relative;
       height: 300px;

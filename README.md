@@ -23,8 +23,8 @@
 - **Styling**: Sass (SCSS)
 - **Effects**: Three.js
 - **Content**: Markdown (with Remark plugins)
-- **Comments**: Giscus
-- **Build Tools**: Vite
+- **Comment System**: Giscus
+- **Tool Chain**: Vite
 - **Code Quality**: ESLint, Prettier, Stylelint, Husky, lint-staged
 - **Package Manager**: pnpm
 
@@ -40,11 +40,11 @@
 
 ## 分支 Branches
 
-| 分支名稱            | 描述                                                       |
-| ------------------- | ---------------------------------------------------------- |
-| `main`              | 使用 Astro 官方提供的 workflow 進行更新，建立 GitHub Pages |
-| `images`            | orphan branch，存放網站文章使用到的圖片                    |
-| `legacy-docusaurus` | 過去在不同框架下的迭代痕跡                                 |
+| 分支名稱 | 描述                                             |
+| -------- | ------------------------------------------------ |
+| `main`   | 使用 Astro 官方提供的 workflow 建立 GitHub Pages |
+| `images` | orphan branch，存放網站文章使用到的圖片          |
+| `legacy` | 過去在不同框架下的迭代痕跡                       |
 
 <br/>
 

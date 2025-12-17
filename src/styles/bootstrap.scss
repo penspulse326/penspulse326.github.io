@@ -21,16 +21,17 @@ $enable-negative-margins: true;
 @import 'bootstrap/scss/images';
 @import 'bootstrap/scss/nav';
 @import 'bootstrap/scss/accordion';
-@import 'bootstrap/scss/alert';
-@import 'bootstrap/scss/badge';
-@import 'bootstrap/scss/breadcrumb';
-@import 'bootstrap/scss/button-group';
+
+// @import 'bootstrap/scss/alert'; // 未使用
+// @import 'bootstrap/scss/badge'; // 未使用
+// @import 'bootstrap/scss/breadcrumb'; // 未使用
+// @import 'bootstrap/scss/button-group'; // 未使用
 @import 'bootstrap/scss/buttons';
 @import 'bootstrap/scss/card';
 
 // @import 'bootstrap/scss/carousel'; // 未使用
-@import 'bootstrap/scss/close';
-@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/close'; // 未使用
+// @import 'bootstrap/scss/dropdown'; // 未使用
 @import 'bootstrap/scss/forms';
 @import 'bootstrap/scss/grid';
 @import 'bootstrap/scss/list-group';
@@ -44,7 +45,7 @@ $enable-negative-margins: true;
 // @import 'bootstrap/scss/popover'; // 未使用
 // @import 'bootstrap/scss/progress'; // 未使用
 // @import 'bootstrap/scss/spinners'; // 未使用
-@import 'bootstrap/scss/tables';
+// @import 'bootstrap/scss/tables'; // 未使用
 
 // @import 'bootstrap/scss/toasts'; // 未使用
 // @import 'bootstrap/scss/tooltip'; // 未使用

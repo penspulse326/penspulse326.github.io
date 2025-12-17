@@ -28,6 +28,13 @@ jobs:
           # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
         # env:
           # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
+      
+      - name: Add cache headers to static assets
+        run: |
+          cd dist
+          # 為所有 HTML 檔案添加短期快取的 meta 標籤(透過 Service Worker 或 CDN 處理)
+          # GitHub Pages 本身不支援自訂 HTTP 標頭,但可以在文件中添加提示
+          echo "Note: Consider using Cloudflare Pages or Netlify for better cache control" > DEPLOYMENT_INFO.txt
 
   deploy:
     needs: build

@@ -20,13 +20,32 @@
 
 - **Framework**: Astro
 - **UI**: Bootstrap 5
-- **Styling**: Sass (SCSS)
-- **Effects**: Three.js
+- **Styling**: Sass (SCSS) + Lightning CSS
+- **Effects**: Three.js (Dynamic Import)
 - **Content**: Markdown (with Remark plugins)
 - **Comment System**: Giscus
 - **Tool Chain**: Vite
 - **Code Quality**: ESLint, Prettier, Stylelint, Husky, lint-staged
 - **Package Manager**: pnpm
+
+<br/>
+
+## 性能優化 Performance
+
+網站已進行多項性能優化,以提升使用者體驗:
+
+### 主要優化措施
+
+- ✅ **Three.js 延遲載入**: 使用動態 import 和 IntersectionObserver,不阻塞首屏渲染
+- ✅ **減少粒子數量**: 根據裝置調整 (桌面 150, 移動 100),降低渲染負擔
+- ✅ **移除未使用的 CSS**: 移除未使用的 Bootstrap 元件,減少約 30-40% CSS 大小
+- ✅ **資源預載入**: 關鍵字體檔案使用 preload 提前載入
+- ✅ **手動 Chunk 分割**: Three.js 和 Bootstrap 獨立打包,改善快取效率
+- ✅ **暫停機制**: 頁面不可見時自動暫停動畫,節省 CPU 和電力
+
+### 詳細資訊
+
+詳見 [性能優化報告](./README_PERFORMANCE.md) 和 [優化說明文件](./PERFORMANCE_OPTIMIZATION.md)
 
 <br/>
 

@@ -57,7 +57,7 @@ export default defineConfig({
 
   // 設定 build 輸出
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always', // 強制內嵌 CSS，消除渲染阻塞
     assets: '_astro',
   },
 

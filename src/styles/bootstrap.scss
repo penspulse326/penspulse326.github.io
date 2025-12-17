@@ -57,8 +57,8 @@ $enable-negative-margins: true;
 // Optional utilities
 @import 'bootstrap/scss/utilities/api';
 
-// Import Bootstrap Icons (font-display 會由 PostCSS 自動轉換為 swap)
-@import 'bootstrap-icons/font/bootstrap-icons.css';
+// Bootstrap Icons 改為動態載入，不放在關鍵 CSS 中
+// @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // Dark mode primary color override
 [data-bs-theme='dark'] {

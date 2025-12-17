@@ -32,6 +32,9 @@ const fullOgImageUrl = new URL(ogImage, baseUrl).href;
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content={Astro.generator} name="generator" />
 
+    <!-- 資源提示：預先連接到自己的網域以加速資源載入 -->
+    <link crossorigin href={baseUrl} rel="preconnect" />
+
     <!-- 主要 Meta 標籤 -->
     <title>{siteTitle}</title>
     <meta content={siteTitle} name="title" />
@@ -61,8 +64,24 @@ const fullOgImageUrl = new URL(ogImage, baseUrl).href;
     <Footer />
 
     <script>
-      // 引入所有 Bootstrap JS 功能
-      import 'bootstrap/dist/js/bootstrap';
+      // 延後載入 Bootstrap Icons CSS，避免阻塞關鍵渲染路徑
+      async function loadBootstrapIcons() {
+        await import('bootstrap-icons/font/bootstrap-icons.css');
+      }
+
+      // 延後載入 Bootstrap JS，避免阻塞關鍵渲染路徑
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => {
+          loadBootstrapIcons();
+          import('bootstrap/dist/js/bootstrap');
+        });
+      } else {
+        // 降級方案：頁面載入完成後載入
+        window.addEventListener('load', () => {
+          loadBootstrapIcons();
+          import('bootstrap/dist/js/bootstrap');
+        });
+      }
     </script>
 
     <style is:inline>

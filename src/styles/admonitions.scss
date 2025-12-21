@@ -3,7 +3,7 @@
 
 .admonition {
   margin: 1rem 0;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   border-left: 4px solid;
   background-color: var(--bs-body-bg);
 
@@ -37,13 +37,6 @@
       }
     }
 
-    code {
-      background-color: rgb(0 0 0 / 5%);
-      padding: 0.125rem 0.25rem;
-      border-radius: 0.25rem;
-      font-size: 0.875em;
-    }
-
     pre {
       margin-top: 0.75rem;
       margin-bottom: 0.75rem;
@@ -60,7 +53,7 @@
     }
 
     li {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.15rem;
     }
   }
 }
@@ -68,7 +61,7 @@
 // Note - Primary (Blue)
 .admonition-note {
   border-left-color: var(--bs-primary);
-  background-color: rgb(var(--bs-primary-rgb), 0.2);
+  background-color: rgb(var(--bs-primary-rgb), 0.1);
 
   .admonition-heading {
     color: var(--bs-primary);
@@ -78,7 +71,7 @@
 // Tip - Success (Green)
 .admonition-tip {
   border-left-color: var(--bs-success);
-  background-color: rgb(var(--bs-success-rgb), 0.2);
+  background-color: rgb(var(--bs-success-rgb), 0.1);
 
   .admonition-heading {
     color: var(--bs-success);
@@ -88,7 +81,7 @@
 // Info - Info (Cyan)
 .admonition-info {
   border-left-color: var(--bs-info);
-  background-color: rgb(var(--bs-info-rgb), 0.2);
+  background-color: rgb(var(--bs-info-rgb), 0.1);
 
   .admonition-heading {
     color: var(--bs-info);
@@ -98,7 +91,7 @@
 // Warning - Warning (Yellow/Orange)
 .admonition-warning {
   border-left-color: var(--bs-warning);
-  background-color: rgb(var(--bs-warning-rgb), 0.2);
+  background-color: rgb(var(--bs-warning-rgb), 0.1);
 
   .admonition-heading {
     color: var(--bs-warning-text-emphasis);
@@ -108,19 +101,10 @@
 // Danger - Danger (Red)
 .admonition-danger {
   border-left-color: var(--bs-danger);
-  background-color: rgb(var(--bs-danger-rgb), 0.2);
+  background-color: rgb(var(--bs-danger-rgb), 0.1);
 
   .admonition-heading {
     color: var(--bs-danger);
-  }
-}
-
-// Dark mode adjustments
-@media (prefers-color-scheme: dark) {
-  .admonition {
-    .admonition-content code {
-      background-color: rgb(255 255 255 / 10%);
-    }
   }
 }
 

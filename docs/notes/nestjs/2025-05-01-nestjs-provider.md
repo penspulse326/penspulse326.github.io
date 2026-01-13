@@ -1,5 +1,5 @@
 ---
-title: 'Provider'
+title: '[元件] Provider'
 description: 'NestJS 的 Provider 概念'
 date: 2025-05-01 17:55:00
 keywords: [程式語言, 後端框架, 設計模式, 物件導向, 依賴注入, JavaScript, TypeScript, NestJS, OOP, DI]
@@ -7,13 +7,15 @@ tags: ['筆記', 'NestJS']
 slug: nestjs-provider
 ---
 
-provider 會**在 module 載入時先實例化並註冊到依賴注入容器**，  
-最後 controller 再透過 `token` 取得 provider 的實例後， controller 才進行實例化。
+## Token
 
-## useClass
+provider 會**在 module 載入時先實例化並註冊到 IoC Container**，最後 controller 再透過 token 取得 provider 的實例後， controller 才進行實例化。
 
-在 module 的元數據寫好的 providers 預設的 token 寫法是 `useClass`，  
-而 `useClass` 可以被縮寫：
+下面是宣告 token 的幾種方式：
+
+### useClass
+
+在 module 元數據寫好的 providers 預設的 token 寫法是 `useClass`，例如 `TodoService` 這個類別定義會直接當成 token 名稱。大多會直接縮寫：
 
 ```ts
 @Module({
@@ -36,19 +38,11 @@ export class TodoModule {}
 export class TodoModule {}
 ```
 
-所以可以知道 token 原本就寫在 providers 裡面了。
-
-除了 useClass，還有 3 種自訂的 provider 可以寫入：
-
-- useValue
-- useFactory
-- useExisting
-
 ---
 
-## useValue
+### useValue
 
-可以用字串設定 token 名稱並指定一個任意型別的回傳值：
+用字串設定 token 名稱並指定一個任意型別的回傳值：
 
 ```ts
 {
@@ -57,7 +51,7 @@ export class TodoModule {}
 }
 ```
 
-自訂 provider 需要在依賴注入時前綴 `@Inject` 裝飾器並傳入 token 名稱：
+自訂 provider 需要在注入時前綴裝飾器 `@Inject` 並傳入 token 名稱：
 
 ```ts
 @Controller()
@@ -76,10 +70,9 @@ export class AppController {
 
 ---
 
-## useFactory
+### useFactory
 
-可以用 callback 的方式產生回傳值，並且提供 `inject` 這個選項，  
-可以直接注入某個實例後在 callback 中呼叫其方法：
+用 callback 的方式產生回傳值，並且提供 `inject` 這個選項，可以直接先存取到別的實例，然後在 callback 中呼叫其方法：
 
 ```ts
 {
@@ -128,9 +121,9 @@ export class AppController {
 
 ---
 
-## useExisting
+### useExisting
 
-可以用其他的 token 名稱作為別名，並指定回傳已經存在的 provider 實例：
+自訂一個 token 名稱來存取已經存在的 provider 實例：
 
 ```ts
 {
@@ -156,10 +149,9 @@ export class AppController {
 
 ---
 
-## 匯出
+## 管理變數
 
-自訂 provider 都是固定的 `key-value` 格式，所以可以直接宣告成變數，  
-填入 module 的 `exports` 匯出：
+自訂 provider 都是固定的 `key-value` 格式，所以可以直接宣告成型別為 `Provider` 的變數，填入 module 的 `exports`：
 
 ```ts
 const testUseValueProvider: Provider = {
@@ -178,10 +170,9 @@ export class CustomModule {}
 
 ## 可選注入
 
-依賴注入是在建構函式裡面傳入實例作為參數，那麼參數就有**可帶可不帶**的問題，  
-可以使用 `@Optional` 標注該依賴是可選的，這樣注入時如果找不到相關的 provider 實例，  
-也還是能順利啟動，但是和一般參數一樣，沒有捕捉到的話就會變 `undefined`，  
-所以要記得在存取實例的地方加上防呆：
+依賴注入是在建構函式裡面**以參數的方式傳入實例**，那麼參數就有**可帶可不帶**的問題。
+
+因此可以使用 `@Optional` 表示該依賴是可選的，這樣注入時如果找不到相關的 provider 實例，也還是能順利啟動，但是和標記 `?` 的參數一樣，沒有傳入就會變 `undefined`，所以要記得在存取實例的地方加上防呆：
 
 ```ts
 @Controller()
@@ -207,13 +198,9 @@ export class AppController {
 
 ## 總結
 
-除了 controller 以外，大部分的功能類別都可以被歸類為 provider，  
-只是要稍微留意匯入匯出、實例化順序的問題。
+除了 controller 以外，大部分的邏輯元件都可以被歸類為 provider，只要留意匯入匯出、實例化順序的問題。
 
-到 provider 之後我才開始對 NestJS 基本的運作流程大致了解，  
-初見時一直套範例或 vibe coding，要去找其他教學除錯的時候，  
-概念很模糊，不知道什麼設定會影響到哪，也不知道問題點，  
-所以去看官方文件也無從查起 XDDD
+到 provider 之後我才開始對 NestJS 基本的運作流程大致了解，一開始就搞 Vibe Coding 的話，爬文過程很難馬上明白這些裝飾器、元數據的定義與機制QQ
 
 ---
 

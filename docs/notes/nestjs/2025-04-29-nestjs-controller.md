@@ -1,5 +1,5 @@
 ---
-title: 'Controller'
+title: '[元件] Controller'
 description: 'NestJS 的 Controller 概念'
 date: 2025-04-29 17:55:00
 keywords: [程式語言, 後端框架, 設計模式, 物件導向, 依賴注入, JavaScript, TypeScript, NestJS, OOP, DI]
@@ -19,7 +19,7 @@ export class TodoController {}
 `'todos'` 就會被註冊成可以存取的端點，可以透過 `http://localhost/todos` 這樣的網址發送請求。
 
 :::info
-`@Controller` 也會被註冊到 DI Container 裡面。
+`@Controller` 也會被註冊到 IoC Container 裡面。
 :::
 
 ---

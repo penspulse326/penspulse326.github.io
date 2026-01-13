@@ -10,7 +10,6 @@ export default defineConfig({
   output: 'static',
 
   image: {
-    // 確保圖片優化正確處理高解析度螢幕
     domains: [],
     remotePatterns: [],
   },
@@ -22,7 +21,6 @@ export default defineConfig({
   vite: {
     build: {
       cssMinify: 'lightningcss',
-      // 提高 chunk 大小警告限制
       chunkSizeWarningLimit: 600,
       rollupOptions: {
         output: {

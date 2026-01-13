@@ -1,5 +1,5 @@
 ---
-title: '[元件] Controller'
+title: 'Controller'
 description: 'NestJS 的 Controller 概念'
 date: 2025-04-29 17:55:00
 keywords: [程式語言, 後端框架, 設計模式, 物件導向, 依賴注入, JavaScript, TypeScript, NestJS, OOP, DI]
@@ -7,23 +7,16 @@ tags: ['筆記', 'NestJS']
 slug: nestjs-controller
 ---
 
-生成指令：
-
-```bash
-nest g controller <name>
-```
-
 ## 路由
 
-路由名稱會透過 `@Controller` 傳入元數據（metadata），  
-在應用程式啟動時建立一個路由表並將這個元數據註冊進去，如：
+路由名稱會透過 `@Controller` 傳入元數據 (metadata），在應用程式啟動時建立一個路由表並將這個元數據註冊進去，如：
 
 ```ts
 @Controller('todos')
 export class TodoController {}
 ```
 
-`'todos'` 就會被註冊成可以存取的端點（endpoint）。
+`'todos'` 就會被註冊成可以存取的端點，可以透過 `http://localhost/todos` 這樣的網址發送請求。
 
 :::info
 `@Controller` 也會被註冊到 DI Container 裡面。
@@ -31,9 +24,9 @@ export class TodoController {}
 
 ---
 
-## 網路請求
+## 請求
 
-controller 裡面必須使用網路請求相關的裝飾器才能正確存取路由，如：
+必須使用 HTTP method 裝飾器，才會將對應方法 (handler) 註冊到路由表，如：
 
 ```ts
 @Controller('todos')
@@ -45,16 +38,13 @@ export class TodoController {
 }
 ```
 
-此時對 `/todos` 發送 GET 請求，會成功得到 status 為 200 的空陣列，  
-這些存取路由的函式也叫做 `handler`。
+此時對 `/todos` 發送 GET 請求，執行 `getTodos` 成功的話會並得到 `[]`。
 
 ---
 
 ## 子路由
 
-子路由的概念也很直觀，直接在 `@Get` 裡面帶入字串，就可以生成一個端點，  
-如在這個 controller 下面標記 `@Get('sub')`則表示，`/todos/sub` 會被捕捉，  
-並執行 `getTodo`：
+在 `@Get` 裡面帶入字串會生成子路由的端點，如 `@Get('sub')`則表示可以存取 `/todos/sub` ：
 
 ```ts
 @Controller('todos')
@@ -71,7 +61,23 @@ export class TodoController {
 }
 ```
 
-### 裝飾器
+---
+
+## 通用路由
+
+可以透過 `*`、`+`、`?` 等符號來匹配有滿足特定條件的路徑，如：
+
+```ts
+// 這樣可以匹配 todos/bulk/goooooooood
+@Get('bulk/goo*d')
+getGood() {
+  return '這是 /bulk 下面的通用路由 goo*d';
+}
+```
+
+---
+
+## 裝飾器
 
 `handler` 的參數可以用裝飾器來解析資料，如：
 
@@ -80,7 +86,9 @@ export class TodoController {
 - `@Body`
 - `@Header`
 
-像上面的子路由，就可以透過 `@Param` 來解出：
+### @Param
+
+動態路由可以透過 `@Param` 來解出路由中的參數，例如下面的 `:id`：
 
 ```ts
 // 解析 /todos/:id
@@ -89,14 +97,14 @@ getTodo(@Param() param: { id: string }) {
   return `這是 id 為 ${param.id} 的子路由`;
 }
 
-// 更簡短的寫法，不用取出整個物件
+// 更簡短的寫法，在裝飾器中指定 key 就不用取出整個物件
 @Get(':id')
 getTodo(@Param('id') id: string) {
   return `這是 id 為 ${id} 的子路由`;
 }
 ```
 
-`@Body` 可以解出 request body：
+### @Body
 
 ```ts
 @Post()
@@ -112,12 +120,15 @@ createTodo(@Body() data: { content: string }) {
 }
 ```
 
-`@Query` 可以解出 query string：
+### @Query
 
 ```ts
 // 解析 /todos?limit=3&offset=3
 @Get()
-getTodos(@Query('limit') limit?: string, @Query('offset') offset?: string) {
+getTodos(
+  @Query('limit') limit?: string,
+  @Query('offset') offset?: string
+) {
   if (!limit) {
     return this.todos;
   }
@@ -133,30 +144,12 @@ getTodos(@Query('limit') limit?: string, @Query('offset') offset?: string) {
 }
 ```
 
-以上是設計 API 必用的裝飾器的用法。
+### @HttpCode
 
----
-
-## 通用路由
-
-可以透過符號（'\*\'、'?'、'+'）匹配特定的子路由，如：
+除了 POST 請求會回應 `201` 之外，其他方法預設都會回應 `200`，如果要自訂回傳的狀態碼，可以使用 `@HttpCode` 裝飾器，並帶入內建的常數 `HttpStatus`：
 
 ```ts
-// 這樣可以匹配 todos/bulk/goooooooood
-@Get('bulk/goo*d')
-getGood() {
-  return '這是 /bulk 下面的通用路由 goo*d';
-}
-```
-
----
-
-## HTTP Code
-
-除了 POST 請求會回應 201 之外，其他方法預設都會回應 200，  
-如果要自訂回傳的代號，可以使用 `@HttpCode` 裝飾器，並帶入內建的常數 `HttpStatus`：
-
-```ts
+// 請求成功時使用 NO_CONTENT 映射出來的 204 作為狀態碼
 @Get()
 @HttpCode(HttpStatus.NO_CONTENT)
 getTodos() {
@@ -164,14 +157,13 @@ getTodos() {
 }
 ```
 
-右鍵查看 `HttpStatus` 可以發現這些常數是 enum 資料，  
-將常見的代號與基本含義都枚舉進去。
+`HttpStatus` 裡面是用 `enum` 型別宣告的映射資料，包含了常見的狀態碼與語意匹配。
 
 ---
 
-## 回應處理
+## 回應
 
-有 3 種處理方式：
+controller 有 3 種方式處理回應：
 
 1. 標準模式
 2. RxJS 模式
@@ -198,25 +190,28 @@ async getAsyncData() {
 
 ### RxJS 模式
 
-~~我不會 RxJS~~。
+回傳一個 Observable 物件 `of`，NestJS 會訂閱這個物件的狀態，`of` 後面可以鏈式串上各種 RxJS 組織資料的方法，整個鏈式的任務結束後會將最後形成的資料送出。
 
-RxJS 可以回傳一個響應物件 `of`，如果沒有串上其他 RxJS 的串流任務的話，  
-就會直接回傳資料：
+:::info
+對呼叫它的前端或是其他服務的請求來說，一樣會收到一個非同步的回應，RxJS 的任務只存在於應用程式內部。
+:::
 
 ```ts
-@Get('data/rxjs')
-getRxjsData() {
-  return of([]);
-}
+import { catchError, map, of } from 'rxjs';
 
-// 使串流方法重新組織資料
+// 使用 RxJS 的鏈式方法重新組織資料
 @Get('data/rxjs')
 getRxjsData() {
   return of(this.todos).pipe(
-    map((todos) => todos.map((todo) => ({ ...todo, status: 'active' }))),
+    map((todos) =>
+      todos.map((todo) => ({
+        ...todo,
+        status: 'active',
+      })),
+    ),
     catchError((err) => {
       console.error('Error occurred:', err);
-      return of({ error: '獲取待辦事項失敗' });
+      return of([]);
     }),
   );
 }
@@ -224,8 +219,7 @@ getRxjsData() {
 
 ### 函式庫模式
 
-可以從底層的服務來控制回應內容，需要在 handler 裡面加入裝飾器標記，  
-如 `@Request`、`@Response`、`@Next`，對應到 Express 的 req, res, next：
+可以從底層的 API 來控制回應內容，需要在 handler 裡面加入裝飾器標記，如 `@Request`、`@Response`、`@Next`，對應到 Express 的 `req`、`res`、`next`，加上標記後就如使用 Express 一樣產生回應：
 
 ```ts
 @Get('data/lib')
@@ -234,16 +228,19 @@ getLibraryData(@Res() res: Response) {
 }
 ```
 
-但就要自訂格式，並綁定特定底層服務（Express 或 Fastify），  
-只有特定情境才會使用這種方法。
+通常會在：
+
+1. 串流任務 (streaming)
+2. 某些套件只支援 Express 的回應物件
+3. 完全控制回應程序的設定與資料
+
+才會使用到函式庫模式。因為會繞過 NestJS 的設定與元件流程，所以回應內容與格式要自行重新調整。
 
 ---
 
-## 總結
+## 小結
 
-controller 的功用大致等同 MVC 架構的 C，大部分的操作都需要用裝飾器取代，  
-需要花點時間轉換，但只要記得 `裝飾器是一種函式`，給出對應的參數就能得到相應的操作，  
-減少反覆宣告、賦值等等的程式碼。
+controller 的功能與一般 MVC 架構雷同，只是大部分的操作都需要用裝飾器取代，需要花點時間轉換，但只要記得 `裝飾器是一種函式`，給出對應的參數就能得到相應的操作，減少反覆宣告、賦值等等的程式碼。
 
 ---
 

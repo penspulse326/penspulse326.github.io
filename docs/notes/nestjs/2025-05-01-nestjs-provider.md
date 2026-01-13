@@ -7,7 +7,7 @@ tags: ['筆記', 'NestJS']
 slug: nestjs-provider
 ---
 
-## Token
+## token
 
 provider 會**在 module 載入時先實例化並註冊到 IoC Container**，最後 controller 再透過 token 取得 provider 的實例後， controller 才進行實例化。
 

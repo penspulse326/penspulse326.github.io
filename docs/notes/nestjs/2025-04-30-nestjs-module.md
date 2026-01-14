@@ -1,5 +1,5 @@
 ---
-title: '[元件] Module'
+title: 'Module'
 description: 'NestJS 的 Module 概念'
 date: 2025-04-30 17:55:00
 keywords: [程式語言, 後端框架, 設計模式, 物件導向, 依賴注入, JavaScript, TypeScript, NestJS, OOP, DI]

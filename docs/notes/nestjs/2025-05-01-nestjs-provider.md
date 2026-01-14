@@ -1,5 +1,5 @@
 ---
-title: '[元件] Provider'
+title: 'Provider'
 description: 'NestJS 的 Provider 概念'
 date: 2025-05-01 17:55:00
 keywords: [程式語言, 後端框架, 設計模式, 物件導向, 依賴注入, JavaScript, TypeScript, NestJS, OOP, DI]

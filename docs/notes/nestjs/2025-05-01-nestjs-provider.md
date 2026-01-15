@@ -196,7 +196,7 @@ export class AppController {
 
 ---
 
-## 總結
+## 小結
 
 除了 controller 以外，大部分的邏輯元件都可以被歸類為 provider，只要留意匯入匯出、實例化順序的問題。
 

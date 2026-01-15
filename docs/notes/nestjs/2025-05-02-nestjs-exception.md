@@ -1,21 +1,26 @@
 ---
-title: 'Exception'
-description: 'NestJS 的 Exception 概念'
+title: 'Exception filter'
+description: 'NestJS 的 Exception filter 概念'
 date: 2025-05-02 17:55:00
 keywords: [程式語言, 後端框架, 設計模式, 物件導向, 依賴注入, JavaScript, TypeScript, NestJS, OOP, DI]
 tags: ['筆記', 'NestJS']
-slug: nestjs-exception
+slug: nestjs-exception-filter
 ---
 
-錯誤處理器（Exception Filter）也是一種元件，可以透過 `HttpException` 這個類別，  
-建立一個拋回 response 物件。
+例外處理器 (Exception filter) 用來捕捉程序中發生的錯誤，也就是一般常見的 catch error 方法。
 
-只要是用 `HttpException` 建立或繼承出來的實例，  
-都會被內建的錯誤處理器捕捉。
+NestJS 的全域錯誤處理層只會捕捉透過 `HttpException` 建立或繼承出來的實例，其他類型的 error 則需要自己設計 filter 元件，否則只會回傳 `Internal server error`：
+
+```json
+{
+  "statusCode": 500,
+  "message": "Internal server error"
+}
+```
 
 ## 標準 exception
 
-直接建立一個 `HttpException` 實例並 throw，可以帶入自訂訊息和回應代號：
+`throw` 一個 `HttpException` 實例，建構函式要帶入自訂訊息和狀態碼：
 
 ```ts
 @Get('test-standard-exception')
@@ -33,7 +38,7 @@ getStandardException() {
 }
 ```
 
-自訂訊息的位置也可以改為物件，來取代預設的格式：
+自訂訊息也可以改為傳入物件，來蓋掉預設的格式：
 
 ```ts
 @Get('test-standard-exception')
@@ -47,6 +52,8 @@ getStandardException() {
 }
 ```
 
+得到：
+
 ```json
 {
   "code": 400,
@@ -54,12 +61,15 @@ getStandardException() {
 }
 ```
 
+:::info
+建構函式帶入的代號也會作為 HTTP 回應物件的狀態碼，與自動產生 body 時的 `statusCode` 會是一致的，除非在自訂訊息中故意複寫一個不同的代碼。
+:::
+
 ---
 
 ## 內建 exception
 
-可以直接選擇要實例化哪一個代號的 exception，  
-該類別的名稱等同於 `HttpStatus` 各個狀態的名稱，如 `new BadRequestException`：
+NestJS 有根據狀態碼的語意封裝好的 exception，例如可以實例化 `UnauthorizedException`，這樣產生的回應就會自動帶入這個 `401` 狀態碼 ：
 
 ```ts
 @Get('test-built-in-exception')
@@ -68,7 +78,7 @@ getBuiltInException() {
 }
 ```
 
-回應會多了 `error` 這個欄位描述這個 exception，以及自動帶入指定的 http code：
+自動產生的回應物件多了 `error` 這個欄位描述這個 exception：
 
 ```json
 {
@@ -83,12 +93,12 @@ getBuiltInException() {
 ```ts
 @Get('test-built-in-exception')
 getBuiltInException() {
-  const customExceptionObj = {
+  const customBody = {
     code: HttpStatus.UNAUTHORIZED,
     msg: '這是自訂格式的 unauthorized exception',
   };
 
-  throw new UnauthorizedException(customExceptionObj);
+  throw new UnauthorizedException(customBody);
 }
 ```
 
@@ -103,38 +113,74 @@ getBuiltInException() {
 
 ## 自訂 exception
 
+需要統一格式時也可以自定義一個繼承某個 exception 的類別：
+
+```ts
+export class CustomException extends HttpException {
+  constructor() {
+    super('自訂 exception 的錯誤', HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
+```
+
+```ts
+@Get('test-custom-exception')
+getCustomException() {
+  throw new CustomException();
+}
+```
+
+---
+
+## filter
+
 錯誤處理器也可以自己生成：
 
 ```
 nest g filter filter/http
 ```
 
-初始架構是一個帶有 `@Catch` 裝飾器的類別，泛型 T 可以改寫成我們要實作的類型：
+CLI 會生成一個帶有 `@Catch` 裝飾器的類別，泛型 `T` 再改寫成想要捕捉的類型：
 
 ```ts
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 
 @Catch()
-export class HttpFilter<T> implements ExceptionFilter {
+export class MyHttpFilter<T> implements ExceptionFilter {
   catch(exception: T, host: ArgumentsHost) {}
 }
 ```
 
-假設我要做一個捕捉 http 請求的 filter，就會在 `@Catch` 傳入 `HttpException`，  
-並拓展泛型 T，確保稍後 `exception` 能夠存取 `HttpException` 的屬性和方法：
+假設要做一個捕捉 HttpException 的 filter，就會在 `@Catch` 傳入 `HttpException`，並拓展泛型 T，確保 `exception: T` 能夠存取 `HttpException` 的屬性和方法：
 
 ```ts
 @Catch(HttpException)
-export class HttpFilter<T extends HttpException> implements ExceptionFilter {
+export class MyHttpFilter<T extends HttpException> implements ExceptionFilter {
   catch(exception: T, host: ArgumentsHost) {}
 }
+```
+
+`@Catch()` 用來指定要捕捉的錯誤類別，本質上是 `try&catch` 語法，所以大部分的錯誤都可以填入裝飾器：
+
+```ts
+// 同時處理多個 HttpException 類型的 exception
+@Catch(
+  BadRequestException,
+  UnauthorizedException,
+  ForbiddenException,
+  NotFoundException
+)
+
+// JS 標準錯誤
+@Catch(ReferenceError)
+
+// 全部的錯誤都捕捉，此時 exception: unknown
+@Catch()
 ```
 
 ### ArgumentsHost
 
-host 本身是一個類別，它是由 `ArgumentsHost` 來定義不同架構來源的介面（interface），  
-如 `RESTful API`、`RPC`、`WebSocket`，因為這些架構的參數內容不太一樣，  
-所以可以透過封裝好的方法來取得對應參數：
+`host` 定義了一些方法來處理不同網路架構的介面 (interface)，HTTP、RPC、WebSocket，這些架構的參數內容不同：
 
 ```ts
 catch(exception: T, host: ArgumentsHost) {
@@ -160,8 +206,7 @@ catch(exception: T, host: ArgumentsHost) {
 }
 ```
 
-`ArgumentsHost` 的定義檔裡面包含了這一系列的介面，  
-像 `HttpArgumentsHost` 就是很標準的 3 個老朋友：
+`ArgumentsHost` 的定義檔裡面包含各架構的參數，像 `HttpArgumentsHost` 就是很標準的 HTTP 物件與函式：
 
 ```ts
 export interface HttpArgumentsHost {
@@ -178,7 +223,7 @@ export interface HttpArgumentsHost {
 ```
 
 :::warning
-ArgumentsHost 的 getResponse 是 HTTP 物件，exception 的 getResponse 是繼承自 HttpException，內容是被捕捉到的錯誤提示物件。
+`ctx.getResponse` 是取得 HTTP 物件，`exception.getResponse` 是取得 exception 的回應內容，也就是上面在 `throw` 各種 exception 實例時傳入建構函式的訊息 。
 :::
 
 ---
@@ -188,17 +233,17 @@ ArgumentsHost 的 getResponse 是 HTTP 物件，exception 的 getResponse 是繼
 使用 `@UseFilter` 標注在 controller 的方法上就可以套用指定的 filter：
 
 ```ts
-@UseFilters(HttpFilter)
-@Get('test-http-filter')
+@UseFilters(MyHttpFilter)
+@Get('test-my-http-filter')
 getHttpFilterException() {
-  throw new UnprocessableEntityException('這是自訂格式的 422 錯誤');
+  throw new UnprocessableEntityException('這是自訂 filter 的 422 錯誤');
 }
 ```
 
 也可以標注在 `@Controller` 上，讓整個 controller 都套用：
 
 ```ts
-@UseFilters(HttpFilter)
+@UseFilters(MyHttpFilter)
 @Controller()
 export class AppController {
   //...
@@ -209,32 +254,34 @@ export class AppController {
 
 ### 全域套用
 
-可以在根模組進行注入（推薦）：
+在根模組進行注入，有多個自訂 filter 需要套用時仍然共用 `APP_FILTER` 這個 token，如果多個 filter 都可以捕捉到同類型的錯誤，會依照這裡的陣列順序套用：
 
 ```ts
+import { APP_FILTER } from '@nest/core';
+
 @Module({
   controllers: [AppController],
   providers: [
     {
       provide: APP_FILTER,
-      useClass: HttpFilter,
+      useClass: MyHttpFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: BadRequestFilter,
     },
   ],
 })
 export class AppModule {}
 ```
 
-:::warning
-注入的 token 名稱必須是 APP_FILTER 才能全域套用。
-:::
-
-或是在啟動函式裡面呼叫 `useGlobalFilters` 並傳入一個 filter 的實例後套用：
+或是在啟動程序裡面呼叫 `useGlobalFilters` 並傳入一個 filter 的實例：
 
 ```ts
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // 建立實例
-  app.useGlobalFilters(new HttpFilter());
+  app.useGlobalFilters(new MyHttpFilter());
   await app.listen(process.env.PORT ?? 3000);
 }
 ```
@@ -249,7 +296,7 @@ async function bootstrap() {
 {
   "code": 422,
   "message": {
-    "message": "這是自訂格式的 422 錯誤",
+    "message": "這是自訂 filter 的 422 錯誤",
     "error": "Unprocessable Entity",
     "statusCode": 422
   },
@@ -257,8 +304,7 @@ async function bootstrap() {
 }
 ```
 
-外層的 message 被塞入的是內建的 exception 資料，所以需要調整 `getResponse` 的判斷，  
-`exception.getResponse()` 的型別是 `string | object`：
+外層的 `message` 被塞入的是內建 exception 回應物件，需要調整 `exception.getResponse()` 輸出的內容：
 
 ```ts
 const message = (() => {
@@ -273,29 +319,7 @@ const message = (() => {
 })();
 ```
 
-這樣 throw 出去的 exception 參數進到 HttpFilter 後就會進行上面的判斷，  
-傳入字串就會直接把字串當成 message 的值，傳入物件就取出物件裡面的 message 作為值：
-
-```ts
-@Get('test-http-filter')
-getHttpFilterException() {
-  // 不傳任何東西
-  throw new UnprocessableEntityException();
-}
-```
-
-不傳任何東西，預設會 throw 出內建的 exception 格式，  
-此時就會帶出 422 exception 的 `message`：
-
-```json
-{
-  "code": 422,
-  "message": "Unprocessable Entity",
-  "timestamp": "2025-05-05T07:00:13.501Z"
-}
-```
-
-傳入字串：
+這樣 `throw` 時傳入建構函式的字串會進行上面的判斷，字串會作為 `message` 的值輸出，傳入物件就取出物件裡面的 `message`：
 
 ```ts
 @Get('test-http-filter')
@@ -305,8 +329,6 @@ getHttpFilterException() {
 }
 ```
 
-回應：
-
 ```json
 {
   "code": 422,
@@ -315,32 +337,33 @@ getHttpFilterException() {
 }
 ```
 
-因為剛剛修正 `getResponse` 時沒有做額外的型別檢查，所以回應會取不出來 message：
+不傳任何東西時會自動帶入內建 exception 回應物件，所以也適用上面的斷言：
 
 ```ts
 @Get('test-http-filter')
 getHttpFilterException() {
-  // 傳一個空物件
-  throw new UnprocessableEntityException({});
+  // 不傳任何東西
+  throw new UnprocessableEntityException();
 }
 ```
 
-回應：
+此時就會帶出內建 422 exception 的 `message`：
 
 ```json
 {
   "code": 422,
-  "timestamp": "2025-05-05T07:12:10.939Z"
+  "message": "Unprocessable Entity",
+  "timestamp": "2025-05-05T07:00:13.501Z"
 }
 ```
 
 ---
 
-## 總結
+## 小結
 
-一般來說內建的 exception 只要能訂出回應的物件型別，已經能應付大多情境，  
-接入外部的服務或是 `ValidationPipe` 產生的報錯，如果也需要被固定在統一格式的話，  
-就會需要自訂的 exception filter 來實現邏輯判斷，這樣也會讓前後端比較容易對照。
+內建 exception 只要訂好回應格式，已經能應付大多情境。
+
+接入外部服務或是 `ValidationPipe` 產生的報錯，也需要自訂統一格式的話，就會需要自己實作 filter。
 
 ---
 

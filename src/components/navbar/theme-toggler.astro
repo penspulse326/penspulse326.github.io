@@ -18,16 +18,15 @@
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   };
 
-  const setTheme = (theme: string) => {
-    if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      htmlElement.setAttribute('data-bs-theme', 'dark');
-    } else {
-      htmlElement.setAttribute('data-bs-theme', theme);
-    }
-    // Add logic to show/hide icons based on theme
+  const updateIcons = (theme: string) => {
     const moonIcon = document.getElementById('moon-icon')!;
     const sunIcon = document.getElementById('sun-icon')!;
-    if (theme === 'dark') {
+
+    // 如果是 auto，我們需要知道目前的實際主題
+    const actualTheme =
+      theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme;
+
+    if (actualTheme === 'dark') {
       moonIcon.classList.remove('d-none');
       sunIcon.classList.add('d-none');
     } else {
@@ -36,7 +35,17 @@
     }
   };
 
-  setTheme(getPreferredTheme());
+  const setTheme = (theme: string) => {
+    if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      htmlElement.setAttribute('data-bs-theme', 'dark');
+    } else {
+      htmlElement.setAttribute('data-bs-theme', theme);
+    }
+    updateIcons(theme);
+  };
+
+  // 初始化圖示 (因為 layout 已經設定好 data-bs-theme，這裡只需要同步圖示)
+  updateIcons(getPreferredTheme());
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     const storedTheme = getStoredTheme();

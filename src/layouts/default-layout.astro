@@ -55,6 +55,28 @@ const fullOgImageUrl = new URL(ogImage, baseUrl).href;
     <meta content={siteTitle} property="twitter:title" />
     <meta content={description} property="twitter:description" />
     <meta content={fullOgImageUrl} property="twitter:image" />
+
+    <!-- Theme Initialization Script -->
+    <script is:inline>
+      const getStoredTheme = () => localStorage.getItem('theme');
+      const getPreferredTheme = () => {
+        const storedTheme = getStoredTheme();
+        if (storedTheme) {
+          return storedTheme;
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+
+      const setTheme = (theme) => {
+        if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-bs-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-bs-theme', theme);
+        }
+      };
+
+      setTheme(getPreferredTheme());
+    </script>
   </head>
   <body>
     <Navbar />

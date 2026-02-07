@@ -26,27 +26,22 @@
 </style>
 
 <script>
-  import type * as THREE from 'three';
+  import * as THREE from 'three';
 
   let isInitialized = false;
-  const container = document.getElementById('psp-waves-container') as HTMLDivElement;
 
-  async function initWaves() {
+  function initWaves() {
     if (isInitialized) return;
-    isInitialized = true;
 
-    const THREE = await import('three');
+    const container = document.getElementById('psp-waves-container') as HTMLDivElement;
+    if (!container) return;
+
+    isInitialized = true;
 
     // 配置參數
     const config = {
-      waveCount: 3, // 波浪數量
-      waveSpeed: 0.001, // 基礎流動速度
-      viscosity: 0.1, // 黏滯度（影響波的平滑度）
-      startColor: 0xffffff, // 波浪顏色
       yOffset: -500, // 垂直偏移 (負數代表往下移)
     };
-
-    if (!container) return;
 
     // 建立場景
     const scene = new THREE.Scene();
@@ -83,19 +78,11 @@
     ];
 
     // 螢幕寬度對應的 3D 寬度計算
-    // 相機垂直 FOV = 75度
-    // 可視高度 (at Z=0) = 2 * tan(75/2) * 1000 ≈ 1534
-    // 對於 banner (e.g. 1920x300)，Aspect Ratio ≈ 6.4
-    // 可視寬度 = 1534 * 6.4 ≈ 9817
-    // 所以寬度必須非常大才能覆蓋整個橫幅
-
-    // 加大寬度以適應各種螢幕比例
     const planeWidth = 12000;
     const planeSegments = 50; // 配合寬度增加分段數以保持平滑
 
     waveParams.forEach((param) => {
       // 每個波浪是一條帶子，所以用 PlaneGeometry
-      // width: planeWidth, height: 200 (帶子寬度)
       const geometry = new THREE.PlaneGeometry(planeWidth, 1200, planeSegments, 1);
 
       const material = new THREE.MeshBasicMaterial({
@@ -111,11 +98,6 @@
       mesh.position.z = param.z;
       mesh.position.y = config.yOffset; // 應用垂直偏移
 
-      // 旋轉
-      // 為了不要讓波浪只是單純的水平線，我們可以讓整個平面稍微轉一點角度
-      // 這樣在寬螢幕上會更有流動感 (可選)
-      // mesh.rotation.z = Math.PI / 36; // 5度
-
       // 儲存自定義數據到 userData
       mesh.userData = {
         speed: param.speed,
@@ -125,8 +107,6 @@
       };
 
       // 備份原始頂點
-      // PlaneGeometry 的 position buffer 是 Float32Array
-      // 每 3 個數值為一個頂點 (x, y, z)
       const positions = geometry.attributes.position.array;
       for (let i = 0; i < positions.length; i++) {
         mesh.userData.baseVertices.push(positions[i]);
@@ -148,40 +128,20 @@
         const count = mesh.geometry.attributes.position.count;
         const baseVertices = mesh.userData.baseVertices;
 
-        // 針對 PlaneGeometry (Segments x 1)
-        // 頂點排列順序是一排一排的
-        // 我們主要改變 Y 軸，根據 X 軸產生正弦波
-
         for (let i = 0; i < count; i++) {
           const x = baseVertices[i * 3];
-          // const y = baseVertices[i * 3 + 1]; // 原始 Y
-          // const z = baseVertices[i * 3 + 2];
-
-          // 波浪公式
-          // y = sin(x * freq + time * speed) * amp
-          // 多重正弦波疊加看起來更自然
           const waveX = x * 0.0005 + mesh.userData.offset;
-
-          // 調整時間係數以匹配想要的速度
-          const t = time * mesh.userData.speed * 1.0;
+          const t = time * mesh.userData.speed;
 
           const movement =
             Math.sin(waveX + t) * mesh.userData.amplitude +
             Math.sin(waveX * 2 + t * 1.5) * (mesh.userData.amplitude * 0.5);
 
-          // 更新 Y
-          // 保持原本的 Y 偏移 (帶子本身的寬度)
           positions[i * 3 + 1] = baseVertices[i * 3 + 1] + movement;
         }
 
         mesh.geometry.attributes.position.needsUpdate = true;
       });
-
-      // 簡單的背景漸變邏輯 (保留原有的青到藍)
-      // 使用 hsl 旋轉 Hue 讓背景有點變化
-      // 或者保持靜態漸層，這裡做一個微幅的 Hue 變化
-      // const hue = (Math.sin(time * 0.1) * 10 + 200); // Blue range
-      // container.style.background = `linear-gradient(to bottom, hsl(${hue}, 80%, 30%) 0%, hsl(${hue + 40}, 80%, 20%) 100%)`;
 
       renderer.render(scene, camera);
     }
@@ -215,10 +175,10 @@
     window.addEventListener('beforeunload', cleanup);
   }
 
-  // 初始化
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => initWaves(), { timeout: 2000 });
+  // 嘗試在不同階段初始化，確保盡快執行
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initWaves();
   } else {
-    setTimeout(initWaves, 1000);
+    document.addEventListener('DOMContentLoaded', initWaves);
   }
 </script>

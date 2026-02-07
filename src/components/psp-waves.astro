@@ -34,7 +34,12 @@
     if (isInitialized) return;
 
     const container = document.getElementById('psp-waves-container') as HTMLDivElement;
-    if (!container) return;
+
+    // 如果容器還沒準備好，使用 RAF 重試，直到找到容器為止
+    if (!container) {
+      requestAnimationFrame(initWaves);
+      return;
+    }
 
     isInitialized = true;
 

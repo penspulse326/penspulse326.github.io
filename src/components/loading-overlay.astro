@@ -1,7 +1,14 @@
----
-// LoadingOverlay.astro
-// 一個全螢幕的遮罩，用於在 Three.js 準備好之前顯示
----
+<!-- LoadingOverlay.astro -->
+<script is:inline>
+  // 使用 is:inline 確保這段腳本立即執行，防止畫面閃爍
+  (function () {
+    if (sessionStorage.getItem('hasVisited')) {
+      document.documentElement.classList.add('skip-loading');
+    } else {
+      sessionStorage.setItem('hasVisited', 'true');
+    }
+  })();
+</script>
 
 <div id="loading-overlay" class="loading-overlay">
   <div class="loader-content">
@@ -17,6 +24,11 @@
 </div>
 
 <style>
+  /* 如果有 skip-loading 類別，直接隱藏遮罩 */
+  :global(.skip-loading) .loading-overlay {
+    display: none !important;
+  }
+
   .loading-overlay {
     position: fixed;
     top: 0;

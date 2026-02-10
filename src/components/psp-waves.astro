@@ -30,12 +30,22 @@
 
   let isInitialized = false;
 
+  // 使用 LoadingManager 管理載入狀態
+  const loadingManager = new THREE.LoadingManager();
+
+  loadingManager.onLoad = () => {
+    // 當所有資源載入完成時（目前這個組件沒有外部資源，但保持架構完整）
+    // 我們在下一幀觸發事件，確保渲染器已經準備好第一幀
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new CustomEvent('threejs-ready'));
+    });
+  };
+
   function initWaves() {
     if (isInitialized) return;
 
     const container = document.getElementById('psp-waves-container') as HTMLDivElement;
 
-    // 如果容器還沒準備好，使用 RAF 重試，直到找到容器為止
     if (!container) {
       requestAnimationFrame(initWaves);
       return;
@@ -45,7 +55,7 @@
 
     // 配置參數
     const config = {
-      yOffset: -500, // 垂直偏移 (負數代表往下移)
+      yOffset: -500,
     };
 
     // 建立場景
@@ -57,7 +67,6 @@
     const near = 1;
     const far = 10000;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    // 調整相機位置，使其看向波浪的側面/上方
     camera.position.set(0, 0, 1000);
     camera.lookAt(0, 0, 0);
 
@@ -69,49 +78,39 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // 創建波浪
-    // 我們使用一群粒子或線條來模擬
-    // 這裡使用 Mesh + PlaneGeometry 並且動態更新頂點來製作「絲帶」效果
-
     const waves: THREE.Mesh[] = [];
 
-    // 定義每個波浪的參數
     const waveParams = [
       { color: 0xffffff, opacity: 0.15, z: 0, speed: 0.3, offset: 0, amplitude: 200 },
       { color: 0xffffff, opacity: 0.1, z: -100, speed: 0.9, offset: 200, amplitude: 150 },
       { color: 0xffffff, opacity: 0.05, z: -200, speed: 0.6, offset: 400, amplitude: 100 },
     ];
 
-    // 螢幕寬度對應的 3D 寬度計算
     const planeWidth = 12000;
-    const planeSegments = 50; // 配合寬度增加分段數以保持平滑
+    const planeSegments = 50;
 
     waveParams.forEach((param) => {
-      // 每個波浪是一條帶子，所以用 PlaneGeometry
       const geometry = new THREE.PlaneGeometry(planeWidth, 1200, planeSegments, 1);
-
       const material = new THREE.MeshBasicMaterial({
         color: param.color,
         transparent: true,
         opacity: param.opacity,
         side: THREE.DoubleSide,
-        depthWrite: false, // 避免遮擋
-        blending: THREE.AdditiveBlending, // 發光效果
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
       });
 
       const mesh = new THREE.Mesh(geometry, material);
       mesh.position.z = param.z;
-      mesh.position.y = config.yOffset; // 應用垂直偏移
+      mesh.position.y = config.yOffset;
 
-      // 儲存自定義數據到 userData
       mesh.userData = {
         speed: param.speed,
         offset: param.offset,
-        baseVertices: [], // 儲存原始頂點位置
+        baseVertices: [],
         amplitude: param.amplitude,
       };
 
-      // 備份原始頂點
       const positions = geometry.attributes.position.array;
       for (let i = 0; i < positions.length; i++) {
         mesh.userData.baseVertices.push(positions[i]);
@@ -123,11 +122,8 @@
 
     function animate() {
       requestAnimationFrame(animate);
-
-      // 使用時間戳記讓動畫速度一致
       const time = performance.now() * 0.001;
 
-      // 更新波浪頂點
       waves.forEach((mesh) => {
         const positions = mesh.geometry.attributes.position.array;
         const count = mesh.geometry.attributes.position.count;
@@ -154,18 +150,31 @@
     // Resize 處理
     function handleResize() {
       if (!container) return;
-
       const width = container.offsetWidth;
       const height = container.offsetHeight;
-
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-
       renderer.setSize(width, height);
     }
 
     window.addEventListener('resize', handleResize);
     animate();
+
+    // 如果沒有資源要加載，手動觸發 LoadingManager 的 onLoad
+    // 這樣即使目前沒用 TextureLoader 等，遮罩也能正確消失
+    // 如果未來在這個組件加了 TextureLoader(loadingManager).load(...)，這行可以拿掉或改成檢查進度
+    const checkLoading = () => {
+      // 在這裡檢查是否還有待處裡的資源，通常 LoadingManager 會自動處理
+      // 但因為我們目前實例化了它卻沒給它任務，它可能不會觸發 onLoad
+      // 這裡我們模擬一個任務或者直接調用
+      if (waves.length > 0) {
+        // 確保波浪已經建立
+        setTimeout(() => {
+          loadingManager.onLoad();
+        }, 300); // 給一點緩衝時間讓初次渲染更穩定
+      }
+    };
+    checkLoading();
 
     // 清理
     const cleanup = () => {
@@ -180,10 +189,5 @@
     window.addEventListener('beforeunload', cleanup);
   }
 
-  // 嘗試在不同階段初始化，確保盡快執行
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    initWaves();
-  } else {
-    document.addEventListener('DOMContentLoaded', initWaves);
-  }
+  initWaves();
 </script>

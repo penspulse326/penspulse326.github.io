@@ -5,11 +5,8 @@ import { createContentManager } from './content';
 const manager = createContentManager('plans', '/plans');
 
 export const getAllPlans = manager.getAllContent;
-export const getPlanById = manager.getContentById;
-export const getPlanByParams = manager.getContentByParams;
 
 export type PlanEntry = ContentEntry;
-export type CategoryPlanItem = CategoryContentItem;
 export interface CategoryWithPlans {
   id: string;
   label: string;

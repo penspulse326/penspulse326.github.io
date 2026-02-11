@@ -5,12 +5,9 @@ import { createContentManager } from './content';
 const manager = createContentManager('notes', '/notes');
 
 export const getAllNotes = manager.getAllContent;
-export const getNoteById = manager.getContentById;
-export const getNoteByParams = manager.getContentByParams;
 
 // 為了向後兼容，保留舊的類型名稱
 export type NoteEntry = ContentEntry;
-export type CategoryNoteItem = CategoryContentItem;
 export interface CategoryWithNotes {
   id: string;
   label: string;

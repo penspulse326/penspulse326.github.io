@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "astro": "^5.15.5",
+    "astro-expressive-code": "^0.41.7",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "remark-directive": "^4.0.0",

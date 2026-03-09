@@ -74,7 +74,7 @@ const showMobile = variant === 'mobile' || variant === 'both';
 
 <script>
   // 初始化目錄功能
-  function initTOC() {
+  function initToC() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -144,9 +144,9 @@ const showMobile = variant === 'mobile' || variant === 'both';
 
   // 頁面載入時初始化
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTOC);
+    document.addEventListener('DOMContentLoaded', initToC);
   } else {
-    initTOC();
+    initToC();
   }
 </script>
 

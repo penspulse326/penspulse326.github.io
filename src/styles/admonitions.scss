@@ -74,7 +74,7 @@
   background-color: rgb(var(--bs-success-rgb), 0.1);
 
   .admonition-heading {
-    color: var(--bs-success);
+    color: var(--bs-success-text-emphasis);
   }
 }
 
@@ -84,7 +84,7 @@
   background-color: rgb(var(--bs-info-rgb), 0.1);
 
   .admonition-heading {
-    color: var(--bs-info);
+    color: var(--bs-info-text-emphasis);
   }
 }
 

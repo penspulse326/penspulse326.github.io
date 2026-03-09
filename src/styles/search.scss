@@ -16,7 +16,13 @@
 /* 讓搜尋結果以絕對定位浮出，不影響導覽列排版 */
 .pagefind-custom {
   position: relative;
-  min-width: 300px;
+  min-width: 0;
+}
+
+@media (width >= 992px) {
+  .pagefind-custom {
+    min-width: 300px;
+  }
 }
 
 /* 移除預設的變數高度連動，強制設定搜尋框為常規高度（例如 Bootstrap 預設的 38px） */
@@ -74,6 +80,7 @@
 }
 
 /* 讓手機端的搜尋框有正確的寬度 */
-#mobile-search.pagefind-custom {
+#mobile-search.pagefind-custom,
+#mobile-nav-search.pagefind-custom {
   width: 100%;
 }

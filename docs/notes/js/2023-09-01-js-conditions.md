@@ -3,49 +3,68 @@ title: '條件判斷'
 description: '理解 if, switch 的差異，與三元運算、短路的運用'
 date: 2023-09-01 09:59:29
 keywords: [JavaScript, 條件判斷, 三元運算, 短路, conditionals, ternary-operator, short-circuit-evaluation]
-tags: ['筆記', 'JavaScript']
-slug: js-conditions
+slug: conditionals
 ---
 
-條件判斷是控制程式運行流程的關鍵，寫得好就上天堂，寫不好就波動拳。
+口語上常說的「如果」、「假設」是控制程式運行流程的關鍵語法。
 
 ## if-else
 
-依照**判斷區間**的 true / false 來決定是否執行：
+條件式為 `true` 時就會執行內容：
 
 ```js
-let a = 1;
+const a = 1;
 
 if (a > 0) {
-  console.log('a 大於 0'); // true 會執行
+  console.log('a 大於 0'); // a > 0 為 true 所以會執行
 }
 ```
 
-能判別為 true 的叫做**真值**（truthy），判別為 false 的則是**假值**（falsy），  
-除了大於、小於等等的比較結果，也經常用在判定某些變數、物件存不存在，  
-以下都是會判定為 false 的假值：
+會自動轉型為 `true` 的是**真值** (truthy），`false` 是**假值** (falsy) 。
 
-- undefined
-- 0
-- ''（空字串）
-- null
-- NaN
+以下都會轉為假值：
+
+- `undefined`
+- `0`
+- `''`（空字串）
+- `null`
+- `NaN`
 
 ```js
 if (message) {
   console.log('有訊息：', message);
 } else {
-  // 訊息有可能不存在，會是空字串、undefined、null 等等的值
-  console.log('沒有訊息');
+  console.log('沒有訊息'); // 訊息如果是空字串、undefined、null 等
 }
 ```
+
+因此條件判斷除了大於、小於等數值比較，也經常用在判定**某些內容是否存在**。
 
 ---
 
 ## switch
 
-switch 是**拿傳入的值和 case 的值比較是否嚴格相等**，來決定是否執行該 case，  
-和 case 的條件成立與否無關：
+需要傳入一個值，然後列舉對應的情境 (case) 與執行內容：
+
+```js
+const letter = 'A';
+
+switch (typeof letter) {
+  case 'string':
+    console.log('這是字串');
+    break;
+  default:
+    console.log('不是字串');
+}
+```
+
+:::warning
+`case` 中如果沒有 `break` 或 `return`，判斷會一直執行下去。
+:::
+
+`switch` 通常用來列舉一個值可能會出現哪些。
+
+下面是一個語意上看起來正確，但實際上**有問題的用法**：
 
 ```js
 let wallet = 300;
@@ -55,58 +74,30 @@ switch (wallet) {
     console.log('給我一瓶酒再給我一支菸');
     break;
   case wallet > 100:
-    console.log('因為錢就是我快樂的泉源');
+    console.log('快把我的悲傷都帶走');
     break;
   default:
     console.log('把愛勇氣希望都賣了能換來多少錢');
 }
 
-// 會印出 '把愛勇氣希望都賣了能換來多少錢'
+// 印出 '把愛勇氣希望都賣了能換來多少錢'
 ```
 
-`wallet < 100` 雖然條件成立，但這個判斷式實際上代表 true 這個值，  
-所以程式碼運行時是在比較 `wallet` 和 `case` 的值是否相等，  
-而 `wallet` 的 300 並不**嚴格相等**於 true，也就沒有進到 `wallet > 100` 這個 case，  
-最後執行的是 default 的內容。
+所以看起來好像要執行 `case wallet > 100` 並印出 `'快把我的悲傷都帶走'`，但最後執行了 `default` 的內容，因為 `300 > 100` 雖然是對的，但這個條件式回傳的是 `true`，所以實際上變成 `case true:`。
 
-想進到 case，只要把 `switch(wallet)` 改成 `switch(true)` 即可，  
+要執行哪個 `case`，是看 `switch ()` 括號中的值和 `case` 的值是否相等，而 `switch (300)` 並不等於 `case true`。
+
+要進到 `wallet > 100` 這個 `case`，只要把 `switch(wallet)` 改成 `switch(true)` 即可，  
 但一般不這麼做是因為**不符合語意**。
-
-需要列舉出所有純值的結果時，switch 會比較好讀，也可以避免過多巢狀結構。  
-而需要同時符合多個條件時，if-else 會是比較好閱讀的：
-
-```js
-// 需要多重條件判斷就用 if-else
-if (bmi > 35) {
-  console.log('重度肥配');
-} else if (bmi < 35 && bmi >= 30) {
-  console.log('中度肥胖');
-}
-
-// 有明確可以列舉的 case
-switch (option) {
-  case 'A':
-    console.log('選項 A 不是答案');
-    break;
-  case 'B':
-    console.log('選項 B 不是答案');
-    break;
-  case 'C':
-    console.log('選項 C 是正確答案');
-    break;
-  default:
-    console.log('你怎麼沒選答案');
-}
-```
 
 ---
 
 ## 三元運算
 
-如果需要**針對某個狀態**的 true/false 接收對應的內容，可以用三元運算簡化程式碼長度：
+如果條件判斷只是單純地看某個變數的真假值，**並且需要一個回傳值**，可以用三元運算簡化程式碼長度：
 
 ```js
-let result = getData();
+const result = getData();
 
 // if else 的寫法
 if (result) {
@@ -119,11 +110,10 @@ if (result) {
 console.log(result ? '有資料' : '沒資料');
 ```
 
-也可以像 if-else 寫一些程式碼進去執行，如下面範例，  
-但個人覺得**三元運算單純用在取值就好**，否則可讀性會有點差：
+也可以寫一些程式碼進去執行，如下面範例，但個人覺得三元運算單純用在簡單的取值就好：
 
 ```js
-let message = getMessage();
+const message = getMessage();
 
 // 不好的寫法
 message ? console.log('有訊息') : console.log('沒訊息');
@@ -132,50 +122,58 @@ message ? console.log('有訊息') : console.log('沒訊息');
 console.log(message ? '有訊息' : '沒訊息');
 
 // 這樣也可以
-let message = getMessage() ? '有訊息' : '沒訊息';
+const message = getMessage() ? '有訊息' : '沒訊息';
 console.log(message);
+```
+
+連續條件判斷也可以這樣斷行，但我個人不太會這樣寫：
+
+```js
+const letter = 'A';
+
+typeof letter === 'string' ? '這是字串'
+  : typeof letter === 'number' ? '這是數字'
+  : typeof letter === 'boolean' ? '這是布林值'
+  : typeof letter === 'object' ? '這是物件'
+  : typeof letter === 'undefined' ? '這是 undefined'
 ```
 
 ---
 
-## 短路取值
+## 短路求值
 
-可以組合多個值並回傳一個真假值，經常和 if 一起使用，做多重條件的判斷。
+邏輯運算子 (operator) 會判斷左右兩邊內容的真假值並回傳**原始值**。每種運算子的真假值判斷方式不同，有可能會提前終止並回傳結果，類似電路的**短路**概念。
 
-### OR ||
+如果原始值本身就是我們需要的內容，就可以使用短路求值來精簡程式碼。
 
-**有一邊為 true 就成立**，  
-兩邊都是 true 時 ，只會提前返回第一個真值的「內容」，不會進到後面的判斷，  
-如果真值本身就是我們需要的內容（非空的字串、非零的數字等等）也可以用 OR 取值。
+### OR
 
-下面範例是假設執行 getData() 會得到一個陣列資料，  
-如果沒有取到資料就賦予一個空陣列給 data：
+- 一邊為 `true` 就成立
+- 返回第一個**真值的原始值**
+
+例如：`getData()` 會得到一個陣列或 `null`，搭配 OR 運算就可以保證 `data` 最後不會是 `null`，防止一些意外操作：
 
 ```js
 // 假設 getData 會回傳陣列或 null
-// 用 || 可以進行判斷後再賦予值
 let data = getData() || [];
+
+console.log(data); // 印出原始陣列或是 []，不會有 null
 ```
 
-### AND &&
+### AND
 
-**兩邊為 true 才成立**，回傳的是後面的值。  
-如果兩邊都是 false 時，在第一個 false 就會提前返回，  
-如 `null && undefined` 會回傳 `null`：
+- 兩邊為 `true` 才成立，並回傳右邊的值
+- `false` 會提前返回：
 
 ```js
-console.log('有東西' && '真的有東西'); // "真的有東西"
+console.log('有東西' && '真的有東西'); // '真的有東西'
 console.log(null && '有東西'); // null
 console.log(null && undefined); // null
 ```
 
-AND 的邏輯是要兩邊都要判斷，因此兩邊都是 true 就代表已經做到第二個值的檢查了，  
-所以回傳的會是後面那一個值。
+### 空值合併運算子 (Nullish Coalescing Operator)
 
-### 空值合併運算子 ??
-
-第一個值是 `null` 或 `undefined` 時回傳右邊的值，  
-是 `0` 或是空字串等其他假值不會判斷到後面：
+- 左邊是 `null` 或 `undefined` 時回傳右邊的值
 
 ```js
 console.log(null ?? '有東西'); // '有東西'
@@ -184,11 +182,11 @@ console.log('' ?? '這裡也有東西'); // ''
 
 ---
 
-## 例外排除
+## 提前排除例外
 
-刷題時很常遇到不合法的值忘記要排除，  
-如果在第一個條件就過濾掉例外值，就可以跳過一連串的判斷，  
-增加一些可讀性與效能：
+實作上有時會忘記排除不合法的值，導致後續對著 `null` 或 `undefined` 等等不能操作的資料進行運算，接著產生報錯。
+
+所以通常會在運算前進行一連串的過濾：
 
 ```js
 function showBodyCondition(bmi) {
@@ -202,9 +200,9 @@ function showBodyCondition(bmi) {
 }
 ```
 
-**early return** 也是很常使用的技巧，  
-在函式內只要執行到 return 就會脫離函式，後面的程式碼就不會繼續執行，  
-如下面範例，showPokemonData 一開始就先判斷資料是否還在讀取或者資料不存在：
+**early return** 也是很常使用的技巧。
+
+函式內只要執行到 `return` 就會脫離函式，後面的程式碼就不會繼續執行，如下面範例，`showPokemonData` 一開始就先判斷資料是否還在讀取或者資料不存在：
 
 ```js
 function showPokemonData(data) {
@@ -215,6 +213,14 @@ function showPokemonData(data) {
   console.log(data);
 }
 ```
+
+---
+
+## 小結
+
+- `if-else` 與 `switch` 的使用情境與差異
+- 運用三元運算與短路求值來簡化程式碼
+- 任何資料運算開始前都要檢查，提前排除例外
 
 ---
 

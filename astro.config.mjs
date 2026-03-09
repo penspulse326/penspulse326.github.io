@@ -5,6 +5,7 @@ import remarkDirective from 'remark-directive';
 import { remarkAdmonitions } from './src/plugins/remark-admonitions.mjs';
 
 import expressiveCode from 'astro-expressive-code';
+import pagefind from 'astro-pagefind';
 
 export default defineConfig({
   site: 'https://penspulse326.github.io',
@@ -69,5 +70,6 @@ export default defineConfig({
     expressiveCode({
       themes: ['houston'],
     }),
+    pagefind(),
   ],
 });

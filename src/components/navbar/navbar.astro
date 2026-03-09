@@ -7,6 +7,7 @@ import type { CategoryPostItem } from '../../utils/posts';
 import ContentMenu from './content-menu.astro';
 import PostsMenu from './posts-menu.astro';
 import ThemeToggler from './theme-toggler.astro';
+import Search from 'astro-pagefind/components/Search';
 
 import logoImage from '/public/logo.png';
 
@@ -110,19 +111,8 @@ if (isNotesRoute) {
         <!-- 右欄 -->
         <div class="d-flex align-items-center justify-content-end">
           <!-- 搜尋框 -->
-          <div class="bd-search me-2">
-            <button aria-label="搜尋 (Ctrl+K)" class="search-button" type="button">
-              <div class="search-button-container">
-                <i class="bi bi-search search-icon"></i>
-                <span class="search-placeholder">搜尋</span>
-              </div>
-              <div class="search-keys">
-                <kbd class="search-key">
-                  <i class="bi bi-command" style="font-size: 0.8em;"></i>
-                </kbd>
-                <kbd class="search-key">K</kbd>
-              </div>
-            </button>
+          <div class="bd-search me-2 d-none d-lg-block">
+            <Search id="desktop-search" className="pagefind-custom" uiOptions={{ showImages: false }} />
           </div>
 
           <!-- 外部連結 -->
@@ -248,21 +238,7 @@ if (isNotesRoute) {
 
           <!-- 搜尋 -->
           <div class="mt-3">
-            <form role="search">
-              <label class="visually-hidden" for="mobile-search">搜尋網站內容</label>
-              <div class="input-group">
-                <input
-                  aria-label="搜尋網站內容"
-                  class="form-control"
-                  id="mobile-search"
-                  placeholder="搜尋..."
-                  type="search"
-                />
-                <button aria-label="執行搜尋" class="btn btn-outline-primary" type="submit">
-                  <span aria-hidden="true" class="bi bi-search"></span>
-                </button>
-              </div>
-            </form>
+            <Search id="mobile-search" className="pagefind-custom" uiOptions={{ showImages: false }} />
           </div>
         </div>
 

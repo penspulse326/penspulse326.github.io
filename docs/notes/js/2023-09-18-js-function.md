@@ -1,7 +1,7 @@
 ---
 title: '函式類型'
 description: 'JavaScript 的函式類型'
-date: 2023-09-08 13:51:24
+date: 2023-09-18 13:51:24
 keywords: [JavaScript, 程式語言, 函式]
 tags: ['筆記', 'JavaScript']
 slug: js-function

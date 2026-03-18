@@ -12,7 +12,7 @@
 
 - [研究筆記](https://penspulse326.github.io/notes/)：簡短的摘要，通常不會寫太長，主要寫給自己快速回顧
 - [挑戰計畫](https://penspulse326.github.io/plans/)：以紀錄個人小型專案開發為主的系列文章
-- [心得文章](https://penspulse326.github.io/posts/)：與職涯、工作、活動等相關的心得文章
+- [文章](https://penspulse326.github.io/posts/)：與職涯、工作、活動等相關的文章
 
 <br/>
 

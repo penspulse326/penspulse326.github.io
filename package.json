@@ -11,6 +11,7 @@
     "generate": "node create-md.js"
   },
   "dependencies": {
+    "@expressive-code/plugin-line-numbers": "^0.41.7",
     "astro": "^5.15.5",
     "astro-expressive-code": "^0.41.7",
     "astro-pagefind": "^1.8.5",

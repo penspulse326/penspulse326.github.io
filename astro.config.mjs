@@ -5,6 +5,7 @@ import remarkDirective from 'remark-directive';
 import { remarkAdmonitions } from './src/plugins/remark-admonitions.mjs';
 
 import expressiveCode from 'astro-expressive-code';
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import pagefind from 'astro-pagefind';
 
 export default defineConfig({
@@ -69,6 +70,10 @@ export default defineConfig({
   integrations: [
     expressiveCode({
       themes: ['houston'],
+      plugins: [pluginLineNumbers()],
+      defaultProps: {
+        showLineNumbers: true,
+      },
     }),
     pagefind(),
   ],

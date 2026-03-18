@@ -45,7 +45,10 @@
 
 /* 確保清除 X 按鈕垂直居中並調整高度 */
 .pagefind-ui__search-clear {
-  height: 38px !important;
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  height: 0 !important;
   width: 38px !important;
   padding: 0 !important;
   font-size: 14px !important;

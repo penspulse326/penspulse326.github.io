@@ -8,221 +8,69 @@ interface Props {
   navigation: CategoryWithContent[];
 }
 
-const { aAttrs, activeId, id, navigation } = Astro.props;
+const { aAttrs, activeId, navigation } = Astro.props;
 
 const sanitizeId = (value: string) => value.replace(/[^a-zA-Z0-9_-]/g, '-');
 ---
 
-<div class="accordion accordion-flush" id={id}>
+<div class="space-y-2">
   {
     navigation.map((category: CategoryWithContent) => {
-      const sectionId = `${id}-${sanitizeId(category.id)}`;
-      const collapseId = `${sectionId}-collapse`;
-      const headingId = `${sectionId}-heading`;
       const isExpanded = category.items.some((item: CategoryContentItem) => item.id === activeId);
 
       return (
-        <div class="accordion-item">
-          <h2 class="accordion-header" id={headingId}>
-            <button
-              aria-controls={collapseId}
-              aria-expanded={isExpanded}
-              class:list={{
-                'accordion-button': true,
-                collapsed: !isExpanded,
-              }}
-              data-bs-target={`#${collapseId}`}
-              data-bs-toggle="collapse"
-              type="button"
-            >
-              {category.label}
-            </button>
-          </h2>
-          <div
-            aria-labelledby={headingId}
-            class:list={{
-              'accordion-collapse collapse': true,
-              show: isExpanded,
-            }}
-            id={collapseId}
-          >
-            <div class="accordion-body">
-              <ul class="content-nav__list">
-                {category.items.map((item: CategoryContentItem) => (
-                  <li class="content-nav__item">
-                    <a
-                      class:list={['content-nav__link', { 'content-nav__link--active': item.id === activeId }]}
-                      href={item.url}
-                      {...(aAttrs?.(item) || {})}
-                    >
-                      {item.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <details class="group border-b border-slate-200 dark:border-slate-800 pb-2 last:border-0" open={isExpanded}>
+          <summary class="flex items-center justify-between py-2 px-1 cursor-pointer list-none font-black text-xs uppercase tracking-widest text-primary hover:opacity-80 transition-opacity">
+            <span>{category.label}</span>
+            <span class="bi bi-chevron-down text-[10px] group-open:rotate-180 transition-transform" />
+          </summary>
+          <div class="mt-2 space-y-1">
+            <ul class="flex flex-col">
+              {category.items.map((item: CategoryContentItem) => (
+                <li>
+                  <a
+                    class:list={[
+                      'block py-2 px-3 rounded-lg text-sm transition-all duration-200',
+                      item.id === activeId
+                        ? 'bg-primary/10 text-primary font-bold shadow-sm'
+                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
+                    ]}
+                    href={item.url}
+                    {...(aAttrs?.(item) || {})}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        </details>
       );
     })
   }
 </div>
 
 <script>
-  // 擴展 Window 介面以包含 Bootstrap
-  declare global {
-    interface Window {
-      bootstrap?: {
-        Offcanvas: {
-          getInstance: (element: HTMLElement) => {
-            hide: () => void;
-          } | null;
-        };
-      };
-    }
-  }
-
-  // 處理 offcanvas 內的導航連結點擊
+  // 處理導航連結點擊（例如在行動版導航關閉選單）
   function initContentNavigation() {
-    const navLinks = document.querySelectorAll('.content-nav__link[data-bs-dismiss="offcanvas"]');
+    const navLinks = document.querySelectorAll('a[href]');
 
     navLinks.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-
-        // 確保有有效的 href
-        if (!href || href === '#') {
-          return;
-        }
-
-        // 阻止預設行為，我們會手動處理導航
-        e.preventDefault();
-
-        // 找到 offcanvas 元素
-        const offcanvasElement = document.getElementById('offcanvasNavbar');
-
-        if (offcanvasElement) {
-          // 檢查 Bootstrap 是否可用
-          if (typeof window.bootstrap !== 'undefined' && window.bootstrap.Offcanvas) {
-            // 使用 Bootstrap 的 API 關閉 offcanvas
-            const bsOffcanvas = window.bootstrap.Offcanvas.getInstance(offcanvasElement);
-            if (bsOffcanvas) {
-              bsOffcanvas.hide();
-            }
-
-            // 在 offcanvas 關閉動畫完成後導航
-            offcanvasElement.addEventListener(
-              'hidden.bs.offcanvas',
-              () => {
-                window.location.href = href;
-              },
-              { once: true },
-            );
-          } else {
-            // 如果 Bootstrap 未載入，使用簡單的方式關閉
-            offcanvasElement.classList.remove('show');
-            const backdrop = document.querySelector('.offcanvas-backdrop');
-            if (backdrop) {
-              backdrop.remove();
-            }
-            document.body.classList.remove('offcanvas-open');
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-
-            // 短暫延遲後導航，讓動畫有時間執行
-            setTimeout(() => {
-              window.location.href = href;
-            }, 150);
-          }
-        } else {
-          // 如果找不到 offcanvas，直接導航
-          window.location.href = href;
-        }
+      link.addEventListener('click', () => {
+        // 如果在行動版選單內，這裡可以觸發自定義事件或直接關閉
+        // 由於我們已經將 Navbar 重構為不依賴 Bootstrap，
+        // 這裡只需要確保連結能正常跳轉即可。
+        // 如果有特定的行動版選單需要關閉，可以在這裡加入邏輯。
       });
     });
   }
 
-  // 頁面載入時初始化
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initContentNavigation);
-  } else {
-    initContentNavigation();
-  }
+  document.addEventListener('astro:page-load', initContentNavigation);
+  initContentNavigation();
 </script>
 
 <style>
-  /* 手風琴基礎樣式 */
-  .accordion {
-    --bs-accordion-color: inherit;
-    --bs-accordion-bg: transparent;
-    --bs-accordion-border-color: transparent;
-  }
-
-  .accordion-item {
-    border: none;
-    border-radius: 0;
-    font-size: 0.9rem;
-  }
-
-  .accordion-button {
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 8px 4px;
-    background-color: transparent;
-    box-shadow: none;
-    border: none;
-    border-bottom: 1px solid var(--bs-border-color);
-    border-radius: 0;
-    font-size: 0.9rem;
-  }
-
-  .accordion-button::after {
-    margin-left: auto;
-  }
-
-  .accordion-button:not(.collapsed) {
-    color: inherit;
-    background-color: transparent;
-  }
-
-  .accordion-body {
-    padding: 0.5rem 0 0;
-  }
-
-  /* 內容導覽列表樣式 */
-  .content-nav__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .content-nav__item {
-    border-radius: 0;
-  }
-
-  .content-nav__item:last-child {
-    border-bottom: none;
-    margin-bottom: 12px;
-  }
-
-  .content-nav__link {
-    display: flex;
-    flex-direction: column;
-    padding: 0.25rem 0.75rem;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s ease-in-out;
-  }
-
-  .content-nav__link:hover {
-    background-color: rgb(var(--bs-primary-rgb), 0.2);
-  }
-
-  .content-nav__link--active {
-    font-weight: 600;
-    color: var(--bs-primary);
-    background-color: var(--bs-primary-bg-subtle);
+  summary::-webkit-details-marker {
+    display: none;
   }
 </style>

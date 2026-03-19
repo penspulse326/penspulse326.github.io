@@ -1,35 +1,41 @@
 {
-  "extends": [
-    "stylelint-config-standard"
-  ],
-  "rules": {
-    "at-rule-no-unknown": [
-      true,
-      {
-        "ignoreAtRules": ["theme", "tailwindcss", "layer", "container", "mixin", "apply"]
-      }
-    ],
-    "no-empty-source": null,
-    "no-descending-specificity": null,
-    "selector-class-pattern": null,
-    "selector-pseudo-class-no-unknown": [
-      true,
-      {
-        "ignorePseudoClasses": ["global"]
-      }
-    ],
-    "selector-type-no-unknown": [
-      true,
-      {
-        "ignore": ["custom-elements"],
-        "ignoreTypes": ["comment"]
-      }
-    ]
-  },
+  "extends": ["stylelint-config-standard"],
   "overrides": [
     {
       "files": ["**/*.astro"],
       "customSyntax": "postcss-html"
     }
-  ]
+  ],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "theme",
+          "tailwindcss",
+          "source",
+          "variant",
+          "layer",
+          "container",
+          "mixin",
+          "apply"
+        ]
+      }
+    ],
+    "no-empty-source": null,
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["content-visibility"]
+      }
+    ],
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignoreTypes": ["/^[a-z0-9-]+$/"]
+      }
+    ]
+  }
 }

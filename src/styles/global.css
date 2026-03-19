@@ -1,5 +1,9 @@
 @import url('tailwindcss');
 
+@source "../../**/*.{astro,html,js,jsx,md,mdx,ts,tsx}";
+
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #057f94;
   --color-secondary: #0861c5;

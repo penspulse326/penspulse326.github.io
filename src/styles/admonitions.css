@@ -1,5 +1,6 @@
-// Admonitions styles using Bootstrap color system
-// Compatible with Docusaurus-style admonitions
+/* Admonitions styles using Bootstrap color system */
+
+/* Compatible with Docusaurus-style admonitions */
 
 .admonition {
   margin: 1rem 0;
@@ -58,7 +59,7 @@
   }
 }
 
-// Note - Primary (Blue)
+/* Note - Primary (Blue) */
 .admonition-note {
   border-left-color: var(--bs-primary);
   background-color: rgb(var(--bs-primary-rgb), 0.1);
@@ -68,7 +69,7 @@
   }
 }
 
-// Tip - Success (Green)
+/* Tip - Success (Green) */
 .admonition-tip {
   border-left-color: var(--bs-success);
   background-color: rgb(var(--bs-success-rgb), 0.1);
@@ -78,7 +79,7 @@
   }
 }
 
-// Info - Info (Cyan)
+/* Info - Info (Cyan) */
 .admonition-info {
   border-left-color: var(--bs-info);
   background-color: rgb(var(--bs-info-rgb), 0.1);
@@ -88,7 +89,7 @@
   }
 }
 
-// Warning - Warning (Yellow/Orange)
+/* Warning - Warning (Yellow/Orange) */
 .admonition-warning {
   border-left-color: var(--bs-warning);
   background-color: rgb(var(--bs-warning-rgb), 0.1);
@@ -98,7 +99,7 @@
   }
 }
 
-// Danger - Danger (Red)
+/* Danger - Danger (Red) */
 .admonition-danger {
   border-left-color: var(--bs-danger);
   background-color: rgb(var(--bs-danger-rgb), 0.1);
@@ -108,7 +109,7 @@
   }
 }
 
-// Responsive adjustments
+/* Responsive adjustments */
 @media (width <= 767.98px) {
   .admonition {
     margin: 1rem 0;

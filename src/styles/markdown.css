@@ -1,5 +1,6 @@
-// Markdown content styles
-// Applied to any content rendered from markdown files
+/* Markdown content styles */
+
+/* Applied to any content rendered from markdown files */
 
 .markdown-body {
   line-height: 1.5;
@@ -45,7 +46,7 @@
     font-size: 1rem;
   }
 
-  // Paragraphs
+  /* Paragraphs */
   p {
     margin-bottom: 1rem;
 
@@ -54,7 +55,7 @@
     }
   }
 
-  // Links
+  /* Links */
   a {
     color: var(--bs-link-color);
     text-decoration: underline;
@@ -68,7 +69,7 @@
     }
   }
 
-  // Inline code
+  /* Inline code */
   code:not(pre code) {
     background-color: var(--bs-primary-bg-subtle);
     color: var(--bs-primary);
@@ -77,13 +78,13 @@
     font-weight: 600;
   }
 
-  // Code blocks (managed by astro-expressive-code)
+  /* Code blocks (managed by astro-expressive-code) */
   .expressive-code {
     margin-top: 1rem;
     margin-bottom: 1.5rem;
   }
 
-  // Lists
+  /* Lists */
   ul,
   ol {
     margin-bottom: 1rem;
@@ -106,7 +107,7 @@
     }
   }
 
-  // Nested lists
+  /* Nested lists */
   ul ul,
   ul ol,
   ol ul,
@@ -115,7 +116,7 @@
     margin-bottom: 0.5rem;
   }
 
-  // Blockquotes
+  /* Blockquotes */
   blockquote {
     margin: 0.75rem 0 1.5rem;
     padding: 0.75rem 1rem;
@@ -136,14 +137,14 @@
     }
   }
 
-  // Horizontal rules
+  /* Horizontal rules */
   hr {
     margin: 0.5rem 0;
     border: 0;
     border-top: 2px solid var(--bs-border-color);
   }
 
-  // Tables
+  /* Tables */
   table {
     width: 100%;
     margin: 1rem 0;
@@ -171,7 +172,7 @@
     }
   }
 
-  // Images
+  /* Images */
   img {
     max-width: 100%;
     height: auto;
@@ -179,7 +180,7 @@
     margin: 1rem 0;
   }
 
-  // Strong and emphasis
+  /* Strong and emphasis */
   strong {
     font-weight: 600;
   }
@@ -188,12 +189,12 @@
     font-style: italic;
   }
 
-  // Task lists
+  /* Task lists */
   input[type='checkbox'] {
     margin-right: 0.5rem;
   }
 
-  // Details/Summary
+  /* Details/Summary */
   details {
     margin: 1rem 0;
     padding: 0.75rem 1rem;
@@ -216,7 +217,7 @@
   }
 }
 
-// Responsive adjustments
+/* Responsive adjustments */
 @media (width <= 767.98px) {
   .markdown-body {
     h1 {

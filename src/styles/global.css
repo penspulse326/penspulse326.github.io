@@ -1,0 +1,52 @@
+@import url('tailwindcss');
+
+@theme {
+  --color-primary: #057f94;
+  --color-secondary: #0861c5;
+}
+
+/* Dark mode overrides  */
+.dark {
+  --color-primary: #00c2be;
+}
+
+/* Custom scrollbar copied from old inline style  */
+@layer base {
+  html {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: color-mix(in srgb, var(--color-primary) 30%, transparent);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-primary);
+      border-radius: 0;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background: color-mix(in srgb, var(--color-primary) 80%, transparent);
+    }
+  }
+
+  body {
+    overflow-y: visible;
+  }
+}
+
+/* Base styles to align with old markdown and Bootstrap defaults if needed  */
+@layer base {
+  body {
+    background-color: var(--color-bg, #fff);
+    color: var(--color-text, #212529);
+  }
+}
+
+.dark body {
+  --color-bg: #212529; /* Bootstrap dark default  */
+  --color-text: #dee2e6; /* Bootstrap dark body text  */
+}

@@ -11,12 +11,12 @@ const navigation = notesNav.map((cat) => ({
 ---
 
 <ArticleLayout navigation={navigation} showToc={false} title="研究筆記">
-  <section class="notes-intro px-2 px-lg-4 w-full">
-    <header class="mb-4">
-      <h1 class="display-6 fw-bold mb-3">研究筆記</h1>
+  <section class="px-2 lg:px-6 w-full">
+    <header class="mb-8">
+      <h1 class="text-4xl font-black text-slate-900 dark:text-white mb-4">研究筆記</h1>
     </header>
 
-    <div class="card-body">
+    <div class="prose dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 leading-relaxed">
       <p>
         這裡的筆記大多是寫給自己快速回顧，所以通常不會有完整的教學。
         <br />
@@ -24,19 +24,12 @@ const navigation = notesNav.map((cat) => ({
         舊的筆記可能會寫得比較冗長，請斟酌閱讀。部分筆記也會隨著我的認知更新而不定時調整內容。 新的筆記通常會有兩個小節：
       </p>
 
-      <ul>
+      <ul class="list-disc pl-6 space-y-2 mt-4">
         <li>使用情境</li>
         <li>坑點</li>
       </ul>
 
-      <p>這也是我認為快速回顧的方向應該要聚焦的方向。</p>
+      <p class="mt-6">這也是我認為快速回顧的方向應該要聚焦的方向。</p>
     </div>
   </section>
 </ArticleLayout>
-
-<style>
-  /* 列表項目間距 */
-  li {
-    margin-bottom: 0.5rem;
-  }
-</style>

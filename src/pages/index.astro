@@ -11,116 +11,147 @@ import avatarImage from '/public/avatar.png';
   <!-- 主標題區域 -->
   <section
     aria-labelledby="site-title-heading"
-    class="hero-section d-flex align-items-center justify-content-center text-white"
+    class="relative h-[300px] flex items-center justify-center bg-slate-900 overflow-hidden"
   >
-    <h1 class="relative title text-center" id="site-title-heading">Pen's Pulse</h1>
+    <h1
+      class="relative z-10 text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-widest text-shadow-lg"
+      id="site-title-heading"
+    >
+      Pen's Pulse
+    </h1>
     <PspWaves />
   </section>
 
-  <div class="container my-lg-2 py-4">
-    <div class="mx-auto" style="max-width: 992px;">
-      <section aria-labelledby="about-site-heading" class="mb-3">
-        <div class="row g-3">
-          <div class="col-md-4">
-            <article class="card h-100">
-              <div class="card-body">
-                <h2 class="card-title card-title-underline fs-5">研究筆記</h2>
-                <p class="card-text mt-2">簡短的摘要，通常不會寫太長，主要寫給自己快速回顧。</p>
-                <a class="card-link" href="/notes">閱讀更多</a>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article class="card h-100">
-              <div class="card-body">
-                <h2 class="card-title card-title-underline fs-5">挑戰計畫</h2>
-                <p class="card-text mt-2">紀錄個人 side project 心路歷程的系列文章。</p>
-                <a class="card-link" href="/plans">閱讀更多</a>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article class="card h-100">
-              <div class="card-body">
-                <h2 class="card-title card-title-underline fs-5">文章</h2>
-                <p class="card-text mt-2">與職涯、活動、產業趨勢等相關的文章。</p>
-                <a class="card-link" href="/posts">閱讀更多</a>
-              </div>
-            </article>
-          </div>
+  <div class="max-w-5xl mx-auto px-4 lg:px-8 py-12">
+    <div class="space-y-12">
+      <!-- 三欄式功能連結 -->
+      <section aria-labelledby="about-site-heading">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <article
+            class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300"
+          >
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-4">研究筆記</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+              簡短的摘要，通常不會寫太長，主要寫給自己快速回顧。
+            </p>
+            <a
+              class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
+              href="/notes"
+            >
+              閱讀更多 <span class="bi bi-arrow-right ml-1"></span>
+            </a>
+          </article>
+
+          <article
+            class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300"
+          >
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-4">挑戰計畫</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+              紀錄個人 side project 心路歷程的系列文章。
+            </p>
+            <a
+              class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
+              href="/plans"
+            >
+              閱讀更多 <span class="bi bi-arrow-right ml-1"></span>
+            </a>
+          </article>
+
+          <article
+            class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-primary/30 transition-all duration-300"
+          >
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-4">文章</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+              與職涯、活動、產業趨勢等相關的文章。
+            </p>
+            <a
+              class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
+              href="/posts"
+            >
+              閱讀更多 <span class="bi bi-arrow-right ml-1"></span>
+            </a>
+          </article>
         </div>
       </section>
 
+      <!-- 個人介紹與技能區域 -->
       <section aria-labelledby="about-me-heading">
-        <div class="row g-3">
-          <div class="col-md-8">
-            <article class="card h-100 overflow-hidden">
-              <div class="card-body">
-                <h2 class="card-title card-title-underline fs-5">個人介紹</h2>
-                <p class="card-text mt-2 mb-5">
-                  我是 Shin，在 2024 年 6 月轉職成為前端工程師，至今仍在工作崗位上努力不被 AI 淘汰 XD<br />
-                  <br />
-                  有一點點設計背景，也在 <a href="https://ithelp.ithome.com.tw/users/20169019/ironman/8482"
-                    ><strong>2025 iT 邦幫忙鐵人賽</strong></a
-                  > 寫過小型的全端專案，所以對跨領域溝通還算是有心得。<br />
-                  <br />
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <!-- 左側介紹 -->
+          <article
+            class="md:col-span-8 relative overflow-hidden bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors"
+          >
+            <div class="relative z-10">
+              <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-6">個人介紹</h2>
+              <div class="text-slate-700 dark:text-slate-300 space-y-4 text-base leading-relaxed max-w-xl">
+                <p>我是 Shin，在 2024 年 6 月轉職成為前端工程師，至今仍在工作崗位上努力不被 AI 淘汰 XD</p>
+                <p>
+                  有一點點設計背景，也在 <a
+                    class="text-primary font-bold hover:underline"
+                    href="https://ithelp.ithome.com.tw/users/20169019/ironman/8482">2025 iT 邦幫忙鐵人賽</a
+                  > 寫過小型的全端專案，所以對跨領域溝通還算是有心得。
+                </p>
+                <p>
                   2024 年 7 月開始與六角學院合作，擔任約聘專題教練，輔導過<strong>切版專題班</strong>、<strong
                     >React 專題班</strong
                   >、<strong>Node.js 全端專題班</strong>，主要以<strong>專案規劃</strong>、<strong>可行性評估</strong
                   >、<strong>產品展示</strong>等管理層面來協助學生完成網站專題。
                 </p>
               </div>
-              <Image
-                alt="Shin"
-                class="avatar rounded-circle"
-                format="webp"
-                height={300}
-                loading="eager"
-                fetchpriority="high"
-                quality={80}
-                src={avatarImage}
-                width={300}
-              />
-            </article>
-          </div>
+            </div>
 
-          <div class="col-md-4 d-flex flex-column gap-3">
-            <article class="card">
-              <div class="card-body">
-                <h2 class="card-title card-title-underline fs-5">經歷</h2>
-                <ul class="card-text mt-2 mt-1 list-unstyled d-flex flex-column gap-2">
-                  <li class="d-flex align-items-end">
-                    <span>💻 前端工程師</span>
-                  </li>
-                  <li class="d-flex align-items-center">
-                    <span>✡️ 六角學院 - 專題教練</span>
-                  </li>
-                </ul>
-              </div>
+            <Image
+              alt="Shin"
+              class="absolute bottom-[-10%] right-[-10%] md:bottom-[-20%] md:right-[-5%] w-[250px] md:w-[350px] opacity-10 dark:opacity-20 pointer-events-none grayscale"
+              format="webp"
+              height={300}
+              loading="lazy"
+              quality={80}
+              src={avatarImage}
+              width={300}
+            />
+          </article>
+
+          <!-- 右側小卡片 -->
+          <div class="md:col-span-4 flex flex-col gap-6">
+            <article
+              class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors"
+            >
+              <h2 class="text-lg font-bold text-slate-900 dark:text-white card-title-underline mb-4">經歷</h2>
+              <ul class="space-y-3 text-sm text-slate-700 dark:text-slate-300">
+                <li class="flex items-center gap-3">
+                  <span class="text-xl">💻</span>
+                  <span class="font-medium">前端工程師</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="text-xl">✡️</span>
+                  <span class="font-medium">六角學院 - 專題教練</span>
+                </li>
+              </ul>
             </article>
 
-            <article class="card">
-              <div class="card-body">
-                <h2 class="card-title card-title-underline fs-5">使用技術</h2>
-                <ul class="card-text mt-2 mt-1 list-unstyled d-flex flex-column gap-2">
-                  <li class="d-flex align-items-center">
-                    <span class="me-2">•</span>
-                    <span>JavaScript / TypeScript</span>
-                  </li>
-                  <li class="d-flex align-items-center">
-                    <span class="me-2">•</span>
-                    <span>Vue / Nuxt</span>
-                  </li>
-                  <li class="d-flex align-items-center">
-                    <span class="me-2">•</span>
-                    <span>React / Next</span>
-                  </li>
-                  <li class="d-flex align-items-center">
-                    <span class="me-2">•</span>
-                    <span>Node.js / Express / NestJS</span>
-                  </li>
-                </ul>
-              </div>
+            <article
+              class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm transition-colors"
+            >
+              <h2 class="text-lg font-bold text-slate-900 dark:text-white card-title-underline mb-4">使用技術</h2>
+              <ul class="grid grid-cols-1 gap-2 text-sm text-slate-700 dark:text-slate-300 font-medium">
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  JavaScript / TypeScript
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Vue / Nuxt
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  React / Next
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Node.js / Express / NestJS
+                </li>
+              </ul>
             </article>
           </div>
         </div>
@@ -129,15 +160,9 @@ import avatarImage from '/public/avatar.png';
   </div>
 
   <style>
-    /* 主視覺區樣式 */
-    .title {
-      text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
-      z-index: 10;
-    }
-
-    .hero-section {
-      position: relative;
-      height: 300px;
+    /* 標題陰影自定義 */
+    .text-shadow-lg {
+      text-shadow: 0 4px 12px rgb(0 0 0 / 50%);
     }
 
     /* 卡片標題底線 */
@@ -145,7 +170,6 @@ import avatarImage from '/public/avatar.png';
       position: relative;
       display: inline-block;
       padding-bottom: 0.5rem;
-      font-weight: 600;
     }
 
     .card-title-underline::after {
@@ -153,26 +177,15 @@ import avatarImage from '/public/avatar.png';
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 80%;
+      width: 40px;
       height: 3px;
-      background-color: var(--bs-primary);
+      background-color: var(--color-primary);
+      border-radius: 99px;
+      transition: width 0.3s ease;
     }
 
-    /* 頭像樣式 */
-    .avatar {
-      position: absolute;
-      bottom: -40px;
-      right: -40px;
-      width: 250px;
-      height: 250px;
-      opacity: 0.2;
-
-      @media (width >= 768px) {
-        bottom: -40px;
-        right: -20px;
-        width: 300px;
-        height: 300px;
-      }
+    .group:hover .card-title-underline::after {
+      width: 100%;
     }
   </style>
 </Layout>

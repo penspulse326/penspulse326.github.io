@@ -80,22 +80,13 @@ const fullOgImageUrl = new URL(ogImage, baseUrl).href;
       setTheme(getPreferredTheme());
     </script>
   </head>
-  <body>
+  <body
+    class="min-h-screen flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300"
+  >
     <Navbar />
-    <main id="main-content">
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 lg:px-8 py-8" id="main-content">
       <slot />
     </main>
     <Footer />
-
-    <style is:inline>
-      /* 主要內容區域最小高度 */
-      #main-content {
-        min-height: calc(100dvh - 60px - 80px);
-
-        @media (width >= 992px) {
-          min-height: calc(100dvh - 60px - 56px);
-        }
-      }
-    </style>
   </body>
 </html>

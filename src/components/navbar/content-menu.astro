@@ -11,40 +11,28 @@ const { activeId, navigation } = Astro.props as Props;
 ---
 
 <button
-  class="btn btn-link text-decoration-none p-2 mb-3 fw-semibold w-100 text-start bg-body-secondary mt-n3 rounded-0"
+  class="flex items-center w-full px-4 py-3 mb-4 text-sm font-semibold text-left text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
   id="back-to-main-menu"
   type="button"
 >
-  <i class="bi bi-arrow-left me-1"></i>
+  <i class="bi bi-arrow-left mr-2"></i>
   回到主選單
 </button>
 
-<div class="content-drawer p-2">
-  <ContentNavigation
-    aAttrs={() => ({ 'data-bs-dismiss': 'offcanvas' })}
-    activeId={activeId}
-    id="content-drawer-accordion"
-    navigation={navigation}
-  />
+<div class="px-2 overflow-y-auto max-h-[calc(100vh-250px)]">
+  <ContentNavigation activeId={activeId} id="content-drawer-accordion" navigation={navigation} />
 </div>
 
-<script define:vars={{ activeId }}>
-  const offcanvasElement = document.getElementById('offcanvasNavbar');
+<script>
   const mainContainer = document.getElementById('main-menu-container');
   const contentContainer = document.getElementById('content-menu-container');
   const backButton = document.getElementById('back-to-main-menu');
 
-  if (offcanvasElement && mainContainer && contentContainer && backButton) {
-    offcanvasElement.addEventListener('show.bs.offcanvas', () => {
-      // 開啟時預設顯示內容選單
-      contentContainer.classList.remove('d-none');
-      mainContainer.classList.add('d-none');
-    });
-
+  if (mainContainer && contentContainer && backButton) {
     backButton.addEventListener('click', () => {
       // 切換到主選單
-      contentContainer.classList.add('d-none');
-      mainContainer.classList.remove('d-none');
+      contentContainer.classList.add('hidden');
+      mainContainer.classList.remove('hidden');
     });
   }
 </script>

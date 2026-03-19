@@ -11,29 +11,36 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 ---
 
 <button
-  class="btn btn-link text-decoration-none p-2 mb-3 fw-semibold w-100 text-start bg-body-secondary mt-n3 rounded-0"
+  class="flex items-center w-full px-4 py-3 mb-4 text-sm font-semibold text-left text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
   id="back-to-main-menu"
   type="button"
 >
-  <i class="bi bi-arrow-left me-1"></i>
+  <i class="bi bi-arrow-left mr-2"></i>
   回到主選單
 </button>
 
-<div class="posts-drawer px-2">
+<div class="px-2 overflow-y-auto max-h-[calc(100vh-250px)]">
   <!-- 近期文章 -->
-  <div class="mb-4">
-    <h3 class="drawer-title">近期文章</h3>
-    <ul class="list-unstyled">
+  <div class="mb-6">
+    <h3 class="text-xs font-bold uppercase tracking-wider text-primary border-b-2 border-primary pb-2 mb-3">
+      近期文章
+    </h3>
+    <ul class="space-y-1">
       {
         recentPosts.map((post) => (
-          <li class="mb-2">
+          <li>
             <a
-              class:list={['post-link', { active: activeId === post.id }]}
-              data-bs-dismiss="offcanvas"
+              class:list={[
+                'block p-2 rounded-lg text-sm transition-colors hover:bg-primary/10 hover:text-primary',
+                {
+                  'bg-primary/10 text-primary font-semibold': activeId === post.id,
+                  'text-slate-700 dark:text-slate-300': activeId !== post.id,
+                },
+              ]}
               href={post.url}
               title={post.title}
             >
-              <div class="post-title">{post.title}</div>
+              <div class="line-clamp-2 leading-snug">{post.title}</div>
             </a>
           </li>
         ))
@@ -43,19 +50,20 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 
   <!-- 標籤列表 -->
   <div>
-    <h3 class="drawer-title">標籤</h3>
-    <ul class="list-unstyled">
+    <h3 class="text-xs font-bold uppercase tracking-wider text-primary border-b-2 border-primary pb-2 mb-3">標籤</h3>
+    <ul class="space-y-1">
       {
         tagCloud.map(({ count, tag }) => (
-          <li class="mb-2">
+          <li>
             <a
-              class="tag-link"
-              data-bs-dismiss="offcanvas"
+              class="flex items-center justify-between p-2 rounded-lg text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors group"
               href={`/posts?tag=${encodeURIComponent(tag)}`}
               title={`${tag} (${count})`}
             >
-              <span class="tag-name">{tag}</span>
-              <span class="tag-count">{count}</span>
+              <span>{tag}</span>
+              <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                {count}
+              </span>
             </a>
           </li>
         ))
@@ -65,100 +73,17 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 </div>
 
 <script>
-  const offcanvasElement = document.getElementById('offcanvasNavbar');
   const mainContainer = document.getElementById('main-menu-container');
   const postsContainer = document.getElementById('posts-menu-container');
   const backButton = document.getElementById('back-to-main-menu');
 
-  if (offcanvasElement && mainContainer && postsContainer && backButton) {
-    offcanvasElement.addEventListener('show.bs.offcanvas', () => {
-      // 開啟時預設顯示 posts 選單
-      postsContainer.classList.remove('d-none');
-      mainContainer.classList.add('d-none');
-    });
-
+  if (mainContainer && postsContainer && backButton) {
     backButton.addEventListener('click', () => {
       // 切換到主選單
-      postsContainer.classList.add('d-none');
-      mainContainer.classList.remove('d-none');
+      postsContainer.classList.add('hidden');
+      mainContainer.classList.remove('hidden');
     });
   }
 </script>
 
-<style>
-  /* 抽屜樣式 */
-  .posts-drawer {
-    max-height: calc(100dvh - 200px);
-    overflow-y: auto;
-  }
-
-  /* 標題樣式 */
-  .drawer-title {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--bs-primary);
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--bs-primary);
-  }
-
-  /* 文章連結 */
-  .post-link {
-    display: block;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s;
-  }
-
-  .post-link:hover {
-    background-color: var(--bs-primary-bg-subtle);
-    color: var(--bs-primary);
-  }
-
-  .post-link.active {
-    background-color: rgb(var(--bs-primary-rgb), 0.15);
-    font-weight: 600;
-    color: var(--bs-primary);
-  }
-
-  .post-title {
-    font-size: 0.875rem;
-    line-height: 1.4;
-  }
-
-  /* 標籤連結 */
-  .tag-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s;
-  }
-
-  .tag-link:hover {
-    background-color: var(--bs-primary-bg-subtle);
-    color: var(--bs-primary);
-  }
-
-  .tag-name {
-    font-size: 0.875rem;
-  }
-
-  .tag-count {
-    font-size: 0.75rem;
-    padding: 0.125rem 0.5rem;
-    background-color: rgb(var(--bs-primary-rgb), 0.1);
-    color: var(--bs-primary);
-    border-radius: 1rem;
-  }
-
-  .tag-link:hover .tag-count {
-    background-color: var(--bs-primary);
-    color: white;
-  }
-</style>
+<style></style>

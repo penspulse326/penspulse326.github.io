@@ -15,16 +15,15 @@
     "astro": "^5.15.5",
     "astro-expressive-code": "^0.41.7",
     "astro-pagefind": "^1.8.5",
-    "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
     "remark-directive": "^4.0.0",
-    "sass": "^1.94.0",
     "sharp": "^0.34.5",
     "three": "^0.181.2",
     "unist-util-visit": "^5.0.0",
     "unist-util-visit-parents": "^6.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.2.2",
     "@types/three": "^0.181.0",
     "@typescript-eslint/parser": "^8.46.4",
     "eslint": "^9.39.1",
@@ -40,17 +39,17 @@
     "prettier-plugin-astro": "0.14.1",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
-    "stylelint-config-standard-scss": "^16.0.0"
+    "tailwindcss": "^4.2.2"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,astro}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{css,md,scss}": [
+    "*.{css,md}": [
       "prettier --write"
     ],
-    "*.{css,scss,astro}": [
+    "*.{css,astro}": [
       "stylelint --fix"
     ]
   },

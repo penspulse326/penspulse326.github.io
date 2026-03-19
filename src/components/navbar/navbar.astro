@@ -54,12 +54,12 @@ if (isNotesRoute) {
 ---
 
 <nav
-  class="w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50"
+  class="w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-colors"
 >
   <div class="max-w-7xl mx-auto px-4 lg:px-8">
     <!-- 手機版導覽列 (Logo, 搜尋, 選單按鈕) - 僅在小於 lg 螢幕顯示 -->
     <div class="flex lg:hidden items-center justify-between h-16 gap-4">
-      <div class="flex-shrink-0">
+      <div class="shrink-0">
         <a class="flex items-center" href="/">
           <Image
             alt="Pen's Pulse Logo"
@@ -73,10 +73,10 @@ if (isNotesRoute) {
           />
         </a>
       </div>
-      <div class="flex-grow max-w-md" style="min-width: 0;">
+      <div class="grow max-w-md" style="min-width: 0;">
         <Search id="mobile-nav-search" className="pagefind-custom w-full" uiOptions={{ showImages: false }} />
       </div>
-      <div class="flex-shrink-0">
+      <div class="shrink-0">
         <button
           aria-controls="mobile-menu"
           aria-label="Toggle navigation"
@@ -161,40 +161,81 @@ if (isNotesRoute) {
     </div>
 
     <!-- 手機版下拉選單 -->
-    <div class="hidden lg:hidden border-t border-slate-200 dark:border-slate-800" id="mobile-menu">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <a
-          class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
-          href="/posts">文章</a
-        >
-        <a
-          class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
-          href="/notes">研究筆記</a
-        >
-        <a
-          class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
-          href="/plans">挑戰計畫</a
-        >
+    <div
+      class="hidden border-t border-slate-200 dark:border-slate-800 lg:hidden overflow-hidden transition-all duration-300"
+      id="mobile-menu"
+    >
+      <div class="px-2 pt-2 pb-6" id="main-menu-container">
+        <div class="grid grid-cols-2 gap-3 pb-4 pt-2">
+          <a
+            class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
+            href="/posts"
+          >
+            <span class="bi bi-file-earmark-text mr-3 text-lg text-primary"></span>
+            <span class="font-medium text-sm">文章</span>
+          </a>
+          <a
+            class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
+            href="/notes"
+          >
+            <span class="bi bi-journal-text mr-3 text-lg text-primary"></span>
+            <span class="font-medium text-sm">研究筆記</span>
+          </a>
+          <a
+            class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
+            href="/plans"
+          >
+            <span class="bi bi-trophy mr-3 text-lg text-primary"></span>
+            <span class="font-medium text-sm">挑戰計畫</span>
+          </a>
+          <a
+            class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
+            href="https://github.com/penspulse326"
+            target="_blank"
+          >
+            <span class="bi bi-github mr-3 text-lg text-primary"></span>
+            <span class="font-medium text-sm">GitHub</span>
+          </a>
+        </div>
+
+        {
+          hasCustomMenu && (
+            <button
+              id="show-custom-menu"
+              class="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-primary/10 text-primary font-bold mb-4"
+            >
+              <span>✨ 顯示當前頁面專屬選單</span>
+              <span class="bi bi-chevron-right" />
+            </button>
+          )
+        }
 
         <div class="border-t border-slate-200 dark:border-slate-800 my-2"></div>
 
-        <a
-          class="flex items-center px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
-          href="https://github.com/penspulse326"
-          target="_blank"
-        >
-          <span aria-hidden="true" class="bi bi-github mr-2"></span>
-          GitHub
-        </a>
-
         <div
-          class="flex items-center px-3 py-2 rounded-md transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+          class="flex items-center px-4 py-3 rounded-xl transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer text-slate-700 dark:text-slate-200"
           id="mobile-theme-toggle-container"
         >
           <ThemeToggler />
-          <span class="ml-2 text-base font-medium text-slate-700 dark:text-slate-200">主題切換</span>
+          <span class="ml-3 font-medium">切換深淺模式</span>
         </div>
       </div>
+
+      <!-- 專屬選單容器 -->
+      {
+        isContentRoute && (
+          <div id="content-menu-container" class="hidden">
+            <ContentMenu activeId={activeContentId} navigation={contentNavigation} />
+          </div>
+        )
+      }
+      {
+        isPostsRoute && (
+          <div id="posts-menu-container" class="hidden">
+            <PostsMenu activeId={activePostId} recentPosts={postsRecentPosts} tagCloud={postsTagCloud} />
+          </div>
+        )
+      }
     </div>
   </div>
 </nav>
@@ -202,10 +243,24 @@ if (isNotesRoute) {
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mainContainer = document.getElementById('main-menu-container');
+  const contentContainer = document.getElementById('content-menu-container');
+  const postsContainer = document.getElementById('posts-menu-container');
+  const showCustomMenuBtn = document.getElementById('show-custom-menu');
   const mobileThemeToggleContainer = document.getElementById('mobile-theme-toggle-container');
 
   mobileMenuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
+    // 開啟時重置回主選單
+    mainContainer?.classList.remove('hidden');
+    if (contentContainer) contentContainer.classList.add('hidden');
+    if (postsContainer) postsContainer.classList.add('hidden');
+  });
+
+  showCustomMenuBtn?.addEventListener('click', () => {
+    mainContainer?.classList.add('hidden');
+    if (contentContainer) contentContainer.classList.remove('hidden');
+    if (postsContainer) postsContainer.classList.remove('hidden');
   });
 
   mobileThemeToggleContainer?.addEventListener('click', () => {
@@ -215,181 +270,11 @@ if (isNotesRoute) {
 </script>
 
 <style>
-  .navbar {
-    height: 60px;
-  }
-
-  /* 搜尋按鈕樣式 */
-  .bd-search {
-    position: relative;
-    margin: 0;
-  }
-
-  .search-button:hover,
-  .search-button:focus {
-    background-color: var(--bs-body-bg);
-    border-color: var(--bs-primary);
-    color: var(--bs-body-color);
-  }
-
-  .search-button:hover {
-    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.1);
-  }
-
-  .search-button:focus {
-    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.25);
-    outline: 0;
-  }
-
-  .search-button-container {
-    align-items: center;
-    display: flex;
-    gap: 0.5rem;
-    pointer-events: none;
-  }
-
-  .search-icon {
-    color: var(--bs-secondary-color);
-    flex-shrink: 0;
-  }
-
-  .search-placeholder {
-    color: var(--bs-secondary-color);
-    opacity: 0.75;
-  }
-
-  .search-keys {
-    align-items: center;
-    display: flex;
-    gap: 0.25rem;
-    pointer-events: none;
-  }
-
-  .search-key {
-    align-items: center;
-    background-color: var(--bs-tertiary-bg);
-    border: 1px solid var(--bs-border-color);
-    border-bottom: 2px solid var(--bs-gray-500);
-    border-radius: 0.25rem;
-    color: var(--bs-secondary-color);
-    display: inline-flex;
-    font-family: var(--bs-font-monospace);
-    font-size: 1em;
-    height: 1.5em;
-    justify-content: center;
-    line-height: 1.2;
-    min-width: 1.2em;
-    padding: 0 0.5em;
-    white-space: nowrap;
-  }
-
-  .search-key-icon {
-    color: var(--bs-secondary-color);
-  }
-
-  /* 導覽列網格佈局 - 三欄式，中間欄位固定寬度 */
-  .navbar-grid-container {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  /* 導覽連結 hover 效果 */
-  .nav-link span {
-    position: relative;
-    text-decoration: none;
-    transition: all 0.15s ease;
-    color: var(--bs-body-color);
-  }
-
-  .nav-link span::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--bs-primary);
-    transition: width 0.15s ease;
-  }
-
-  .nav-link:hover span::after {
-    width: 100%;
-  }
-
-  /* 導覽連結 active 狀態 */
-  .nav-link.active span {
-    color: var(--bs-primary);
-  }
-
-  .nav-link.active span::after {
-    width: 100%;
-  }
-
-  /* 外部連結 hover 效果 */
-  .text-opacity-75-hover:hover {
-    opacity: 1 !important;
-  }
-
-  [data-bs-theme='light'] .text-opacity-75-hover:hover {
-    color: var(--bs-body-color) !important;
-  }
-
-  /* 側邊選單平滑過渡效果 */
-  .offcanvas {
-    transition: transform 0.3s ease-in-out;
-  }
-
-  /* 手機版選單項目間距 */
-  .offcanvas-body .nav-item {
-    margin: 0.5rem 0;
-  }
-
-  /* 側邊選單關閉按鈕樣式 */
-  .offcanvas-header .btn-close {
-    margin: -0.5rem -0.5rem -0.5rem auto;
-    padding: 0.5rem;
-  }
-
-  /* 側邊選單連結樣式 */
-  .offcanvas-body a {
-    border-radius: 0.375rem;
-    transition: background-color 0.2s;
-  }
-
-  .offcanvas-body a:hover {
-    background-color: rgb(0 0 0 / 5%);
-  }
-
-  [data-bs-theme='dark'] .offcanvas-body a:hover {
-    background-color: rgb(255 255 255 / 10%);
-  }
-
-  [data-bs-theme='dark'] .text-opacity-75-hover {
-    color: var(--bs-body-color) !important;
-    opacity: 0.75;
-  }
-
-  .notes-drawer .accordion-button {
-    padding: 0.5rem 0;
-  }
-
-  .notes-drawer-item + .notes-drawer-item {
-    border-top: 1px solid var(--bs-border-color-translucent);
-  }
-
-  .notes-drawer-link {
-    display: block;
-    padding: 0.625rem 0;
-    text-decoration: none;
-    color: inherit;
-    font-size: 0.95rem;
-  }
-
-  .notes-drawer-link.active {
-    font-weight: 600;
-    color: var(--bs-primary);
+  /* Pagefind UI overrides */
+  :global(.pagefind-ui) {
+    --pagefind-ui-primary: var(--color-primary) !important;
+    --pagefind-ui-text: var(--color-text) !important;
+    --pagefind-ui-background: transparent !important;
+    --pagefind-ui-border: var(--color-border) !important;
   }
 </style>

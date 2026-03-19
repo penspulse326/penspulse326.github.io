@@ -5,6 +5,7 @@ import PspWaves from '../components/psp-waves.astro';
 import Layout from '../layouts/default-layout.astro';
 
 import avatarImage from '/public/avatar.png';
+import { Icon } from 'astro-icon/components';
 ---
 
 <Layout>
@@ -38,7 +39,7 @@ import avatarImage from '/public/avatar.png';
               class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
               href="/notes"
             >
-              閱讀更多 <span class="bi bi-arrow-right ml-1"></span>
+              閱讀更多 <Icon class="ml-1" name="bi:arrow-right" />
             </a>
           </article>
 
@@ -53,7 +54,7 @@ import avatarImage from '/public/avatar.png';
               class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
               href="/plans"
             >
-              閱讀更多 <span class="bi bi-arrow-right ml-1"></span>
+              閱讀更多 <Icon class="ml-1" name="bi:arrow-right" />
             </a>
           </article>
 
@@ -68,7 +69,7 @@ import avatarImage from '/public/avatar.png';
               class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
               href="/posts"
             >
-              閱讀更多 <span class="bi bi-arrow-right ml-1"></span>
+              閱讀更多 <Icon class="ml-1" name="bi:arrow-right" />
             </a>
           </article>
         </div>

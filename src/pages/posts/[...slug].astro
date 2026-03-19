@@ -7,6 +7,8 @@ import TableOfContents from '../../components/table-of-contents.astro';
 import ArticleLayout from '../../layouts/article-layout.astro';
 import { getAllPosts, getRecentPosts, getTagCloud } from '../../utils/posts';
 
+import { Icon } from 'astro-icon/components';
+
 export const getStaticPaths = (async () => {
   const posts = getAllPosts();
 
@@ -47,24 +49,33 @@ function formatDate(date?: Date): string {
 >
   <PostsSidebar activeId={post.id} recentPosts={recentPosts} slot="sidebar" tagCloud={tagCloud} />
 
-  <article class="px-2 px-lg-4">
-    <header class="mb-4">
-      <h1 class="display-6 fw-bold mb-3">{post.frontmatter.title}</h1>
+  <article class="px-2 lg:px-4">
+    <header class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{post.frontmatter.title}</h1>
 
-      <div class="post-meta text-muted mb-3 d-flex gap-3">
-        {post.frontmatter.date && <div class="mb-2">{formatDate(post.frontmatter.date)} 發布</div>}
+      <div class="flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+        {
+          post.frontmatter.date && (
+            <time class="flex items-center gap-1.5" datetime={post.frontmatter.date.toISOString()}>
+              <Icon name="bi:calendar3" />
+              {formatDate(post.frontmatter.date)} 發布
+            </time>
+          )
+        }
         {
           post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-            <div>
-              <i class="bi bi-tags" />{' '}
-              {post.frontmatter.tags.map((tag, index) => (
-                <>
-                  <a class="text-muted text-decoration-none tag-link" href={`/posts/tag/${encodeURIComponent(tag)}`}>
-                    {tag}
-                  </a>
-                  {index < (post.frontmatter.tags?.length ?? 0) - 1 && ', '}
-                </>
-              ))}
+            <div class="flex items-center gap-2">
+              <Icon name="bi:tags" />
+              <div class="flex flex-wrap gap-2">
+                {post.frontmatter.tags.map((tag: string, index: number) => (
+                  <>
+                    <a class="hover:text-primary transition-colors" href={`/posts/tag/${encodeURIComponent(tag)}`}>
+                      #{tag}
+                    </a>
+                    {index < (post.frontmatter.tags?.length ?? 0) - 1 && <span class="opacity-30">|</span>}
+                  </>
+                ))}
+              </div>
             </div>
           )
         }
@@ -77,9 +88,10 @@ function formatDate(date?: Date): string {
       <Content />
     </div>
 
-    <footer class="mt-5 pt-4 border-top">
-      <a class="back-to-list-link" href="/posts">
-        <i class="bi bi-arrow-left"></i> 返回文章列表
+    <footer class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+      <a class="inline-flex items-center gap-2 text-primary font-medium hover:underline group" href="/posts">
+        <Icon class="group-hover:-translate-x-1 transition-transform" name="bi:arrow-left" />
+        返回文章列表
       </a>
     </footer>
 
@@ -88,21 +100,5 @@ function formatDate(date?: Date): string {
 </ArticleLayout>
 
 <style>
-  /* 標籤連結 */
-  .tag-link:hover {
-    text-decoration: underline !important;
-  }
-
-  /* 返回列表連結 */
-  .back-to-list-link {
-    color: var(--bs-link-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  .back-to-list-link:hover {
-    color: var(--bs-link-hover-color);
-    text-decoration: underline;
-  }
+  /* 額外樣式已整合至 Tailwind，保留供未來擴充 */
 </style>

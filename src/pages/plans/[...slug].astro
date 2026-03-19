@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 import type { PlanEntry } from '../../utils/plans';
 
 import GiscusComment from '../../components/giscus-comment.astro';
@@ -47,7 +49,7 @@ const headings = await plan.getHeadings();
         {
           plan.frontmatter.date && (
             <time class="flex items-center gap-2" datetime={plan.frontmatter.date.toISOString()}>
-              <span class="bi bi-calendar3 text-primary" />
+              <Icon class="text-primary" name="bi:calendar3" />
               {plan.frontmatter.date.toLocaleDateString('zh-TW')} 發布
             </time>
           )

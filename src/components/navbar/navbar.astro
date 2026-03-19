@@ -8,6 +8,7 @@ import ContentMenu from './content-menu.astro';
 import PostsMenu from './posts-menu.astro';
 import ThemeToggler from './theme-toggler.astro';
 import Search from 'astro-pagefind/components/Search';
+import { Icon } from 'astro-icon/components';
 
 import logoImage from '/public/logo.png';
 
@@ -84,7 +85,7 @@ if (isNotesRoute) {
           id="mobile-menu-button"
           type="button"
         >
-          <span class="bi bi-list text-2xl"></span>
+          <Icon class="text-2xl" name="bi:list" />
         </button>
       </div>
     </div>
@@ -140,7 +141,7 @@ if (isNotesRoute) {
       <!-- 右欄 -->
       <div class="flex items-center gap-4">
         <!-- 搜尋框 -->
-        <div class="w-64">
+        <div class="w-64 relative min-h-[42px]">
           <Search id="desktop-search" className="pagefind-custom" uiOptions={{ showImages: false }} />
         </div>
 
@@ -152,7 +153,7 @@ if (isNotesRoute) {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <span aria-hidden="true" class="bi bi-github text-xl"></span>
+          <Icon class="text-xl" name="bi:github" />
         </a>
 
         <!-- 主題切換 -->
@@ -171,21 +172,21 @@ if (isNotesRoute) {
             class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
             href="/posts"
           >
-            <span class="bi bi-file-earmark-text mr-3 text-lg text-primary"></span>
+            <Icon class="mr-3 text-lg text-primary" name="bi:file-earmark-text" />
             <span class="font-medium text-sm">文章</span>
           </a>
           <a
             class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
             href="/notes"
           >
-            <span class="bi bi-journal-text mr-3 text-lg text-primary"></span>
+            <Icon class="mr-3 text-lg text-primary" name="bi:journal-text" />
             <span class="font-medium text-sm">研究筆記</span>
           </a>
           <a
             class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
             href="/plans"
           >
-            <span class="bi bi-trophy mr-3 text-lg text-primary"></span>
+            <Icon class="mr-3 text-lg text-primary" name="bi:trophy" />
             <span class="font-medium text-sm">挑戰計畫</span>
           </a>
           <a
@@ -193,7 +194,7 @@ if (isNotesRoute) {
             href="https://github.com/penspulse326"
             target="_blank"
           >
-            <span class="bi bi-github mr-3 text-lg text-primary"></span>
+            <Icon class="mr-3 text-lg text-primary" name="bi:github" />
             <span class="font-medium text-sm">GitHub</span>
           </a>
         </div>
@@ -205,7 +206,7 @@ if (isNotesRoute) {
               class="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-primary/10 text-primary font-bold mb-4"
             >
               <span>✨ 顯示當前頁面專屬選單</span>
-              <span class="bi bi-chevron-right" />
+              <Icon name="bi:chevron-right" />
             </button>
           )
         }

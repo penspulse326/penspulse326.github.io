@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 import type { CategoryPostItem } from '../../utils/posts';
 
 interface Props {
@@ -15,7 +17,7 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
   id="back-to-main-menu"
   type="button"
 >
-  <i class="bi bi-arrow-left mr-2"></i>
+  <Icon class="mr-2" name="bi:arrow-left" />
   回到主選單
 </button>
 

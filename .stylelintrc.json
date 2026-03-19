@@ -14,6 +14,7 @@
           "theme",
           "tailwindcss",
           "source",
+          "utility",
           "variant",
           "layer",
           "container",
@@ -36,6 +37,14 @@
       {
         "ignoreTypes": ["/^[a-z0-9-]+$/"]
       }
-    ]
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "no-descending-specificity": null,
+    "nesting-selector-no-missing-scoping-root": null
   }
 }

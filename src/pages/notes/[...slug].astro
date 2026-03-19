@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 import type { NoteEntry } from '../../utils/notes';
 
 import GiscusComment from '../../components/giscus-comment.astro';
@@ -47,7 +49,7 @@ const headings = await note.getHeadings();
         {
           note.frontmatter.date && (
             <time class="flex items-center gap-2" datetime={note.frontmatter.date.toISOString()}>
-              <span class="bi bi-calendar3 text-primary" />
+              <Icon class="text-primary" name="bi:calendar3" />
               {note.frontmatter.date.toLocaleDateString('zh-TW')} 發布
             </time>
           )

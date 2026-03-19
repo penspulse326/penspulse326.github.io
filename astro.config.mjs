@@ -9,6 +9,7 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import pagefind from 'astro-pagefind';
 
 import tailwindcss from '@tailwindcss/vite';
+import icon from 'astro-icon';
 
 export default defineConfig({
   site: 'https://penspulse326.github.io',
@@ -67,6 +68,7 @@ export default defineConfig({
   },
 
   integrations: [
+    icon(),
     expressiveCode({
       themes: ['houston'],
       plugins: [pluginLineNumbers()],

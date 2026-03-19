@@ -35,11 +35,7 @@ export function remarkAdmonitions() {
 
   return (tree) => {
     visit(tree, (node) => {
-      if (
-        node.type === 'containerDirective' ||
-        node.type === 'leafDirective' ||
-        node.type === 'textDirective'
-      ) {
+      if (node.type === 'containerDirective' || node.type === 'leafDirective' || node.type === 'textDirective') {
         if (node.type !== 'containerDirective') return;
 
         const type = node.name;

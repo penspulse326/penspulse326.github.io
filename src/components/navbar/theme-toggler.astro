@@ -1,11 +1,15 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
 <button
   aria-label="Toggle theme"
   class="flex items-center justify-center p-2 text-current hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors"
   id="bd-theme"
   type="button"
 >
-  <i class="bi bi-moon-fill hidden dark:block" id="moon-icon"></i>
-  <i class="bi bi-sun-fill block dark:hidden" id="sun-icon"></i>
+  <Icon class="hidden dark:block w-5 h-5" id="moon-icon" name="bi:moon-fill" />
+  <Icon class="block dark:hidden w-5 h-5" id="sun-icon" name="bi:sun-fill" />
 </button>
 
 <script>

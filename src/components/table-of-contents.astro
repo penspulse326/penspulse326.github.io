@@ -1,6 +1,8 @@
 ---
 import type { MarkdownHeading } from 'astro';
 
+import { Icon } from 'astro-icon/components';
+
 interface Props {
   headings: MarkdownHeading[];
   variant?: 'both' | 'desktop' | 'mobile';
@@ -52,10 +54,10 @@ const showMobile = variant === 'mobile' || variant === 'both';
       >
         <summary class="flex items-center justify-between p-4 cursor-pointer list-none font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
           <div class="flex items-center gap-2">
-            <span class="bi bi-list-ul text-primary text-xl" />
+            <Icon class="text-primary text-xl" name="bi:list-ul" />
             <span>目錄</span>
           </div>
-          <span class="bi bi-chevron-down group-open:rotate-180 transition-transform" />
+          <Icon class="group-open:rotate-180 transition-transform" name="bi:chevron-down" />
         </summary>
         <div class="p-4 pt-0 border-t border-slate-200 dark:border-slate-800">
           <ul class="space-y-1 mt-4">

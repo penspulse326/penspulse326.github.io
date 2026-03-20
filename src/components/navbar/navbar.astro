@@ -214,18 +214,6 @@ if (isNotesRoute) {
           </a>
         </div>
 
-        {
-          hasCustomMenu && (
-            <button
-              id="show-custom-menu"
-              class="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-primary/10 text-primary font-bold mb-4"
-            >
-              <span>✨ 顯示當前頁面專屬選單</span>
-              <Icon name="bi:chevron-right" />
-            </button>
-          )
-        }
-
         <div class="border-t border-slate-200 dark:border-slate-800 my-2"></div>
 
         <div
@@ -310,21 +298,22 @@ if (isNotesRoute) {
   const mainContainer = document.getElementById('main-menu-container');
   const contentContainer = document.getElementById('content-menu-container');
   const postsContainer = document.getElementById('posts-menu-container');
-  const showCustomMenuBtn = document.getElementById('show-custom-menu');
   const mobileThemeToggleContainer = document.getElementById('mobile-theme-toggle-container');
 
   mobileMenuButton?.addEventListener('click', () => {
+    const isOpening = mobileMenu?.classList.contains('hidden');
     mobileMenu?.classList.toggle('hidden');
-    // 開啟時重置回主選單
-    mainContainer?.classList.remove('hidden');
-    if (contentContainer) contentContainer.classList.add('hidden');
-    if (postsContainer) postsContainer.classList.add('hidden');
-  });
 
-  showCustomMenuBtn?.addEventListener('click', () => {
-    mainContainer?.classList.add('hidden');
-    if (contentContainer) contentContainer.classList.remove('hidden');
-    if (postsContainer) postsContainer.classList.remove('hidden');
+    if (isOpening) {
+      // 開啟時檢查是否有專屬選單，有的話優先顯示
+      if (contentContainer || postsContainer) {
+        mainContainer?.classList.add('hidden');
+        if (contentContainer) contentContainer.classList.remove('hidden');
+        if (postsContainer) postsContainer.classList.remove('hidden');
+      } else {
+        mainContainer?.classList.remove('hidden');
+      }
+    }
   });
 
   mobileThemeToggleContainer?.addEventListener('click', () => {

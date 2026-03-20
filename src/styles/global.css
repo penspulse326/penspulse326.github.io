@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 @import './search.css';
+@import './markdown.css';
+@import './admonitions.css';
 
 @source "../**/*.{astro,html,js,jsx,md,mdx,ts,tsx}";
 

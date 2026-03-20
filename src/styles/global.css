@@ -1,4 +1,4 @@
-@import url('tailwindcss');
+@import 'tailwindcss';
 @import url('./search.css');
 
 @source "../**/*.{astro,html,js,jsx,md,mdx,ts,tsx}";
@@ -8,15 +8,12 @@
 @theme {
   --color-primary: #057f94;
   --color-secondary: #0861c5;
+  --color-bg: #f8fafc;
+  --color-text: #1e293b;
+  --color-primary-rgb: 5, 127, 148;
 }
 
 @layer base {
-  :root {
-    --color-bg: #f8fafc;
-    --color-text: #1e293b;
-    --color-primary-rgb: 5, 127, 148;
-  }
-
   .dark {
     --color-bg: #030712;
     --color-text: #f1f5f9;

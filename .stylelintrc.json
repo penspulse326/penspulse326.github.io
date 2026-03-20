@@ -45,6 +45,7 @@
       }
     ],
     "no-descending-specificity": null,
-    "nesting-selector-no-missing-scoping-root": null
+    "nesting-selector-no-missing-scoping-root": null,
+    "import-notation": null
   }
 }

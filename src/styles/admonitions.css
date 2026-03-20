@@ -3,9 +3,9 @@
 .admonition {
   margin: 1.5rem 0;
   padding: 1rem 1.25rem;
-  border-left-width: 4px;
-  border-left-style: solid;
-  border-radius: 0 0.75rem 0.75rem 0;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.75rem;
   background-color: var(--color-slate-50);
 
   &:where(.dark, .dark *) {
@@ -47,7 +47,7 @@
 
 /* Note - Blue */
 .admonition-note {
-  border-left-color: var(--color-blue-500);
+  border-color: var(--color-blue-500);
 
   .admonition-heading {
     color: var(--color-blue-600);
@@ -66,7 +66,7 @@
 
 /* Tip - Green */
 .admonition-tip {
-  border-left-color: var(--color-emerald-500);
+  border-color: var(--color-emerald-500);
 
   .admonition-heading {
     color: var(--color-emerald-600);
@@ -85,7 +85,7 @@
 
 /* Info - Sky */
 .admonition-info {
-  border-left-color: var(--color-sky-500);
+  border-color: var(--color-sky-500);
 
   .admonition-heading {
     color: var(--color-sky-600);
@@ -104,7 +104,7 @@
 
 /* Warning - Amber */
 .admonition-warning {
-  border-left-color: var(--color-amber-500);
+  border-color: var(--color-amber-500);
 
   .admonition-heading {
     color: var(--color-amber-600);
@@ -123,7 +123,7 @@
 
 /* Danger - Rose */
 .admonition-danger {
-  border-left-color: var(--color-rose-500);
+  border-color: var(--color-rose-500);
 
   .admonition-heading {
     color: var(--color-rose-600);

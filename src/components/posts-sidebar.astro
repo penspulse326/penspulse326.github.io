@@ -13,7 +13,7 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 <div class="hidden lg:block w-64 sticky top-0 self-start">
   <!-- 近期文章 -->
   <nav aria-label="近期文章" class="mb-8">
-    <h3 class="text-sm font-bold text-primary mb-4 pb-2 border-b border-primary/20">近期文章</h3>
+    <h3 class="text-sm font-bold text-primary pb-2">近期文章</h3>
     <ul class="space-y-1">
       {
         recentPosts.map((post) => (
@@ -40,7 +40,7 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 
   <!-- 標籤雲 -->
   <nav aria-label="標籤雲">
-    <h3 class="text-sm font-bold text-primary mb-4 pb-2 border-b border-primary/20">標籤</h3>
+    <h3 class="text-sm font-bold text-primary mb-2 pb-2">標籤</h3>
     <div class="flex flex-wrap gap-2">
       {
         tagCloud.map(({ count, tag }) => (
@@ -49,8 +49,8 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
             href={`/posts/tag/${encodeURIComponent(tag)}`}
             title={`${tag} (${count})`}
           >
-            {tag}{' '}
-            <span class="ml-1.5 opacity-50 px-1.5 bg-slate-100 dark:bg-slate-800 rounded-full group-hover:bg-primary/20">
+            {tag}
+            <span class="ml-1.5 opacity-50 px-1.5 bg-slate-200 dark:bg-slate-800 rounded-full group-hover:bg-primary/20">
               {count}
             </span>
           </a>

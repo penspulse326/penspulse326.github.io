@@ -14,6 +14,6 @@ const { activeId, ariaLabel = '側邊導覽', navigation } = Astro.props;
 
 <div class="hidden lg:block px-2 pb-2">
   <nav aria-label={ariaLabel}>
-    <ContentNavigation activeId={activeId} id="content-sidebar-accordion" navigation={navigation} />
+    <ContentNavigation activeId={activeId} id="content-sidebar-accordion" isDrawer={true} navigation={navigation} />
   </nav>
 </div>

@@ -6,62 +6,192 @@ interface Props {
   aAttrs?: (item: CategoryContentItem) => Record<string, boolean | string | undefined>;
   activeId?: string;
   id: string;
+  isDrawer?: boolean;
   navigation: CategoryWithContent[];
 }
 
-const { aAttrs, activeId, navigation } = Astro.props;
-
-const sanitizeId = (value: string) => value.replace(/[^a-zA-Z0-9_-]/g, '-');
+const { aAttrs, activeId, id, isDrawer = false, navigation } = Astro.props;
 ---
 
-<div class="space-y-2">
-  {
-    navigation.map((category: CategoryWithContent) => {
-      const isExpanded = category.items.some((item: CategoryContentItem) => item.id === activeId);
+{
+  isDrawer ? (
+    <>
+      <button
+        aria-controls={id}
+        aria-expanded="false"
+        class="flex items-center gap-2 px-4 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-white dark:hover:bg-slate-900 hover:border-primary dark:hover:border-primary transition-all font-bold text-sm shadow-sm group"
+        id={`${id}-trigger`}
+        type="button"
+      >
+        <Icon class="text-lg text-slate-400 group-hover:text-primary transition-colors" name="bi:list-stars" />
+        <span>主題清單</span>
+      </button>
 
-      return (
-        <details class="group border-b border-slate-200 dark:border-slate-800 pb-2 last:border-0" open={isExpanded}>
-          <summary class="flex items-center justify-between py-2 px-1 cursor-pointer list-none font-bold text-sm text-primary hover:opacity-80 transition-opacity">
-            <span>{category.label}</span>
-            <Icon class="text-[10px] group-open:rotate-180 transition-transform" name="bi:chevron-down" />
-          </summary>
-          <div class="mt-2 space-y-1">
-            <ul class="flex flex-col">
-              {category.items.map((item: CategoryContentItem) => (
-                <li>
-                  <a
-                    class:list={[
-                      'block py-2 px-3 rounded-lg text-sm transition-all duration-200',
-                      item.id === activeId
-                        ? 'bg-primary/10 text-primary font-bold '
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
-                    ]}
-                    href={item.url}
-                    {...(aAttrs?.(item) || {})}
-                  >
-                    {item.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
+      <div class="fixed inset-0 top-16 z-100 invisible" id={id} role="dialog">
+        <div
+          class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+          id={`${id}-backdrop`}
+        />
+
+        <div
+          class="absolute inset-y-0 left-0 w-full max-w-xs bg-white dark:bg-slate-950 shadow-2xl -translate-x-full transition-transform duration-300 flex flex-col border-r border-slate-200 dark:border-slate-800"
+          id={`${id}-content`}
+        >
+          <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+            <h2 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Icon class="text-primary" name="bi:journal-bookmark-fill" />
+              主題清單
+            </h2>
+            <button
+              aria-label="關閉"
+              class="p-2 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg text-slate-500 transition-colors"
+              id={`${id}-close`}
+            >
+              <Icon class="text-xl" name="bi:x" />
+            </button>
           </div>
-        </details>
-      );
-    })
-  }
-</div>
+
+          <div class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar">
+            {navigation.map((category: CategoryWithContent) => {
+              const isExpanded = category.items.some((item: CategoryContentItem) => item.id === activeId);
+
+              return (
+                <details
+                  class="group border-b border-slate-200 dark:border-slate-800 pb-2 last:border-0"
+                  open={isExpanded}
+                >
+                  <summary class="flex items-center justify-between py-3 px-1 cursor-pointer list-none font-bold text-sm text-primary hover:opacity-80 transition-opacity">
+                    <span class="flex items-center gap-2">
+                      <Icon
+                        class="text-xs opacity-50 group-open:text-primary transition-colors"
+                        name="bi:folder2-open"
+                      />
+                      {category.label}
+                    </span>
+                    <Icon class="text-[10px] group-open:rotate-180 transition-transform" name="bi:chevron-down" />
+                  </summary>
+                  <div class="mt-1 space-y-1">
+                    <ul class="flex flex-col">
+                      {category.items.map((item: CategoryContentItem) => (
+                        <li>
+                          <a
+                            class:list={[
+                              'py-2.5 px-3 rounded-xl text-sm transition-all duration-200 flex items-center gap-3',
+                              item.id === activeId
+                                ? 'bg-primary/10 text-primary font-bold shadow-sm ring-1 ring-primary/20'
+                                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
+                            ]}
+                            href={item.url}
+                            {...(aAttrs?.(item) || {})}
+                          >
+                            <div
+                              class:list={[
+                                'w-1.5 h-1.5 rounded-full transition-colors',
+                                item.id === activeId
+                                  ? 'bg-primary'
+                                  : 'bg-slate-300 dark:bg-slate-700 group-hover:bg-primary',
+                              ]}
+                            />
+                            <span class="flex-1 truncate">{item.title}</span>
+                            {item.id === activeId && <Icon class="text-xs" name="bi:chevron-right" />}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </details>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </>
+  ) : (
+    <div class="space-y-2">
+      {navigation.map((category: CategoryWithContent) => {
+        const isExpanded = category.items.some((item: CategoryContentItem) => item.id === activeId);
+
+        return (
+          <details class="group border-b border-slate-200 dark:border-slate-800 pb-2 last:border-0" open={isExpanded}>
+            <summary class="flex items-center justify-between py-2 px-1 cursor-pointer list-none font-bold text-sm text-primary hover:opacity-80 transition-opacity">
+              <span>{category.label}</span>
+              <Icon class="text-[10px] group-open:rotate-180 transition-transform" name="bi:chevron-down" />
+            </summary>
+            <div class="mt-2 space-y-1">
+              <ul class="flex flex-col">
+                {category.items.map((item: CategoryContentItem) => (
+                  <li>
+                    <a
+                      class:list={[
+                        'block py-2 px-3 rounded-lg text-sm transition-all duration-200',
+                        item.id === activeId
+                          ? 'bg-primary/10 text-primary font-bold '
+                          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
+                      ]}
+                      href={item.url}
+                      {...(aAttrs?.(item) || {})}
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
+        );
+      })}
+    </div>
+  )
+}
 
 <script>
-  // 處理導航連結點擊（例如在行動版導航關閉選單）
   function initContentNavigation() {
-    const navLinks = document.querySelectorAll('a[href]');
+    const dialogs = document.querySelectorAll('[role="dialog"][id]');
 
-    navLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        // 如果在行動版選單內，這裡可以觸發自定義事件或直接關閉
-        // 由於我們已經將 Navbar 重構為不依賴 Bootstrap，
-        // 這裡只需要確保連結能正常跳轉即可。
-        // 如果有特定的行動版選單需要關閉，可以在這裡加入邏輯。
+    dialogs.forEach((dialog) => {
+      const id = dialog.id;
+      const trigger = document.getElementById(`${id}-trigger`);
+      const backdrop = document.getElementById(`${id}-backdrop`);
+      const content = document.getElementById(`${id}-content`);
+      const closeBtn = document.getElementById(`${id}-close`);
+      const links = content?.querySelectorAll('a');
+
+      if (!trigger || !backdrop || !content) return;
+
+      const openDrawer = () => {
+        dialog.classList.remove('invisible');
+        backdrop.classList.add('opacity-100');
+        content.classList.remove('-translate-x-full');
+        document.body.style.overflow = 'hidden';
+        trigger.setAttribute('aria-expanded', 'true');
+      };
+
+      const closeDrawer = () => {
+        backdrop.classList.remove('opacity-100');
+        content.classList.add('-translate-x-full');
+        document.body.style.overflow = '';
+        trigger.setAttribute('aria-expanded', 'false');
+
+        setTimeout(() => {
+          if (content.classList.contains('-translate-x-full')) {
+            dialog.classList.add('invisible');
+          }
+        }, 300);
+      };
+
+      trigger.addEventListener('click', openDrawer);
+      closeBtn?.addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+
+      links?.forEach((link) => {
+        link.addEventListener('click', closeDrawer);
+      });
+
+      // ESC 鍵關閉
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !dialog.classList.contains('invisible')) {
+          closeDrawer();
+        }
       });
     });
   }
@@ -73,5 +203,18 @@ const sanitizeId = (value: string) => value.replace(/[^a-zA-Z0-9_-]/g, '-');
 <style>
   summary::-webkit-details-marker {
     display: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    border-radius: 99px;
   }
 </style>

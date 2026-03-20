@@ -21,13 +21,13 @@ const showMobile = variant === 'mobile' || variant === 'both';
   showDesktop && (
     <aside class="hidden lg:block">
       <nav aria-label="段落">
-        <h2 class="text-sm font-bold text-primary mb-4">段落</h2>
+        <h2 class="text-sm font-bold text-primary mb-2">段落</h2>
         <ul class="space-y-1">
           {tocHeadings.map((heading) => (
             <li
               class:list={[
                 'transition-all duration-200 border-l-2',
-                heading.depth === 2 ? 'pl-0 border-transparent' : 'pl-4 border-transparent text-sm opacity-80',
+                heading.depth === 2 ? 'pl-1 border-transparent' : 'pl-4 border-transparent text-sm opacity-80',
               ]}
             >
               <a

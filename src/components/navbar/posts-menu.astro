@@ -24,9 +24,7 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 <div class="px-2 overflow-y-auto max-h-[calc(100vh-250px)]">
   <!-- 近期文章 -->
   <div class="mb-6">
-    <h3 class="text-xs font-bold uppercase tracking-wider text-primary border-b-2 border-primary pb-2 mb-3">
-      近期文章
-    </h3>
+    <h3 class="text-sm font-bold text-primary border-b-2 border-primary pb-2 mb-3">近期文章</h3>
     <ul class="space-y-1">
       {
         recentPosts.map((post) => (
@@ -52,7 +50,7 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 
   <!-- 標籤列表 -->
   <div>
-    <h3 class="text-xs font-bold uppercase tracking-wider text-primary border-b-2 border-primary pb-2 mb-3">標籤</h3>
+    <h3 class="text-sm font-bold text-primary border-b-2 border-primary pb-2 mb-3">標籤</h3>
     <ul class="space-y-1">
       {
         tagCloud.map(({ count, tag }) => (

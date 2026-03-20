@@ -20,8 +20,8 @@ const showMobile = variant === 'mobile' || variant === 'both';
 {
   showDesktop && (
     <aside class="hidden lg:block">
-      <nav aria-label="目錄">
-        <h2 class="text-xs font-black uppercase tracking-widest text-primary mb-4">目錄</h2>
+      <nav aria-label="段落">
+        <h2 class="text-sm font-bold text-primary mb-4">段落</h2>
         <ul class="space-y-1">
           {tocHeadings.map((heading) => (
             <li
@@ -55,7 +55,7 @@ const showMobile = variant === 'mobile' || variant === 'both';
         <summary class="flex items-center justify-between p-4 cursor-pointer list-none font-bold text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
           <div class="flex items-center gap-2">
             <Icon class="text-primary text-xl" name="bi:list-ul" />
-            <span>目錄</span>
+            <span>段落</span>
           </div>
           <Icon class="group-open:rotate-180 transition-transform" name="bi:chevron-down" />
         </summary>

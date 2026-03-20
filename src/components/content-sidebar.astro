@@ -12,8 +12,8 @@ interface Props {
 const { activeId, ariaLabel = '側邊導覽', navigation } = Astro.props;
 ---
 
-<aside class="hidden lg:block pt-1 px-2">
+<div class="hidden lg:block px-2 pb-2">
   <nav aria-label={ariaLabel}>
     <ContentNavigation activeId={activeId} id="content-sidebar-accordion" navigation={navigation} />
   </nav>
-</aside>
+</div>

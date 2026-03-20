@@ -17,6 +17,7 @@
 
 @layer base {
   .dark {
+    --color-primary: #20ecec;
     --color-bg: #030712;
     --color-text: #f1f5f9;
   }

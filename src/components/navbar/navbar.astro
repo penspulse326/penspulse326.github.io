@@ -59,8 +59,8 @@ if (isNotesRoute) {
 >
   <div class="max-w-7xl mx-auto px-4 lg:px-8">
     <!-- 手機版導覽列 (Logo, 搜尋, 選單按鈕) - 僅在小於 lg 螢幕顯示 -->
-    <div class="flex lg:hidden items-center justify-between h-16 gap-4">
-      <div class="shrink-0">
+    <div class="grid lg:hidden grid-cols-[auto_1fr_auto] items-center h-16 gap-3">
+      <div class="flex items-center">
         <a class="flex items-center" href="/">
           <Image
             alt="Pen's Pulse Logo"
@@ -74,10 +74,17 @@ if (isNotesRoute) {
           />
         </a>
       </div>
-      <div class="grow max-w-md" style="min-width: 0;">
-        <Search id="mobile-nav-search" className="pagefind-custom w-full" uiOptions={{ showImages: false }} />
+      <div class="flex justify-center w-full min-w-0">
+        <button
+          id="mobile-search-trigger"
+          class="flex items-center w-full max-w-[200px] px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 rounded-lg text-sm transition-all truncate"
+          aria-label="搜尋記事"
+        >
+          <Icon class="shrink-0 mr-2 text-slate-400" name="bi:search" />
+          <span class="truncate">搜尋文章...</span>
+        </button>
       </div>
-      <div class="shrink-0">
+      <div class="flex justify-end">
         <button
           aria-controls="mobile-menu"
           aria-label="Toggle navigation"
@@ -140,10 +147,18 @@ if (isNotesRoute) {
 
       <!-- 右欄 -->
       <div class="flex items-center gap-4">
-        <!-- 搜尋框 -->
-        <div class="w-64 relative min-h-[42px]">
-          <Search id="desktop-search" className="pagefind-custom" uiOptions={{ showImages: false }} />
-        </div>
+        <!-- 搜尋觸發按鈕 -->
+        <button
+          id="desktop-search-trigger"
+          class="flex items-center w-64 px-3 py-2 bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-500 rounded-xl text-sm transition-all hover:bg-white dark:hover:bg-slate-800 hover:border-primary group"
+        >
+          <Icon class="mr-2 group-hover:text-primary transition-colors" name="bi:search" />
+          <span class="flex-grow text-left">搜尋文章...</span>
+          <kbd
+            class="hidden sm:inline-flex items-center px-1.5 py-0.5 font-sans text-xs font-semibold text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md"
+            >⌘K</kbd
+          >
+        </button>
 
         <!-- 外部連結 -->
         <a
@@ -241,6 +256,54 @@ if (isNotesRoute) {
   </div>
 </nav>
 
+<!-- Search Modal Overlay -->
+<div class="fixed inset-0 z-[60] hidden overflow-y-auto p-4 sm:p-6 md:p-20" id="search-modal" role="dialog">
+  <!-- Backdrop -->
+  <div
+    class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm dark:bg-slate-950/60 transition-opacity"
+    id="search-modal-backdrop"
+  >
+  </div>
+
+  <!-- Modal Content -->
+  <div class="relative mx-auto max-w-2xl transform transition-all">
+    <div
+      class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 flex flex-col max-h-[80vh]"
+    >
+      <div class="modal-search-wrapper flex-grow overflow-y-auto">
+        <Search
+          id="modal-search"
+          className="pagefind-custom-modal"
+          uiOptions={{ showImages: false, excerptLength: 40 }}
+        />
+      </div>
+
+      <div
+        class="shrink-0 p-3 bg-slate-50 dark:bg-slate-900/80 border-t border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 font-medium flex gap-4"
+      >
+        <span class="flex items-center gap-1"
+          ><kbd
+            class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px] shadow-sm"
+            >Enter</kbd
+          > 選擇</span
+        >
+        <span class="flex items-center gap-1"
+          ><kbd
+            class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px] shadow-sm"
+            >↑↓</kbd
+          > 導覽</span
+        >
+        <span class="flex items-center gap-1"
+          ><kbd
+            class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px] shadow-sm"
+            >ESC</kbd
+          > 關閉</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -267,6 +330,56 @@ if (isNotesRoute) {
   mobileThemeToggleContainer?.addEventListener('click', () => {
     const toggler = mobileThemeToggleContainer.querySelector('#bd-theme') as HTMLElement;
     toggler?.click();
+  });
+
+  // Search Modal Logic
+  const searchModal = document.getElementById('search-modal');
+  const searchBackdrop = document.getElementById('search-modal-backdrop');
+  const closeButton = document.getElementById('close-search-modal');
+  const searchTriggers = [
+    document.getElementById('desktop-search-trigger'),
+    document.getElementById('mobile-search-trigger'),
+  ];
+
+  const openSearch = () => {
+    searchModal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    // Focus the Pagefind input after a small delay
+    setTimeout(() => {
+      const input = searchModal?.querySelector('input');
+      input?.focus();
+    }, 100);
+  };
+
+  const closeSearch = () => {
+    searchModal?.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+
+  searchTriggers.forEach((btn) => btn?.addEventListener('click', openSearch));
+  closeButton?.addEventListener('click', closeSearch);
+  searchBackdrop?.addEventListener('click', closeSearch);
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Open on Cmd+K or Ctrl+K
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+    // Open on '/' if not in an input
+    if (
+      e.key === '/' &&
+      document.activeElement?.tagName !== 'INPUT' &&
+      document.activeElement?.tagName !== 'TEXTAREA'
+    ) {
+      e.preventDefault();
+      openSearch();
+    }
+    // Close on Escape
+    if (e.key === 'Escape' && !searchModal?.classList.contains('hidden')) {
+      closeSearch();
+    }
   });
 </script>
 

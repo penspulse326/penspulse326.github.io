@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import url('./search.css');
+@import './search.css';
 
 @source "../**/*.{astro,html,js,jsx,md,mdx,ts,tsx}";
 

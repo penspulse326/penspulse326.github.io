@@ -51,6 +51,14 @@ function formatDate(date?: Date): string {
 
   <article class="px-2 lg:px-4">
     <header class="mb-8">
+      <a
+        class="inline-flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors mb-4 group text-sm font-medium cursor-pointer"
+        href="/posts"
+        id="back-button"
+      >
+        <Icon class="group-hover:-translate-x-1 transition-transform" name="bi:arrow-left" />
+        返回
+      </a>
       <h1 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">{post.frontmatter.title}</h1>
 
       <div class="flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
@@ -98,6 +106,18 @@ function formatDate(date?: Date): string {
     <GiscusComment />
   </article>
 </ArticleLayout>
+
+<script>
+  // 處理返回按鈕逻辑
+  const backButton = document.getElementById('back-button');
+  if (backButton && document.referrer && document.referrer.includes(window.location.host)) {
+    backButton.addEventListener('click', (e) => {
+      // 如果來源網址是同一個網域，則執行 history.back() 以返回正確的來源（如 posts/2 或標籤頁面）
+      e.preventDefault();
+      history.back();
+    });
+  }
+</script>
 
 <style>
   /* 額外樣式已整合至 Tailwind，保留供未來擴充 */

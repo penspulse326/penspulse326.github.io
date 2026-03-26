@@ -17,7 +17,6 @@
     "astro-expressive-code": "^0.41.7",
     "astro-icon": "^1.1.5",
     "astro-pagefind": "^1.8.5",
-    "bootstrap-icons": "^1.13.1",
     "remark-directive": "^4.0.0",
     "sharp": "^0.34.5",
     "three": "^0.181.2",

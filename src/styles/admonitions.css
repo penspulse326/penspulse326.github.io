@@ -22,7 +22,7 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
 
-    i {
+    .admonition-icon {
       font-size: 1.25rem;
     }
   }

@@ -1,4 +1,25 @@
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import { visit } from 'unist-util-visit';
+
+const require = createRequire(import.meta.url);
+
+function getIconSvg(iconRef) {
+  const iconName = iconRef.replace(/^bi-/, '');
+  try {
+    const iconsPath = require.resolve('@iconify-json/bi/icons.json');
+    const iconsData = JSON.parse(fs.readFileSync(iconsPath, 'utf8'));
+    const icon = iconsData.icons[iconName];
+    if (icon) {
+      const width = iconsData.width || 16;
+      const height = iconsData.height || 16;
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 ${width} ${height}" class="admonition-icon">${icon.body}</svg>`;
+    }
+  } catch (e) {
+    console.error('Failed to load icon:', iconRef, e);
+  }
+  return `<i class="bi ${iconRef}"></i>`;
+}
 
 /**
  * Remark plugin to transform directive nodes (:::note, :::info, etc.) into admonition HTML
@@ -58,7 +79,7 @@ export function remarkAdmonitions() {
           children: [
             {
               type: 'html',
-              value: `<i class="bi ${config.icon}"></i>`,
+              value: getIconSvg(config.icon),
             },
             {
               type: 'text',

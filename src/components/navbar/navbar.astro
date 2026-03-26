@@ -1,22 +1,24 @@
 ---
-import { Image } from 'astro:assets';
-
 import type { CategoryWithContent } from '../../utils/content';
 import type { CategoryPostItem } from '../../utils/posts';
 
 import ContentMenu from './content-menu.astro';
 import PostsMenu from './posts-menu.astro';
 import ThemeToggler from './theme-toggler.astro';
-import Search from 'astro-pagefind/components/Search';
+import { Icon } from 'astro-icon/components';
 
-import logoImage from '/public/logo.png';
+/* New Components */
+import NavLogo from './nav-logo.astro';
+import NavLinks from './nav-links.astro';
+import SearchTrigger from './search-trigger.astro';
+import SearchModal from './search-modal.astro';
+import MobileMenuContent from './mobile-menu-content.astro';
 
 const pathname = Astro.url.pathname;
 const isNotesRoute = pathname.startsWith('/notes');
 const isPlansRoute = pathname.startsWith('/plans');
 const isPostsRoute = pathname.startsWith('/posts');
 const isContentRoute = isNotesRoute || isPlansRoute;
-const hasCustomMenu = isContentRoute || isPostsRoute;
 
 const normalizePath = (path: string) => (path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path);
 
@@ -53,391 +55,102 @@ if (isNotesRoute) {
 }
 ---
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
-  <div class="container-fluid px-3 px-lg-5">
+<nav
+  class="w-full bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-colors"
+>
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
     <!-- 手機版導覽列 (Logo, 搜尋, 選單按鈕) - 僅在小於 lg 螢幕顯示 -->
-    <div class="navbar-grid-container d-lg-none">
-      <div class="d-flex justify-content-start">
-        <a class="navbar-brand m-0" href="/">
-          <Image
-            alt="Pen's Pulse Logo"
-            class="d-inline-block align-text-top"
-            densities={[1.5, 2, 3]}
-            format="webp"
-            height={30}
-            quality={90}
-            src={logoImage}
-            width={30}
-          />
-        </a>
+    <div class="grid lg:hidden grid-cols-[auto_1fr_auto] items-center h-16 gap-3">
+      <NavLogo isMobile={true} />
+
+      <div class="flex justify-center w-full min-w-0">
+        <SearchTrigger type="mobile" />
       </div>
-      <div class="d-flex justify-content-center w-100 px-2" style="min-width: 0;">
-        <Search id="mobile-nav-search" className="pagefind-custom w-100" uiOptions={{ showImages: false }} />
-      </div>
-      <div class="d-flex justify-content-end">
+
+      <div class="flex justify-end">
         <button
-          aria-controls="offcanvasNavbar"
+          aria-controls="mobile-menu"
           aria-label="Toggle navigation"
-          class="navbar-toggler px-1 border-0"
-          data-bs-target="#offcanvasNavbar"
-          data-bs-toggle="offcanvas"
+          class="rounded-md text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none"
+          id="mobile-menu-button"
           type="button"
         >
-          <span class="navbar-toggler-icon"></span>
+          <Icon class="text-3xl" name="bi:list" />
         </button>
       </div>
     </div>
 
     <!-- 桌面版導覽列 - 僅在 lg 以上顯示 -->
-    <div class="collapse navbar-collapse">
-      <div class="d-flex justify-content-between w-100">
-        <!-- 左欄 -->
-        <div class="d-flex align-items-center">
-          <!-- Logo -->
-          <a class="navbar-brand me-4" href="/">
-            <Image
-              alt="Pen's Pulse 首頁"
-              class="d-inline-block align-text-top rounded-circle"
-              densities={[1.5, 2, 3]}
-              format="webp"
-              height={32}
-              quality={100}
-              src={logoImage}
-              width={32}
-            />
-          </a>
+    <div class="hidden lg:flex items-center justify-between h-16">
+      <div class="flex items-center gap-8">
+        <NavLogo />
+        <NavLinks isPostsRoute={isPostsRoute} isNotesRoute={isNotesRoute} isPlansRoute={isPlansRoute} />
+      </div>
 
-          <!-- 站內連結 -->
-          <ul class="navbar-nav mb-0 d-flex flex-row gap-1">
-            <li class="nav-item">
-              <a class={`nav-link ${isPostsRoute ? 'active' : ''}`} href="/posts">
-                <span>文章</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class={`nav-link ${isNotesRoute ? 'active' : ''}`} href="/notes">
-                <span>研究筆記</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class={`nav-link ${isPlansRoute ? 'active' : ''}`} href="/plans">
-                <span>挑戰計畫</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+      <div class="flex items-center gap-4">
+        <SearchTrigger type="desktop" />
 
-        <!-- 右欄 -->
-        <div class="d-flex align-items-center justify-content-end">
-          <!-- 搜尋框 -->
-          <div class="bd-search me-2 d-none d-lg-block">
-            <Search id="desktop-search" className="pagefind-custom" uiOptions={{ showImages: false }} />
-          </div>
+        <a
+          aria-label="前往 GitHub 查看專案"
+          class="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+          href="https://github.com/penspulse326"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <Icon class="text-xl" name="bi:github" />
+        </a>
 
-          <!-- 外部連結 -->
-          <a
-            aria-label="前往 GitHub 查看專案"
-            class="text-body-emphasis text-opacity-75-hover px-2"
-            href="https://github.com/penspulse326"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <span aria-hidden="true" class="bi bi-github" style="font-size: 1.25rem;"></span>
-          </a>
-
-          <!-- 主題切換 -->
-          <ThemeToggler />
-        </div>
+        <ThemeToggler />
       </div>
     </div>
 
-    <!-- 側邊選單 - 僅在手機版顯示 -->
+    <!-- 手機版下拉選單 -->
     <div
-      aria-labelledby="offcanvasNavbarLabel"
-      class="offcanvas offcanvas-end d-lg-none"
-      id="offcanvasNavbar"
-      tabindex="-1"
+      class="hidden border-t py-4 border-slate-200 dark:border-slate-800 lg:hidden overflow-hidden transition-all duration-300"
+      id="mobile-menu"
     >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">Pen's Pulse</h5>
-        <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button"></button>
-      </div>
+      <MobileMenuContent isPostsRoute={isPostsRoute} isNotesRoute={isNotesRoute} isPlansRoute={isPlansRoute} />
 
-      <hr class="mx-3 mt-0" />
-
-      <div class="offcanvas-body">
-        <div id="main-menu-container">
-          <!-- 內部連結 - 兩欄排列 -->
-          <div class="row g-3">
-            <div class="col-6 m-0">
-              <a class="d-block py-2 text-decoration-none text-body" href="/posts">
-                <div class="d-flex align-items-center">
-                  <span aria-hidden="true" class="bi bi-file-earmark-text me-2"></span>
-                  <span>文章</span>
-                </div>
-              </a>
-            </div>
-            <div class="col-6 m-0">
-              <a class="d-block py-2 text-decoration-none text-body" href="/notes">
-                <div class="d-flex align-items-center">
-                  <span aria-hidden="true" class="bi bi-journal-text me-2"></span>
-                  <span>研究筆記</span>
-                </div>
-              </a>
-            </div>
-            <div class="col-6 m-0">
-              <a class="d-block py-2 text-decoration-none text-body" href="/plans">
-                <div class="d-flex align-items-center">
-                  <span aria-hidden="true" class="bi bi-trophy me-2"></span>
-                  <span>挑戰計畫</span>
-                </div>
-              </a>
-            </div>
+      <!-- 專屬選單容器 -->
+      {
+        isContentRoute && (
+          <div id="content-menu-container" class="hidden">
+            <ContentMenu activeId={activeContentId} navigation={contentNavigation} />
           </div>
-
-          <hr class="my-3" />
-
-          <!-- 外部連結 -->
-          <div class="row g-2">
-            <div class="col-6">
-              <a
-                aria-label="前往 GitHub 查看專案"
-                class="d-block py-2 text-decoration-none text-body"
-                href="https://github.com/yourusername/yourrepo"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <div class="d-flex align-items-center">
-                  <span aria-hidden="true" class="bi bi-github me-2"></span>
-                  <span>GitHub</span>
-                </div>
-              </a>
-            </div>
-            <div class="col-6">
-              <a
-                aria-label="前往外部連結"
-                class="d-block py-2 text-decoration-none text-body"
-                href="https://example.com"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <div class="d-flex alignments-center">
-                  <span aria-hidden="true" class="bi bi-box-arrow-up-right me-2"></span>
-                  <span>外部連結</span>
-                </div>
-              </a>
-            </div>
+        )
+      }
+      {
+        isPostsRoute && (
+          <div id="posts-menu-container" class="hidden">
+            <PostsMenu activeId={activePostId} recentPosts={postsRecentPosts} tagCloud={postsTagCloud} />
           </div>
-
-          <hr class="my-3" />
-
-          <!-- 主題切換 -->
-          <div
-            class="d-flex align-items-center"
-            onclick="document.getElementById('bd-theme').click()"
-            style="cursor: pointer;"
-          >
-            <ThemeToggler />
-            <span class="me-3">主題切換</span>
-          </div>
-        </div>
-
-        {
-          isContentRoute && (
-            <div id="content-menu-container">
-              <ContentMenu activeId={activeContentId} navigation={contentNavigation} />
-            </div>
-          )
-        }
-
-        {
-          isPostsRoute && (
-            <div id="posts-menu-container">
-              <PostsMenu activeId={activePostId} recentPosts={postsRecentPosts} tagCloud={postsTagCloud} />
-            </div>
-          )
-        }
-      </div>
+        )
+      }
     </div>
   </div>
 </nav>
 
-<style>
-  .navbar {
-    height: 60px;
-  }
+<SearchModal />
 
-  /* 搜尋按鈕樣式 */
-  .bd-search {
-    position: relative;
-    margin: 0;
-  }
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mainContainer = document.getElementById('main-menu-container');
+  const contentContainer = document.getElementById('content-menu-container');
+  const postsContainer = document.getElementById('posts-menu-container');
 
-  .search-button:hover,
-  .search-button:focus {
-    background-color: var(--bs-body-bg);
-    border-color: var(--bs-primary);
-    color: var(--bs-body-color);
-  }
+  mobileMenuButton?.addEventListener('click', () => {
+    const isOpening = mobileMenu?.classList.contains('hidden');
+    mobileMenu?.classList.toggle('hidden');
 
-  .search-button:hover {
-    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.1);
-  }
-
-  .search-button:focus {
-    box-shadow: 0 0 0 3px rgb(var(--bs-primary-rgb), 0.25);
-    outline: 0;
-  }
-
-  .search-button-container {
-    align-items: center;
-    display: flex;
-    gap: 0.5rem;
-    pointer-events: none;
-  }
-
-  .search-icon {
-    color: var(--bs-secondary-color);
-    flex-shrink: 0;
-  }
-
-  .search-placeholder {
-    color: var(--bs-secondary-color);
-    opacity: 0.75;
-  }
-
-  .search-keys {
-    align-items: center;
-    display: flex;
-    gap: 0.25rem;
-    pointer-events: none;
-  }
-
-  .search-key {
-    align-items: center;
-    background-color: var(--bs-tertiary-bg);
-    border: 1px solid var(--bs-border-color);
-    border-bottom: 2px solid var(--bs-gray-500);
-    border-radius: 0.25rem;
-    color: var(--bs-secondary-color);
-    display: inline-flex;
-    font-family: var(--bs-font-monospace);
-    font-size: 1em;
-    height: 1.5em;
-    justify-content: center;
-    line-height: 1.2;
-    min-width: 1.2em;
-    padding: 0 0.5em;
-    white-space: nowrap;
-  }
-
-  .search-key-icon {
-    color: var(--bs-secondary-color);
-  }
-
-  /* 導覽列網格佈局 - 三欄式，中間欄位固定寬度 */
-  .navbar-grid-container {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  /* 導覽連結 hover 效果 */
-  .nav-link span {
-    position: relative;
-    text-decoration: none;
-    transition: all 0.15s ease;
-    color: var(--bs-body-color);
-  }
-
-  .nav-link span::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--bs-primary);
-    transition: width 0.15s ease;
-  }
-
-  .nav-link:hover span::after {
-    width: 100%;
-  }
-
-  /* 導覽連結 active 狀態 */
-  .nav-link.active span {
-    color: var(--bs-primary);
-  }
-
-  .nav-link.active span::after {
-    width: 100%;
-  }
-
-  /* 外部連結 hover 效果 */
-  .text-opacity-75-hover:hover {
-    opacity: 1 !important;
-  }
-
-  [data-bs-theme='light'] .text-opacity-75-hover:hover {
-    color: var(--bs-body-color) !important;
-  }
-
-  /* 側邊選單平滑過渡效果 */
-  .offcanvas {
-    transition: transform 0.3s ease-in-out;
-  }
-
-  /* 手機版選單項目間距 */
-  .offcanvas-body .nav-item {
-    margin: 0.5rem 0;
-  }
-
-  /* 側邊選單關閉按鈕樣式 */
-  .offcanvas-header .btn-close {
-    margin: -0.5rem -0.5rem -0.5rem auto;
-    padding: 0.5rem;
-  }
-
-  /* 側邊選單連結樣式 */
-  .offcanvas-body a {
-    border-radius: 0.375rem;
-    transition: background-color 0.2s;
-  }
-
-  .offcanvas-body a:hover {
-    background-color: rgb(0 0 0 / 5%);
-  }
-
-  [data-bs-theme='dark'] .offcanvas-body a:hover {
-    background-color: rgb(255 255 255 / 10%);
-  }
-
-  [data-bs-theme='dark'] .text-opacity-75-hover {
-    color: var(--bs-body-color) !important;
-    opacity: 0.75;
-  }
-
-  .notes-drawer .accordion-button {
-    padding: 0.5rem 0;
-  }
-
-  .notes-drawer-item + .notes-drawer-item {
-    border-top: 1px solid var(--bs-border-color-translucent);
-  }
-
-  .notes-drawer-link {
-    display: block;
-    padding: 0.625rem 0;
-    text-decoration: none;
-    color: inherit;
-    font-size: 0.95rem;
-  }
-
-  .notes-drawer-link.active {
-    font-weight: 600;
-    color: var(--bs-primary);
-  }
-</style>
+    if (isOpening) {
+      if (contentContainer || postsContainer) {
+        mainContainer?.classList.add('hidden');
+        if (contentContainer) contentContainer.classList.remove('hidden');
+        if (postsContainer) postsContainer.classList.remove('hidden');
+      } else {
+        mainContainer?.classList.remove('hidden');
+      }
+    }
+  });
+</script>

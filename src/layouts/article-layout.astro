@@ -22,10 +22,10 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
 ---
 
 <Layout description={description} title={title}>
-  <div class="px-2 px-lg-5">
-    <div class="d-flex">
+  <div class="max-w-7xl mx-auto px-4 lg:px-8">
+    <div class="flex flex-col lg:flex-row gap-4">
       <!-- 側邊導覽 -->
-      <div class="content-sidebar flex-shrink-0 mt-3">
+      <aside class="content-sidebar hidden lg:block shrink-0 mt-4 lg:mt-8">
         {
           hasCustomSidebar ? (
             <slot name="sidebar" />
@@ -33,17 +33,17 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
             <ContentSidebar activeId={activeId} ariaLabel={ariaLabel} navigation={navigation} />
           ) : null
         }
-      </div>
+      </aside>
 
       <!-- 內文 -->
-      <div class="content-main flex-grow-1 mt-4" style={{ minWidth: 0 }}>
+      <main class="grow mt-4 lg:mt-8 min-w-0 relative z-0">
         <slot />
-      </div>
+      </main>
 
       <!-- 目錄 -->
       {
         showToc && (
-          <aside class="content-toc d-none d-lg-block flex-shrink-0 mt-3" style={{ width: '220px' }}>
+          <aside class="content-toc grow hidden lg:block min-w-40 mt-8">
             <TableOfContents headings={headings} variant="desktop" />
           </aside>
         )
@@ -54,16 +54,17 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
 
 <style>
   .content-sidebar {
-    @media (width >= 992px) {
+    @media (width >= 1024px) {
       position: sticky;
-      top: calc(60px + 1rem);
-      height: calc(100dvh - 60px - 56px - 1.5rem);
-      overflow-y: scroll;
+      top: 6rem;
+      max-height: calc(100vh - 8rem);
+      overflow-y: auto;
+      z-index: 40;
     }
 
     /* 捲軸樣式 */
     &::-webkit-scrollbar {
-      width: 6px;
+      width: 4px;
     }
 
     &::-webkit-scrollbar-track {
@@ -71,27 +72,27 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgb(var(--bs-primary-rgb), 0.6);
-      border-radius: 0;
+      background: color-mix(in srgb, var(--color-primary) 30%, transparent);
+      border-radius: 99px;
     }
   }
 
-  .content-main {
-    margin-bottom: 6rem;
+  main {
+    margin-bottom: 8rem;
   }
 
   .content-toc {
-    @media (width >= 992px) {
+    @media (width >= 1024px) {
       position: sticky;
-      top: calc(60px + 1.5rem);
-      max-height: calc(100dvh - 60px - 56px - 1.5rem);
+      top: 6rem;
+      max-height: calc(100vh - 8rem);
       align-self: flex-start;
       overflow-y: auto;
     }
 
     /* 捲軸樣式 */
     &::-webkit-scrollbar {
-      width: 6px;
+      width: 4px;
     }
 
     &::-webkit-scrollbar-track {
@@ -99,8 +100,8 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgb(var(--bs-primary-rgb), 0.4);
-      border-radius: 0;
+      background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+      border-radius: 99px;
     }
   }
 </style>

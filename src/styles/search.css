@@ -1,0 +1,168 @@
+/* Pagefind Search Modal Styles - Algolia Style */
+
+:root {
+  --pagefind-ui-scale: 0.95;
+  --pagefind-ui-primary: var(--color-primary);
+  --pagefind-ui-text: var(--color-slate-800);
+  --pagefind-ui-background: transparent;
+  --pagefind-ui-border: var(--color-slate-200);
+  --pagefind-ui-font: inherit;
+
+  &:where(.dark) {
+    --pagefind-ui-text: var(--color-slate-200);
+    --pagefind-ui-border: var(--color-slate-700);
+  }
+}
+
+/* Modal Specific Sizing and Layout */
+.pagefind-custom-modal {
+  width: 100% !important;
+}
+
+/* Custom Search Input in Modal */
+.pagefind-custom-modal .pagefind-ui__search-input {
+  font-weight: 400 !important;
+  height: 56px !important;
+  padding-left: 3.5rem !important;
+  font-size: 1.125rem !important;
+  border-radius: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid var(--pagefind-ui-border) !important;
+  background-color: transparent !important;
+  color: var(--pagefind-ui-text) !important;
+}
+
+.pagefind-custom-modal .pagefind-ui__search-input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Form adjustment for larger icon */
+.pagefind-custom-modal .pagefind-ui__form {
+  position: relative !important;
+}
+
+.pagefind-custom-modal .pagefind-ui__form::before {
+  width: 22px !important;
+  height: 22px !important;
+  top: 17px !important;
+  left: 24px !important;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Clear button adjustment */
+.pagefind-custom-modal .pagefind-ui__search-clear {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  right: 16px !important;
+  height: 56px !important; /* 同 input 高度 */
+  width: 40px !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  color: var(--color-slate-400) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.2s !important;
+
+  &:hover {
+    opacity: 1 !important;
+  }
+}
+
+/* Modal Drawer / Results Area */
+.pagefind-custom-modal .pagefind-ui__drawer {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.pagefind-custom-modal .pagefind-ui__results-area {
+  padding: 1.5rem !important;
+  margin: 0 !important;
+}
+
+/* Individual Result Item Style */
+.pagefind-custom-modal .pagefind-ui__result {
+  margin-bottom: 0.75rem !important;
+  padding: 1rem !important;
+  background-color: var(--color-slate-50) !important;
+  border-radius: 12px !important;
+  border: 1px solid transparent !important;
+  transition: all 0.2s ease !important;
+  list-style: none !important;
+
+  &:where(.dark) {
+    background-color: color-mix(in srgb, var(--color-slate-800) 40%, transparent) !important;
+  }
+}
+
+.pagefind-custom-modal .pagefind-ui__result:hover {
+  background-color: white !important;
+  border-color: var(--color-primary) !important;
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 10%),
+    0 2px 4px -2px rgb(0 0 0 / 10%) !important;
+  transform: translateY(-2px);
+
+  &:where(.dark) {
+    background-color: var(--color-slate-800) !important;
+  }
+}
+
+.pagefind-custom-modal .pagefind-ui__result-link {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--color-slate-900) !important;
+  text-decoration: none !important;
+
+  &:where(.dark) {
+    color: var(--color-slate-100) !important;
+  }
+}
+
+.pagefind-custom-modal .pagefind-ui__result-excerpt {
+  font-size: 0.875rem !important;
+  color: var(--color-slate-500) !important;
+  margin-top: 0.25rem !important;
+
+  &:where(.dark) {
+    color: var(--color-slate-400) !important;
+  }
+}
+
+.pagefind-custom-modal mark {
+  background-color: color-mix(in srgb, var(--color-primary) 20%, transparent) !important;
+  color: var(--color-primary) !important;
+  font-weight: 600;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* Hide some elements we don't need in modal */
+.pagefind-custom-modal .pagefind-ui__message {
+  padding: 1rem 1.5rem !important;
+  font-size: 0.875rem !important;
+  color: var(--color-slate-400) !important;
+  border-bottom: 1px solid var(--pagefind-ui-border) !important;
+}
+
+.pagefind-custom-modal .pagefind-ui__button {
+  margin: 1.5rem auto !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 10px !important;
+  background-color: var(--color-slate-100) !important;
+  color: var(--color-slate-700) !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  border: none !important;
+
+  &:where(.dark) {
+    background-color: var(--color-slate-800) !important;
+    color: var(--color-slate-300) !important;
+  }
+}

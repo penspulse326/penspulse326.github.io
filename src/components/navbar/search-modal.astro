@@ -1,0 +1,108 @@
+---
+import Search from 'astro-pagefind/components/Search';
+---
+
+<!-- Search Modal Overlay -->
+<div class="fixed inset-0 z-60 hidden overflow-y-auto p-4 sm:p-6 md:p-20" id="search-modal" role="dialog">
+  <!-- Backdrop -->
+  <div
+    class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm dark:bg-slate-950/60 transition-opacity"
+    id="search-modal-backdrop"
+  >
+  </div>
+
+  <!-- Modal Content -->
+  <div class="relative mx-auto max-w-2xl transform transition-all">
+    <div
+      class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 flex flex-col max-h-[80vh]"
+    >
+      <div class="modal-search-wrapper grow overflow-y-auto">
+        <Search
+          id="modal-search"
+          className="pagefind-custom-modal"
+          uiOptions={{ showImages: false, excerptLength: 40 }}
+        />
+      </div>
+
+      <div
+        class="shrink-0 p-3 bg-slate-50 dark:bg-slate-900/80 border-t border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 font-medium flex gap-4"
+      >
+        <span class="flex items-center gap-1"
+          ><kbd class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px]"
+            >Enter</kbd
+          > 選擇</span
+        >
+        <span class="flex items-center gap-1"
+          ><kbd class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px]"
+            >↑↓</kbd
+          > 導覽</span
+        >
+        <span class="flex items-center gap-1"
+          ><kbd class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px]"
+            >ESC</kbd
+          > 關閉</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Search Modal Logic
+  const searchModal = document.getElementById('search-modal');
+  const searchBackdrop = document.getElementById('search-modal-backdrop');
+  const searchTriggers = [
+    document.getElementById('desktop-search-trigger'),
+    document.getElementById('mobile-search-trigger'),
+  ];
+
+  const openSearch = () => {
+    searchModal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    // Focus the Pagefind input after a small delay
+    setTimeout(() => {
+      const input = searchModal?.querySelector('input');
+      input?.focus();
+    }, 100);
+  };
+
+  const closeSearch = () => {
+    searchModal?.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
+
+  searchTriggers.forEach((btn) => btn?.addEventListener('click', openSearch));
+  searchBackdrop?.addEventListener('click', closeSearch);
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Open on Cmd+K or Ctrl+K
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+    // Open on '/' if not in an input
+    if (
+      e.key === '/' &&
+      document.activeElement?.tagName !== 'INPUT' &&
+      document.activeElement?.tagName !== 'TEXTAREA'
+    ) {
+      e.preventDefault();
+      openSearch();
+    }
+    // Close on Escape
+    if (e.key === 'Escape' && !searchModal?.classList.contains('hidden')) {
+      closeSearch();
+    }
+  });
+</script>
+
+<style>
+  /* Pagefind UI overrides */
+  :global(.pagefind-ui) {
+    --pagefind-ui-primary: var(--color-primary) !important;
+    --pagefind-ui-text: var(--color-text) !important;
+    --pagefind-ui-background: transparent !important;
+    --pagefind-ui-border: var(--color-border) !important;
+  }
+</style>

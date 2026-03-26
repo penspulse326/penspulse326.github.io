@@ -1,0 +1,33 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  type: 'desktop' | 'mobile';
+}
+
+const { type } = Astro.props;
+---
+
+{
+  type === 'desktop' ? (
+    <button
+      id="desktop-search-trigger"
+      class="hidden lg:flex items-center w-64 px-3 py-2 bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-500 rounded-xl text-sm transition-all hover:bg-white dark:hover:bg-slate-800 hover:border-primary group"
+    >
+      <Icon class="mr-2 group-hover:text-primary transition-colors" name="bi:search" />
+      <span class="grow text-left">搜尋文章...</span>
+      <kbd class="hidden sm:inline-flex items-center px-1.5 py-0.5 font-sans text-xs font-semibold text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md">
+        ⌘K
+      </kbd>
+    </button>
+  ) : (
+    <button
+      id="mobile-search-trigger"
+      class="flex items-center w-full max-w-[200px] px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 rounded-lg text-sm transition-all truncate"
+      aria-label="搜尋記事"
+    >
+      <Icon class="shrink-0 mr-2 text-slate-400" name="bi:search" />
+      <span class="truncate">搜尋文章...</span>
+    </button>
+  )
+}

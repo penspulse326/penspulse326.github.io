@@ -8,6 +8,9 @@ import expressiveCode from 'astro-expressive-code';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers';
 import pagefind from 'astro-pagefind';
 
+import tailwindcss from '@tailwindcss/vite';
+import icon from 'astro-icon';
+
 export default defineConfig({
   site: 'https://penspulse326.github.io',
   output: 'static',
@@ -22,6 +25,7 @@ export default defineConfig({
   },
 
   vite: {
+    plugins: [tailwindcss()],
     build: {
       cssMinify: 'lightningcss',
       chunkSizeWarningLimit: 600,
@@ -46,10 +50,6 @@ export default defineConfig({
             if (id.includes('node_modules/three')) {
               return 'three';
             }
-            // 將 Bootstrap 單獨打包
-            if (id.includes('node_modules/bootstrap')) {
-              return 'bootstrap';
-            }
           },
         },
       },
@@ -68,6 +68,7 @@ export default defineConfig({
   },
 
   integrations: [
+    icon(),
     expressiveCode({
       themes: ['houston'],
       plugins: [pluginLineNumbers()],

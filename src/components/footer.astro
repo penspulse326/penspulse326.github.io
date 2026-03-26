@@ -1,17 +1,21 @@
-<footer class="footer py-3 bg-body-secondary text-center">
-  <div>
-    © 2026 Pen's Pulse. All rights reserved. <br class="d-lg-none" />
-    <a class="text-decoration-none" href="mailto:penspulse@gmail.com">✉️ penspulse@gmail.com</a>
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<footer
+  class="w-full py-8 mt-auto bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800 transition-colors"
+>
+  <div class="max-w-7xl mx-auto px-4 lg:px-8 text-center text-slate-600 dark:text-slate-400 text-sm">
+    <div class="space-y-2">
+      <p>© 2026 Pen's Pulse. All rights reserved.</p>
+      <div class="flex items-center justify-center gap-2">
+        <Icon name="bi:envelope" />
+        <a class="hover:text-primary transition-colors" href="mailto:penspulse@gmail.com">penspulse@gmail.com</a>
+      </div>
+    </div>
   </div>
 </footer>
 
 <style>
-  /* 頁尾高度設定 */
-  .footer {
-    height: 80px;
-
-    @media (width >= 992px) {
-      height: 56px;
-    }
-  }
+  /* Footer-specific styles if any, otherwise leave empty or remove */
 </style>

@@ -11,24 +11,18 @@ const navigation = plansNav.map((cat) => ({
 ---
 
 <ArticleLayout navigation={navigation} showToc={false} title="挑戰計畫">
-  <section class="plans-intro px-2 px-lg-4 w-full">
-    <header class="mb-4">
-      <h1 class="display-6 fw-bold mb-3">挑戰計畫</h1>
+  <section class="px-2 w-full">
+    <header class="mb-8">
+      <h1 class="text-4xl font-black text-slate-900 dark:text-white mb-4">挑戰計畫</h1>
     </header>
 
-    <div class="card-body">
+    <div class="prose dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 leading-relaxed">
       <p>
-        這裡記錄各種 Side Project 的開發過程。相較於筆記，這裡的內容會比較多雜項，但通常還是會有實作與小結。
+        這裡是我參與各種 side project、學習挑戰或是技術馬拉松的紀錄。
         <br />
         <br />
+        比起單純的技術文件，這裡更多的是關於「為什麼要這麼做」的心路歷程，以及在過程中遇到的困難與解決方案。
       </p>
     </div>
   </section>
-
-  <style>
-    /* 列表項目間距 */
-    li {
-      margin-bottom: 0.5rem;
-    }
-  </style>
 </ArticleLayout>

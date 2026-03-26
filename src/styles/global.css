@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+@import './search.css';
+@import './markdown.css';
+@import './admonitions.css';
+
+@source "../**/*.{astro,html,js,jsx,md,mdx,ts,tsx}";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #057f94;
+  --color-secondary: #0861c5;
+  --color-bg: #f8fafc;
+  --color-text: #1e293b;
+  --color-primary-rgb: 5, 127, 148;
+}
+
+@layer base {
+  .dark {
+    --color-primary: #20ecec;
+    --color-bg: #030712;
+    --color-text: #f1f5f9;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 10% 20%, rgb(5 127 148 / 5%) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgb(8 97 197 / 5%) 0%, transparent 40%);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100vh;
+    font-family:
+      Inter,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+  }
+}
+
+/* Custom Utility for text shadow as it was used in index.astro */
+@utility text-shadow-lg {
+  text-shadow: 0 4px 8px rgb(0 0 0 / 30%);
+}
+
+@utility card-title-underline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--color-primary);
+    border-radius: 2px;
+  }
+}

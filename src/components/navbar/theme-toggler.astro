@@ -1,10 +1,18 @@
-<button aria-label="Toggle theme" class="btn ps-lg-2 ps-0 pe-2 py-1" id="bd-theme" type="button">
-  <i class="bi bi-moon-fill d-none" id="moon-icon"></i>
-  <i class="bi bi-sun-fill" id="sun-icon"></i>
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button
+  aria-label="Toggle theme"
+  class="theme-toggle-btn flex items-center justify-center p-2 text-current hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors"
+  type="button"
+>
+  <Icon class="hidden dark:block w-5 h-5" id="moon-icon" name="bi:moon-fill" />
+  <Icon class="block dark:hidden w-5 h-5" id="sun-icon" name="bi:sun-fill" />
 </button>
 
 <script>
-  const themeToggleBtn = document.getElementById('bd-theme')!;
+  const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
   const htmlElement = document.documentElement;
 
   const getStoredTheme = () => localStorage.getItem('theme');
@@ -18,34 +26,16 @@
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   };
 
-  const updateIcons = (theme: string) => {
-    const moonIcon = document.getElementById('moon-icon')!;
-    const sunIcon = document.getElementById('sun-icon')!;
-
-    // 如果是 auto，我們需要知道目前的實際主題
-    const actualTheme =
-      theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme;
-
-    if (actualTheme === 'dark') {
-      moonIcon.classList.remove('d-none');
-      sunIcon.classList.add('d-none');
-    } else {
-      moonIcon.classList.add('d-none');
-      sunIcon.classList.remove('d-none');
-    }
-  };
-
   const setTheme = (theme: string) => {
-    if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      htmlElement.setAttribute('data-bs-theme', 'dark');
+    if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      htmlElement.classList.add('dark');
     } else {
-      htmlElement.setAttribute('data-bs-theme', theme);
+      htmlElement.classList.remove('dark');
     }
-    updateIcons(theme);
   };
 
-  // 初始化圖示 (因為 layout 已經設定好 data-bs-theme，這裡只需要同步圖示)
-  updateIcons(getPreferredTheme());
+  // 初始化
+  setTheme(getPreferredTheme());
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     const storedTheme = getStoredTheme();
@@ -54,10 +44,12 @@
     }
   });
 
-  themeToggleBtn.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-bs-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    setStoredTheme(newTheme);
-    setTheme(newTheme);
+  themeToggleBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const isDark = htmlElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      setStoredTheme(newTheme);
+      setTheme(newTheme);
+    });
   });
 </script>

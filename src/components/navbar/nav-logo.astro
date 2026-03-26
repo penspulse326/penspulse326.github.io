@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import logoImage from '/public/logo.png';
+
+interface Props {
+  isMobile?: boolean;
+}
+
+const { isMobile = false } = Astro.props;
+---
+
+<a class="flex items-center shrink-0" href="/">
+  <Image
+    alt={isMobile ? "Pen's Pulse Logo" : "Pen's Pulse 首頁"}
+    class:list={['h-8 w-8', !isMobile && 'rounded-full']}
+    densities={[1.5, 2, 3]}
+    format="webp"
+    height={32}
+    quality={isMobile ? 90 : 100}
+    src={logoImage}
+    width={32}
+  />
+  {!isMobile && <span class="ml-3 text-xl font-bold text-slate-900 dark:text-white">Pen's Pulse</span>}
+</a>

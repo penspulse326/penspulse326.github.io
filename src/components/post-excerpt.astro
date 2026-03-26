@@ -12,7 +12,7 @@ const { Content } = Astro.props;
 
 <script>
   // 在客戶端處理截斷並轉換為純文字
-  document.addEventListener('DOMContentLoaded', () => {
+  function initPostExcerpt() {
     const excerpts = document.querySelectorAll('.post-excerpt-wrapper');
 
     excerpts.forEach((excerpt) => {
@@ -47,12 +47,19 @@ const { Content } = Astro.props;
       const textNode = document.createTextNode(textContent);
       (excerpt as HTMLElement).appendChild(textNode);
     });
-  });
+  }
+
+  document.addEventListener('astro:page-load', initPostExcerpt);
+  initPostExcerpt();
 </script>
 
 <style>
   .post-excerpt-wrapper {
-    color: var(--bs-secondary-color);
+    color: var(--color-slate-500);
     line-height: 1.6;
+  }
+
+  :where(.dark, .dark *) .post-excerpt-wrapper {
+    color: var(--color-slate-400);
   }
 </style>

@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components';
+
 import type { PlanEntry } from '../../utils/plans';
 
 import GiscusComment from '../../components/giscus-comment.astro';
@@ -17,7 +19,6 @@ export function getStaticPaths() {
 const { plan } = Astro.props as { plan: PlanEntry };
 
 if (!plan) {
-  // 靜態生成時不應該發生此情況
   return Astro.redirect('/404');
 }
 
@@ -39,37 +40,29 @@ const headings = await plan.getHeadings();
   navigation={navigation}
   title={pageTitle}
 >
-  <article class="plans-article px-2 px-lg-4">
-    <header class="mb-4">
-      <h1 class="display-6 fw-bold mb-3">{plan.frontmatter.title}</h1>
-      <div class="d-flex flex-wrap align-items-center gap-3">
+  <article class="px-2">
+    <header class="mb-8">
+      <h1 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white mb-4 leading-tight">
+        {plan.frontmatter.title}
+      </h1>
+      <div class="flex items-center gap-4 text-sm font-medium text-slate-500 dark:text-slate-400">
         {
           plan.frontmatter.date && (
-            <time class="plans-article__meta text-muted" datetime={plan.frontmatter.date.toISOString()}>
+            <time class="flex items-center gap-2" datetime={plan.frontmatter.date.toISOString()}>
+              <Icon class="text-primary" name="bi:calendar3" />
               {plan.frontmatter.date.toLocaleDateString('zh-TW')} 發布
             </time>
           )
         }
       </div>
     </header>
+
     <TableOfContents headings={headings} variant="mobile" />
-    <div class="markdown-body">
+
+    <div class="markdown-body mt-8">
       <plan.Content />
     </div>
 
     <GiscusComment />
   </article>
 </ArticleLayout>
-
-<style>
-  /* 計畫文章樣式 */
-  .plans-article {
-    background-color: var(--bs-body-bg);
-  }
-
-  /* 計畫文章 meta 資訊樣式 */
-  .plans-article__meta {
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-  }
-</style>

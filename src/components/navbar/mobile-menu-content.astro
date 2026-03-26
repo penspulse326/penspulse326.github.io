@@ -1,0 +1,36 @@
+---
+import ThemeToggler from './theme-toggler.astro';
+import NavLinks from './nav-links.astro';
+
+interface Props {
+  isPostsRoute: boolean;
+  isNotesRoute: boolean;
+  isPlansRoute: boolean;
+}
+
+const { isPostsRoute, isNotesRoute, isPlansRoute } = Astro.props;
+---
+
+<div id="main-menu-container">
+  <NavLinks isMobile={true} isPostsRoute={isPostsRoute} isNotesRoute={isNotesRoute} isPlansRoute={isPlansRoute} />
+
+  <div class="border-t border-slate-200 dark:border-slate-800 my-2"></div>
+
+  <div
+    class="flex items-center p-1 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
+    id="mobile-theme-toggle-container"
+  >
+    <ThemeToggler />
+    <span class="ml-2 font-medium">切換深淺模式</span>
+  </div>
+</div>
+
+<script>
+  const mobileThemeToggleContainer = document.getElementById('mobile-theme-toggle-container');
+  mobileThemeToggleContainer?.addEventListener('click', (e) => {
+    const toggler = mobileThemeToggleContainer.querySelector('.theme-toggle-btn') as HTMLElement;
+    if (toggler && !toggler.contains(e.target as Node)) {
+      toggler.click();
+    }
+  });
+</script>

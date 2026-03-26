@@ -4,8 +4,7 @@ import { Icon } from 'astro-icon/components';
 
 <button
   aria-label="Toggle theme"
-  class="flex items-center justify-center p-2 text-current hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors"
-  id="bd-theme"
+  class="theme-toggle-btn flex items-center justify-center p-2 text-current hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors"
   type="button"
 >
   <Icon class="hidden dark:block w-5 h-5" id="moon-icon" name="bi:moon-fill" />
@@ -13,7 +12,7 @@ import { Icon } from 'astro-icon/components';
 </button>
 
 <script>
-  const themeToggleBtn = document.getElementById('bd-theme')!;
+  const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
   const htmlElement = document.documentElement;
 
   const getStoredTheme = () => localStorage.getItem('theme');
@@ -45,10 +44,12 @@ import { Icon } from 'astro-icon/components';
     }
   });
 
-  themeToggleBtn.addEventListener('click', () => {
-    const isDark = htmlElement.classList.contains('dark');
-    const newTheme = isDark ? 'light' : 'dark';
-    setStoredTheme(newTheme);
-    setTheme(newTheme);
+  themeToggleBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const isDark = htmlElement.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      setStoredTheme(newTheme);
+      setTheme(newTheme);
+    });
   });
 </script>

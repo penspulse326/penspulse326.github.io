@@ -1,23 +1,24 @@
 ---
-import { Image } from 'astro:assets';
-
 import type { CategoryWithContent } from '../../utils/content';
 import type { CategoryPostItem } from '../../utils/posts';
 
 import ContentMenu from './content-menu.astro';
 import PostsMenu from './posts-menu.astro';
 import ThemeToggler from './theme-toggler.astro';
-import Search from 'astro-pagefind/components/Search';
 import { Icon } from 'astro-icon/components';
 
-import logoImage from '/public/logo.png';
+/* New Components */
+import NavLogo from './nav-logo.astro';
+import NavLinks from './nav-links.astro';
+import SearchTrigger from './search-trigger.astro';
+import SearchModal from './search-modal.astro';
+import MobileMenuContent from './mobile-menu-content.astro';
 
 const pathname = Astro.url.pathname;
 const isNotesRoute = pathname.startsWith('/notes');
 const isPlansRoute = pathname.startsWith('/plans');
 const isPostsRoute = pathname.startsWith('/posts');
 const isContentRoute = isNotesRoute || isPlansRoute;
-const hasCustomMenu = isContentRoute || isPostsRoute;
 
 const normalizePath = (path: string) => (path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path);
 
@@ -60,30 +61,12 @@ if (isNotesRoute) {
   <div class="max-w-7xl mx-auto px-4 lg:px-8">
     <!-- 手機版導覽列 (Logo, 搜尋, 選單按鈕) - 僅在小於 lg 螢幕顯示 -->
     <div class="grid lg:hidden grid-cols-[auto_1fr_auto] items-center h-16 gap-3">
-      <div class="flex items-center">
-        <a class="flex items-center" href="/">
-          <Image
-            alt="Pen's Pulse Logo"
-            class="h-8 w-8"
-            densities={[1.5, 2, 3]}
-            format="webp"
-            height={32}
-            quality={90}
-            src={logoImage}
-            width={32}
-          />
-        </a>
-      </div>
+      <NavLogo isMobile={true} />
+
       <div class="flex justify-center w-full min-w-0">
-        <button
-          id="mobile-search-trigger"
-          class="flex items-center w-full max-w-[200px] px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 rounded-lg text-sm transition-all truncate"
-          aria-label="搜尋記事"
-        >
-          <Icon class="shrink-0 mr-2 text-slate-400" name="bi:search" />
-          <span class="truncate">搜尋文章...</span>
-        </button>
+        <SearchTrigger type="mobile" />
       </div>
+
       <div class="flex justify-end">
         <button
           aria-controls="mobile-menu"
@@ -92,75 +75,21 @@ if (isNotesRoute) {
           id="mobile-menu-button"
           type="button"
         >
-          <Icon class="text-2xl" name="bi:list" />
+          <Icon class="text-3xl" name="bi:list" />
         </button>
       </div>
     </div>
 
     <!-- 桌面版導覽列 - 僅在 lg 以上顯示 -->
     <div class="hidden lg:flex items-center justify-between h-16">
-      <!-- 左欄 -->
       <div class="flex items-center gap-8">
-        <!-- Logo -->
-        <a class="flex items-center shrink-0" href="/">
-          <Image
-            alt="Pen's Pulse 首頁"
-            class="h-8 w-8 rounded-full"
-            densities={[1.5, 2, 3]}
-            format="webp"
-            height={32}
-            quality={100}
-            src={logoImage}
-            width={32}
-          />
-          <span class="ml-3 text-xl font-bold text-slate-900 dark:text-white">Pen's Pulse</span>
-        </a>
-
-        <!-- 站內連結 -->
-        <ul class="flex items-center gap-1">
-          <li>
-            <a
-              class={`px-3 py-2 text-sm font-medium transition-colors hover:text-primary ${isPostsRoute ? 'text-primary' : 'text-slate-600 dark:text-slate-400'}`}
-              href="/posts"
-            >
-              文章
-            </a>
-          </li>
-          <li>
-            <a
-              class={`px-3 py-2 text-sm font-medium transition-colors hover:text-primary ${isNotesRoute ? 'text-primary' : 'text-slate-600 dark:text-slate-400'}`}
-              href="/notes"
-            >
-              研究筆記
-            </a>
-          </li>
-          <li>
-            <a
-              class={`px-3 py-2 text-sm font-medium transition-colors hover:text-primary ${isPlansRoute ? 'text-primary' : 'text-slate-600 dark:text-slate-400'}`}
-              href="/plans"
-            >
-              挑戰計畫
-            </a>
-          </li>
-        </ul>
+        <NavLogo />
+        <NavLinks isPostsRoute={isPostsRoute} isNotesRoute={isNotesRoute} isPlansRoute={isPlansRoute} />
       </div>
 
-      <!-- 右欄 -->
       <div class="flex items-center gap-4">
-        <!-- 搜尋觸發按鈕 -->
-        <button
-          id="desktop-search-trigger"
-          class="flex items-center w-64 px-3 py-2 bg-slate-100/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-500 rounded-xl text-sm transition-all hover:bg-white dark:hover:bg-slate-800 hover:border-primary group"
-        >
-          <Icon class="mr-2 group-hover:text-primary transition-colors" name="bi:search" />
-          <span class="flex-grow text-left">搜尋文章...</span>
-          <kbd
-            class="hidden sm:inline-flex items-center px-1.5 py-0.5 font-sans text-xs font-semibold text-slate-400 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-md"
-            >⌘K</kbd
-          >
-        </button>
+        <SearchTrigger type="desktop" />
 
-        <!-- 外部連結 -->
         <a
           aria-label="前往 GitHub 查看專案"
           class="text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
@@ -171,59 +100,16 @@ if (isNotesRoute) {
           <Icon class="text-xl" name="bi:github" />
         </a>
 
-        <!-- 主題切換 -->
         <ThemeToggler />
       </div>
     </div>
 
     <!-- 手機版下拉選單 -->
     <div
-      class="hidden border-t border-slate-200 dark:border-slate-800 lg:hidden overflow-hidden transition-all duration-300"
+      class="hidden border-t py-4 border-slate-200 dark:border-slate-800 lg:hidden overflow-hidden transition-all duration-300"
       id="mobile-menu"
     >
-      <div class="px-2 pt-2 pb-6" id="main-menu-container">
-        <div class="grid grid-cols-2 gap-3 pb-4 pt-2">
-          <a
-            class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
-            href="/posts"
-          >
-            <Icon class="mr-3 text-lg text-primary" name="bi:file-earmark-text" />
-            <span class="font-medium text-sm">文章</span>
-          </a>
-          <a
-            class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
-            href="/notes"
-          >
-            <Icon class="mr-3 text-lg text-primary" name="bi:journal-text" />
-            <span class="font-medium text-sm">研究筆記</span>
-          </a>
-          <a
-            class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
-            href="/plans"
-          >
-            <Icon class="mr-3 text-lg text-primary" name="bi:trophy" />
-            <span class="font-medium text-sm">挑戰計畫</span>
-          </a>
-          <a
-            class="flex items-center p-3 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
-            href="https://github.com/penspulse326"
-            target="_blank"
-          >
-            <Icon class="mr-3 text-lg text-primary" name="bi:github" />
-            <span class="font-medium text-sm">GitHub</span>
-          </a>
-        </div>
-
-        <div class="border-t border-slate-200 dark:border-slate-800 my-2"></div>
-
-        <div
-          class="flex items-center px-4 py-3 rounded-xl transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer text-slate-700 dark:text-slate-200"
-          id="mobile-theme-toggle-container"
-        >
-          <ThemeToggler />
-          <span class="ml-3 font-medium">切換深淺模式</span>
-        </div>
-      </div>
+      <MobileMenuContent isPostsRoute={isPostsRoute} isNotesRoute={isNotesRoute} isPlansRoute={isPlansRoute} />
 
       <!-- 專屬選單容器 -->
       {
@@ -244,50 +130,7 @@ if (isNotesRoute) {
   </div>
 </nav>
 
-<!-- Search Modal Overlay -->
-<div class="fixed inset-0 z-[60] hidden overflow-y-auto p-4 sm:p-6 md:p-20" id="search-modal" role="dialog">
-  <!-- Backdrop -->
-  <div
-    class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm dark:bg-slate-950/60 transition-opacity"
-    id="search-modal-backdrop"
-  >
-  </div>
-
-  <!-- Modal Content -->
-  <div class="relative mx-auto max-w-2xl transform transition-all">
-    <div
-      class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 flex flex-col max-h-[80vh]"
-    >
-      <div class="modal-search-wrapper flex-grow overflow-y-auto">
-        <Search
-          id="modal-search"
-          className="pagefind-custom-modal"
-          uiOptions={{ showImages: false, excerptLength: 40 }}
-        />
-      </div>
-
-      <div
-        class="shrink-0 p-3 bg-slate-50 dark:bg-slate-900/80 border-t border-slate-100 dark:border-slate-800 text-[10px] text-slate-400 font-medium flex gap-4"
-      >
-        <span class="flex items-center gap-1"
-          ><kbd class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px]"
-            >Enter</kbd
-          > 選擇</span
-        >
-        <span class="flex items-center gap-1"
-          ><kbd class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px]"
-            >↑↓</kbd
-          > 導覽</span
-        >
-        <span class="flex items-center gap-1"
-          ><kbd class="px-1 border border-slate-200 dark:border-slate-700 rounded bg-white dark:bg-slate-800 text-[9px]"
-            >ESC</kbd
-          > 關閉</span
-        >
-      </div>
-    </div>
-  </div>
-</div>
+<SearchModal />
 
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -295,14 +138,12 @@ if (isNotesRoute) {
   const mainContainer = document.getElementById('main-menu-container');
   const contentContainer = document.getElementById('content-menu-container');
   const postsContainer = document.getElementById('posts-menu-container');
-  const mobileThemeToggleContainer = document.getElementById('mobile-theme-toggle-container');
 
   mobileMenuButton?.addEventListener('click', () => {
     const isOpening = mobileMenu?.classList.contains('hidden');
     mobileMenu?.classList.toggle('hidden');
 
     if (isOpening) {
-      // 開啟時檢查是否有專屬選單，有的話優先顯示
       if (contentContainer || postsContainer) {
         mainContainer?.classList.add('hidden');
         if (contentContainer) contentContainer.classList.remove('hidden');
@@ -312,69 +153,4 @@ if (isNotesRoute) {
       }
     }
   });
-
-  mobileThemeToggleContainer?.addEventListener('click', () => {
-    const toggler = mobileThemeToggleContainer.querySelector('#bd-theme') as HTMLElement;
-    toggler?.click();
-  });
-
-  // Search Modal Logic
-  const searchModal = document.getElementById('search-modal');
-  const searchBackdrop = document.getElementById('search-modal-backdrop');
-  const closeButton = document.getElementById('close-search-modal');
-  const searchTriggers = [
-    document.getElementById('desktop-search-trigger'),
-    document.getElementById('mobile-search-trigger'),
-  ];
-
-  const openSearch = () => {
-    searchModal?.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-    // Focus the Pagefind input after a small delay
-    setTimeout(() => {
-      const input = searchModal?.querySelector('input');
-      input?.focus();
-    }, 100);
-  };
-
-  const closeSearch = () => {
-    searchModal?.classList.add('hidden');
-    document.body.style.overflow = '';
-  };
-
-  searchTriggers.forEach((btn) => btn?.addEventListener('click', openSearch));
-  closeButton?.addEventListener('click', closeSearch);
-  searchBackdrop?.addEventListener('click', closeSearch);
-
-  // Keyboard shortcuts
-  document.addEventListener('keydown', (e) => {
-    // Open on Cmd+K or Ctrl+K
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-      e.preventDefault();
-      openSearch();
-    }
-    // Open on '/' if not in an input
-    if (
-      e.key === '/' &&
-      document.activeElement?.tagName !== 'INPUT' &&
-      document.activeElement?.tagName !== 'TEXTAREA'
-    ) {
-      e.preventDefault();
-      openSearch();
-    }
-    // Close on Escape
-    if (e.key === 'Escape' && !searchModal?.classList.contains('hidden')) {
-      closeSearch();
-    }
-  });
 </script>
-
-<style>
-  /* Pagefind UI overrides */
-  :global(.pagefind-ui) {
-    --pagefind-ui-primary: var(--color-primary) !important;
-    --pagefind-ui-text: var(--color-text) !important;
-    --pagefind-ui-background: transparent !important;
-    --pagefind-ui-border: var(--color-border) !important;
-  }
-</style>

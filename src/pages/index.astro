@@ -24,10 +24,25 @@ import { Icon } from 'astro-icon/components';
   </section>
 
   <div class="max-w-5xl mx-auto px-4 lg:px-8 py-12">
-    <div class="space-y-12">
+    <div class="space-y-3">
       <!-- 三欄式功能連結 -->
       <section aria-labelledby="about-site-heading">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <article
+            class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
+          >
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-4">文章</h2>
+            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+              與職涯、活動、產業趨勢等相關的文章。
+            </p>
+            <a
+              class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
+              href="/posts"
+            >
+              閱讀更多 <Icon class="ml-1" name="bi:arrow-right" />
+            </a>
+          </article>
+
           <article
             class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
           >
@@ -57,27 +72,12 @@ import { Icon } from 'astro-icon/components';
               閱讀更多 <Icon class="ml-1" name="bi:arrow-right" />
             </a>
           </article>
-
-          <article
-            class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
-          >
-            <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-4">文章</h2>
-            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
-              與職涯、活動、產業趨勢等相關的文章。
-            </p>
-            <a
-              class="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all"
-              href="/posts"
-            >
-              閱讀更多 <Icon class="ml-1" name="bi:arrow-right" />
-            </a>
-          </article>
         </div>
       </section>
 
       <!-- 個人介紹與技能區域 -->
       <section aria-labelledby="about-me-heading">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
           <!-- 左側介紹 -->
           <article
             class="md:col-span-8 relative overflow-hidden bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 transition-colors"
@@ -103,7 +103,7 @@ import { Icon } from 'astro-icon/components';
 
             <Image
               alt="Shin"
-              class="absolute bottom-[-10%] right-[-10%] md:bottom-[-20%] md:right-[-5%] w-[250px] md:w-[350px] opacity-10 dark:opacity-20 pointer-events-none grayscale"
+              class="absolute bottom-[-10%] right-[-10%] md:bottom-[-20%] md:right-[-5%] w-[250px] md:w-[350px] opacity-10 dark:opacity-20 pointer-events-none rounded-full"
               format="webp"
               height={300}
               loading="lazy"
@@ -114,7 +114,7 @@ import { Icon } from 'astro-icon/components';
           </article>
 
           <!-- 右側小卡片 -->
-          <div class="md:col-span-4 flex flex-col gap-6">
+          <div class="md:col-span-4 flex flex-col gap-3">
             <article
               class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 transition-colors"
             >

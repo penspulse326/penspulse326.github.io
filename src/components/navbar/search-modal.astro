@@ -3,7 +3,7 @@ import Search from 'astro-pagefind/components/Search';
 ---
 
 <!-- Search Modal Overlay -->
-<div class="fixed inset-0 z-[60] hidden overflow-y-auto p-4 sm:p-6 md:p-20" id="search-modal" role="dialog">
+<div class="fixed inset-0 z-60 hidden overflow-y-auto p-4 sm:p-6 md:p-20" id="search-modal" role="dialog">
   <!-- Backdrop -->
   <div
     class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm dark:bg-slate-950/60 transition-opacity"
@@ -16,7 +16,7 @@ import Search from 'astro-pagefind/components/Search';
     <div
       class="overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl ring-1 ring-slate-200 dark:ring-slate-800 flex flex-col max-h-[80vh]"
     >
-      <div class="modal-search-wrapper flex-grow overflow-y-auto">
+      <div class="modal-search-wrapper grow overflow-y-auto">
         <Search
           id="modal-search"
           className="pagefind-custom-modal"

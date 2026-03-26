@@ -36,7 +36,7 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
       </aside>
 
       <!-- 內文 -->
-      <main class="grow mt-4 lg:mt-8 min-w-0">
+      <main class="grow mt-4 lg:mt-8 min-w-0 relative z-0">
         <slot />
       </main>
 
@@ -59,6 +59,7 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
       top: 6rem;
       max-height: calc(100vh - 8rem);
       overflow-y: auto;
+      z-index: 40;
     }
 
     /* 捲軸樣式 */

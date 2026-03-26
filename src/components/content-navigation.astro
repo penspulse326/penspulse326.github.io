@@ -27,7 +27,7 @@ const { aAttrs, activeId, id, isDrawer = false, navigation } = Astro.props;
         <span>主題清單</span>
       </button>
 
-      <div class="fixed inset-0 top-16 z-100 invisible" id={id} role="dialog">
+      <div class="fixed inset-0 top-16 invisible" id={id} role="dialog">
         <div
           class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm opacity-0 transition-opacity duration-300"
           id={`${id}-backdrop`}

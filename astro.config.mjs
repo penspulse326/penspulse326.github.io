@@ -12,7 +12,7 @@ import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 
 export default defineConfig({
-  site: 'https://penspulse326.github.io',
+  site: 'https://dev.penspulse.com',
   output: 'static',
 
   image: {

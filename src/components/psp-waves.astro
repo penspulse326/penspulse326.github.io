@@ -26,32 +26,33 @@
 </style>
 
 <script>
-  import * as THREE from 'three';
-
   let isInitialized = false;
 
-  // 使用 LoadingManager 管理載入狀態
-  const loadingManager = new THREE.LoadingManager();
-
-  loadingManager.onLoad = () => {
-    // 當所有資源載入完成時（目前這個組件沒有外部資源，但保持架構完整）
-    // 我們在下一幀觸發事件，確保渲染器已經準備好第一幀
-    requestAnimationFrame(() => {
-      window.dispatchEvent(new CustomEvent('threejs-ready'));
-    });
-  };
-
-  function initWaves() {
+  async function initWaves() {
     if (isInitialized) return;
 
     const container = document.getElementById('psp-waves-container') as HTMLDivElement;
 
     if (!container) {
-      requestAnimationFrame(initWaves);
+      if (document.readyState !== 'complete') {
+        window.addEventListener('load', () => initWaves(), { once: true });
+      }
       return;
     }
 
     isInitialized = true;
+
+    // 動態引入所需的 three 模組 (Tree shaking 友好)
+    const {
+      Scene,
+      PerspectiveCamera,
+      WebGLRenderer,
+      Mesh,
+      PlaneGeometry,
+      MeshBasicMaterial,
+      DoubleSide,
+      AdditiveBlending,
+    } = await import('three');
 
     // 配置參數
     const config = {
@@ -59,27 +60,29 @@
     };
 
     // 建立場景
-    const scene = new THREE.Scene();
+    const scene = new Scene();
 
     // 透視相機
     const fov = 75;
     const aspect = container.offsetWidth / container.offsetHeight;
     const near = 1;
     const far = 10000;
-    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    const camera = new PerspectiveCamera(fov, aspect, near, far);
     camera.position.set(0, 0, 1000);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({
+    const renderer = new WebGLRenderer({
       alpha: true,
       antialias: true,
     });
+
+    const isMobile = window.innerWidth < 768;
+
     renderer.setSize(container.offsetWidth, container.offsetHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    const waves: THREE.Mesh[] = [];
-
+    const waves: any[] = [];
     const waveParams = [
       { color: 0xffffff, opacity: 0.15, z: 0, speed: 0.3, offset: 0, amplitude: 200 },
       { color: 0xffffff, opacity: 0.1, z: -100, speed: 0.9, offset: 200, amplitude: 150 },
@@ -87,45 +90,47 @@
     ];
 
     const planeWidth = 12000;
-    const planeSegments = 50;
+    const planeSegments = isMobile ? 30 : 50;
 
     waveParams.forEach((param) => {
-      const geometry = new THREE.PlaneGeometry(planeWidth, 1200, planeSegments, 1);
-      const material = new THREE.MeshBasicMaterial({
+      const geometry = new PlaneGeometry(planeWidth, 1200, planeSegments, 1);
+      const material = new MeshBasicMaterial({
         color: param.color,
         transparent: true,
         opacity: param.opacity,
-        side: THREE.DoubleSide,
+        side: DoubleSide,
         depthWrite: false,
-        blending: THREE.AdditiveBlending,
+        blending: AdditiveBlending,
       });
 
-      const mesh = new THREE.Mesh(geometry, material);
+      const mesh = new Mesh(geometry, material);
       mesh.position.z = param.z;
       mesh.position.y = config.yOffset;
+
+      // 儲存原始頂點數據用於動畫計算
+      const positions = geometry.attributes.position.array;
+      const baseVertices: number[] = [];
+      for (let i = 0; i < positions.length; i++) {
+        baseVertices.push(positions[i]);
+      }
 
       mesh.userData = {
         speed: param.speed,
         offset: param.offset,
-        baseVertices: [],
+        baseVertices: baseVertices,
         amplitude: param.amplitude,
       };
-
-      const positions = geometry.attributes.position.array;
-      for (let i = 0; i < positions.length; i++) {
-        mesh.userData.baseVertices.push(positions[i]);
-      }
 
       scene.add(mesh);
       waves.push(mesh);
     });
 
-    function animate() {
+    function animate(currentTime: number) {
       requestAnimationFrame(animate);
-      const time = performance.now() * 0.001;
+      const time = currentTime * 0.001;
 
       waves.forEach((mesh) => {
-        const positions = mesh.geometry.attributes.position.array;
+        const positions = mesh.geometry.attributes.position.array as Float32Array;
         const count = mesh.geometry.attributes.position.count;
         const baseVertices = mesh.userData.baseVertices;
 
@@ -147,6 +152,9 @@
       renderer.render(scene, camera);
     }
 
+    // 啟動動畫
+    requestAnimationFrame(animate);
+
     // Resize 處理
     function handleResize() {
       if (!container) return;
@@ -158,36 +166,39 @@
     }
 
     window.addEventListener('resize', handleResize);
-    animate();
-
-    // 如果沒有資源要加載，手動觸發 LoadingManager 的 onLoad
-    // 這樣即使目前沒用 TextureLoader 等，遮罩也能正確消失
-    // 如果未來在這個組件加了 TextureLoader(loadingManager).load(...)，這行可以拿掉或改成檢查進度
-    const checkLoading = () => {
-      // 在這裡檢查是否還有待處裡的資源，通常 LoadingManager 會自動處理
-      // 但因為我們目前實例化了它卻沒給它任務，它可能不會觸發 onLoad
-      // 這裡我們模擬一個任務或者直接調用
-      if (waves.length > 0) {
-        // 確保波浪已經建立
-        setTimeout(() => {
-          loadingManager.onLoad();
-        }, 300); // 給一點緩衝時間讓初次渲染更穩定
-      }
-    };
-    checkLoading();
+    window.dispatchEvent(new CustomEvent('threejs-ready'));
 
     // 清理
     const cleanup = () => {
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
-      waves.forEach((w) => {
-        w.geometry.dispose();
-        (w.material as THREE.Material).dispose();
+      scene.traverse((object) => {
+        if (object instanceof Mesh) {
+          object.geometry.dispose();
+          if (Array.isArray(object.material)) {
+            object.material.forEach((m) => m.dispose());
+          } else {
+            object.material.dispose();
+          }
+        }
       });
     };
 
     window.addEventListener('beforeunload', cleanup);
   }
 
-  initWaves();
+  // 使用 requestIdleCallback 延遲啟動即可解決 TBT 問題
+  const scheduleInit = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => initWaves(), { timeout: 3000 });
+    } else {
+      setTimeout(initWaves, 1000);
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleInit);
+  } else {
+    scheduleInit();
+  }
 </script>

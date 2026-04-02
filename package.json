@@ -11,6 +11,7 @@
     "generate": "node create-md.js"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@expressive-code/plugin-line-numbers": "^0.41.7",
     "@iconify-json/bi": "^1.2.7",
     "astro": "^5.15.5",

@@ -10,6 +10,8 @@ import pagefind from 'astro-pagefind';
 
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
+import sitemap from '@astrojs/sitemap';
+
 
 export default defineConfig({
   site: 'https://dev.penspulse.com',
@@ -77,5 +79,7 @@ export default defineConfig({
       },
     }),
     pagefind(),
+    sitemap(),
   ],
+
 });

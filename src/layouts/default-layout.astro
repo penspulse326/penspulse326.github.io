@@ -47,14 +47,17 @@ const fullOgImageUrl = new URL(ogImage, baseUrl).href;
     <meta content={siteTitle} property="og:title" />
     <meta content={description} property="og:description" />
     <meta content={fullOgImageUrl} property="og:image" />
+    <meta content="400" property="og:image:width" />
+    <meta content="400" property="og:image:height" />
+    <meta content="Pen's Pulse" property="og:image:alt" />
     <meta content="zh_TW" property="og:locale" />
 
     <!-- Twitter -->
-    <meta content="summary_large_image" property="twitter:card" />
-    <meta content={canonicalUrl} property="twitter:url" />
-    <meta content={siteTitle} property="twitter:title" />
-    <meta content={description} property="twitter:description" />
-    <meta content={fullOgImageUrl} property="twitter:image" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content={canonicalUrl} name="twitter:url" />
+    <meta content={siteTitle} name="twitter:title" />
+    <meta content={description} name="twitter:description" />
+    <meta content={fullOgImageUrl} name="twitter:image" />
 
     <!-- Theme Initialization Script -->
     <script is:inline>

@@ -4,6 +4,7 @@ import type { MarkdownHeading } from 'astro';
 import type { CategoryWithContent } from '../utils/content';
 
 import ContentSidebar from '../components/content-sidebar.astro';
+import ImageZoom from '../components/image-zoom.astro';
 import TableOfContents from '../components/table-of-contents.astro';
 import Layout from './default-layout.astro';
 
@@ -37,7 +38,7 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
       </aside>
 
       <!-- 內文 -->
-      <main class="grow mt-4 lg:mt-8 min-w-0 relative z-0">
+      <main class="grow mt-4 lg:mt-8 min-w-0 relative z-0 markdown-body">
         <slot />
       </main>
 
@@ -51,6 +52,7 @@ const hasCustomSidebar = Astro.slots.has('sidebar');
       }
     </div>
   </div>
+  <ImageZoom />
 </Layout>
 
 <style>

@@ -1,0 +1,97 @@
+---
+/**
+ * ImageZoom Component
+ * Provides a lightbox effect for images within the `.markdown-body` content area.
+ * Follows SRP by isolating the lightbox HTML and its associated behavior.
+ */
+import { Icon } from 'astro-icon/components';
+---
+
+<!-- Image Zoom Overlay -->
+<div
+  aria-hidden="true"
+  class="fixed inset-0 z-100 hidden bg-slate-950/90 backdrop-blur-md cursor-zoom-out items-center justify-center transition-all duration-300 opacity-0"
+  id="image-zoom-overlay"
+>
+  <img
+    alt="Zoomed image"
+    class="max-w-[95vw] max-h-[95vh] object-contain shadow-2xl scale-95 transition-transform duration-500 ease-out rounded-lg select-none"
+    id="image-zoom-img"
+    src=""
+  />
+  <div
+    class="absolute top-4 right-4 p-2 text-white/50 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full cursor-pointer flex items-center justify-center"
+    id="image-zoom-close"
+    title="Close (Esc)"
+  >
+    <Icon name="bi:x-lg" size={24} />
+  </div>
+</div>
+
+<script>
+  function setupImageZoom() {
+    const images = document.querySelectorAll('.markdown-body img');
+    const overlay = document.getElementById('image-zoom-overlay');
+    const zoomImg = document.getElementById('image-zoom-img') as HTMLImageElement;
+    const closeBtn = document.getElementById('image-zoom-close');
+
+    if (!overlay || !zoomImg) {
+      return;
+    }
+
+    images.forEach((img) => {
+      // Avoid conflict with images already wrapped in links
+      if (img.parentElement?.tagName === 'A') {
+        return;
+      }
+
+      (img as HTMLElement).style.cursor = 'zoom-in';
+
+      img.addEventListener('click', () => {
+        const src = (img as HTMLImageElement).src;
+        zoomImg.src = src;
+        overlay.classList.remove('hidden');
+        overlay.classList.add('flex');
+
+        requestAnimationFrame(() => {
+          overlay.style.opacity = '1';
+          zoomImg.style.transform = 'scale(1)';
+        });
+
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    const closeZoom = () => {
+      overlay.style.opacity = '0';
+      zoomImg.style.transform = 'scale(0.95)';
+
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        overlay.classList.remove('flex');
+        zoomImg.src = '';
+        document.body.style.overflow = '';
+      }, 300);
+    };
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target !== zoomImg) {
+        closeZoom();
+      }
+    });
+
+    closeBtn?.addEventListener('click', closeZoom);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+        closeZoom();
+      }
+    });
+  }
+
+  // Initial setup
+  setupImageZoom();
+
+  // Re-initialize after Astro view transition swaps
+  document.addEventListener('astro:after-swap', setupImageZoom);
+</script>

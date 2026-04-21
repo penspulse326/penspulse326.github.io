@@ -29,10 +29,10 @@ import { Icon } from 'astro-icon/components';
       <section aria-labelledby="about-site-heading">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <article
-            class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
+            class="flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300"
           >
             <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-4">文章</h2>
-            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+            <p class="flex-1 text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
               與職涯、活動、產業趨勢等相關的文章。
             </p>
             <a
@@ -44,10 +44,10 @@ import { Icon } from 'astro-icon/components';
           </article>
 
           <article
-            class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
+            class="flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300"
           >
             <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-4">研究筆記</h2>
-            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+            <p class="flex-1 text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
               簡短的摘要，通常不會寫太長，主要寫給自己快速回顧。
             </p>
             <a
@@ -59,10 +59,10 @@ import { Icon } from 'astro-icon/components';
           </article>
 
           <article
-            class="group bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 hover:shadow-xl hover:border-primary/30 transition-all duration-300"
+            class="flex flex-col bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300"
           >
             <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-4">挑戰計畫</h2>
-            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
+            <p class="flex-1 text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed">
               紀錄個人 side project 心路歷程的系列文章。
             </p>
             <a
@@ -80,7 +80,7 @@ import { Icon } from 'astro-icon/components';
         <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
           <!-- 左側介紹 -->
           <article
-            class="md:col-span-8 relative overflow-hidden bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 transition-colors"
+            class="md:col-span-8 relative overflow-hidden bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 transition-colors"
           >
             <div class="relative z-10">
               <h2 class="text-xl font-bold text-slate-900 dark:text-white card-title-underline mb-6">個人介紹</h2>
@@ -164,29 +164,6 @@ import { Icon } from 'astro-icon/components';
     /* 標題陰影自定義 */
     .text-shadow-lg {
       text-shadow: 0 4px 12px rgb(0 0 0 / 50%);
-    }
-
-    /* 卡片標題底線 */
-    .card-title-underline {
-      position: relative;
-      display: inline-block;
-      padding-bottom: 0.5rem;
-    }
-
-    .card-title-underline::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 40px;
-      height: 3px;
-      background-color: var(--color-primary);
-      border-radius: 99px;
-      transition: width 0.3s ease;
-    }
-
-    .group:hover .card-title-underline::after {
-      width: 100%;
     }
   </style>
 </Layout>

@@ -13,7 +13,7 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 ---
 
 <button
-  class="flex items-center w-full px-4 py-3 mb-4 text-sm font-semibold text-left text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+  class="flex items-center w-full px-4 py-3 mb-4 text-sm font-bold text-left text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-primary/10 hover:text-primary rounded-xl transition-all"
   id="back-to-main-menu"
   type="button"
 >
@@ -24,16 +24,16 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 <div class="px-2 overflow-y-auto max-h-[calc(100vh-250px)]">
   <!-- 近期文章 -->
   <div class="mb-6">
-    <h3 class="text-sm font-bold text-primary border-b-2 border-primary pb-2 mb-3">近期文章</h3>
+    <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3 px-2">近期文章</h3>
     <ul class="space-y-1">
       {
         recentPosts.map((post) => (
           <li>
             <a
               class:list={[
-                'block p-2 rounded-lg text-sm transition-colors hover:bg-primary/10 hover:text-primary',
+                'block p-2.5 rounded-xl text-sm transition-all hover:bg-primary/10 hover:text-primary',
                 {
-                  'bg-primary/10 text-primary font-semibold': activeId === post.id,
+                  'bg-primary/10 text-primary font-bold': activeId === post.id,
                   'text-slate-700 dark:text-slate-300': activeId !== post.id,
                 },
               ]}
@@ -50,18 +50,18 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
 
   <!-- 標籤列表 -->
   <div>
-    <h3 class="text-sm font-bold text-primary border-b-2 border-primary pb-2 mb-3">標籤</h3>
+    <h3 class="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3 px-2">標籤</h3>
     <ul class="space-y-1">
       {
         tagCloud.map(({ count, tag }) => (
           <li>
             <a
-              class="flex items-center justify-between p-2 rounded-lg text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors group"
+              class="flex items-center justify-between p-2.5 rounded-xl text-sm text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-all group"
               href={`/posts?tag=${encodeURIComponent(tag)}`}
               title={`${tag} (${count})`}
             >
-              <span>{tag}</span>
-              <span class="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+              <span class="font-medium">{tag}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-500 group-hover:bg-primary group-hover:text-white transition-colors">
                 {count}
               </span>
             </a>

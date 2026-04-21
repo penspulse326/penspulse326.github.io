@@ -20,7 +20,7 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
           <li>
             <a
               class:list={[
-                'block p-3 rounded-xl transition-all duration-200 group truncate',
+                'block p-3 rounded-xl transition-all duration-200 group',
                 activeId === post.id
                   ? 'bg-primary/10 text-primary font-bold '
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
@@ -28,7 +28,7 @@ const { activeId, recentPosts, tagCloud } = Astro.props;
               href={post.url}
               title={post.title}
             >
-              <div class="text-sm leading-relaxed line-clamp-2 group-hover:translate-x-1 transition-transform">
+              <div class="text-sm leading-relaxed truncate group-hover:translate-x-1 transition-transform">
                 {post.title}
               </div>
             </a>

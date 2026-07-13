@@ -2,54 +2,70 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-<button
-  aria-label="Toggle theme"
-  class="theme-toggle-btn flex items-center justify-center p-2 text-current hover:bg-black/5 dark:hover:bg-white/10 rounded-xl transition-colors"
-  type="button"
->
-  <Icon class="hidden dark:block w-5 h-5" id="moon-icon" name="bi:moon-fill" />
-  <Icon class="block dark:hidden w-5 h-5" id="sun-icon" name="bi:sun-fill" />
-</button>
+<theme-toggler>
+  <button
+    aria-label="Toggle theme"
+    class="theme-toggle-btn flex items-center justify-center p-2 text-current hover:bg-black/5 dark:hover:bg-white/10 rounded-xl transition-colors"
+    type="button"
+  >
+    <Icon class="hidden dark:block w-5 h-5" id="moon-icon" name="bi:moon-fill" />
+    <Icon class="block dark:hidden w-5 h-5" id="sun-icon" name="bi:sun-fill" />
+  </button>
+</theme-toggler>
 
 <script>
-  const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
-  const htmlElement = document.documentElement;
+  class ThemeToggler extends HTMLElement {
+    private button: HTMLButtonElement | null = null;
+    private htmlElement = document.documentElement;
+    private mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-  const getStoredTheme = () => localStorage.getItem('theme');
-  const setStoredTheme = (theme: string) => localStorage.setItem('theme', theme);
+    connectedCallback() {
+      this.button = this.querySelector('.theme-toggle-btn');
+      this.button?.addEventListener('click', this.toggleTheme);
+      this.mediaQuery.addEventListener('change', this.handleSystemThemeChange);
 
-  const getPreferredTheme = () => {
-    const storedTheme = getStoredTheme();
-    if (storedTheme) {
-      return storedTheme;
+      // 初始化目前主題
+      this.setTheme(this.getPreferredTheme());
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  };
 
-  const setTheme = (theme: string) => {
-    if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      htmlElement.classList.add('dark');
-    } else {
-      htmlElement.classList.remove('dark');
+    disconnectedCallback() {
+      this.button?.removeEventListener('click', this.toggleTheme);
+      this.mediaQuery.removeEventListener('change', this.handleSystemThemeChange);
     }
-  };
 
-  // 初始化
-  setTheme(getPreferredTheme());
+    private getStoredTheme = () => localStorage.getItem('theme');
+    private setStoredTheme = (theme: string) => localStorage.setItem('theme', theme);
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    const storedTheme = getStoredTheme();
-    if (storedTheme !== 'light' && storedTheme !== 'dark') {
-      setTheme(getPreferredTheme());
-    }
-  });
+    private getPreferredTheme = () => {
+      const storedTheme = this.getStoredTheme();
+      if (storedTheme) {
+        return storedTheme;
+      }
+      return this.mediaQuery.matches ? 'dark' : 'light';
+    };
 
-  themeToggleBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const isDark = htmlElement.classList.contains('dark');
+    private setTheme = (theme: string) => {
+      if (theme === 'dark' || (theme === 'auto' && this.mediaQuery.matches)) {
+        this.htmlElement.classList.add('dark');
+      } else {
+        this.htmlElement.classList.remove('dark');
+      }
+    };
+
+    private toggleTheme = () => {
+      const isDark = this.htmlElement.classList.contains('dark');
       const newTheme = isDark ? 'light' : 'dark';
-      setStoredTheme(newTheme);
-      setTheme(newTheme);
-    });
-  });
+      this.setStoredTheme(newTheme);
+      this.setTheme(newTheme);
+    };
+
+    private handleSystemThemeChange = () => {
+      const storedTheme = this.getStoredTheme();
+      if (storedTheme !== 'light' && storedTheme !== 'dark') {
+        this.setTheme(this.getPreferredTheme());
+      }
+    };
+  }
+
+  customElements.define('theme-toggler', ThemeToggler);
 </script>

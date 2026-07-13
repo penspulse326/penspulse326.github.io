@@ -3,133 +3,175 @@
 // 使用 Three.js 實現流動的波浪線條
 ---
 
-<div id="psp-waves-container"></div>
+<psp-waves class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+  <div class="waves-container w-full h-full"></div>
+</psp-waves>
 
 <style>
-  #psp-waves-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-
-    /* 初始背景色 */
-    background: linear-gradient(to bottom, #00a8a5 0%, #0861c5 100%);
-    z-index: 0;
+  psp-waves {
+    display: block;
   }
 
-  #psp-waves-container canvas {
+  .waves-container {
+    /* 初始背景色 */
+    background: linear-gradient(to bottom, #00a8a5 0%, #0861c5 100%);
+  }
+
+  .waves-container canvas {
     display: block;
   }
 </style>
 
 <script>
-  let isInitialized = false;
+  class PspWaves extends HTMLElement {
+    private container: HTMLDivElement | null = null;
+    private renderer: any = null;
+    private scene: any = null;
+    private camera: any = null;
+    private animationFrameId: number | null = null;
+    private observer: IntersectionObserver | null = null;
+    private isPaused = false;
+    private waves: any[] = [];
+    private resizeListener: (() => void) | null = null;
 
-  async function initWaves() {
-    if (isInitialized) return;
+    connectedCallback() {
+      this.container = this.querySelector('.waves-container');
+      if (!this.container) return;
 
-    const container = document.getElementById('psp-waves-container') as HTMLDivElement;
+      // 監聽可見度優化效能
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (this.isPaused) {
+                this.isPaused = false;
+                this.animate();
+              }
+            } else {
+              this.isPaused = true;
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      this.observer.observe(this);
 
-    if (!container) {
-      if (document.readyState !== 'complete') {
-        window.addEventListener('load', () => initWaves(), { once: true });
+      // 使用 requestIdleCallback 延遲啟動以優化 TBT
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => this.initWaves(), { timeout: 3000 });
+      } else {
+        setTimeout(() => this.initWaves(), 1000);
       }
-      return;
     }
 
-    isInitialized = true;
+    disconnectedCallback() {
+      this.cleanup();
+    }
 
-    // 動態引入所需的 three 模組 (Tree shaking 友好)
-    const {
-      Scene,
-      PerspectiveCamera,
-      WebGLRenderer,
-      Mesh,
-      PlaneGeometry,
-      MeshBasicMaterial,
-      DoubleSide,
-      AdditiveBlending,
-    } = await import('three');
+    private async initWaves() {
+      if (!this.container) return;
 
-    // 配置參數
-    const config = {
-      yOffset: -500,
-    };
+      // 動態引入所需的 three 模組 (Tree shaking 友好)
+      const {
+        Scene,
+        PerspectiveCamera,
+        WebGLRenderer,
+        Mesh,
+        PlaneGeometry,
+        MeshBasicMaterial,
+        DoubleSide,
+        AdditiveBlending,
+      } = await import('three');
 
-    // 建立場景
-    const scene = new Scene();
-
-    // 透視相機
-    const fov = 75;
-    const aspect = container.offsetWidth / container.offsetHeight;
-    const near = 1;
-    const far = 10000;
-    const camera = new PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 0, 1000);
-    camera.lookAt(0, 0, 0);
-
-    const renderer = new WebGLRenderer({
-      alpha: true,
-      antialias: true,
-    });
-
-    const isMobile = window.innerWidth < 768;
-
-    renderer.setSize(container.offsetWidth, container.offsetHeight);
-    renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
-
-    const waves: any[] = [];
-    const waveParams = [
-      { color: 0xffffff, opacity: 0.15, z: 0, speed: 0.3, offset: 0, amplitude: 200 },
-      { color: 0xffffff, opacity: 0.1, z: -100, speed: 0.9, offset: 200, amplitude: 150 },
-      { color: 0xffffff, opacity: 0.05, z: -200, speed: 0.6, offset: 400, amplitude: 100 },
-    ];
-
-    const planeWidth = 12000;
-    const planeSegments = isMobile ? 30 : 50;
-
-    waveParams.forEach((param) => {
-      const geometry = new PlaneGeometry(planeWidth, 1200, planeSegments, 1);
-      const material = new MeshBasicMaterial({
-        color: param.color,
-        transparent: true,
-        opacity: param.opacity,
-        side: DoubleSide,
-        depthWrite: false,
-        blending: AdditiveBlending,
-      });
-
-      const mesh = new Mesh(geometry, material);
-      mesh.position.z = param.z;
-      mesh.position.y = config.yOffset;
-
-      // 儲存原始頂點數據用於動畫計算
-      const positions = geometry.attributes.position.array;
-      const baseVertices: number[] = [];
-      for (let i = 0; i < positions.length; i++) {
-        baseVertices.push(positions[i]);
-      }
-
-      mesh.userData = {
-        speed: param.speed,
-        offset: param.offset,
-        baseVertices: baseVertices,
-        amplitude: param.amplitude,
+      const config = {
+        yOffset: -500,
       };
 
-      scene.add(mesh);
-      waves.push(mesh);
-    });
+      this.scene = new Scene();
 
-    function animate(currentTime: number) {
-      requestAnimationFrame(animate);
-      const time = currentTime * 0.001;
+      // 透視相機
+      const fov = 75;
+      const aspect = this.container.offsetWidth / this.container.offsetHeight;
+      const near = 1;
+      const far = 10000;
+      this.camera = new PerspectiveCamera(fov, aspect, near, far);
+      this.camera.position.set(0, 0, 1000);
+      this.camera.lookAt(0, 0, 0);
 
-      waves.forEach((mesh) => {
+      this.renderer = new WebGLRenderer({
+        alpha: true,
+        antialias: true,
+      });
+
+      const isMobile = window.innerWidth < 768;
+
+      this.renderer.setSize(this.container.offsetWidth, this.container.offsetHeight);
+      this.renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
+      this.container.appendChild(this.renderer.domElement);
+
+      const waveParams = [
+        { color: 0xffffff, opacity: 0.15, z: 0, speed: 0.3, offset: 0, amplitude: 200 },
+        { color: 0xffffff, opacity: 0.1, z: -100, speed: 0.9, offset: 200, amplitude: 150 },
+        { color: 0xffffff, opacity: 0.05, z: -200, speed: 0.6, offset: 400, amplitude: 100 },
+      ];
+
+      const planeWidth = 12000;
+      const planeSegments = isMobile ? 30 : 50;
+
+      waveParams.forEach((param) => {
+        const geometry = new PlaneGeometry(planeWidth, 1200, planeSegments, 1);
+        const material = new MeshBasicMaterial({
+          color: param.color,
+          transparent: true,
+          opacity: param.opacity,
+          side: DoubleSide,
+          depthWrite: false,
+          blending: AdditiveBlending,
+        });
+
+        const mesh = new Mesh(geometry, material);
+        mesh.position.z = param.z;
+        mesh.position.y = config.yOffset;
+
+        const positions = geometry.attributes.position.array;
+        const baseVertices: number[] = [];
+        for (let i = 0; i < positions.length; i++) {
+          baseVertices.push(positions[i]);
+        }
+
+        mesh.userData = {
+          speed: param.speed,
+          offset: param.offset,
+          baseVertices: baseVertices,
+          amplitude: param.amplitude,
+        };
+
+        this.scene.add(mesh);
+        this.waves.push(mesh);
+      });
+
+      this.animate();
+
+      this.resizeListener = () => {
+        if (!this.container || !this.camera || !this.renderer) return;
+        const width = this.container.offsetWidth;
+        const height = this.container.offsetHeight;
+        this.camera.aspect = width / height;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(width, height);
+      };
+
+      window.addEventListener('resize', this.resizeListener);
+      window.dispatchEvent(new CustomEvent('threejs-ready'));
+    }
+
+    private animate = () => {
+      if (this.isPaused || !this.renderer || !this.scene || !this.camera) return;
+
+      this.animationFrameId = requestAnimationFrame(this.animate);
+      const time = performance.now() * 0.001;
+
+      this.waves.forEach((mesh) => {
         const positions = mesh.geometry.attributes.position.array as Float32Array;
         const count = mesh.geometry.attributes.position.count;
         const baseVertices = mesh.userData.baseVertices;
@@ -149,56 +191,42 @@
         mesh.geometry.attributes.position.needsUpdate = true;
       });
 
-      renderer.render(scene, camera);
-    }
-
-    // 啟動動畫
-    requestAnimationFrame(animate);
-
-    // Resize 處理
-    function handleResize() {
-      if (!container) return;
-      const width = container.offsetWidth;
-      const height = container.offsetHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
-    }
-
-    window.addEventListener('resize', handleResize);
-    window.dispatchEvent(new CustomEvent('threejs-ready'));
-
-    // 清理
-    const cleanup = () => {
-      window.removeEventListener('resize', handleResize);
-      renderer.dispose();
-      scene.traverse((object) => {
-        if (object instanceof Mesh) {
-          object.geometry.dispose();
-          if (Array.isArray(object.material)) {
-            object.material.forEach((m) => m.dispose());
-          } else {
-            object.material.dispose();
-          }
-        }
-      });
+      this.renderer.render(this.scene, this.camera);
     };
 
-    window.addEventListener('beforeunload', cleanup);
-  }
-
-  // 使用 requestIdleCallback 延遲啟動即可解決 TBT 問題
-  const scheduleInit = () => {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(() => initWaves(), { timeout: 3000 });
-    } else {
-      setTimeout(initWaves, 1000);
+    private cleanup() {
+      this.isPaused = true;
+      if (this.animationFrameId) {
+        cancelAnimationFrame(this.animationFrameId);
+      }
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+      if (this.resizeListener) {
+        window.removeEventListener('resize', this.resizeListener);
+      }
+      if (this.renderer) {
+        if (this.renderer.domElement && this.renderer.domElement.parentElement) {
+          this.renderer.domElement.parentElement.removeChild(this.renderer.domElement);
+        }
+        this.renderer.dispose();
+      }
+      if (this.scene) {
+        this.scene.traverse((object: any) => {
+          if (object.geometry) {
+            object.geometry.dispose();
+          }
+          if (object.material) {
+            if (Array.isArray(object.material)) {
+              object.material.forEach((m: any) => m.dispose());
+            } else {
+              object.material.dispose();
+            }
+          }
+        });
+      }
     }
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', scheduleInit);
-  } else {
-    scheduleInit();
   }
+
+  customElements.define('psp-waves', PspWaves);
 </script>

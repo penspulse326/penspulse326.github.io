@@ -10,23 +10,32 @@
 
 網站內容主要分為三個區塊：
 
-- [研究筆記](https://penspulse326.github.io/notes/)：簡短的摘要，通常不會寫太長，主要寫給自己快速回顧
-- [挑戰計畫](https://penspulse326.github.io/plans/)：以紀錄個人小型專案開發為主的系列文章
-- [文章](https://penspulse326.github.io/posts/)：與職涯、工作、活動等相關的文章
+- [研究筆記](https://dev.penspulse.com/notes/)：簡短的摘要，通常不會寫太長，主要寫給自己快速回顧
+- [挑戰計畫](https://dev.penspulse.com/plans/)：以紀錄個人小型專案開發為主的系列文章
+- [文章](https://dev.penspulse.com/posts/)：與職涯、工作、活動等相關的文章
 
 <br/>
 
 ## 技術選型 Tech Stack
 
 - **Framework**: Astro
-- **UI**: Bootstrap 5
-- **Styling**: Sass (SCSS) + Lightning CSS
+- **UI**: Tailwind CSS v4
+- **Styling**: CSS + Tailwind CSS + Lightning CSS
 - **Effects**: Three.js
 - **Content**: Markdown (with Remark plugins)
 - **Comment System**: Giscus
 - **Tool Chain**: Vite
 - **Code Quality**: ESLint, Prettier, Stylelint, Husky, lint-staged
 - **Package Manager**: pnpm
+
+<br/>
+
+## 開發與工具 CLI Commands
+
+- 啟動開發伺服器：`pnpm dev`
+- 建立生產版本：`pnpm build`
+- 預覽生產版本：`pnpm preview`
+- 快速生成文章/筆記範本：`pnpm generate <文章名稱>`
 
 <br/>
 

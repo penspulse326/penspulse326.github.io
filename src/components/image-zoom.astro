@@ -7,91 +7,123 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-<!-- Image Zoom Overlay -->
-<div
-  aria-hidden="true"
-  class="fixed inset-0 z-100 hidden bg-slate-950/90 backdrop-blur-md cursor-zoom-out items-center justify-center transition-all duration-300 opacity-0"
-  id="image-zoom-overlay"
->
-  <img
-    alt="Zoomed image"
-    class="max-w-[95vw] max-h-[95vh] object-contain shadow-2xl scale-95 transition-transform duration-500 ease-out rounded-xl select-none"
-    id="image-zoom-img"
-    src=""
-  />
+<image-zoom>
+  <!-- Image Zoom Overlay -->
   <div
-    class="absolute top-4 right-4 p-2 text-white/50 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full cursor-pointer flex items-center justify-center"
-    id="image-zoom-close"
-    title="Close (Esc)"
+    aria-hidden="true"
+    class="fixed inset-0 z-100 hidden bg-slate-950/90 backdrop-blur-md cursor-zoom-out items-center justify-center transition-all duration-300 opacity-0"
+    id="image-zoom-overlay"
   >
-    <Icon name="bi:x-lg" size={24} />
+    <img
+      alt="Zoomed image"
+      class="max-w-[95vw] max-h-[95vh] object-contain shadow-2xl scale-95 transition-transform duration-500 ease-out rounded-xl select-none"
+      id="image-zoom-img"
+      src=""
+    />
+    <div
+      class="absolute top-4 right-4 p-2 text-white/50 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full cursor-pointer flex items-center justify-center"
+      id="image-zoom-close"
+      title="Close (Esc)"
+    >
+      <Icon name="bi:x-lg" size={24} />
+    </div>
   </div>
-</div>
+</image-zoom>
 
 <script>
-  function setupImageZoom() {
-    const images = document.querySelectorAll('.markdown-body img');
-    const overlay = document.getElementById('image-zoom-overlay');
-    const zoomImg = document.getElementById('image-zoom-img') as HTMLImageElement;
-    const closeBtn = document.getElementById('image-zoom-close');
+  class ImageZoom extends HTMLElement {
+    private overlay: HTMLElement | null = null;
+    private zoomImg: HTMLImageElement | null = null;
+    private closeBtn: HTMLElement | null = null;
+    private images: NodeListOf<HTMLImageElement> | null = null;
+    private imageClickListeners = new Map<HTMLImageElement, () => void>();
 
-    if (!overlay || !zoomImg) {
-      return;
-    }
+    connectedCallback() {
+      this.overlay = this.querySelector('#image-zoom-overlay');
+      this.zoomImg = this.querySelector('#image-zoom-img');
+      this.closeBtn = this.querySelector('#image-zoom-close');
 
-    images.forEach((img) => {
-      // Avoid conflict with images already wrapped in links
-      if (img.parentElement?.tagName === 'A') {
+      if (!this.overlay || !this.zoomImg) {
         return;
       }
 
-      (img as HTMLElement).style.cursor = 'zoom-in';
+      this.images = document.querySelectorAll('.markdown-body img') as NodeListOf<HTMLImageElement>;
+      this.images.forEach((img) => {
+        // 避免與已被連結包裹的圖片衝突
+        if (img.parentElement?.tagName === 'A') {
+          return;
+        }
 
-      img.addEventListener('click', () => {
-        const src = (img as HTMLImageElement).src;
-        zoomImg.src = src;
-        overlay.classList.remove('hidden');
-        overlay.classList.add('flex');
-
-        requestAnimationFrame(() => {
-          overlay.style.opacity = '1';
-          zoomImg.style.transform = 'scale(1)';
-        });
-
-        document.body.style.overflow = 'hidden';
+        img.style.cursor = 'zoom-in';
+        const clickListener = () => this.openZoom(img.src);
+        img.addEventListener('click', clickListener);
+        this.imageClickListeners.set(img, clickListener);
       });
-    });
 
-    const closeZoom = () => {
-      overlay.style.opacity = '0';
-      zoomImg.style.transform = 'scale(0.95)';
+      this.overlay.addEventListener('click', this.handleOverlayClick);
+      this.closeBtn?.addEventListener('click', this.closeZoom);
+      window.addEventListener('keydown', this.handleKeyDown);
+    }
+
+    disconnectedCallback() {
+      if (this.images) {
+        this.images.forEach((img) => {
+          const listener = this.imageClickListeners.get(img);
+          if (listener) {
+            img.removeEventListener('click', listener);
+          }
+        });
+      }
+      this.imageClickListeners.clear();
+
+      this.overlay?.removeEventListener('click', this.handleOverlayClick);
+      this.closeBtn?.removeEventListener('click', this.closeZoom);
+      window.removeEventListener('keydown', this.handleKeyDown);
+    }
+
+    private openZoom(src: string) {
+      if (!this.overlay || !this.zoomImg) return;
+      this.zoomImg.src = src;
+      this.overlay.classList.remove('hidden');
+      this.overlay.classList.add('flex');
+
+      requestAnimationFrame(() => {
+        if (this.overlay && this.zoomImg) {
+          this.overlay.style.opacity = '1';
+          this.zoomImg.style.transform = 'scale(1)';
+        }
+      });
+
+      document.body.style.overflow = 'hidden';
+    }
+
+    private closeZoom = () => {
+      if (!this.overlay || !this.zoomImg) return;
+      this.overlay.style.opacity = '0';
+      this.zoomImg.style.transform = 'scale(0.95)';
 
       setTimeout(() => {
-        overlay.classList.add('hidden');
-        overlay.classList.remove('flex');
-        zoomImg.src = '';
+        if (this.overlay && this.zoomImg) {
+          this.overlay.classList.add('hidden');
+          this.overlay.classList.remove('flex');
+          this.zoomImg.src = '';
+        }
         document.body.style.overflow = '';
       }, 300);
     };
 
-    overlay.addEventListener('click', (e) => {
-      if (e.target !== zoomImg) {
-        closeZoom();
+    private handleOverlayClick = (e: MouseEvent) => {
+      if (e.target !== this.zoomImg) {
+        this.closeZoom();
       }
-    });
+    };
 
-    closeBtn?.addEventListener('click', closeZoom);
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
-        closeZoom();
+    private handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && this.overlay && !this.overlay.classList.contains('hidden')) {
+        this.closeZoom();
       }
-    });
+    };
   }
 
-  // Initial setup
-  setupImageZoom();
-
-  // Re-initialize after Astro view transition swaps
-  document.addEventListener('astro:after-swap', setupImageZoom);
+  customElements.define('image-zoom', ImageZoom);
 </script>

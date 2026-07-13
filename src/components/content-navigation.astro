@@ -15,7 +15,7 @@ const { aAttrs, activeId, id, isDrawer = false, navigation } = Astro.props;
 
 {
   isDrawer ? (
-    <>
+    <content-drawer>
       <button
         aria-controls={id}
         aria-expanded="false"
@@ -105,7 +105,7 @@ const { aAttrs, activeId, id, isDrawer = false, navigation } = Astro.props;
           </div>
         </div>
       </div>
-    </>
+    </content-drawer>
   ) : (
     <div class="space-y-2">
       {navigation.map((category: CategoryWithContent) => {
@@ -145,59 +145,79 @@ const { aAttrs, activeId, id, isDrawer = false, navigation } = Astro.props;
 }
 
 <script>
-  function initContentNavigation() {
-    const dialogs = document.querySelectorAll('[role="dialog"][id]');
+  class ContentDrawer extends HTMLElement {
+    private trigger: HTMLElement | null = null;
+    private dialog: HTMLElement | null = null;
+    private backdrop: HTMLElement | null = null;
+    private content: HTMLElement | null = null;
+    private closeBtn: HTMLElement | null = null;
+    private links: NodeListOf<HTMLAnchorElement> | null = null;
 
-    dialogs.forEach((dialog) => {
-      const id = dialog.id;
-      const trigger = document.getElementById(`${id}-trigger`);
-      const backdrop = document.getElementById(`${id}-backdrop`);
-      const content = document.getElementById(`${id}-content`);
-      const closeBtn = document.getElementById(`${id}-close`);
-      const links = content?.querySelectorAll('a');
+    connectedCallback() {
+      this.trigger = this.querySelector('[id$="-trigger"]');
+      this.dialog = this.querySelector('[role="dialog"]');
+      if (!this.dialog) return;
 
-      if (!trigger || !backdrop || !content) return;
+      const id = this.dialog.id;
+      this.backdrop = this.querySelector(`#${id}-backdrop`);
+      this.content = this.querySelector(`#${id}-content`);
+      this.closeBtn = this.querySelector(`#${id}-close`);
+      this.links = this.querySelectorAll('a');
 
-      const openDrawer = () => {
-        dialog.classList.remove('invisible');
-        backdrop.classList.add('opacity-100');
-        content.classList.remove('-translate-x-full');
-        document.body.style.overflow = 'hidden';
-        trigger.setAttribute('aria-expanded', 'true');
-      };
+      this.trigger?.addEventListener('click', this.openDrawer);
+      this.closeBtn?.addEventListener('click', this.closeDrawer);
+      this.backdrop?.addEventListener('click', this.closeDrawer);
 
-      const closeDrawer = () => {
-        backdrop.classList.remove('opacity-100');
-        content.classList.add('-translate-x-full');
-        document.body.style.overflow = '';
-        trigger.setAttribute('aria-expanded', 'false');
-
-        setTimeout(() => {
-          if (content.classList.contains('-translate-x-full')) {
-            dialog.classList.add('invisible');
-          }
-        }, 300);
-      };
-
-      trigger.addEventListener('click', openDrawer);
-      closeBtn?.addEventListener('click', closeDrawer);
-      backdrop.addEventListener('click', closeDrawer);
-
-      links?.forEach((link) => {
-        link.addEventListener('click', closeDrawer);
+      this.links?.forEach((link) => {
+        link.addEventListener('click', this.closeDrawer);
       });
 
-      // ESC 鍵關閉
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !dialog.classList.contains('invisible')) {
-          closeDrawer();
+      document.addEventListener('keydown', this.handleKeyDown);
+    }
+
+    disconnectedCallback() {
+      this.trigger?.removeEventListener('click', this.openDrawer);
+      this.closeBtn?.removeEventListener('click', this.closeDrawer);
+      this.backdrop?.removeEventListener('click', this.closeDrawer);
+
+      this.links?.forEach((link) => {
+        link.removeEventListener('click', this.closeDrawer);
+      });
+
+      document.removeEventListener('keydown', this.handleKeyDown);
+    }
+
+    private openDrawer = () => {
+      if (!this.dialog || !this.backdrop || !this.content || !this.trigger) return;
+      this.dialog.classList.remove('invisible');
+      this.backdrop.classList.add('opacity-100');
+      this.content.classList.remove('-translate-x-full');
+      document.body.style.overflow = 'hidden';
+      this.trigger.setAttribute('aria-expanded', 'true');
+    };
+
+    private closeDrawer = () => {
+      if (!this.dialog || !this.backdrop || !this.content || !this.trigger) return;
+      this.backdrop.classList.remove('opacity-100');
+      this.content.classList.add('-translate-x-full');
+      document.body.style.overflow = '';
+      this.trigger.setAttribute('aria-expanded', 'false');
+
+      setTimeout(() => {
+        if (this.content && this.content.classList.contains('-translate-x-full')) {
+          this.dialog?.classList.add('invisible');
         }
-      });
-    });
+      }, 300);
+    };
+
+    private handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && this.dialog && !this.dialog.classList.contains('invisible')) {
+        this.closeDrawer();
+      }
+    };
   }
 
-  document.addEventListener('astro:page-load', initContentNavigation);
-  initContentNavigation();
+  customElements.define('content-drawer', ContentDrawer);
 </script>
 
 <style>

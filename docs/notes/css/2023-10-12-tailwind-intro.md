@@ -46,7 +46,7 @@ module.exports = {
 
 建立 input.css 把 Tailwind 的功能抓進來用：
 
-```CSS
+```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

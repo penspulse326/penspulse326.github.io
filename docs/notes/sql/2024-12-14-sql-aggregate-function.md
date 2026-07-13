@@ -14,7 +14,7 @@ slug: sql-aggregate-function
 建立 table 時可以指定欄位是否必填，  
 如果設定了 `NOT NULL`，其他欄位建議也補上 `NULL`， 整體可讀性較一致。
 
-```SQL
+```sql
 -- 建立員工資料表
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -32,7 +32,7 @@ CREATE TABLE users (
 可以使 NULL 的欄位輸出變成指定的值，  
 如撈到 salary 為 NULL 的時候，就顯示 `'未設定'`：
 
-```SQL
+```sql
 SELECT
    id,
    name,
@@ -48,7 +48,7 @@ FROM users;
 
 在撈取時可以去除重複資料，類似 Set 物件：
 
-```SQL
+```sql
 SELECT
   DISTINCT team_name
 FROM
@@ -59,7 +59,7 @@ FROM
 
 ## COUNT
 
-```SQL
+```sql
 SELECT
   COUNT(*) as 員工總數
 FROM
@@ -70,7 +70,7 @@ FROM
 
 ## AVG、SUM、MAX、MIN
 
-```SQL
+```sql
 SELECT
   AVG(salary) AS 平均薪資,
   SUM(salary) AS 總薪資,
@@ -85,7 +85,7 @@ FROM users;
 
 可以產生比純數字的 id 更具安全性的代號，代價是占用更多容量：
 
-```SQL
+```sql
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users (

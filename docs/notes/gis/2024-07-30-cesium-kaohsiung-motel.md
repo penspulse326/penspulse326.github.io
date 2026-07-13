@@ -61,7 +61,7 @@ Cesium 是我過去在公司的專案上用到的一套 GIS 工具，
 以 [高雄城市資料平台 高雄市一般旅館資料](https://api.kcg.gov.tw/ServiceList/Detail/8ed53368-e292-4e2a-80a7-434cf497220c)為例，將 JSON 檔下載下來後，  
 甚至能直接看到中文命名的屬性：
 
-```JSON
+```json
 {
   // 略...
   "經度Lng": "120.2956306",

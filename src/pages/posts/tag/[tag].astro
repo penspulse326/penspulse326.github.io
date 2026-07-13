@@ -1,8 +1,8 @@
 ---
 import type { GetStaticPaths, Page } from 'astro';
 
-import PostExcerpt from '../../../components/post-excerpt.astro';
-import PostsSidebar from '../../../components/posts-sidebar.astro';
+import PostExcerpt from '../../../components/posts/post-excerpt.astro';
+import PostsSidebar from '../../../components/posts/posts-sidebar.astro';
 import ArticleLayout from '../../../layouts/article-layout.astro';
 import { getPostsSortedByDate, getRecentPosts, getTagCloud, getAllTags, type PostEntry } from '../../../utils/posts';
 

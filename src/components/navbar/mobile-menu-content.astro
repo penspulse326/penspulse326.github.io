@@ -11,26 +11,47 @@ interface Props {
 const { isPostsRoute, isNotesRoute, isPlansRoute } = Astro.props;
 ---
 
-<div id="main-menu-container">
-  <NavLinks isMobile={true} isPostsRoute={isPostsRoute} isNotesRoute={isNotesRoute} isPlansRoute={isPlansRoute} />
+<mobile-menu-content>
+  <div id="main-menu-container">
+    <NavLinks isMobile={true} isPostsRoute={isPostsRoute} isNotesRoute={isNotesRoute} isPlansRoute={isPlansRoute} />
 
-  <div class="border-t border-slate-200 dark:border-slate-800 my-2"></div>
+    <div class="border-t border-slate-200 dark:border-slate-800 my-2"></div>
 
-  <div
-    class="flex items-center p-1 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800"
-    id="mobile-theme-toggle-container"
-  >
-    <ThemeToggler />
-    <span class="ml-2 font-medium">切換深淺模式</span>
+    <div
+      class="flex items-center p-1 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-slate-800 cursor-pointer"
+      id="mobile-theme-toggle-container"
+    >
+      <ThemeToggler />
+      <span class="ml-2 font-medium select-none">切換深淺模式</span>
+    </div>
   </div>
-</div>
+</mobile-menu-content>
 
 <script>
-  const mobileThemeToggleContainer = document.getElementById('mobile-theme-toggle-container');
-  mobileThemeToggleContainer?.addEventListener('click', (e) => {
-    const toggler = mobileThemeToggleContainer.querySelector('.theme-toggle-btn') as HTMLElement;
-    if (toggler && !toggler.contains(e.target as Node)) {
-      toggler.click();
+  class MobileMenuContent extends HTMLElement {
+    private toggleContainer: HTMLElement | null = null;
+    private clickListener: ((e: MouseEvent) => void) | null = null;
+
+    connectedCallback() {
+      this.toggleContainer = this.querySelector('#mobile-theme-toggle-container');
+      if (!this.toggleContainer) return;
+
+      this.clickListener = (e: MouseEvent) => {
+        const toggler = this.toggleContainer?.querySelector('.theme-toggle-btn') as HTMLElement;
+        if (toggler && !toggler.contains(e.target as Node)) {
+          toggler.click();
+        }
+      };
+
+      this.toggleContainer.addEventListener('click', this.clickListener);
     }
-  });
+
+    disconnectedCallback() {
+      if (this.toggleContainer && this.clickListener) {
+        this.toggleContainer.removeEventListener('click', this.clickListener);
+      }
+    }
+  }
+
+  customElements.define('mobile-menu-content', MobileMenuContent);
 </script>

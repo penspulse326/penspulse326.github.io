@@ -1,0 +1,36 @@
+---
+import type { CategoryPostItem } from '../../utils/posts';
+
+interface Props {
+  activeId?: string;
+  recentPosts: CategoryPostItem[];
+}
+
+const { activeId, recentPosts } = Astro.props;
+---
+
+<nav aria-label="近期文章" class="mb-8">
+  <h3 class="text-sm font-bold text-primary pb-2">近期文章</h3>
+  <ul class="space-y-1">
+    {
+      recentPosts.map((post) => (
+        <li>
+          <a
+            class:list={[
+              'block p-3 rounded-xl transition-all duration-200 group',
+              activeId === post.id
+                ? 'bg-primary/10 text-primary font-bold '
+                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
+            ]}
+            href={post.url}
+            title={post.title}
+          >
+            <div class="text-sm leading-relaxed truncate group-hover:translate-x-1 transition-transform">
+              {post.title}
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

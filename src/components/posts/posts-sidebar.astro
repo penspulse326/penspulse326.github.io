@@ -1,0 +1,18 @@
+---
+import type { CategoryPostItem } from '../../utils/posts';
+import PostsRecentList from './posts-recent-list.astro';
+import PostsTagCloud from './posts-tag-cloud.astro';
+
+interface Props {
+  activeId?: string;
+  recentPosts: CategoryPostItem[];
+  tagCloud: Array<{ count: number; tag: string }>;
+}
+
+const { activeId, recentPosts, tagCloud } = Astro.props;
+---
+
+<div class="hidden lg:block max-w-54 sticky top-0 self-start">
+  <PostsRecentList activeId={activeId} recentPosts={recentPosts} />
+  <PostsTagCloud tagCloud={tagCloud} />
+</div>

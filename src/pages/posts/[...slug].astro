@@ -1,9 +1,9 @@
 ---
 import type { GetStaticPaths } from 'astro';
 
-import GiscusComment from '../../components/giscus-comment.astro';
-import PostsSidebar from '../../components/posts-sidebar.astro';
-import TableOfContents from '../../components/table-of-contents.astro';
+import GiscusComment from '../../components/common/giscus-comment.astro';
+import PostsSidebar from '../../components/posts/posts-sidebar.astro';
+import TableOfContents from '../../components/toc/table-of-contents.astro';
 import ArticleLayout from '../../layouts/article-layout.astro';
 import { getAllPosts, getRecentPosts, getTagCloud } from '../../utils/posts';
 

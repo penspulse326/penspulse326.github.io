@@ -6,17 +6,14 @@ interface Props {
 const { Content } = Astro.props;
 ---
 
-<div class="post-excerpt-wrapper">
+<post-excerpt class="post-excerpt-wrapper block">
   <Content />
-</div>
+</post-excerpt>
 
 <script>
-  // 在客戶端處理截斷並轉換為純文字
-  function initPostExcerpt() {
-    const excerpts = document.querySelectorAll('.post-excerpt-wrapper');
-
-    excerpts.forEach((excerpt) => {
-      const walker = document.createTreeWalker(excerpt, NodeFilter.SHOW_COMMENT, null);
+  class PostExcerpt extends HTMLElement {
+    connectedCallback() {
+      const walker = document.createTreeWalker(this, NodeFilter.SHOW_COMMENT, null);
       let comment;
       let truncateFound = false;
 
@@ -40,17 +37,16 @@ const { Content } = Astro.props;
       }
 
       // 將內容轉換為純文字
-      const textContent = (excerpt as HTMLElement).innerText || (excerpt as HTMLElement).textContent || '';
+      const textContent = this.innerText || this.textContent || '';
 
       // 清空原有內容並插入純文字
-      (excerpt as HTMLElement).innerHTML = '';
+      this.innerHTML = '';
       const textNode = document.createTextNode(textContent);
-      (excerpt as HTMLElement).appendChild(textNode);
-    });
+      this.appendChild(textNode);
+    }
   }
 
-  document.addEventListener('astro:page-load', initPostExcerpt);
-  initPostExcerpt();
+  customElements.define('post-excerpt', PostExcerpt);
 </script>
 
 <style>
@@ -59,7 +55,7 @@ const { Content } = Astro.props;
     line-height: 1.6;
   }
 
-  :where(.dark, .dark *) .post-excerpt-wrapper {
+  :global(:where(.dark, .dark *) post-excerpt) {
     color: var(--color-slate-400);
   }
 </style>

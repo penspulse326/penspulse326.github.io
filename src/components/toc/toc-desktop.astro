@@ -1,0 +1,34 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  tocHeadings: MarkdownHeading[];
+}
+
+const { tocHeadings } = Astro.props;
+---
+
+<div class="hidden lg:block">
+  <nav aria-label="段落">
+    <h2 class="text-sm font-bold text-primary mb-2">段落</h2>
+    <ul class="space-y-1">
+      {
+        tocHeadings.map((heading) => (
+          <li
+            class:list={[
+              'transition-all duration-200 border-l-2',
+              heading.depth === 2 ? 'pl-1 border-transparent' : 'pl-4 border-transparent text-sm opacity-80',
+            ]}
+          >
+            <a
+              class="toc-link block py-1.5 px-3 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors truncate"
+              href={`#${heading.slug}`}
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</div>

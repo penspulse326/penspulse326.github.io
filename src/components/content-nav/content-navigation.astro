@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import type { CategoryContentItem, CategoryWithContent } from '../utils/content';
+import type { CategoryContentItem, CategoryWithContent } from '../../utils/content';
+import ContentNavList from './content-nav-list.astro';
 
 interface Props {
   aAttrs?: (item: CategoryContentItem) => Record<string, boolean | string | undefined>;
@@ -51,96 +52,14 @@ const { aAttrs, activeId, id, isDrawer = false, navigation } = Astro.props;
             </button>
           </div>
 
-          <div class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar">
-            {navigation.map((category: CategoryWithContent) => {
-              const isExpanded = category.items.some((item: CategoryContentItem) => item.id === activeId);
-
-              return (
-                <details
-                  class="group border-b border-slate-200 dark:border-slate-800 pb-2 last:border-0"
-                  open={isExpanded}
-                >
-                  <summary class="flex items-center justify-between py-3 px-1 cursor-pointer list-none font-bold text-sm text-primary hover:opacity-80 transition-opacity">
-                    <span class="flex items-center gap-2">
-                      <Icon
-                        class="text-xs opacity-50 group-open:text-primary transition-colors"
-                        name="bi:folder2-open"
-                      />
-                      {category.label}
-                    </span>
-                    <Icon class="text-[10px] group-open:rotate-180 transition-transform" name="bi:chevron-down" />
-                  </summary>
-                  <div class="mt-1 space-y-1">
-                    <ul class="flex flex-col gap-1">
-                      {category.items.map((item: CategoryContentItem) => (
-                        <li>
-                          <a
-                            class:list={[
-                              'py-2 px-3 rounded-xl text-sm transition-all duration-200 flex items-center gap-3',
-                              item.id === activeId
-                                ? 'bg-primary/10 text-primary font-bold shadow-sm ring-1 ring-primary/20'
-                                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
-                            ]}
-                            href={item.url}
-                            {...(aAttrs?.(item) || {})}
-                          >
-                            <div
-                              class:list={[
-                                'w-1.5 h-1.5 rounded-full transition-colors',
-                                item.id === activeId
-                                  ? 'bg-primary'
-                                  : 'bg-slate-300 dark:bg-slate-700 group-hover:bg-primary',
-                              ]}
-                            />
-                            <span class="flex-1 truncate">{item.title}</span>
-                            {item.id === activeId && <Icon class="text-xs" name="bi:chevron-right" />}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </details>
-              );
-            })}
+          <div class="flex-1 overflow-y-auto p-4 custom-scrollbar">
+            <ContentNavList aAttrs={aAttrs} activeId={activeId} isDrawerMode={true} navigation={navigation} />
           </div>
         </div>
       </div>
     </content-drawer>
   ) : (
-    <div class="space-y-2">
-      {navigation.map((category: CategoryWithContent) => {
-        const isExpanded = category.items.some((item: CategoryContentItem) => item.id === activeId);
-
-        return (
-          <details class="group border-b border-slate-200 dark:border-slate-800 pb-2 last:border-0" open={isExpanded}>
-            <summary class="flex items-center justify-between py-2 px-1 cursor-pointer list-none font-bold text-sm text-primary hover:opacity-80 transition-opacity">
-              <span>{category.label}</span>
-              <Icon class="text-[10px] group-open:rotate-180 transition-transform" name="bi:chevron-down" />
-            </summary>
-            <div class="mt-2 space-y-1">
-              <ul class="flex flex-col gap-1">
-                {category.items.map((item: CategoryContentItem) => (
-                  <li>
-                    <a
-                      class:list={[
-                        'block py-2 px-3 rounded-xl text-sm transition-all duration-200',
-                        item.id === activeId
-                          ? 'bg-primary/10 text-primary font-bold '
-                          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
-                      ]}
-                      href={item.url}
-                      {...(aAttrs?.(item) || {})}
-                    >
-                      {item.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </details>
-        );
-      })}
-    </div>
+    <ContentNavList aAttrs={aAttrs} activeId={activeId} isDrawerMode={false} navigation={navigation} />
   )
 }
 

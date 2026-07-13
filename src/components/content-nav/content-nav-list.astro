@@ -1,0 +1,72 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { CategoryContentItem, CategoryWithContent } from '../../utils/content';
+
+interface Props {
+  aAttrs?: (item: CategoryContentItem) => Record<string, boolean | string | undefined>;
+  activeId?: string;
+  navigation: CategoryWithContent[];
+  isDrawerMode?: boolean;
+}
+
+const { aAttrs, activeId, navigation, isDrawerMode = false } = Astro.props;
+---
+
+<div class={isDrawerMode ? 'space-y-1' : 'space-y-2'}>
+  {
+    navigation.map((category: CategoryWithContent) => {
+      const isExpanded = category.items.some((item: CategoryContentItem) => item.id === activeId);
+
+      return (
+        <details class="group border-b border-slate-200 dark:border-slate-800 pb-2 last:border-0" open={isExpanded}>
+          <summary
+            class:list={[
+              'flex items-center justify-between cursor-pointer list-none font-bold text-sm text-primary hover:opacity-80 transition-opacity',
+              isDrawerMode ? 'py-3 px-1' : 'py-2 px-1',
+            ]}
+          >
+            <span class="flex items-center gap-2">
+              {isDrawerMode && (
+                <Icon class="text-xs opacity-50 group-open:text-primary transition-colors" name="bi:folder2-open" />
+              )}
+              {category.label}
+            </span>
+            <Icon class="text-[10px] group-open:rotate-180 transition-transform" name="bi:chevron-down" />
+          </summary>
+          <div class={isDrawerMode ? 'mt-1 space-y-1' : 'mt-2 space-y-1'}>
+            <ul class="flex flex-col gap-1">
+              {category.items.map((item: CategoryContentItem) => (
+                <li>
+                  <a
+                    class:list={[
+                      'rounded-xl text-sm transition-all duration-200',
+                      isDrawerMode ? 'py-2 px-3 flex items-center gap-3' : 'block py-2 px-3',
+                      item.id === activeId
+                        ? isDrawerMode
+                          ? 'bg-primary/10 text-primary font-bold shadow-sm ring-1 ring-primary/20'
+                          : 'bg-primary/10 text-primary font-bold'
+                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
+                    ]}
+                    href={item.url}
+                    {...(aAttrs?.(item) || {})}
+                  >
+                    {isDrawerMode && (
+                      <div
+                        class:list={[
+                          'w-1.5 h-1.5 rounded-full transition-colors',
+                          item.id === activeId ? 'bg-primary' : 'bg-slate-300 dark:bg-slate-700 group-hover:bg-primary',
+                        ]}
+                      />
+                    )}
+                    <span class="flex-1 truncate">{item.title}</span>
+                    {isDrawerMode && item.id === activeId && <Icon class="text-xs" name="bi:chevron-right" />}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </details>
+      );
+    })
+  }
+</div>

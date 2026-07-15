@@ -42,9 +42,7 @@ const { aAttrs, activeId, navigation, isDrawerMode = false } = Astro.props;
                       'rounded-xl text-sm transition-all duration-200',
                       isDrawerMode ? 'py-2 px-3 flex items-center gap-3' : 'block py-2 px-3',
                       item.id === activeId
-                        ? isDrawerMode
-                          ? 'bg-primary/10 text-primary font-bold shadow-sm ring-1 ring-primary/20'
-                          : 'bg-primary/10 text-primary font-bold'
+                        ? isDrawerMode && 'bg-primary/10 text-primary font-bold'
                         : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-primary',
                     ]}
                     href={item.url}
@@ -59,7 +57,6 @@ const { aAttrs, activeId, navigation, isDrawerMode = false } = Astro.props;
                       />
                     )}
                     <span class="flex-1 truncate">{item.title}</span>
-                    {isDrawerMode && item.id === activeId && <Icon class="text-xs" name="bi:chevron-right" />}
                   </a>
                 </li>
               ))}
